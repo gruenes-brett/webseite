@@ -163,14 +163,14 @@ input:disabled {
   background: var(--lightgray);
 }
 
-button[type="submit"] {
+button {
   background: var(--green);
   color: var(--white);
   border: none;
   cursor: pointer;
 }
 
-button[type="submit"]:hover, button[type="submit"]:focus {
+button:hover, button:focus {
   background: var(--darkgray);
 }
 
@@ -182,11 +182,16 @@ option:checked {
   background: var(--green);
 }
 
-label, button[type="submit"] {
+label, button {
   font-weight: 700;
   font-family: 'Bebas Neue';
   font-size: 18px;
   letter-spacing: 1px;
+  display: inline-block;
+}
+
+button img {
+  margin: 0 auto;
 }
 
 .formgroup {
@@ -203,7 +208,7 @@ label, button[type="submit"] {
   margin-right: 15px;
 }
 
-.formgroup label, .formgroup input {
+.formgroup label, .formgroup input, .formgroup button {
   margin-right: 10px;
 }
 
@@ -211,7 +216,9 @@ label, button[type="submit"] {
   flex: 1 1 40px;
 }
 
-.formgroup label:last-child, .formgroup input:last-child {
+.formgroup label:last-child,
+.formgroup input:last-child,
+.formgroup button:last-child {
   margin-right: 0;
 }
 
@@ -465,9 +472,66 @@ aside nav a:hover, aside nav a:focus {
   padding: 5px 10px;
 }
 
+/* Detail */
+
+.detail {
+  margin: 0;
+}
+
+.detail .image {
+  margin-bottom: 30px;
+  overflow: hidden;
+  height: 0;
+  padding-top: 56.25%;
+  background-size: cover;
+}
+
+.detail article {
+  padding-bottom: 20px;
+}
+
+.detail .note {
+  margin-bottom: 0;
+}
+
+.detail .share .group {
+  margin: 20px 0;
+}
+
+.detail .share .group label {
+  margin-bottom: 5px;
+}
+
+.detail .share .group #permalink {
+  margin-right: 0;
+}
+
+.detail .share .group #permalink + button {
+  width: 50px;
+}
+
+.featherlight title.featherlight-inner {
+  display: none;
+}
+
+.featherlight main.featherlight-inner {
+  display: flex;
+}
+
+.featherlight div.featherlight-content {
+  margin: 0;
+  border: none;
+  max-height: 100vh;
+  max-width: 1400px;
+}
+
 /* Media queries */
 
 @media only screen and (max-width: 1000px) {
+
+main > form, main > section, main > article {
+  margin-right: 0;
+}
 
 .explore article {
   width: 50%;
@@ -487,6 +551,10 @@ aside nav a:hover, aside nav a:focus {
 
 .addevent form {
   margin-right: 0;
+}
+
+.detail {
+  flex-direction: column;
 }
 
 }
@@ -538,6 +606,11 @@ aside nav a {
   display: block;
   width: 100%;
   padding: 5px 0;
+}
+
+.detail .formgroup {
+  flex-direction: row;
+  justify-content: stretch;
 }
 
 }
