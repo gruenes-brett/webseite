@@ -1,0 +1,43 @@
+name: Run Linters
+
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+  
+defaults:
+  run:
+    working-directory: gruenes-brett/
+
+jobs:
+  stylelint:
+    name: stylelint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install modules
+        run: npm install
+
+      - name: Run stylelint
+        run: npx stylelint *.css
+
+  phpcs:
+    name: PHPCS
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+
+      - name: Run Composer install
+        run: composer install
+          
+      - name: Run PHPCS
+        run: ./vendor/bin/phpcs index.php
