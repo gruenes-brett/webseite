@@ -4,7 +4,7 @@ Die Seite wird momentan mit [Wordpress](https://wordpress.org/) 5.6.2 und [PHP](
 
 ## stylint
 
-Für das Linting von CSS-Dateien wird [stylint](https://stylelint.io/) verwendet. Für die Installation und Ausführung wird Node.js und NPM benötigt:
+Für das Linting von CSS-Dateien wird [stylint](https://stylelint.io/) verwendet. Für die Installation und Ausführung wird [Node.js](https://nodejs.org/) und NPM benötigt:
 
 ```
 npm install
