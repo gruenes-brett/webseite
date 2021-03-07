@@ -61,9 +61,9 @@ html {
   box-sizing: inherit;
 }
 
-/* Remove default padding */
+/* Set default padding */
 ul, ol {
-  padding: 0;
+  padding-left: 40px;
 }
 
 /* Remove default margin */
@@ -233,6 +233,9 @@ main {
   margin-top: 50px;
   padding: 60px 50px;
   background: var(--white);
+}
+
+main.explore, main.calendar, main.addevent {
   display: flex;
 }
 
@@ -264,11 +267,16 @@ header .logo {
 }
 
 header .logo a {
-  display: block;
+  display: flex;
+  align-items: center;
 }
 
 header .logo img {
   height: 75px;
+}
+
+header .logo span {
+  margin-left: 20px;
 }
 
 header nav {
@@ -276,9 +284,13 @@ header nav {
   font-size: 24px;
 }
 
-header nav .item {
+header nav .item, header nav .page_item {
   margin-right: 40px;
   text-align: center;
+}
+
+header nav .current_page_item a, header nav .current_page_ancestor {
+  color: var(--foreground);
 }
 
 /* Sub navigation */
@@ -518,6 +530,10 @@ aside nav a:hover, aside nav a:focus {
     margin-right: 0;
   }
 
+  header .logo span {
+    display: none;
+  }
+
   .explore article {
     width: 50%;
   }
@@ -564,7 +580,7 @@ aside nav a:hover, aside nav a:focus {
     font-weight: 700;
   }
 
-  header nav .item {
+  header nav .item, header nav .page_item {
     margin-right: 25px;
     text-align: right;
   }
