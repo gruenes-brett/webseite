@@ -5,4 +5,6 @@
  * @package GruenesBrett
  */
 
-?>
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}

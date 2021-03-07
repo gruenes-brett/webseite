@@ -7,7 +7,7 @@
 
 ?>
 <?php get_header(); ?>
-<?php get_sidebar('addevent'); ?>
+<?php get_sidebar( 'addevent' ); ?>
 <main class="addevent">
   <section class="note">
     <?php the_content(); ?>

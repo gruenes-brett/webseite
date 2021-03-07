@@ -40,4 +40,4 @@ jobs:
         run: composer install
           
       - name: Run PHPCS
-        run: ./vendor/bin/phpcs index.php
+        run: ./vendor/bin/phpcs addevent.php calendar.php explore.php footer.php functions.php index.php sidebar-addevent.php sidebar-calendar.php sidebar-explore.php sidebar.php

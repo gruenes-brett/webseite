@@ -7,7 +7,7 @@
 
 ?>
 <?php get_header(); ?>
-<?php get_sidebar('explore'); ?>
+<?php get_sidebar( 'explore' ); ?>
 <main class="explore">
   <article>
     <section class="image" style="background-image: url(<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/placeholder.png);">

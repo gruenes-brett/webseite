@@ -7,7 +7,7 @@
 
 ?>
 <?php get_header(); ?>
-<?php get_sidebar('calendar'); ?>
+<?php get_sidebar( 'calendar' ); ?>
 <main class="calendar">
   <table>
     <tr>
