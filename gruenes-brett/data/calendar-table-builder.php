@@ -1,5 +1,9 @@
 <?php
 
+if ( ! verifyCommunityCalendarLoaded() ) {
+    return;
+}
+
 define('STYLE_NAME', 'gruenes-brett-table');
 
 class gb_CalendarTableBuilder extends comcal_TableBuilder {

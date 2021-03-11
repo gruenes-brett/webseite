@@ -12,6 +12,7 @@
 <main class="calendar">
 
 <?php
+if ( verifyCommunityCalendarLoaded(true) ) {
   gb_CalendarTableBuilder::show();
   echo comcal_getShowEventBox();
   echo comcal_getEditForm('gruenes-brett');
@@ -19,6 +20,7 @@
       echo comcal_getEditCategoriesDialog();
   }
   echo comcal_floatingButtons_func(array('addEvent' => true));
+}
 ?>
 
 <!-- <table>
