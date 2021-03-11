@@ -13,9 +13,10 @@
 
     <!-- Show sniff codes in all reports -->
     <arg value="ns"/>
-    
+
     <rule ref="WordPress">
         <exclude name="Generic.WhiteSpace.DisallowSpaceIndent" />
+        <exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped" />
     </rule>
 
     <!-- Include the WordPress-Extra standard. -->

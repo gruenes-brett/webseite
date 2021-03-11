@@ -11,9 +11,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
-function verifyCommunityCalendarLoaded($echoMessage=false) : bool {
+/**
+ * Checks if the required Community Calendar plugin is loaded.
+ *
+ * @param bool $echo_message set true to echo a message.
+ */
+function verify_community_calendar_loaded( $echo_message = false ) : bool {
     $loaded = is_plugin_active( 'community-calendar/community-calendar.php' );
-    if ( ! $loaded && $echoMessage ) {
+    if ( ! $loaded && $echo_message ) {
         echo <<<XML
             <p>
                 This theme requires the <a href="https://github.com/joergrs/community-calendar">

@@ -12,14 +12,14 @@
 <main class="calendar">
 
 <?php
-if ( verifyCommunityCalendarLoaded(true) ) {
-  gb_CalendarTableBuilder::show();
-  echo comcal_getShowEventBox();
-  echo comcal_getEditForm('gruenes-brett');
-  if (comcal_currentUserCanSetPublic()) {
-      echo comcal_getEditCategoriesDialog();
-  }
-  echo comcal_floatingButtons_func(array('addEvent' => true));
+if ( verify_community_calendar_loaded( true ) ) {
+    gb_CalendarTableBuilder::show();
+    echo comcal_getShowEventBox();
+    echo comcal_getEditForm( 'gruenes-brett' );
+    if ( comcal_currentUserCanSetPublic() ) {
+        echo comcal_getEditCategoriesDialog();
+    }
+    echo comcal_floatingButtons_func( array( 'addEvent' => true ) );
 }
 ?>
 

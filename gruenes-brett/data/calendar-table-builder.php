@@ -1,6 +1,6 @@
 <?php
 
-if ( ! verifyCommunityCalendarLoaded() ) {
+if ( ! verify_community_calendar_loaded() ) {
     return;
 }
 
