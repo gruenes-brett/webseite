@@ -8,8 +8,20 @@
 ?>
 <?php get_header(); ?>
 <?php get_sidebar( 'calendar' ); ?>
+
 <main class="calendar">
-  <table>
+
+<?php
+  gb_CalendarTableBuilder::show();
+  echo comcal_getShowEventBox();
+  echo comcal_getEditForm('gruenes-brett');
+  if (comcal_currentUserCanSetPublic()) {
+      echo comcal_getEditCategoriesDialog();
+  }
+  echo comcal_floatingButtons_func(array('addEvent' => true));
+?>
+
+<!-- <table>
     <tr>
       <td><a href="#november-2020" name="november-2020">November 2020</a></td>
       <td>1</td>
@@ -422,6 +434,6 @@
       <td>Do</td>
       <td></td>
     </tr>
-  </table>
+  </table> -->
 </main>
 <?php get_footer(); ?>

@@ -8,3 +8,5 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+
+require_once( 'data/calendar-table-builder.php' );

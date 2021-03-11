@@ -3,3 +3,4 @@ node_modules/
 
 # ignore composer dependency directories
 vendor/
+.vscode/settings.json

@@ -235,7 +235,7 @@ main {
   background: var(--white);
 }
 
-main.explore, main.calendar, main.addevent {
+main.explore, main.addevent {
   display: flex;
 }
 
@@ -409,10 +409,6 @@ aside nav a:hover, aside nav a:focus {
   background: var(--green);
 }
 
-.calendar table tr.today td:first-child {
-  background: transparent;
-}
-
 .calendar table tr.today a {
   color: var(--white);
 }
@@ -427,20 +423,19 @@ aside nav a:hover, aside nav a:focus {
   text-align: right;
 }
 
-.calendar table td:first-child {
-  border: none;
-  text-align: left;
+.calendar h2.month-title {
   position: sticky;
   top: 0;
 }
 
-.calendar table td:first-child a {
+.calendar h2.month-title a {
   display: block;
   background: var(--white);
 }
 
 .calendar table td:last-child {
   text-align: left;
+  width: 99%;
 }
 
 .calendar table td article + article {
