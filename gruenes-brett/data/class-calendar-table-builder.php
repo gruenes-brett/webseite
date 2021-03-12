@@ -1,4 +1,9 @@
 <?php
+/**
+ * Defines how the calendar table is rendered.
+ *
+ * @package GruenesBrett
+ */
 
 if ( ! verify_community_calendar_loaded() ) {
     return;
@@ -6,16 +11,24 @@ if ( ! verify_community_calendar_loaded() ) {
 
 define( 'STYLE_NAME', 'gruenes-brett-table' );
 
+/**
+ * Creates calendar tables for each month.
+ */
 class Calendar_Table_Builder extends comcal_TableBuilder {
 
-    public static function show() {
+    /**
+     * Helper function that loads the events from the database and returns the calendar tables.
+     *
+     * @return string HTML string.
+     */
+    public static function create_tables() : string {
 
-        $category = null;
+        $category      = null;
         $calendar_name = 'gruenes-brett';
-        $start_date = null;
-        $latest_date = null;
+        $start_date    = null;
+        $latest_date   = null;
+        $is_admin      = comcal_currentUserCanSetPublic();
 
-        $is_admin = comcal_currentUserCanSetPublic();
         $events_iterator = new comcal_EventIterator(
             ! $is_admin,
             $category,
@@ -25,12 +38,18 @@ class Calendar_Table_Builder extends comcal_TableBuilder {
         );
 
         $builder = self::createDisplay( STYLE_NAME, $events_iterator );
-        echo $builder->getHtml();
+        return $builder->getHtml();
     }
 
-    function __construct( $earliest_date = null, $latest_date = null ) {
+    /**
+     * Initializes the renderer.
+     *
+     * @param comcal_DateTime $earliest_date Start date to load from database.
+     * @param comcal_DateTime $latest_date Last date to load from database.
+     */
+    public function __construct( $earliest_date = null, $latest_date = null ) {
         parent::__construct( $earliest_date, $latest_date );
-        $this->eventRenderer = new gb_EventRenderer();
+        $this->event_renderer = new Table_Event_Renderer();
     }
 
     protected function getTableHead( $month_title ) {
@@ -40,39 +59,22 @@ class Calendar_Table_Builder extends comcal_TableBuilder {
 
     protected function createDayRow( $date_time, $text, $is_new_day = true ) {
         if ( $is_new_day ) {
-            $weekday = $date_time->getShortWeekday();
+            $weekday      = $date_time->getShortWeekday();
             $day_of_month = $date_time->getDayOfMonth();
         } else {
-            $weekday = '';
+            $weekday      = '';
             $day_of_month = '';
         }
-        $tr_class = $is_new_day ? '' : 'sameDay';
-        $date_class = ( $text === '' ) ? 'has-no-events' : 'has-events';
+        $tr_class   = $is_new_day ? '' : 'sameDay';
+        $date_class = ( '' === $text ) ? 'has-no-events' : 'has-events';
+
         $this->html .= "<tr class='{$date_time->getDayClasses()} $tr_class day'>";
         $this->html .= "<td class='date $date_class'>$weekday</td>";
         $this->html .= "<td class='date $date_class'>$day_of_month</td>";
         $this->html .= "<td class='event'>$text</td></tr>\n";
-        $this->currentDate = $date_time;
+
+        $this->current_date = $date_time;
     }
 
 }
 comcal_EventsDisplayBuilder::addStyle( STYLE_NAME, 'Calendar_Table_Builder' );
-
-
-class Event_Renderer extends comcal_EventRenderer {
-    function render( comcal_Event $event ) : string {
-        $title = $event->getField( 'title' );
-        $time = $event->getDateTime()->getPrettyTime();
-        $location = $event->getField( 'location' );
-        $url = $event->getField( 'url' );
-        $edit_link = $this->getEditLink( $event );
-        return <<<XML
-      <article>
-        <h2><a href="$url" target="_blank">$title</a></h2>
-        <section class="meta">
-          $edit_link &mdash; $time, $location
-        </section>
-      </article>
-XML;
-    }
-}

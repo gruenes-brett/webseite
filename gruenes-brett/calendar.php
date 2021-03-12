@@ -14,7 +14,7 @@
 <?php
 
 if ( verify_community_calendar_loaded( true ) ) {
-    Calendar_Table_Builder::show();
+    echo Calendar_Table_Builder::create_tables();
     echo comcal_getShowEventBox();
     echo comcal_getEditForm( 'gruenes-brett' );
     if ( comcal_currentUserCanSetPublic() ) {

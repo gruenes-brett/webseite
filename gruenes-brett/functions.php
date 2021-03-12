@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-require_once ABSPATH . 'wp-admin/includes/plugin.php';
+require_once ABSPATH . 'wp-admin/includes/plugin.php';  // needed for is_plugin_active.
 
 /**
  * Checks if the required Community Calendar plugin is loaded.
@@ -30,3 +30,4 @@ XML;
 }
 
 require_once 'data/class-calendar-table-builder.php';
+require_once 'data/class-table-event-renderer.php';

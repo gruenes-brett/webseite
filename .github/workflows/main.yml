@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
   workflow_dispatch:
-  
+
 defaults:
   run:
     working-directory: gruenes-brett/
@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -38,6 +38,6 @@ jobs:
 
       - name: Run Composer install
         run: composer install
-          
+
       - name: Run PHPCS
-        run: ./vendor/bin/phpcs addevent.php calendar.php explore.php footer.php functions.php index.php sidebar-addevent.php sidebar-calendar.php sidebar-explore.php sidebar.php
+        run: ./vendor/bin/phpcs addevent.php calendar.php explore.php footer.php functions.php index.php sidebar-addevent.php sidebar-calendar.php sidebar-explore.php sidebar.php data/*.php
