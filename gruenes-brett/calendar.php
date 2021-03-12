@@ -12,8 +12,9 @@
 <main class="calendar">
 
 <?php
+
 if ( verify_community_calendar_loaded( true ) ) {
-    gb_CalendarTableBuilder::show();
+    Calendar_Table_Builder::show();
     echo comcal_getShowEventBox();
     echo comcal_getEditForm( 'gruenes-brett' );
     if ( comcal_currentUserCanSetPublic() ) {
