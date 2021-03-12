@@ -9,8 +9,6 @@ if ( ! verify_community_calendar_loaded() ) {
     return;
 }
 
-define( 'STYLE_NAME', 'gruenes-brett-table' );
-
 /**
  * Creates calendar tables for each month.
  */
@@ -46,7 +44,7 @@ class Calendar_Table_Builder extends comcal_TableBuilder {
             $latest_date ? $latest_date->getDateStr() : null
         );
 
-        static::$instance = self::createDisplay( STYLE_NAME, $events_iterator );
+        static::$instance = self::createDisplay( static::class, $events_iterator );
         return static::$instance;
     }
 
@@ -106,4 +104,3 @@ class Calendar_Table_Builder extends comcal_TableBuilder {
     }
 
 }
-comcal_EventsDisplayBuilder::add_style( STYLE_NAME, 'Calendar_Table_Builder' );
