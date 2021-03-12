@@ -17,11 +17,20 @@ define( 'STYLE_NAME', 'gruenes-brett-table' );
 class Calendar_Table_Builder extends comcal_TableBuilder {
 
     /**
-     * Helper function that loads the events from the database and returns the calendar tables.
+     * Singleton instance of this class.
      *
-     * @return string HTML string.
+     * @var $instance Singleton instance of this class.
      */
-    public static function create_tables() : string {
+    private static ?Calendar_Table_Builder $instance = null;
+
+    /**
+     * Instantiates the Calendar_Table_Builder singleton and loads the
+     * events from the database.
+     */
+    public static function get_instance() {
+        if ( null !== static::$instance ) {
+            return static::$instance;
+        }
 
         $category      = null;
         $calendar_name = 'gruenes-brett';
@@ -37,9 +46,16 @@ class Calendar_Table_Builder extends comcal_TableBuilder {
             $latest_date ? $latest_date->getDateStr() : null
         );
 
-        $builder = self::createDisplay( STYLE_NAME, $events_iterator );
-        return $builder->getHtml();
+        static::$instance = self::createDisplay( STYLE_NAME, $events_iterator );
+        return static::$instance;
     }
+
+    /**
+     * List of month names and links in the tables.
+     *
+     * @var $month_links array( month_title => month_link )
+     */
+    private $month_links = array();
 
     /**
      * Initializes the renderer.
@@ -50,14 +66,27 @@ class Calendar_Table_Builder extends comcal_TableBuilder {
     public function __construct( $earliest_date = null, $latest_date = null ) {
         parent::__construct( $earliest_date, $latest_date );
         $this->event_renderer = new Table_Event_Renderer();
+        $this->month_links    = array();
     }
 
-    protected function getTableHead( $month_title ) {
-        return "<h2 class='month-title'>$month_title</h2>\n"
+    public function get_table_html() {
+        return $this->get_html();
+    }
+
+    public function get_month_links() {
+        return $this->month_links;
+    }
+
+    protected function get_table_head( $date ) {
+        $month_title = $date->get_month_title();
+        $month_link  = $date->get_month_link();
+
+        $this->month_links[ $month_title ] = $month_link;
+        return "<h2 class='month-title'><a href='#$month_link' name='$month_link'>$month_title</a></h2>\n"
                . "<table><tbody>\n";
     }
 
-    protected function createDayRow( $date_time, $text, $is_new_day = true ) {
+    protected function create_day_row( $date_time, $text, $is_new_day = true ) {
         if ( $is_new_day ) {
             $weekday      = $date_time->getShortWeekday();
             $day_of_month = $date_time->getDayOfMonth();
@@ -77,4 +106,4 @@ class Calendar_Table_Builder extends comcal_TableBuilder {
     }
 
 }
-comcal_EventsDisplayBuilder::addStyle( STYLE_NAME, 'Calendar_Table_Builder' );
+comcal_EventsDisplayBuilder::add_style( STYLE_NAME, 'Calendar_Table_Builder' );

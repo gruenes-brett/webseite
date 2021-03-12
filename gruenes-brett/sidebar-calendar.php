@@ -8,23 +8,16 @@
 ?>
 <aside>
   <nav>
+
+    <?php
+    $month_links = Calendar_Table_Builder::get_instance()->get_month_links();
+    foreach ( $month_links as $name => $link_name ) :
+        ?>
+
     <div class="item">
-      <a href="#november-2020">November 2020</a>
+      <a href="#<?php echo $link_name; ?>"><?php echo $name; ?></a>
     </div>
-    <div class="item">
-      <a href="#dezember-2020">Dezember 2020</a>
-    </div>
-    <div class="item">
-      <a href="">Januar 2021</a>
-    </div>
-    <div class="item">
-      <a href="">Februar 2021</a>
-    </div>
-    <div class="item">
-      <a href="">März 2021</a>
-    </div>
-    <div class="item">
-      <a href="">April 2021</a>
-    </div>
+
+    <?php endforeach ?>
   </nav>
 </aside>

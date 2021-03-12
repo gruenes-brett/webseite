@@ -426,6 +426,7 @@ aside nav a:hover, aside nav a:focus {
 .calendar h2.month-title {
   position: sticky;
   top: 0;
+  padding-top: 1.5em;
 }
 
 .calendar h2.month-title a {
