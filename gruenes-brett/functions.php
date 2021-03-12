@@ -29,5 +29,23 @@ XML;
     return $loaded;
 }
 
+
+/**
+ * Helper function that puts basic elements into the HTML
+ * - Event popup
+ * - Event edit form
+ * - Floating buttons
+ */
+function echo_buttons_forms_and_popups() {
+    echo comcal_getShowEventBox();
+    echo comcal_getEditForm( 'gruenes-brett' );
+    if ( comcal_currentUserCanSetPublic() ) {
+        echo comcal_getEditCategoriesDialog();
+    }
+    echo comcal_floatingButtons_func( array( 'addEvent' => true ) );
+}
+
 require_once 'data/class-calendar-table-builder.php';
 require_once 'data/class-table-event-renderer.php';
+require_once 'data/class-event-explorer-builder.php';
+require_once 'data/class-explorer-event-renderer.php';

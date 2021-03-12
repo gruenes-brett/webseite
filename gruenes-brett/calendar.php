@@ -15,12 +15,7 @@
 
 if ( verify_community_calendar_loaded( true ) ) {
     echo Calendar_Table_Builder::get_instance()->get_html();
-    echo comcal_getShowEventBox();
-    echo comcal_getEditForm( 'gruenes-brett' );
-    if ( comcal_currentUserCanSetPublic() ) {
-        echo comcal_getEditCategoriesDialog();
-    }
-    echo comcal_floatingButtons_func( array( 'addEvent' => true ) );
+    echo_buttons_forms_and_popups();
 }
 ?>
 

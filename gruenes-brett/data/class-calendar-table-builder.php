@@ -61,7 +61,7 @@ class Calendar_Table_Builder extends comcal_TableBuilder {
      * @param comcal_DateTime $earliest_date Start date to load from database.
      * @param comcal_DateTime $latest_date Last date to load from database.
      */
-    private function __construct( $earliest_date = null, $latest_date = null ) {
+    protected function __construct( $earliest_date = null, $latest_date = null ) {
         parent::__construct( $earliest_date, $latest_date );
         $this->event_renderer = new Table_Event_Renderer();
         $this->month_links    = array();

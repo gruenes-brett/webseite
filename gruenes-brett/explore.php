@@ -9,6 +9,14 @@
 <?php get_header(); ?>
 <?php get_sidebar( 'explore' ); ?>
 <main class="explore">
+
+<?php
+if ( verify_community_calendar_loaded( true ) ) {
+    echo Event_Explorer_Builder::get_instance()->get_html();
+    echo_buttons_forms_and_popups();
+}
+?>
+
   <article>
     <section class="image" style="background-image: url(<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/placeholder.png);">
       <a href=""></a>

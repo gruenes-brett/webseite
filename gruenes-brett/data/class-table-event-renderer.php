@@ -24,7 +24,7 @@ class Table_Event_Renderer extends comcal_EventRenderer {
       <article>
         <h2><a href="$url" target="_blank">$title</a></h2>
         <section class="meta">
-          $edit_link &mdash; $time, $location
+          $edit_link $time, $location
         </section>
       </article>
 XML;
