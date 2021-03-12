@@ -19,7 +19,7 @@ class Table_Event_Renderer extends comcal_EventRenderer {
         $time      = $event->getDateTime()->getPrettyTime();
         $location  = $event->getField( 'location' );
         $url       = $event->getField( 'url' );
-        $edit_link = $this->getEditLink( $event );
+        $edit_link = $this->get_edit_link( $event );
         return <<<XML
       <article>
         <h2><a href="$url" target="_blank">$title</a></h2>
