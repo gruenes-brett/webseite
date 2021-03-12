@@ -42,7 +42,7 @@ function echo_buttons_forms_and_popups() {
     if ( comcal_currentUserCanSetPublic() ) {
         echo comcal_getEditCategoriesDialog();
     }
-    echo comcal_floatingButtons_func( array( 'addEvent' => true ) );
+    echo comcal_floating_buttons_func( array( 'addEvent' => true ) );
 }
 
 require_once 'data/class-calendar-table-builder.php';
