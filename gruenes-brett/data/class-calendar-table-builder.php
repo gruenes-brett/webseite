@@ -40,8 +40,8 @@ class Calendar_Table_Builder extends comcal_TableBuilder {
             ! $is_admin,
             $category,
             $calendar_name,
-            $start_date ? $start_date->getDateStr() : null,
-            $latest_date ? $latest_date->getDateStr() : null
+            $start_date ? $start_date->get_date_str() : null,
+            $latest_date ? $latest_date->get_date_str() : null
         );
 
         static::$instance = self::create_display( static::class, $events_iterator );
@@ -58,8 +58,8 @@ class Calendar_Table_Builder extends comcal_TableBuilder {
     /**
      * Initializes the renderer.
      *
-     * @param comcal_DateTime $earliest_date Start date to load from database.
-     * @param comcal_DateTime $latest_date Last date to load from database.
+     * @param comcal_DateTimeWrapper $earliest_date Start date to load from database.
+     * @param comcal_DateTimeWrapper $latest_date Last date to load from database.
      */
     protected function __construct( $earliest_date = null, $latest_date = null ) {
         parent::__construct( $earliest_date, $latest_date );
@@ -86,8 +86,8 @@ class Calendar_Table_Builder extends comcal_TableBuilder {
 
     protected function create_day_row( $date_time, $text, $is_new_day = true ) {
         if ( $is_new_day ) {
-            $weekday      = $date_time->getShortWeekday();
-            $day_of_month = $date_time->getDayOfMonth();
+            $weekday      = $date_time->get_short_weekday();
+            $day_of_month = $date_time->get_day_of_month();
         } else {
             $weekday      = '';
             $day_of_month = '';
@@ -95,7 +95,7 @@ class Calendar_Table_Builder extends comcal_TableBuilder {
         $tr_class   = $is_new_day ? '' : 'sameDay';
         $date_class = ( '' === $text ) ? 'has-no-events' : 'has-events';
 
-        $this->html .= "<tr class='{$date_time->getDayClasses()} $tr_class day'>";
+        $this->html .= "<tr class='{$date_time->get_day_classes()} $tr_class day'>";
         $this->html .= "<td class='date $date_class'>$weekday</td>";
         $this->html .= "<td class='date $date_class'>$day_of_month</td>";
         $this->html .= "<td class='event'>$text</td></tr>\n";

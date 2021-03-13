@@ -15,10 +15,10 @@ class Table_Event_Renderer extends comcal_EventRenderer {
      * @param comcal_Event $event Event instance.
      */
     public function render( comcal_Event $event ) : string {
-        $title     = $event->getField( 'title' );
-        $time      = $event->getDateTime()->getPrettyTime();
-        $location  = $event->getField( 'location' );
-        $url       = $event->getField( 'url' );
+        $title     = $event->get_field( 'title' );
+        $time      = $event->get_start_date_time()->get_pretty_time();
+        $location  = $event->get_field( 'location' );
+        $url       = $event->get_field( 'url' );
         $edit_link = $this->get_edit_link( $event );
         return <<<XML
       <article>

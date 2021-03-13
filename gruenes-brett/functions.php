@@ -37,7 +37,7 @@ XML;
  * - Floating buttons
  */
 function echo_buttons_forms_and_popups() {
-    echo comcal_getShowEventBox();
+    echo comcal_get_show_event_box();
     echo comcal_getEditForm( 'gruenes-brett' );
     if ( comcal_currentUserCanSetPublic() ) {
         echo comcal_getEditCategoriesDialog();

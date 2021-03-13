@@ -42,8 +42,8 @@ class Event_Explorer_Builder extends comcal_DefaultDisplayBuilder {
             ! $is_admin,
             $category,
             $calendar_name,
-            $start_date ? $start_date->getDateStr() : null,
-            $latest_date ? $latest_date->getDateStr() : null
+            $start_date ? $start_date->get_date_str() : null,
+            $latest_date ? $latest_date->get_date_str() : null
         );
 
         static::$instance = self::create_display( static::class, $events_iterator );
