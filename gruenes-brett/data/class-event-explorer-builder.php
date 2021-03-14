@@ -36,7 +36,7 @@ class Event_Explorer_Builder extends comcal_DefaultDisplayBuilder {
         $calendar_name = 'gruenes-brett';
         $start_date    = null;
         $latest_date   = null;
-        $is_admin      = comcal_currentUserCanSetPublic();
+        $is_admin      = comcal_current_user_can_set_public();
 
         $events_iterator = new comcal_EventIterator(
             ! $is_admin,

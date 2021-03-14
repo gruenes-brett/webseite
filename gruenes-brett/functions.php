@@ -38,9 +38,9 @@ XML;
  */
 function echo_buttons_forms_and_popups() {
     echo comcal_get_show_event_box();
-    echo comcal_getEditForm( 'gruenes-brett' );
-    if ( comcal_currentUserCanSetPublic() ) {
-        echo comcal_getEditCategoriesDialog();
+    echo comcal_get_edit_form( 'gruenes-brett' );
+    if ( comcal_current_user_can_set_public() ) {
+        echo comcal_get_edit_categories_dialog();
     }
     echo comcal_floating_buttons_func( array( 'addEvent' => true ) );
 }
