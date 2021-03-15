@@ -10,14 +10,19 @@
   <nav>
 
     <?php
-    $month_links = Calendar_Table_Builder::get_instance()->get_month_links();
-    foreach ( $month_links as $name => $link_name ) :
-        ?>
+    if ( verify_community_calendar_loaded() ) {
 
-    <div class="item">
-      <a href="#<?php echo $link_name; ?>"><?php echo $name; ?></a>
-    </div>
+        $month_links = Calendar_Table_Builder::get_instance()->get_month_links();
+        foreach ( $month_links as $name => $link_name ) :
+            ?>
 
-    <?php endforeach ?>
+        <div class="item">
+          <a href="#<?php echo $link_name; ?>"><?php echo $name; ?></a>
+        </div>
+
+            <?php
+        endforeach;
+    }
+    ?>
   </nav>
 </aside>
