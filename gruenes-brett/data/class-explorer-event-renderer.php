@@ -20,7 +20,10 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
         $description = $event->get_field( 'description' );
         $url         = $event->get_field( 'url' );
         $edit_link   = $this->get_edit_link( $event );
-        $image_url   = esc_url( get_stylesheet_directory_uri() . '/img/placeholder.png' );
+        $image_url   = esc_url( $event->get_field( 'imageUrl' ) );
+        if ( ! $image_url ) {
+            $image_url = esc_url( get_stylesheet_directory_uri() . '/img/placeholder.png' );
+        }
         return <<<XML
         <article>
             <section class="image" style="background-image: url($image_url);">
