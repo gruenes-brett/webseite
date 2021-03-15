@@ -12,7 +12,7 @@ if ( ! verify_community_calendar_loaded() ) {
 /**
  * Creates calendar tables for each month.
  */
-class Calendar_Table_Builder extends comcal_TableBuilder {
+class Calendar_Table_Builder extends Comcal_Table_Builder {
 
     /**
      * Singleton instance of this class.
@@ -36,7 +36,7 @@ class Calendar_Table_Builder extends comcal_TableBuilder {
         $latest_date   = null;
         $is_admin      = comcal_current_user_can_set_public();
 
-        $events_iterator = new comcal_EventIterator(
+        $events_iterator = new Comcal_Event_Iterator(
             ! $is_admin,
             $category,
             $calendar_name,
@@ -58,8 +58,8 @@ class Calendar_Table_Builder extends comcal_TableBuilder {
     /**
      * Initializes the renderer.
      *
-     * @param comcal_DateTimeWrapper $earliest_date Start date to load from database.
-     * @param comcal_DateTimeWrapper $latest_date Last date to load from database.
+     * @param Comcal_Date_Time $earliest_date Start date to load from database.
+     * @param Comcal_Date_Time $latest_date Last date to load from database.
      */
     protected function __construct( $earliest_date = null, $latest_date = null ) {
         parent::__construct( $earliest_date, $latest_date );

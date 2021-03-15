@@ -8,13 +8,13 @@
 /**
  * Defines how an event is rendered in the calendar table.
  */
-class Table_Event_Renderer extends comcal_EventRenderer {
+class Table_Event_Renderer extends Comcal_Event_Renderer {
     /**
      * Creates the HTML for an event.
      *
-     * @param comcal_Event $event Event instance.
+     * @param Comcal_Event $event Event instance.
      */
-    public function render( comcal_Event $event ) : string {
+    public function render( Comcal_Event $event ) : string {
         $title     = $event->get_field( 'title' );
         $time      = $event->get_start_date_time()->get_pretty_time();
         $location  = $event->get_field( 'location' );

@@ -9,12 +9,10 @@ if ( ! verify_community_calendar_loaded() ) {
     return;
 }
 
-define( 'STYLE_NAME', 'gruenes-brett-table ' );
-
 /**
  * Creates calendar tables for each month.
  */
-class Event_Explorer_Builder extends comcal_DefaultDisplayBuilder {
+class Event_Explorer_Builder extends Comcal_Default_Display_Builder {
 
     /**
      * Singleton instance of this class.
@@ -38,7 +36,7 @@ class Event_Explorer_Builder extends comcal_DefaultDisplayBuilder {
         $latest_date   = null;
         $is_admin      = comcal_current_user_can_set_public();
 
-        $events_iterator = new comcal_EventIterator(
+        $events_iterator = new Comcal_Event_Iterator(
             ! $is_admin,
             $category,
             $calendar_name,

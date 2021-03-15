@@ -8,8 +8,8 @@
 /**
  * Defines how an event is rendered in the explorer view.
  */
-class Explorer_Event_Renderer extends comcal_DefaultEventRenderer {
-    public function render( comcal_Event $event ) : string {
+class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
+    public function render( Comcal_Event $event ) : string {
         $title       = $event->get_field( 'title' );
         $time        = $event->get_start_date_time()->get_humanized_time();
         $date        = $event->get_start_date_time()->get_humanized_date();
