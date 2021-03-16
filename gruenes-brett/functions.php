@@ -37,7 +37,7 @@ XML;
  * - Floating buttons
  */
 function echo_buttons_forms_and_popups() {
-    echo comcal_get_show_event_box();
+    echo Comcal_Basic_Event_Popup::get_popup_html();
     echo comcal_get_edit_form( 'gruenes-brett' );
     if ( comcal_current_user_can_set_public() ) {
         echo comcal_get_edit_categories_dialog();
