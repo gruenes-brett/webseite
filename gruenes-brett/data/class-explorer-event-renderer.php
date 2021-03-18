@@ -27,12 +27,14 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
         $edit_link  = $this->get_edit_link( $event );
         $show_popup = $this->get_show_popup_javascript_call( $event );
 
+        $featherlight_data = Event_Popup::get_featherlight_url( $event );
+
         return <<<XML
         <article>
             <section class="image" style="background-image: url($image_url);">
                 <a href="" onclick="$show_popup"></a>
             </section>
-            <h2><a href="" onclick="$show_popup">$title</a></h2>
+            <h2><a href="#" $featherlight_data>$title</a></h2>
             <section class="meta">
             $edit_link $date, $time
             </section>
@@ -44,3 +46,5 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
 XML;
     }
 }
+
+Event_Popup::intialize();

@@ -36,8 +36,7 @@ XML;
  * - Event edit form
  * - Floating buttons
  */
-function echo_buttons_forms_and_popups() {
-    echo Comcal_Basic_Event_Popup::get_popup_html();
+function echo_buttons_and_forms() {
     echo comcal_get_edit_form( 'gruenes-brett' );
     if ( comcal_current_user_can_set_public() ) {
         echo comcal_get_edit_categories_dialog();
@@ -45,6 +44,7 @@ function echo_buttons_forms_and_popups() {
     echo comcal_floating_buttons_func( array( 'addEvent' => true ) );
 }
 
+require_once 'data/class-event-popup.php';
 require_once 'data/class-calendar-table-builder.php';
 require_once 'data/class-table-event-renderer.php';
 require_once 'data/class-event-explorer-builder.php';

@@ -13,7 +13,7 @@
 <?php
 if ( verify_community_calendar_loaded( true ) ) {
     echo Event_Explorer_Builder::get_instance()->get_html();
-    echo_buttons_forms_and_popups();
+    echo_buttons_and_forms();
 }
 ?>
 
