@@ -22,14 +22,14 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
         $title    = $event->get_field( 'title' );
         $time     = $event->get_start_date_time()->get_pretty_time();
         $location = $event->get_field( 'location' );
-        $url      = $event->get_field( 'url' );
 
-        $edit_link  = $this->get_edit_link( $event );
-        $show_popup = $this->get_show_popup_javascript_call( $event );
+        $edit_link = $this->get_edit_link( $event );
+
+        $featherlight_data = Event_Popup::get_featherlight_attribute( $event );
 
         return <<<XML
       <article>
-        <h2><a href="" onclick="$show_popup">$title</a></h2>
+        <h2><a href="#" $featherlight_data>$title</a></h2>
         <section class="meta">
           $edit_link $time, $location
         </section>
@@ -37,3 +37,5 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
 XML;
     }
 }
+
+Event_Popup::verify_popup_initialized();
