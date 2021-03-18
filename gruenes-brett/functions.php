@@ -49,3 +49,4 @@ require_once 'data/class-calendar-table-builder.php';
 require_once 'data/class-table-event-renderer.php';
 require_once 'data/class-event-explorer-builder.php';
 require_once 'data/class-explorer-event-renderer.php';
+require_once 'data/class-pretty-event.php';

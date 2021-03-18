@@ -6,20 +6,23 @@
  */
 
 /**
- * Event popup.
+ * Event popup that is called via AJAX.
  */
 class Event_Popup extends Comcal_Featherlight_Event_Popup {
     protected static function render( Comcal_Event $event ) : void {
-        // TODO schöner machen
-        $title = $event->get_field( 'title' );
+        $pretty = new Pretty_Event( $event );
+
+        // TODO Popup schöner machen.
         echo <<<XML
-            <h4 id="title">$title</h4>
-            <p><span id="weekday"></span>, <span id="prettyDate"></span> um <span id="prettyTime"></span></p>
-            <p>Ort: <span id="location"></span></p>
-            <p>Veranstalter: <span id="organizer"></span></p>
-            <p><a id="url" target="_blank"></a></p>
+            <h4 id="title">$pretty->title</h4>
+            <p>
+                <span id="weekday">$pretty->weekday</span>,
+                <span id="prettyDate">$pretty->prettyDate</span> um <span id="prettyTime">$pretty->prettyTime</span></p>
+            <p>Ort: <span id="location">$pretty->location</span></p>
+            <p>Veranstalter: <span id="organizer">$pretty->organizer</span></p>
+            <p><a href="$pretty->url" target="_blank">Veranstaltungslink</a></p>
             <b>Beschreibung:</b>
-            <p id="description"></b>
+            <p id="description">$pretty->description</p>
             <p id="categories" class="comcal-categories"></p>
 XML;
     }
