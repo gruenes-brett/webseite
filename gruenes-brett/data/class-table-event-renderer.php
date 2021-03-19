@@ -19,9 +19,7 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
      * @param Comcal_Event $event Event instance.
      */
     public function render( Comcal_Event $event ) : string {
-        $title    = $event->get_field( 'title' );
-        $time     = $event->get_start_date_time()->get_pretty_time();
-        $location = $event->get_field( 'location' );
+        $pretty = new Pretty_Event( $event );
 
         $edit_link = $this->get_edit_link( $event );
 
@@ -29,9 +27,9 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
 
         return <<<XML
       <article>
-        <h2><a href="#" $featherlight_data>$title</a></h2>
+        <h2><a href="#" $featherlight_data>$pretty->title</a></h2>
         <section class="meta">
-          $edit_link $time, $location
+          $edit_link $pretty->pretty_time, $pretty->location
         </section>
       </article>
 XML;
