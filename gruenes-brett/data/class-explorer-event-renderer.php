@@ -14,17 +14,14 @@ if ( ! verify_community_calendar_loaded() ) {
  */
 class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
     public function render( Comcal_Event $event ) : string {
-        $title       = $event->get_field( 'title' );
-        $time        = $event->get_start_date_time()->get_humanized_time();
-        $date        = $event->get_start_date_time()->get_humanized_date();
-        $description = $event->get_field( 'description' );
-        $url         = $event->get_field( 'url' );
-        $image_url   = esc_url( $event->get_field( 'imageUrl' ) );
+        $pretty = new Pretty_Event( $event );
+
+        $image_url = $pretty->image_url;
         if ( ! $image_url ) {
             $image_url = esc_url( get_stylesheet_directory_uri() . '/img/placeholder.png' );
         }
 
-        $edit_link  = $this->get_edit_link( $event );
+        $edit_link = $this->get_edit_link( $event );
 
         $featherlight_data = Event_Popup::get_featherlight_attribute( $event );
 
@@ -33,13 +30,13 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
             <section class="image" style="background-image: url($image_url);">
                 <a href="#" $featherlight_data></a>
             </section>
-            <h2><a href="#" $featherlight_data>$title</a></h2>
+            <h2><a href="#" $featherlight_data>$pretty->title</a></h2>
             <section class="meta">
-            $edit_link $date, $time
+            $edit_link $pretty->pretty_date, $pretty->pretty_time
             </section>
             <section class="description">
-            <p>$description</p>
-            <p class="details"><a href="$url">mehr Informationen</a></p>
+            <p>$pretty->description</p>
+            <p class="details"><a href="$pretty->url">mehr Informationen</a></p>
             </section>
         </article>
 XML;
