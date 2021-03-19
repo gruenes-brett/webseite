@@ -1,6 +1,6 @@
 <?php
 /**
- * A helper for getting nice HTML out of a Comcal_Event instance.
+ * A helper for getting human readable details out of a Comcal_Event instance.
  *
  * @package GruenesBrett
  */

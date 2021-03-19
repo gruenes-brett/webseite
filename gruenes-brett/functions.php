@@ -50,3 +50,4 @@ require_once 'data/class-table-event-renderer.php';
 require_once 'data/class-event-explorer-builder.php';
 require_once 'data/class-explorer-event-renderer.php';
 require_once 'data/class-pretty-event.php';
+require_once 'data/class-category-provider.php';

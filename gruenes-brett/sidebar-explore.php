@@ -8,35 +8,24 @@
 ?>
 <aside>
   <nav>
-    <div class="item">
-      <a href="">Demo</a>
-    </div>
-    <div class="item">
-      <a href="">Diskussion</a>
-    </div>
-    <div class="item">
-      <a href="">Exkursion</a>
-    </div>
-    <div class="item">
-      <a href="">Online</a>
-    </div>
-    <div class="item">
-      <a href="">Pflegeeinsatz</a>
-    </div>
-    <div class="item">
-      <a href="">Sonstiges</a>
-    </div>
-    <div class="item">
-      <a href="">Tauschen</a>
-    </div>
-    <div class="item">
-      <a href="">Treffen</a>
-    </div>
-    <div class="item">
-      <a href="">Vortrag</a>
-    </div>
-    <div class="item">
-      <a href="">Workshop</a>
-    </div>
+    <?php
+    $all_categories = Category_Provider::get_all();
+    foreach ( $all_categories as $category ) {
+        list(
+          $background,
+          $foreground
+          )   = Category_Provider::get_background_foreground_colors( $category );
+        $name = $category->get_field( 'name' );
+
+        $bg_style = "background-color: $background;";
+        $fg_style = "color: $foreground;";
+
+        echo <<<XML
+        <div class="item" style="$bg_style">
+          <a href="" style="$fg_style">$name</a>
+        </div>
+XML;
+    }
+    ?>
   </nav>
 </aside>
