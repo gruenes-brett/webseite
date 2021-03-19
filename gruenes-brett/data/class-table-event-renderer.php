@@ -25,6 +25,7 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
 
         $featherlight_data = Event_Popup::get_featherlight_attribute( $event );
 
+        // TODO @sebastianlay: Format event on calendar page as desired.
         return <<<XML
       <article>
         <h2><a href="#" $featherlight_data>$pretty->title</a></h2>

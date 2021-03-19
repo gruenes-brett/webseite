@@ -25,6 +25,7 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
 
         $featherlight_data = Event_Popup::get_featherlight_attribute( $event );
 
+        // TODO @sebastianlay: Format event on explorer page as desired.
         return <<<XML
         <article>
             <section class="image" style="background-image: url($image_url);">

@@ -20,6 +20,7 @@
         $bg_style = "background-color: $background;";
         $fg_style = "color: $foreground;";
 
+        // TODO @sebastianlay/@joergrs: Implement behavior of category buttons.
         echo <<<XML
         <div class="item" style="$bg_style">
           <a href="" style="$fg_style">$name</a>

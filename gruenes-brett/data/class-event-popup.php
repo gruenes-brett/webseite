@@ -12,7 +12,7 @@ class Event_Popup extends Comcal_Featherlight_Event_Popup {
     protected static function render( Comcal_Event $event ) : void {
         $pretty = new Pretty_Event( $event );
 
-        // TODO Popup schöner machen.
+        // TODO @sebastianlay: Format event popup as desired.
         echo <<<XML
             <h4 id="title">$pretty->title</h4>
             <p>
