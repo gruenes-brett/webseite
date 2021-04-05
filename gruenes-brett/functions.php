@@ -45,6 +45,7 @@ function echo_buttons_and_forms() {
 }
 
 require_once 'data/class-event-popup.php';
+require_once 'data/class-edit-event-popup.php';
 require_once 'data/class-calendar-table-builder.php';
 require_once 'data/class-table-event-renderer.php';
 require_once 'data/class-event-explorer-builder.php';

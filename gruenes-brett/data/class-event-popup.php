@@ -27,3 +27,5 @@ class Event_Popup extends Comcal_Featherlight_Event_Popup {
 XML;
     }
 }
+
+Event_Popup::verify_popup_initialized();

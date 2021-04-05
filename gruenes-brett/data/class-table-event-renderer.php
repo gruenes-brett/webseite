@@ -23,18 +23,22 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
 
         $edit_link = $this->get_edit_link( $event );
 
-        $featherlight_data = Event_Popup::get_featherlight_attribute( $event );
+        $featherlight_view_data = Event_Popup::get_featherlight_attribute( $event );
+        $featherlight_edit_data = Edit_Event_Popup::get_featherlight_attribute( $event );
+
+        $edit_link_popup = '';
+        if ( '' !== $edit_link ) {
+            $edit_link_popup = "<a href='#' $featherlight_edit_data>editfs</a>";
+        }
 
         // TODO @sebastianlay: Format event on calendar page as desired.
         return <<<XML
       <article>
-        <h2><a href="#" $featherlight_data>$pretty->title</a></h2>
+        <h2><a href="#" $featherlight_view_data>$pretty->title</a></h2>
         <section class="meta">
-          $edit_link $pretty->pretty_time, $pretty->location
+          $edit_link_popup $edit_link $pretty->pretty_time, $pretty->location
         </section>
       </article>
 XML;
     }
 }
-
-Event_Popup::verify_popup_initialized();
