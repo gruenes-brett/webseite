@@ -12,6 +12,6 @@
   <section class="note">
     <?php the_content(); ?>
   </section>
-  <?php Edit_Event_Popup::render_form(); ?>
+  <?php Edit_Event_Form::render_empty_form(); ?>
 </main>
 <?php get_footer(); ?>
