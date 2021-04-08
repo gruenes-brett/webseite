@@ -226,7 +226,7 @@ main {
   background: var(--white);
 }
 
-main.explore, main.addevent {
+main.explore, main.calendar, main.addevent {
   display: flex;
 }
 
@@ -384,7 +384,15 @@ aside nav a:hover, aside nav a:focus {
   content: '→ ';
 }
 
+.explore .comcal-floating-button-container {
+  width: 100%;
+}
+
 /* Calendar */
+
+.calendar {
+  flex-direction: column;
+}
 
 .calendar table {
   font-size: 18px;
@@ -402,6 +410,10 @@ aside nav a:hover, aside nav a:focus {
   background: var(--green);
 }
 
+.calendar table tr.today td:first-child {
+  background: transparent;
+}
+
 .calendar table tr.today a {
   color: var(--white);
 }
@@ -413,23 +425,32 @@ aside nav a:hover, aside nav a:focus {
 .calendar table td {
   padding: 10px 20px;
   border-bottom: 1px solid var(--lightgray);
-  text-align: right;
+  text-align: center;
 }
 
-.calendar h2.month-title {
+.calendar table td:first-child {
+  border: none;
+  text-align: left;
   position: sticky;
   top: 0;
-  padding-top: 1.5em;
+  width: 150px;
 }
 
-.calendar h2.month-title a {
+.calendar table td:first-child a {
   display: block;
   background: var(--white);
 }
 
+.calendar table td:nth-child(2) {
+  width: 60px;
+}
+
+.calendar table td:nth-child(3) {
+  width: 60px;
+}
+
 .calendar table td:last-child {
   text-align: left;
-  width: 99%;
 }
 
 .calendar table td article + article {
@@ -438,7 +459,7 @@ aside nav a:hover, aside nav a:focus {
 
 .calendar table td article .meta {
   color: var(--foreground);
-  font-family: 'Droid Serif', serif;
+  font-family: 'Fira Sans', serif;
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 0;
