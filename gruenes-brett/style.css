@@ -12,32 +12,28 @@ Text Domain: gruenes-brett
 
 @font-face {
   font-family: 'Fira Sans';
-  src: url('fonts/firasans-regular-webfont.woff2') format('woff2'),
-       url('fonts/firasans-regular-webfont.woff') format('woff');
+  src: url('fonts/firasans-regular-webfont.woff2') format('woff2'), url('fonts/firasans-regular-webfont.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Barlow Condensed';
-  src: url('fonts/barlowcondensed-regular-webfont.woff2') format('woff2'),
-       url('fonts/barlowcondensed-regular-webfont.woff') format('woff');
+  src: url('fonts/barlowcondensed-regular-webfont.woff2') format('woff2'), url('fonts/barlowcondensed-regular-webfont.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Barlow Condensed';
-  src: url('fonts/barlowcondensed-medium-webfont.woff2') format('woff2'),
-       url('fonts/barlowcondensed-medium-webfont.woff') format('woff');
+  src: url('fonts/barlowcondensed-medium-webfont.woff2') format('woff2'), url('fonts/barlowcondensed-medium-webfont.woff') format('woff');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Barlow Condensed';
-  src: url('fonts/barlowcondensed-semibold-webfont.woff2') format('woff2'),
-       url('fonts/barlowcondensed-semibold-webfont.woff') format('woff');
+  src: url('fonts/barlowcondensed-semibold-webfont.woff2') format('woff2'), url('fonts/barlowcondensed-semibold-webfont.woff') format('woff');
   font-weight: 600;
   font-style: normal;
 }
@@ -107,7 +103,7 @@ a:hover, a:focus {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Barlow Condensed', sans-serif;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   font-size: 24px;
   font-weight: 500;
   line-height: 30px;
@@ -159,7 +155,7 @@ label, button {
   font-weight: 600;
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 18px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   display: inline-block;
 }
 
@@ -249,7 +245,7 @@ header {
   justify-content: space-between;
   align-items: center;
   font-family: 'Barlow Condensed', sans-serif;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -294,7 +290,7 @@ aside nav {
   font-size: 18px;
   font-weight: 500;
   font-family: 'Barlow Condensed', sans-serif;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -398,7 +394,7 @@ aside nav a:hover, aside nav a:focus {
   font-size: 18px;
   font-weight: 700;
   font-family: 'Barlow Condensed', sans-serif;
-  letter-spacing: 0px;
+  letter-spacing: 0;
 }
 
 .calendar table tr.weekend {
