@@ -55,7 +55,7 @@ XML;
         $organizer      = $this->event->get_field( 'organizer' );
         $location       = $this->event->get_field( 'location' );
         $title          = $this->event->get_field( 'title' );
-        $date           = $this->event->get_field( 'date', date( 'Y-m-d' ) );
+        $date           = $this->event->get_field( 'date', gmdate( 'Y-m-d' ) );
         $time           = $this->event->get_field( 'time', '12:00:00' );
         $date_end       = $this->event->get_field( 'dateEnd', '' );
         $time_end       = $this->event->get_field( 'timeEnd', '' );
