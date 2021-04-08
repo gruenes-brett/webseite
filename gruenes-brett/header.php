@@ -22,7 +22,7 @@
       <h1 class="logo">
         <a href="<?php echo esc_url( get_home_url() ); ?>">
           <img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/logo.svg" alt="Grünes Brett">
-          <span>Grünes Brett</span>
+          <!-- <span>Grünes Brett</span> -->
         </a>
       </h1>
 <?php

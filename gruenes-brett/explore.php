@@ -17,7 +17,7 @@ if ( verify_community_calendar_loaded( true ) ) {
 }
 ?>
 
-  <article>
+  <!-- <article>
     <section class="image" style="background-image: url(<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/placeholder.png);">
       <a href=""></a>
     </section>
@@ -107,6 +107,6 @@ if ( verify_community_calendar_loaded( true ) ) {
       <p>Umweltschutz liegt dir am Herzen? Du möchtest gern in einem Umweltschutzverein aktiv werden? Dann komm vorbei! Die Treffen der BUNDjugend Dresden sind für alle Interessierte bis 27 Jahre offen - wir freuen uns immer über neue Gesichter! Egal ob du mit deinem Engagement erst anfängst oder schon erfahren bist: Bei…</p>
       <p class="details"><a href="">mehr Informationen</a></p>
     </section>
-  </article>
+  </article> -->
 </main>
 <?php get_footer(); ?>
