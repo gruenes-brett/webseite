@@ -29,9 +29,11 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
             $edit_link = ", <a href='#' $featherlight_edit_data>bearbeiten</a>";
         }
 
+        $private = $event->get_field( 'public' ) ? '' : 'private';
+
         // TODO @sebastianlay: Format event on calendar page as desired.
         return <<<XML
-      <article>
+      <article class="$private">
         <h2><a href="#" $featherlight_view_data>$pretty->title</a></h2>
         <section class="meta">
           $pretty->pretty_time, $pretty->location$edit_link

@@ -345,6 +345,16 @@ aside nav a:hover, aside nav a:focus {
   z-index: 200;
 }
 
+.explore article.private h2:after {
+  content: ' ';
+  width: 25px;
+  height: 25px;
+  background-image: url(img/icons/eye-off.svg);
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
 .explore article .image {
   position: relative;
   top: -30px;
@@ -449,8 +459,10 @@ aside nav a:hover, aside nav a:focus {
   text-align: left;
 }
 
-.calendar table td article + article {
-  margin-top: 10px;
+.calendar table td article.private {
+  background: url(img/icons/eye-off.svg) no-repeat;
+  background-position: right center;
+  padding-right: 25px;
 }
 
 .calendar table td article .meta {

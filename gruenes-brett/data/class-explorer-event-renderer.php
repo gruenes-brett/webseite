@@ -29,9 +29,11 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
             $edit_link = ", <a href='#' $featherlight_edit_data>bearbeiten</a>";
         }
 
+        $private = $event->get_field( 'public' ) ? '' : 'private';
+
         // TODO @sebastianlay: Format event on explorer page as desired.
         return <<<XML
-        <article>
+        <article class="$private">
             <section class="image" style="background-image: url($image_url);">
                 <a href="#" $featherlight_view_data></a>
             </section>
