@@ -11,44 +11,34 @@ Text Domain: gruenes-brett
 /* Web fonts */
 
 @font-face {
-  font-family: 'Bebas Neue';
-  src: url('fonts/bebasneue-thin-webfont.woff2') format('woff2'), url('fonts/bebasneue-thin-webfont.woff') format('woff');
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Bebas Neue';
-  src: url('fonts/bebasneue-light-webfont.woff2') format('woff2'), url('fonts/bebasneue-light-webfont.woff') format('woff');
-  font-weight: 200;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Bebas Neue';
-  src: url('fonts/bebasneue-book-webfont.woff2') format('woff2'), url('fonts/bebasneue-book-webfont.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Bebas Neue';
-  src: url('fonts/bebasneue-regular-webfont.woff2') format('woff2'), url('fonts/bebasneue-regular-webfont.woff') format('woff');
+  font-family: 'Fira Sans';
+  src: url('fonts/firasans-regular-webfont.woff2') format('woff2'),
+       url('fonts/firasans-regular-webfont.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Bebas Neue';
-  src: url('fonts/bebasneue-bold-webfont.woff2') format('woff2'), url('fonts/bebasneue-bold-webfont.woff') format('woff');
-  font-weight: 700;
+  font-family: 'Barlow Condensed';
+  src: url('fonts/barlowcondensed-regular-webfont.woff2') format('woff2'),
+       url('fonts/barlowcondensed-regular-webfont.woff') format('woff');
+  font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Droid Serif';
-  src: url('fonts/DroidSerif-Regular-webfont.woff') format('woff');
-  font-weight: 400;
+  font-family: 'Barlow Condensed';
+  src: url('fonts/barlowcondensed-medium-webfont.woff2') format('woff2'),
+       url('fonts/barlowcondensed-medium-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('fonts/barlowcondensed-semibold-webfont.woff2') format('woff2'),
+       url('fonts/barlowcondensed-semibold-webfont.woff') format('woff');
+  font-weight: 600;
   font-style: normal;
 }
 
@@ -88,12 +78,12 @@ body {
   min-height: 100vh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
-  line-height: 1.5;
   overflow-y: scroll;
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Droid Serif', serif;
+  font-family: 'Fira Sans', sans-serif;
   font-size: 14px;
+  line-height: 1.5;
 }
 
 img {
@@ -116,11 +106,12 @@ a:hover, a:focus {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 1px;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 0px;
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 30px;
+  text-transform: uppercase;
 }
 
 h3 {
@@ -140,7 +131,7 @@ td {
 input, textarea, select, button {
   width: 100%;
   padding: 10px;
-  font-family: 'Droid Serif', serif;
+  font-family: 'Fira Sans', sans-serif;
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 0;
@@ -165,10 +156,10 @@ button {
 }
 
 label, button {
-  font-weight: 700;
-  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 600;
+  font-family: 'Barlow Condensed', sans-serif;
   font-size: 18px;
-  letter-spacing: 1px;
+  letter-spacing: 0px;
   display: inline-block;
 }
 
@@ -257,8 +248,9 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 1px;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 0px;
+  text-transform: uppercase;
 }
 
 header .logo {
@@ -300,9 +292,10 @@ aside nav {
   align-items: stretch;
   flex-wrap: wrap;
   font-size: 18px;
-  font-weight: 700;
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 1px;
+  font-weight: 500;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 0px;
+  text-transform: uppercase;
 }
 
 aside nav .item {
@@ -396,8 +389,8 @@ aside nav a:hover, aside nav a:focus {
 .calendar table {
   font-size: 18px;
   font-weight: 700;
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 1px;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 0px;
 }
 
 .calendar table tr.weekend {
