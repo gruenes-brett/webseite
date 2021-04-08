@@ -21,23 +21,27 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
             $image_url = esc_url( get_stylesheet_directory_uri() . '/img/placeholder.png' );
         }
 
-        $edit_link = $this->get_edit_link( $event );
+        $featherlight_view_data = Event_Popup::get_featherlight_attribute( $event );
+        $featherlight_edit_data = Edit_Event_Popup::get_featherlight_attribute( $event );
 
-        $featherlight_data = Event_Popup::get_featherlight_attribute( $event );
+        $edit_link = $this->get_edit_link( $event );
+        if ( '' !== $edit_link ) {
+            $edit_link = ", <a href='#' $featherlight_edit_data>bearbeiten</a>";
+        }
 
         // TODO @sebastianlay: Format event on explorer page as desired.
         return <<<XML
         <article>
             <section class="image" style="background-image: url($image_url);">
-                <a href="#" $featherlight_data></a>
+                <a href="#" $featherlight_view_data></a>
             </section>
-            <h2><a href="#" $featherlight_data>$pretty->title</a></h2>
+            <h2><a href="#" $featherlight_view_data>$pretty->title</a></h2>
             <section class="meta">
-            $edit_link $pretty->pretty_date, $pretty->pretty_time
+            $pretty->pretty_date, $pretty->pretty_time$edit_link
             </section>
             <section class="description">
             <p>$pretty->description</p>
-            <p class="details"><a href="$pretty->url">mehr Informationen</a></p>
+            <p class="details"><a href="#" $featherlight_view_data>mehr Informationen</a></p>
             </section>
         </article>
 XML;
