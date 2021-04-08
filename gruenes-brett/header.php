@@ -12,8 +12,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grünes Brett - Erkunden</title>
-  <?php wp_enqueue_style( 'style', get_stylesheet_uri(), '', '1.0' ); ?>
-  <?php wp_enqueue_style( 'featherlight', esc_url( get_stylesheet_directory_uri() ) . '/css/featherlight.min.css', '', '1.0' ); ?>
   <?php wp_head(); ?>
   <link rel="icon" href="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/favicon.png">
   <link rel="shortcut icon" href="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/favicon.png">

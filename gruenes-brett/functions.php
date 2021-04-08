@@ -53,3 +53,38 @@ require_once 'data/class-event-explorer-builder.php';
 require_once 'data/class-explorer-event-renderer.php';
 require_once 'data/class-pretty-event.php';
 require_once 'data/class-category-provider.php';
+
+
+/**
+ * Enqueue scripts and styles.
+ */
+function gruenes_brett_scripts() {
+    $version = '1.0';
+    wp_enqueue_script(
+        'gruenes_brett_form_script',
+        esc_url( get_stylesheet_directory_uri() . '/js/forms.js' ),
+        array( 'jquery', 'jquery-form' ),
+        $version,
+        true
+    );
+    wp_enqueue_script(
+        'featherlight',
+        esc_url( get_stylesheet_directory_uri() ) . '/js/featherlight.min.js',
+        '',
+        $version,
+        true
+    );
+}
+add_action( 'wp_enqueue_scripts', 'gruenes_brett_scripts' );
+
+function gruenes_brett_styles() {
+    $version = '1.0';
+    wp_enqueue_style( 'style', get_stylesheet_uri(), '', '1.0' );
+    wp_enqueue_style(
+        'featherlight',
+        esc_url( get_stylesheet_directory_uri() ) . '/css/featherlight.min.css',
+        '',
+        '1.0'
+    );
+}
+add_action( 'wp_print_styles', 'gruenes_brett_styles' );

@@ -33,6 +33,22 @@ class Edit_Event_Form extends Comcal_Edit_Event_Form {
         'inputImageUrl'  => 'imageUrl',
     );
 
+    protected function get_form_id(): string {
+        return 'edit-event-form';
+    }
+
+    protected function get_html_after_form(): string {
+        $id = $this->get_form_id();
+        return <<<XML
+          <script>
+            jQuery(document).ready(function(){
+                register_form_ajax_submission('#$id');
+            });
+          </script>
+XML;
+
+    }
+
     public function get_form_fields() : string {
         $event_id = $this->event->get_entry_id();
 
@@ -50,8 +66,7 @@ class Edit_Event_Form extends Comcal_Edit_Event_Form {
         $public_control = comcal_get_public_control( $public );
         $categories     = comcal_edit_event_categories();
 
-        $submitter_form_fields     = $this->get_submitter_form_fields();
-        $import_event_url_controls = comcal_get_import_event_url_controls();
+        $submitter_form_fields = $this->get_submitter_form_fields();
 
         $submit_button_text = 'Veranstaltung eintragen';
         if ( $this->event->exists() ) {
@@ -61,10 +76,6 @@ class Edit_Event_Form extends Comcal_Edit_Event_Form {
         return <<<XML
             <table>
               $submitter_form_fields
-              <tr>
-                <td></td>
-                <td>$import_event_url_controls</td>
-              </tr>
               <tr>
                 <td><label for="inputTitle">Veranstaltungsname</label></td>
                 <td><input type="text" id="inputTitle" name="inputTitle" placeholder="Party im Hinterhof" maxlength="100" value="$title" required></td>
