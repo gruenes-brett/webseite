@@ -31,6 +31,16 @@ XML;
 
 
 /**
+ * Returns whether the currently logged in user may edit or delete events.
+ *
+ * @return bool
+ */
+function user_can_administer_events() : bool {
+    return current_user_can( 'edit_others_posts' );
+}
+
+
+/**
  * Helper function that puts basic elements into the HTML
  * - Event popup
  * - Event edit form
@@ -38,7 +48,7 @@ XML;
  */
 function echo_buttons_and_forms() {
     echo comcal_get_edit_form( 'gruenes-brett' );
-    if ( comcal_current_user_can_set_public() ) {
+    if ( user_can_administer_events() ) {
         echo comcal_get_edit_categories_dialog();
     }
     echo comcal_floating_buttons_func( array( 'addEvent' => true ) );

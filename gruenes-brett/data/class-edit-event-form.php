@@ -21,7 +21,7 @@ class Edit_Event_Form extends Comcal_Edit_Event_Form {
      *
      * @var array
      */
-    protected static $form_to_event_field = array(
+    protected static $form_field_to_model_field = array(
         'inputTitle'     => 'title',
         'inputStartDate' => 'date',
         'inputStartTime' => 'time',
@@ -31,6 +31,7 @@ class Edit_Event_Form extends Comcal_Edit_Event_Form {
         'inputOrganizer' => 'organizer',
         'inputUrl'       => 'url',
         'inputImageUrl'  => 'imageUrl',
+        'inputPublic'    => 'public',
     );
 
     protected function get_form_id(): string {
@@ -38,6 +39,8 @@ class Edit_Event_Form extends Comcal_Edit_Event_Form {
     }
 
     protected function get_html_after_form(): string {
+        // "hack" to make sure this form can be submitted via AJAX, as
+        // defined in forms.js
         $id = $this->get_form_id();
         return <<<XML
           <script>
@@ -52,21 +55,23 @@ XML;
     public function get_form_fields() : string {
         $event_id = $this->event->get_entry_id();
 
-        $organizer      = $this->event->get_field( 'organizer' );
-        $location       = $this->event->get_field( 'location' );
-        $title          = $this->event->get_field( 'title' );
-        $date           = $this->event->get_field( 'date', gmdate( 'Y-m-d' ) );
-        $time           = $this->event->get_field( 'time', '12:00:00' );
-        $date_end       = $this->event->get_field( 'dateEnd', '' );
-        $time_end       = $this->event->get_field( 'timeEnd', '' );
-        $url            = $this->event->get_field( 'url' );
-        $description    = $this->event->get_field( 'description' );
-        $image_url      = $this->event->get_field( 'imageUrl' );
-        $public         = $this->event->get_field( 'public' );
-        $public_control = comcal_get_public_control( $public );
-        $categories     = comcal_edit_event_categories();
+        $organizer   = $this->event->get_field( 'organizer' );
+        $location    = $this->event->get_field( 'location' );
+        $title       = $this->event->get_field( 'title' );
+        $date        = $this->event->get_field( 'date', gmdate( 'Y-m-d' ) );
+        $time        = $this->event->get_field( 'time', '12:00:00' );
+        $date_end    = $this->event->get_field( 'dateEnd', '' );
+        $time_end    = $this->event->get_field( 'timeEnd', '' );
+        $url         = $this->event->get_field( 'url' );
+        $description = $this->event->get_field( 'description' );
+        $image_url   = $this->event->get_field( 'imageUrl' );
+        $public      = $this->event->get_field( 'public' );
+        $categories  = comcal_edit_event_categories();
 
         $submitter_form_fields = $this->get_submitter_form_fields();
+
+        $more_fields  = $this->get_privacy_consent_checkbox();
+        $more_fields .= $this->get_public_checkbox( $public );
 
         $submit_button_text = 'Veranstaltung eintragen';
         if ( $this->event->exists() ) {
@@ -193,17 +198,7 @@ XML;
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
               </tr>
-              <tr>
-                <td></td>
-                <td>
-                  <div class="formgroup">
-                    <div class="row">
-                      <input type="checkbox" name="inputPrivacy" id="inputPrivacy" >
-                      <label for="inputPrivacy">Ich stimme zu, dass meine eingegebenen Daten, wie in der <a href="">Datenschutzerklärung</a> vom Grünen Brett beschrieben, gesammelt und verarbeitet werden.</label>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+              $more_fields
               <tr>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
@@ -216,8 +211,45 @@ XML;
 XML;
     }
 
+    protected function get_privacy_consent_checkbox() {
+        $checked = user_can_administer_events() ? 'checked' : '';
+        return <<<XML
+              <tr>
+                <td></td>
+                <td>
+                  <div class="formgroup">
+                    <div class="row">
+                      <input type="checkbox" name="inputPrivacy" id="inputPrivacy" $checked>
+                      <label for="inputPrivacy">Ich stimme zu, dass meine eingegebenen Daten, wie in der <a href="">Datenschutzerklärung</a> vom Grünen Brett beschrieben, gesammelt und verarbeitet werden.</label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+XML;
+    }
+
+    protected function get_public_checkbox( bool $is_checked ) {
+        if ( ! user_can_administer_events() ) {
+            return '';
+        }
+        $checked = $is_checked ? 'checked' : '';
+        return <<<XML
+              <tr>
+                <td></td>
+                <td>
+                  <div class="formgroup">
+                    <div class="row">
+                      <input type="checkbox" name="inputPublic" id="inputPublic" $checked>
+                      <label for="inputPublic">Event veröffentlichen</label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+XML;
+    }
+
     protected function get_submitter_form_fields() : string {
-        if ( comcal_current_user_can_set_public() ) {
+        if ( user_can_administer_events() ) {
             return '';
         }
 
