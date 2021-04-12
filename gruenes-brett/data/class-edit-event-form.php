@@ -97,7 +97,6 @@ XML;
                 <td>&nbsp;</td>
                 <td>
                     <input name="eventId" id="eventId" value="$event_id" type="hidden">
-                    <input name="calendarName" id="calendarName" value="{$this->calendar_name}" type="hidden">
                 </td>
               </tr>
               <tr>
@@ -219,7 +218,7 @@ XML;
                 <td>
                   <div class="formgroup">
                     <div class="row">
-                      <input type="checkbox" name="inputPrivacy" id="inputPrivacy" $checked>
+                      <input type="checkbox" name="inputPrivacy" id="inputPrivacy" $checked required>
                       <label for="inputPrivacy">Ich stimme zu, dass meine eingegebenen Daten, wie in der <a href="">Datenschutzerklärung</a> vom Grünen Brett beschrieben, gesammelt und verarbeitet werden.</label>
                     </div>
                   </div>

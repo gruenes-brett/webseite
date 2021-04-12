@@ -31,7 +31,7 @@ class Calendar_Table_Builder extends Comcal_Table_Builder {
         }
 
         $category      = null;
-        $calendar_name = 'gruenes-brett';
+        $calendar_name = '';
         $start_date    = null;
         $latest_date   = null;
         $is_admin      = user_can_administer_events();
