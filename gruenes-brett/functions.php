@@ -54,6 +54,7 @@ function echo_buttons_and_forms() {
     echo comcal_floating_buttons_func( array( 'addEvent' => true ) );
 }
 
+require_once 'data/class-common-data.php';
 require_once 'data/class-event-popup.php';
 require_once 'data/class-edit-event-popup.php';
 require_once 'data/class-edit-event-form.php';
