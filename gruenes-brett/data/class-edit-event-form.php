@@ -66,8 +66,8 @@ XML;
         $description = $this->event->get_field( 'description' );
         $image_url   = $this->event->get_field( 'imageUrl' );
         $public      = $this->event->get_field( 'public' );
-        $categories  = comcal_edit_event_categories();
 
+        $category_selector     = $this->get_category_selector();
         $submitter_form_fields = $this->get_submitter_form_fields();
 
         $more_fields  = $this->get_privacy_consent_checkbox();
@@ -171,23 +171,9 @@ XML;
                 <td><label for="textareaDescription">Beschreibung</label></td>
                 <td><textarea name="textareaDescription" id="textareaDescription" rows="7">$description</textarea></td>
               </tr>
-              <tr>
-                <td><label for="selectCategory">Kategorie</label></td>
-                <td>
-                  <select multiple name="selectCategory" id="selectCategory" size="7">
-                    <option>Demo</option>
-                    <option>Diskussion</option>
-                    <option>Exkursion</option>
-                    <option>Online</option>
-                    <option>Pflegeeinsatz</option>
-                    <option>Sonstiges</option>
-                    <option>Tauschen</option>
-                    <option>Treffen</option>
-                    <option>Vortrag</option>
-                    <option>Workshop</option>
-                  </select>
-                </td>
-              </tr>
+
+              $category_selector
+
               <tr>
                 <td><label for="inputImage">Veranstaltungsbild</label></td>
                 <!-- <td><input type="file" name="inputImage" id="inputImage" ></td> -->
@@ -266,6 +252,36 @@ XML;
                 <td>&nbsp;</td>
               </tr>
 XML;
+    }
+
+    protected function get_category_selector() : string {
+        $all_categories = Category_Provider::get_all();
+        $options        = '';
+        foreach ( $all_categories as $category ) {
+            $cat_id   = $category->get_entry_id();
+            $name     = $category->get_field( 'name' );
+            $selected = $this->event->has_category( $category ) ? 'selected' : '';
+            $options .= "<option value='$cat_id' $selected>$name</option>\n";
+        }
+        return <<<XML
+              <tr>
+                <td><label for="selectCategories">Weitere Kategorien</label></td>
+                <td>
+                  <select multiple name="selectCategories[]" id="selectCategories" size="7">
+                    $options
+                  </select>
+                </td>
+              </tr>
+XML;
+    }
+
+    /**
+     * Extracts catgory ids from post data.
+     *
+     * @param array $post_data Post data.
+     */
+    protected static function extract_category_ids( $post_data ) {
+        return $post_data['selectCategories'] ?? array();
     }
 }
 

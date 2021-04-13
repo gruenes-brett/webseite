@@ -10,7 +10,7 @@
  */
 class Category_Provider {
 
-    public static function get_all() {
+    public static function get_all() : array {
         return Comcal_Category::get_all();
     }
 
