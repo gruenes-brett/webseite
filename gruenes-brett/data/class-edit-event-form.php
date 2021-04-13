@@ -255,20 +255,32 @@ XML;
     }
 
     protected function get_category_selector() : string {
-        $all_categories = Category_Provider::get_all();
-        $options        = '';
+        $all_categories     = Category_Provider::get_all();
+        $main_cat_options   = '';
+        $other_cats_options = '';
         foreach ( $all_categories as $category ) {
-            $cat_id   = $category->get_entry_id();
-            $name     = $category->get_field( 'name' );
-            $selected = $this->event->has_category( $category ) ? 'selected' : '';
-            $options .= "<option value='$cat_id' $selected>$name</option>\n";
+            $cat_id        = $category->get_entry_id();
+            $name          = $category->get_field( 'name' );
+            $selected_main = $this->event->has_category( $category, true ) ? 'selected' : '';
+            $selected      = $this->event->has_category( $category, false ) ? 'selected' : '';
+
+            $main_cat_options   .= "<option value='$cat_id' $selected_main>$name</option>\n";
+            $other_cats_options .= "<option value='$cat_id' $selected>$name</option>\n";
         }
         return <<<XML
+              <tr>
+                <td><label for="selectMainCategory">Primäre Kategorie</label></td>
+                <td>
+                  <select name="selectMainCategory" id="selectMainCategory">
+                    $main_cat_options
+                  </select>
+                </td>
+              </tr>
               <tr>
                 <td><label for="selectCategories">Weitere Kategorien</label></td>
                 <td>
                   <select multiple name="selectCategories[]" id="selectCategories" size="7">
-                    $options
+                    $other_cats_options
                   </select>
                 </td>
               </tr>
@@ -281,7 +293,8 @@ XML;
      * @param array $post_data Post data.
      */
     protected static function extract_category_ids( $post_data ) {
-        return $post_data['selectCategories'] ?? array();
+        $primary_category = isset( $post_data['selectMainCategory'] ) ? array( $post_data['selectMainCategory'] ) : array();
+        return array_merge( $primary_category, $post_data['selectCategories'] ?? array() );
     }
 }
 
