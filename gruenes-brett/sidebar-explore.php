@@ -18,7 +18,7 @@
         list(
           $background,
           $foreground
-          )   = Category_Provider::get_background_foreground_colors( $category );
+          )   = $category->get_background_foreground_colors();
         $name = $category->get_field( 'name' );
 
         $bg_style = "background-color: $background;";

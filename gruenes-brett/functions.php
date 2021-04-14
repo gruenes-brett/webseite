@@ -55,13 +55,20 @@ function echo_buttons_and_forms() {
 }
 
 require_once 'data/class-common-data.php';
+
 require_once 'data/class-event-popup.php';
 require_once 'data/class-edit-event-popup.php';
 require_once 'data/class-edit-event-form.php';
+
+// calendar.
 require_once 'data/class-calendar-table-builder.php';
 require_once 'data/class-table-event-renderer.php';
+
+// explorer.
 require_once 'data/class-event-explorer-builder.php';
 require_once 'data/class-explorer-event-renderer.php';
+
+// helpers.
 require_once 'data/class-pretty-event.php';
 require_once 'data/class-category-provider.php';
 
