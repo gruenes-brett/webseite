@@ -31,9 +31,12 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
 
         $private = $event->get_field( 'public' ) ? '' : 'private';
 
+        $overlay = $this->get_overlay( $event );
+
         // TODO @sebastianlay: Format event on explorer page as desired.
         return <<<XML
         <article class="$private">
+            $overlay
             <section class="image" style="background-image: url($image_url);">
                 <a href="#" $featherlight_view_data></a>
             </section>
@@ -46,6 +49,17 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
             <p class="details"><a href="#" $featherlight_view_data>mehr Informationen</a></p>
             </section>
         </article>
+XML;
+    }
+
+    protected function get_overlay( Comcal_Event $event ) : string {
+        $background_color = 'var(--green)';
+        $category         = $event->get_primary_category();
+        if ( null !== $category ) {
+            $background_color = $category->get_background_color();
+        }
+        return <<<XML
+            <div class="event-overlay" style="background-color: $background_color;"></div>
 XML;
     }
 }

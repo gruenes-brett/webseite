@@ -338,7 +338,7 @@ aside nav a:hover, aside nav a:focus {
   width: calc(100% / 3);
 }
 
-.explore article:before {
+.explore article .event-overlay {
   display: block;
   width: 30%;
   height: 5px;
