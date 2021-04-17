@@ -209,6 +209,11 @@ option:checked {
   align-self: flex-start;
 }
 
+.formgroup.highlight {
+  background-color: yellow;
+  color: red;
+}
+
 /* Main document */
 
 .wrapper {

@@ -32,6 +32,7 @@ class Edit_Event_Form extends Comcal_Edit_Event_Form {
         'inputUrl'       => 'url',
         'inputImageUrl'  => 'imageUrl',
         'inputPublic'    => 'public',
+        'inputDelete'    => 'delete',
     );
 
     protected function get_form_id(): string {
@@ -53,7 +54,8 @@ XML;
     }
 
     public function get_form_fields() : string {
-        $event_id = $this->event->get_entry_id();
+        $event_id     = $this->event->get_entry_id();
+        $event_exists = $this->event->exists();
 
         $organizer   = $this->event->get_field( 'organizer' );
         $location    = $this->event->get_field( 'location' );
@@ -72,11 +74,14 @@ XML;
 
         $more_fields  = $this->get_privacy_consent_checkbox();
         $more_fields .= $this->get_public_checkbox( $public );
+        $more_fields .= $event_exists ? $this->get_delete_checkbox() : '';
 
         $submit_button_text = 'Veranstaltung eintragen';
-        if ( $this->event->exists() ) {
+        if ( $event_exists ) {
             $submit_button_text = 'Veranstaltung aktualisieren';
         }
+
+        $spacer = $this->get_spacer();
 
         return <<<XML
             <table>
@@ -140,10 +145,7 @@ XML;
                   </div>
                 </td>
               </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
+              $spacer
               <tr>
                 <td><label for="inputPlaceName">Veranstaltungsort</label></td>
                 <td><input type="text" name="inputPlaceName" id="inputPlaceName" placeholder="Unser Hinterhof" maxlength="50" value="$location"></td>
@@ -163,10 +165,7 @@ XML;
                   </div>
                 </td>
               </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
+              $spacer
               <tr>
                 <td><label for="textareaDescription">Beschreibung</label></td>
                 <td><textarea name="textareaDescription" id="textareaDescription" rows="7">$description</textarea></td>
@@ -179,15 +178,9 @@ XML;
                 <!-- <td><input type="file" name="inputImage" id="inputImage" ></td> -->
                 <td><input type="text" value="$image_url" name="inputImageUrl" id="nputImageUrl" placeholder="https://..."></td>
               </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
+              $spacer
               $more_fields
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
+              $spacer
               <tr>
                 <td></td>
                 <td><button type="submit">$submit_button_text</button></td>
@@ -229,6 +222,34 @@ XML;
                     </div>
                   </div>
                 </td>
+              </tr>
+XML;
+    }
+
+    protected function get_delete_checkbox() {
+        if ( ! user_can_administer_events() ) {
+            return '';
+        }
+        return <<<XML
+              <tr>
+                <td></td>
+                <td>
+                  <div class="formgroup highlight">
+                    <div class="row">
+                      <input type="checkbox" name="inputDelete" id="inputDelete">
+                      <label for="inputDelete">Event löschen</label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+XML;
+    }
+
+    protected function get_spacer() {
+        return <<<XML
+              <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
               </tr>
 XML;
     }
