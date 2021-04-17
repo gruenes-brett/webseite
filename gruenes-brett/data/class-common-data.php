@@ -28,8 +28,8 @@ class Common_Data {
     public static function get_events_iterator() : Comcal_Event_Iterator {
         $category      = static::get_active_category();
         $calendar_name = '';
-        $start_date    = null;
         $latest_date   = null;
+        $start_date    = static::get_earliest_display_date();
         $is_admin      = user_can_administer_events();
 
         $events_iterator = new Comcal_Event_Iterator(
@@ -40,5 +40,17 @@ class Common_Data {
             $latest_date ? $latest_date->get_date_str() : null
         );
         return $events_iterator;
+    }
+
+    /**
+     * When to start to show events.
+     *
+     * @return Comcal_Date_Time Timestamp or null for all events.
+     */
+    public static function get_earliest_display_date() {
+        if ( user_can_administer_events() ) {
+            return null;
+        }
+        return Comcal_Date_Time::now();
     }
 }

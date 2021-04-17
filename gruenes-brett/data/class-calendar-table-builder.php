@@ -32,7 +32,11 @@ class Calendar_Table_Builder extends Comcal_Table_Builder {
 
         $events_iterator = Common_Data::get_events_iterator();
 
-        static::$instance = self::create_display( static::class, $events_iterator );
+        static::$instance = self::create_display(
+            static::class,
+            $events_iterator,
+            Common_Data::get_earliest_display_date(),
+        );
         return static::$instance;
     }
 
