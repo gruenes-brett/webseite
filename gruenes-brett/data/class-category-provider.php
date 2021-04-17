@@ -21,6 +21,9 @@ class Category_Provider {
             </div>
 XML;
 
+        $active_category      = Common_Data::get_active_category();
+        $active_category_name = null !== $active_category ? $active_category->get_field( 'name' ) : '';
+
         foreach ( static::get_all() as $category ) {
             list(
               $background,
@@ -28,12 +31,13 @@ XML;
               )   = $category->get_background_foreground_colors();
             $name = $category->get_field( 'name' );
 
-            $bg_style = "background-color: $background;";
-            $fg_style = "color: $foreground;";
-            $href     = '?category=' . rawurlencode( $name );
+            $bg_style     = "background-color: $background;";
+            $fg_style     = "color: $foreground;";
+            $href         = '?category=' . rawurlencode( $name );
+            $active_class = $active_category_name === $name ? 'active' : '';
 
             $html .= <<<XML
-            <div class="item" style="$bg_style">
+            <div class="item $active_class" style="$bg_style">
               <a href="$href" style="$fg_style">$name</a>
             </div>
     XML;

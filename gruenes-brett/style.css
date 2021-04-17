@@ -307,6 +307,11 @@ aside nav .item {
   white-space: nowrap;
 }
 
+/* TODO @sebastianlay: what would be a nice way to highlight the active button? */
+aside nav .item.active a {
+  text-decoration: overline underline;
+}
+
 aside nav .item:last-child {
   border-right: none;
 }
