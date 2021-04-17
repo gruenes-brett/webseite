@@ -42,16 +42,10 @@ function user_can_administer_events() : bool {
 
 /**
  * Helper function that puts basic elements into the HTML
- * - Event popup
- * - Event edit form
  * - Floating buttons
  */
-function echo_buttons_and_forms() {
-    echo comcal_get_edit_form( 'gruenes-brett' );
-    if ( user_can_administer_events() ) {
-        echo comcal_get_edit_categories_dialog();
-    }
-    echo comcal_floating_buttons_func( array( 'addEvent' => true ) );
+function echo_floating_buttons() {
+    echo comcal_floating_buttons_func( array( 'addEvent' => false ) );
 }
 
 require_once 'data/class-common-data.php';
