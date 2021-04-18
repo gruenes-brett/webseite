@@ -210,8 +210,8 @@ option:checked {
 }
 
 .formgroup.highlight {
-  background-color: yellow;
-  color: red;
+  background-color: #ff0;
+  color: #f00;
 }
 
 /* Main document */
