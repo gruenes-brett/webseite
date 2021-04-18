@@ -22,6 +22,8 @@ class Edit_Event_Form extends Comcal_Edit_Event_Form {
      * @var array
      */
     protected static $form_field_to_model_field = array(
+        'inputName'      => 'submitterName',
+        'inputEmail'     => 'submitterEmail',
         'inputTitle'     => 'title',
         'inputStartDate' => 'date',
         'inputStartTime' => 'time',
@@ -255,18 +257,29 @@ XML;
     }
 
     protected function get_submitter_form_fields() : string {
-        if ( user_can_administer_events() ) {
-            return '';
+        $event_exists = $this->event->exists();
+
+        $name  = '';
+        $email = '';
+        if ( $event_exists ) {
+            $name  = $this->event->get_field( 'submitterName' );
+            $email = $this->event->get_field( 'submitterEmail' );
+        } else {
+            $user = wp_get_current_user();
+            if ( null !== $user ) {
+                $name  = $user->user_login;
+                $email = $user->user_email;
+            }
         }
 
         return <<<XML
               <tr>
                 <td><label for="inputName">Dein Name</label></td>
-                <td><input type="text" name="inputName" id="inputName" placeholder="Max Mustermann" required></td>
+                <td><input type="text" name="inputName" id="inputName" placeholder="Max Mustermann" value="$name" required></td>
               </tr>
               <tr>
                 <td><label for="inputEmail">E-Mail-Adresse</label></td>
-                <td><input type="email" name="inputEmail" id="inputEmail" placeholder="max@mustermann.de" required></td>
+                <td><input type="email" name="inputEmail" id="inputEmail" placeholder="max@mustermann.de" value="$email" required></td>
               </tr>
               <tr>
                 <td>&nbsp;</td>
