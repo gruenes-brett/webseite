@@ -108,6 +108,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
   line-height: 30px;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
 h3 {
@@ -415,6 +416,7 @@ aside nav a:hover, aside nav a:focus {
   font-weight: 700;
   font-family: 'Barlow Condensed', sans-serif;
   letter-spacing: 0;
+  margin-top: 1em;
 }
 
 .calendar table tr.weekend {
@@ -450,6 +452,7 @@ aside nav a:hover, aside nav a:focus {
   position: sticky;
   top: 0;
   width: 150px;
+  white-space: nowrap;
 }
 
 .calendar table td:first-child a {
@@ -574,6 +577,10 @@ aside nav a:hover, aside nav a:focus {
     padding: 5px 10px;
   }
 
+  .calendar table td:last-child {
+    width: 99%;
+  }
+
   .addevent {
     flex-direction: column;
   }
@@ -623,6 +630,20 @@ aside nav a:hover, aside nav a:focus {
 
   .calendar {
     padding: 0;
+  }
+
+  .calendar table td:first-child {
+    width: 1px;
+    display: block;
+    text-align: center;
+  }
+
+  .calendar table td:nth-child(2) {
+    width: 1px;
+  }
+
+  .calendar table td:nth-child(3) {
+    width: 1px;
   }
 
   .calendar table td {
