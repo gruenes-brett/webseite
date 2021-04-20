@@ -10,6 +10,7 @@ function submit_edit_event_form(event) {
 }
 
 function __submit_form(form) {
+    disable_form(form);
     form.ajaxSubmit({
         success: function(response) {
             console.log(response);
@@ -20,6 +21,15 @@ function __submit_form(form) {
             let text = response.responseText;
             alert(text);
             console.error(text);
+            enable_form(form);
         },
     });
+}
+
+function disable_form(form) {
+    form.find('button').attr('disabled', '');
+}
+
+function enable_form(form) {
+    form.find('button').removeAttr('disabled');
 }
