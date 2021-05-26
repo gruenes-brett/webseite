@@ -5,6 +5,10 @@
  * @package GruenesBrett
  */
 
+if ( ! verify_community_calendar_loaded() ) {
+    return;
+}
+
 /**
  * Retrieves categories from the database.
  */

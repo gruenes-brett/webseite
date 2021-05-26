@@ -5,6 +5,10 @@
  * @package GruenesBrett
  */
 
+if ( ! verify_community_calendar_loaded() ) {
+    return;
+}
+
 /**
  * Helper class that provides function for getting events, categories etc.
  */
