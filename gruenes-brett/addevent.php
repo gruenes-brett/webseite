@@ -14,7 +14,7 @@
   </section>
 
   <?php
-    if ( user_can_administer_events() ) {
+    if ( Comcal_User_Capabilities::administer_events() ) {
         $categories      = Category_Provider::get_all();
         $categories_form = new Comcal_Edit_Categories_Form( $categories );
         echo $categories_form->get_form_html();

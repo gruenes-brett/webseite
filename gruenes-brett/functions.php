@@ -31,16 +31,6 @@ XML;
 
 
 /**
- * Returns whether the currently logged in user may edit or delete events.
- *
- * @return bool
- */
-function user_can_administer_events() : bool {
-    return current_user_can( 'edit_others_posts' );
-}
-
-
-/**
  * Helper function that puts basic elements into the HTML
  * - Floating buttons
  */

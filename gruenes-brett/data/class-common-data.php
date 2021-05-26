@@ -1,6 +1,6 @@
 <?php
 /**
- * Common helper functions.
+ * Common helper functions for handling event and category data.
  *
  * @package GruenesBrett
  */
@@ -34,7 +34,7 @@ class Common_Data {
         $calendar_name = '';
         $latest_date   = null;
         $start_date    = static::get_earliest_display_date();
-        $is_admin      = user_can_administer_events();
+        $is_admin      = Comcal_User_Capabilities::administer_events();
 
         $events_iterator = new Comcal_Event_Iterator(
             ! $is_admin,
@@ -52,7 +52,7 @@ class Common_Data {
      * @return Comcal_Date_Time Timestamp or null for all events.
      */
     public static function get_earliest_display_date() {
-        if ( user_can_administer_events() ) {
+        if ( Comcal_User_Capabilities::administer_events() ) {
             return null;
         }
         return Comcal_Date_Time::now();

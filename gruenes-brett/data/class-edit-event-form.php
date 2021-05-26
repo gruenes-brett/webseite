@@ -196,7 +196,7 @@ XML;
     }
 
     protected function get_privacy_consent_checkbox() {
-        $checked = user_can_administer_events() ? 'checked' : '';
+        $checked = Comcal_User_Capabilities::administer_events() ? 'checked' : '';
         return <<<XML
               <tr>
                 <td></td>
@@ -213,7 +213,7 @@ XML;
     }
 
     protected function get_public_checkbox( bool $is_checked ) {
-        if ( ! user_can_administer_events() ) {
+        if ( ! Comcal_User_Capabilities::administer_events() ) {
             return '';
         }
         $checked = $is_checked ? 'checked' : '';
@@ -233,7 +233,7 @@ XML;
     }
 
     protected function get_delete_checkbox() {
-        if ( ! user_can_administer_events() ) {
+        if ( ! Comcal_User_Capabilities::administer_events() ) {
             return '';
         }
         return <<<XML
