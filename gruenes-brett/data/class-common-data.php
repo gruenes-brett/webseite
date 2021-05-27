@@ -34,10 +34,8 @@ class Common_Data {
         $calendar_name = '';
         $latest_date   = null;
         $start_date    = static::get_earliest_display_date();
-        $is_admin      = Comcal_User_Capabilities::administer_events();
 
         $events_iterator = new Comcal_Event_Iterator(
-            ! $is_admin,
             $category,
             $calendar_name,
             $start_date ? $start_date->get_date_str() : null,
