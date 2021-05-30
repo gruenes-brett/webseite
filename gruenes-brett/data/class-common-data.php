@@ -35,7 +35,7 @@ class Common_Data {
         $latest_date   = null;
         $start_date    = static::get_earliest_display_date();
 
-        $events_iterator = new Comcal_Event_Iterator(
+        $events_iterator = Comcal_Event_Iterator::load_from_database(
             $category,
             $calendar_name,
             $start_date ? $start_date->get_date_str() : null,
