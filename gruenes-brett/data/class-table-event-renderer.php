@@ -17,8 +17,10 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
      * Creates the HTML for an event.
      *
      * @param Comcal_Event $event Event instance.
+     * @param int          $day This is the n-th day instance of this event (starting at 0).
+     *                     Check $event->get_number_of_days() for total amount of days.
      */
-    public function render( Comcal_Event $event ) : string {
+    public function render( Comcal_Event $event, int $day ) : string {
         $pretty = new Pretty_Event( $event );
 
         $featherlight_view_data = Event_Popup::get_featherlight_attribute( $event );

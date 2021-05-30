@@ -13,7 +13,11 @@ if ( ! verify_community_calendar_loaded() ) {
  * Defines how an event is rendered in the explorer view.
  */
 class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
-    public function render( Comcal_Event $event ) : string {
+    public function render( Comcal_Event $event, int $day ) : string {
+        if ( 0 !== $day ) {
+            // Render multi-day events only once.
+            return '';
+        }
         $pretty = new Pretty_Event( $event );
 
         $image_url = $pretty->image_url;
