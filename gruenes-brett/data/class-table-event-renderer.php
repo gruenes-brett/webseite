@@ -33,10 +33,21 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
 
         $private = $event->get_field( 'public' ) ? '' : 'private';
 
+        $day_of_day     = '';
+        $number_of_days = $event->get_number_of_days();
+        $header_tag     = 'h2';
+        if ( $number_of_days > 1 ) {
+            $current_day = $day + 1;
+            $day_of_day  = " (Tag $current_day von $number_of_days)";
+            if ( 0 !== $day ) {
+                $header_tag = 'h3';
+            }
+        }
+
         // TODO @sebastianlay: Format event on calendar page as desired.
         return <<<XML
       <article class="$private">
-        <h2><a href="#" $featherlight_view_data>$pretty->title</a></h2>
+        <$header_tag><a href="#" $featherlight_view_data>$pretty->title$day_of_day</a></$header_tag>
         <section class="meta">
           $pretty->pretty_time, $pretty->location$edit_link
         </section>
