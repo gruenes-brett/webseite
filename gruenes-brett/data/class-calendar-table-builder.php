@@ -59,10 +59,6 @@ class Calendar_Table_Builder extends Comcal_Table_Builder {
         $this->month_links    = array();
     }
 
-    public function get_table_html() {
-        return $this->get_html();
-    }
-
     public function get_month_links() {
         return $this->month_links;
     }
@@ -90,8 +86,6 @@ class Calendar_Table_Builder extends Comcal_Table_Builder {
         $this->html .= "<td class='date $date_class'>$day_of_month</td>";
         $this->html .= "<td class='date $date_class'>$weekday</td>";
         $this->html .= "<td class='event'>$text</td></tr>\n";
-
-        $this->current_date = $date_time;
     }
 
 }
