@@ -17,8 +17,17 @@ if ( ! verify_community_calendar_loaded() ) {
 class Edit_Event_Popup extends Comcal_Featherlight_Event_Popup {
 
     protected static function render( Comcal_Event $event ) : void {
-        $form = new Edit_Event_Form( '', $event );
-        echo $form->get_form_html();
+        $form      = new Edit_Event_Form( '', $event );
+        $form_html = $form->get_form_html();
+
+        echo <<<XML
+        <main class="addevent">
+            <section class="note">
+            </section>
+
+            $form_html
+        </main>
+        XML;
     }
 
     /**

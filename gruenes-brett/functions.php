@@ -56,6 +56,37 @@ require_once 'data/class-explorer-event-renderer.php';
 require_once 'data/class-pretty-event.php';
 require_once 'data/class-category-provider.php';
 
+// define custom media size.
+add_image_size( 'gruenesbrett', 960, 540 );
+
+/**
+ * Custom API route that handles the upload to the media library.
+ *
+ * @param WP_REST_Request $data contains the uploaded image.
+ */
+function upload_image( WP_REST_Request $data ) {
+    $image      = $data->get_file_params()['image'];
+    $attachment = media_handle_sideload( $image, 0 );
+
+    if ( ! is_wp_error( $attachment ) ) {
+        $url = wp_get_attachment_image_url( $attachment, 'gruenesbrett' );
+        return $url;
+    }
+}
+
+add_action(
+    'rest_api_init',
+    function () {
+        register_rest_route(
+            'gruenesbrett/v1',
+            '/upload/',
+            array(
+                'methods'  => 'POST',
+                'callback' => 'upload_image',
+            )
+        );
+    }
+);
 
 /**
  * Enqueue scripts and styles.
@@ -75,6 +106,28 @@ function gruenes_brett_scripts() {
         '',
         $version,
         true
+    );
+    wp_enqueue_script(
+        'stimulus',
+        esc_url( get_stylesheet_directory_uri() . '/js/stimulus.umd.js' ),
+        '',
+        $version,
+        true
+    );
+    wp_enqueue_script(
+        'script',
+        esc_url( get_stylesheet_directory_uri() ) . '/js/script.js',
+        '',
+        $version,
+        true
+    );
+    wp_localize_script(
+        'script',
+        'wp_api',
+        array(
+            'root'  => esc_url_raw( rest_url() ),
+            'nonce' => wp_create_nonce( 'wp_rest' ),
+        )
     );
 }
 add_action( 'wp_enqueue_scripts', 'gruenes_brett_scripts' );

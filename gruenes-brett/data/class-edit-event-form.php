@@ -63,16 +63,18 @@ XML;
         $event_id     = $this->event->get_entry_id();
         $event_exists = $this->event->exists();
 
+        $placeholder = esc_url( get_stylesheet_directory_uri() . '/img/placeholder.png' );
+
         $organizer   = $this->event->get_field( 'organizer' );
         $location    = $this->event->get_field( 'location' );
         $title       = $this->event->get_field( 'title' );
         $date        = $this->event->get_field( 'date', gmdate( 'Y-m-d' ) );
-        $time        = $this->event->get_field( 'time', '12:00:00' );
+        $time        = $this->event->get_field( 'time', '12:00' );
         $date_end    = $this->event->get_field( 'dateEnd', '' );
         $time_end    = $this->event->get_field( 'timeEnd', '' );
         $url         = $this->event->get_field( 'url' );
         $description = $this->event->get_field( 'description' );
-        $image_url   = $this->event->get_field( 'imageUrl' );
+        $image_url   = $this->event->get_field( 'imageUrl', $placeholder );
         $public      = $this->event->get_field( 'public' );
 
         $category_selector     = $this->get_category_selector();
@@ -180,9 +182,17 @@ XML;
               $category_selector
 
               <tr>
-                <td><label for="inputImage">Veranstaltungsbild</label></td>
-                <!-- <td><input type="file" name="inputImage" id="inputImage" ></td> -->
-                <td><input type="text" value="$image_url" name="inputImageUrl" id="nputImageUrl" placeholder="https://..."></td>
+                <td><label>Veranstaltungsbild</label></td>
+                <td>
+                  <div class="formgroup">
+                    <input type="file" name="inputImage" id="inputImage" data-target="form.image" data-action="form#uploadImage">
+                  </div>
+                  <div class="formgroup">&nbsp;</div>
+                  <div class="formgroup">
+                    <div class="image" style="background-image: url('$image_url')" data-target="form.imagePreview" />
+                    <input type="hidden" value="$image_url" name="inputImageUrl" id="inputImageUrl" data-target="form.imageUrl">
+                  </div>
+                </td>
               </tr>
               $spacer
               $more_fields
@@ -199,7 +209,7 @@ XML;
         $checked = Comcal_User_Capabilities::administer_events() ? 'checked' : '';
         return <<<XML
               <tr>
-                <td></td>
+                <td><label>Datenschutz</label></td>
                 <td>
                   <div class="formgroup">
                     <div class="row">

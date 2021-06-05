@@ -18,6 +18,11 @@ class Event_Popup extends Comcal_Featherlight_Event_Popup {
 
         $stylesheet_directory = esc_url( get_stylesheet_directory_uri() );
 
+        $image_url = $pretty->image_url;
+        if ( ! $image_url ) {
+            $image_url = esc_url( get_stylesheet_directory_uri() . '/img/placeholder.png' );
+        }
+
         $date     = $pretty->pretty_date;
         $time     = $pretty->pretty_time;
         $location = $pretty->location;
@@ -30,7 +35,7 @@ class Event_Popup extends Comcal_Featherlight_Event_Popup {
         echo <<<XML
     <main class="detail">
       <section class="note">
-        <section class="image" style="background-image: url($stylesheet_directory/img/placeholder.png);"></section>
+        <section class="image" style="background-image: url($image_url);"></section>
         <h2><a href="$pretty->url" target="_blank" rel="noreferrer noopener">$pretty->title</a></h2>
         <section class="meta">
           $date, $time$location 
