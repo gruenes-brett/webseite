@@ -68,7 +68,7 @@ class Calendar_Table_Builder extends Comcal_Table_Builder {
         $month_link  = $date->get_month_link();
 
         $this->month_links[ $month_title ] = $month_link;
-        return "<table><tbody><tr><td><a href='#$month_link' name='$month_link'>$month_title</a></td><td></td><td></td><td></td>\n";
+        return "<div><h1><a href='#$month_link' name='$month_link'>$month_title</a></h1><table><tbody>\n";
     }
 
     protected function create_day_row( $date_time, $text, $is_new_day = true ) {
@@ -82,10 +82,14 @@ class Calendar_Table_Builder extends Comcal_Table_Builder {
         $tr_class   = $is_new_day ? '' : 'sameDay';
         $date_class = ( '' === $text ) ? 'has-no-events' : 'has-events';
 
-        $this->html .= "<tr class='{$date_time->get_day_classes()} $tr_class day'><td></td>";
+        $this->html .= "<tr class='{$date_time->get_day_classes()} $tr_class day'>";
         $this->html .= "<td class='date $date_class'>$day_of_month</td>";
         $this->html .= "<td class='date $date_class'>$weekday</td>";
         $this->html .= "<td class='event'>$text</td></tr>\n";
+    }
+
+    protected function get_table_foot() {
+        return "</tbody></table></div>\n";
     }
 
 }
