@@ -59,6 +59,7 @@ body, h1, h2, h3, h4, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
 
 :root {
   --green: #5ea318;
+  --red: #a31818;
   --white: #fff;
   --background: #f1f1f1;
   --lightgray: #ddd;
@@ -206,13 +207,14 @@ option:checked {
 
 .formgroup input[type='checkbox'] {
   flex-basis: 20px;
-  margin: 7px 5px 1px 0;
+  margin: 5px 5px 1px 0;
   align-self: flex-start;
 }
 
 .formgroup.highlight {
-  background-color: #ff0;
-  color: #f00;
+  background-color: var(--red);
+  color: #fff;
+  padding: 8px 12px;
 }
 
 /* Main document */
