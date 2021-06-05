@@ -44,12 +44,18 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
             }
         }
 
+        $time     = $pretty->pretty_time;
+        $location = $pretty->location;
+        if ( '' !== $time && '' !== $location ) {
+            $location = ', ' . $location;
+        }
+
         // TODO @sebastianlay: Format event on calendar page as desired.
         return <<<XML
       <article class="$private">
         <$header_tag><a href="#" $featherlight_view_data>$pretty->title$day_of_day</a></$header_tag>
         <section class="meta">
-          $pretty->pretty_time, $pretty->location$edit_link
+            $time$location$edit_link
         </section>
       </article>
 XML;

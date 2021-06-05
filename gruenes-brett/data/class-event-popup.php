@@ -18,6 +18,14 @@ class Event_Popup extends Comcal_Featherlight_Event_Popup {
 
         $stylesheet_directory = esc_url( get_stylesheet_directory_uri() );
 
+        $date     = $pretty->pretty_date;
+        $time     = $pretty->pretty_time;
+        $location = $pretty->location;
+
+        if ( '' !== $location ) {
+            $location = ', ' . $location;
+        }
+
         // TODO @sebastianlay: Format event popup as desired.
         echo <<<XML
     <main class="detail">
@@ -25,7 +33,7 @@ class Event_Popup extends Comcal_Featherlight_Event_Popup {
         <section class="image" style="background-image: url($stylesheet_directory/img/placeholder.png);"></section>
         <h2><a href="$pretty->url" target="_blank" rel="noreferrer noopener">$pretty->title</a></h2>
         <section class="meta">
-          $pretty->prettyDate, $pretty->prettyTime, $pretty->location
+          $date, $time$location 
         </section>
         <section class="share">
           <div class="group">
