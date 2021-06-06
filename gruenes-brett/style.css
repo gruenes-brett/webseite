@@ -146,14 +146,14 @@ input:disabled {
   background: var(--lightgray);
 }
 
-button {
+button, a.more {
   background: var(--green);
   color: var(--white);
   border: none;
   cursor: pointer;
 }
 
-label, button {
+label, button, a.more {
   font-weight: 600;
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 18px;
@@ -161,12 +161,22 @@ label, button {
   display: inline-block;
 }
 
-button:hover, button:focus {
+button:hover, button:focus, a.more:hover, a.more:focus {
   background: var(--darkgray);
 }
 
 button img {
   margin: 0 auto;
+}
+
+a.more {
+  margin-top: 20px;
+  padding: 5px 10px;
+  display: inline-flex;
+}
+
+a.more img {
+  margin-left: 5px;
 }
 
 textarea {
@@ -515,7 +525,7 @@ aside nav a:hover, aside nav a:focus {
 /* Detail */
 
 .detail {
-  margin: 0;
+  display: flex;
 }
 
 .detail .image {
@@ -551,8 +561,8 @@ aside nav a:hover, aside nav a:focus {
 }
 
 .featherlight main.featherlight-inner {
-  display: flex;
   margin-top: 0;
+  display: flex;
 }
 
 .featherlight div.featherlight-content {

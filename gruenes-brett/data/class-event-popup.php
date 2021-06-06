@@ -31,12 +31,17 @@ class Event_Popup extends Comcal_Featherlight_Event_Popup {
             $location = ', ' . $location;
         }
 
-        // TODO @sebastianlay: Format event popup as desired.
+        $event_link = '';
+        if ( $pretty->url ) {
+            $event_link = "<br><a href='" . $pretty->url . "' class='more'>mehr Informationen "
+                          . "<img src='" . $stylesheet_directory . "/img/icons/arrow-right-line.svg' alt='Pfeil'></a>";
+        }
+
         echo <<<XML
     <main class="detail">
       <section class="note">
         <section class="image" style="background-image: url($image_url);"></section>
-        <h2><a href="$pretty->url" target="_blank" rel="noreferrer noopener">$pretty->title</a></h2>
+        <h2>$pretty->title</h2>
         <section class="meta">
           $date, $time$location 
         </section>
@@ -44,7 +49,7 @@ class Event_Popup extends Comcal_Featherlight_Event_Popup {
           <div class="group">
             <label for="permalink">Link zur Veranstaltung</label>
             <div class="formgroup">
-              <input type="text" id="permalink" value="$pretty->url" readonly>
+              <input type="text" id="permalink" value="" readonly>
               <button><img src="$stylesheet_directory/img/icons/clipboard-fill.svg" alt="Kopieren"></button>
             </div>
           </div>
@@ -62,6 +67,7 @@ class Event_Popup extends Comcal_Featherlight_Event_Popup {
       <article>
         <section class="description">
           $pretty->description
+          $event_link
         </section>
       </article>
     </main>
