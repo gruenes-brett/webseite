@@ -89,6 +89,31 @@ add_action(
 );
 
 /**
+ * Custom rewrite rule to enable virtual event pages.
+ */
+add_action(
+    'init',
+    function() {
+        add_rewrite_rule(
+            '^veranstaltung/(.+)/?',
+            'index.php?pagename=veranstaltung&event_id=$matches[1]',
+            'top'
+        );
+    },
+    10,
+    0
+);
+
+add_action(
+    'init',
+    function() {
+        add_rewrite_tag( '%event_id%', '([^&]+)' );
+    },
+    10,
+    0
+);
+
+/**
  * Enqueue scripts and styles.
  */
 function gruenes_brett_scripts() {

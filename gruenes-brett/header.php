@@ -27,7 +27,7 @@
       </h1>
 <?php
 
-// TODO: move explore and calendar page into the same div!
+// TODO: move explore and calendar page into the same div and hide "veranstaltung" properly!
 $output = wp_page_menu(
     array(
         'echo'      => 0,
@@ -35,6 +35,7 @@ $output = wp_page_menu(
         'container' => 'nav',
         'before'    => '',
         'after'     => '',
+        'exclude'   => 67,
     )
 );
 
