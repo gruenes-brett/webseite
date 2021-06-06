@@ -47,21 +47,23 @@ class Event_Popup extends Comcal_Featherlight_Event_Popup {
         <section class="meta">
           $date, $time$location 
         </section>
-        <section class="share">
+        <section class="share" data-controller="share">
           <div class="group">
             <label for="permalink">Link zur Veranstaltung</label>
             <div class="formgroup">
-              <input type="text" id="permalink" value="$permalink" readonly>
-              <button><img src="$stylesheet_directory/img/icons/clipboard-fill.svg" alt="Kopieren"></button>
+              <input type="text" id="permalink" data-target="share.permalink" value="$permalink" readonly>
+              <button data-target="share.clipboard" data-action="share#copyPermalink">
+                <img src="$stylesheet_directory/img/icons/clipboard-fill.svg" alt="Kopieren" data-target="share.clipboardIcon">
+              </button>
             </div>
           </div>
           <div class="group">
             <label>Veranstaltung teilen</label>
             <div class="formgroup">
-              <button><img src="$stylesheet_directory/img/icons/facebook-fill.svg" alt="Facebook"></button>
-              <button><img src="$stylesheet_directory/img/icons/twitter-fill.svg" alt="Twitter"></button>
-              <button><img src="$stylesheet_directory/img/icons/telegram-fill.svg" alt="Telegram"></button>
-              <button><img src="$stylesheet_directory/img/icons/calendar-event-fill.svg" alt="Kalender"></button>
+              <button data-target="share.facebook" data-action="share#onFacebook"><img src="$stylesheet_directory/img/icons/facebook-fill.svg" alt="Facebook"></button>
+              <button data-target="share.twitter" data-action="share#onTwitter"><img src="$stylesheet_directory/img/icons/twitter-fill.svg" alt="Twitter"></button>
+              <button data-target="share.telegram" data-action="share#onTelegram"><img src="$stylesheet_directory/img/icons/telegram-fill.svg" alt="Telegram"></button>
+              <button data-target="share.calendar" data-action="share#withCalendar"><img src="$stylesheet_directory/img/icons/calendar-event-fill.svg" alt="Kalender"></button>
             </div>
           </div>
         </section>
