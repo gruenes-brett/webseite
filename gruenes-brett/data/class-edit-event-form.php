@@ -39,6 +39,7 @@ class Edit_Event_Form extends Comcal_Edit_Event_Form {
         'inputImageUrl'  => 'imageUrl',
         'inputPublic'    => 'public',
         'inputDelete'    => 'delete',
+        'inputJoinDaily' => 'joinDaily',
     );
 
     protected function get_form_id(): string {
@@ -76,6 +77,8 @@ XML;
         $description = $this->event->get_field( 'description' );
         $image_url   = $this->event->get_field( 'imageUrl', $placeholder );
         $public      = $this->event->get_field( 'public' );
+
+        $join_daily_checked = $this->event->get_field( 'joinDaily' ) ? 'checked' : 'unchecked';
 
         $category_selector     = $this->get_category_selector();
         $submitter_form_fields = $this->get_submitter_form_fields();
@@ -147,8 +150,8 @@ XML;
                 <td>
                   <div class="formgroup">
                     <div class="row">
-                      <input type="checkbox" name="inputFullDay" id="inputFullDay" data-target="form.fullDay" data-action="form#setTimeState">
-                      <label for="inputFullDay">Es ist eine ganztägige Veranstaltung.</label>
+                      <input type="checkbox" name="inputJoinDaily" id="inputJoinDaily" data-target="form.joinDaily" data-action="form#setTimeState" $join_daily_checked>
+                      <label for="inputJoinDaily">Bei mehrtägigen Veranstaltungen: Teilnahme an jedem Tag möglich</label>
                     </div>
                   </div>
                 </td>
