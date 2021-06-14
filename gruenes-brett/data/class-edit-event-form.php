@@ -26,20 +26,22 @@ class Edit_Event_Form extends Comcal_Edit_Event_Form {
      * @var array
      */
     protected static $form_field_to_model_field = array(
-        'inputName'      => 'submitterName',
-        'inputEmail'     => 'submitterEmail',
-        'inputTitle'     => 'title',
-        'inputStartDate' => 'date',
-        'inputStartTime' => 'time',
-        'inputEndDate'   => 'dateEnd',
-        'inputEndTime'   => 'timeEnd',
-        'inputPlaceName' => 'location',
-        'inputOrganizer' => 'organizer',
-        'inputUrl'       => 'url',
-        'inputImageUrl'  => 'imageUrl',
-        'inputPublic'    => 'public',
-        'inputDelete'    => 'delete',
-        'inputJoinDaily' => 'joinDaily',
+        'inputName'           => 'submitterName',
+        'inputEmail'          => 'submitterEmail',
+        'inputTitle'          => 'title',
+        'inputStartDate'      => 'date',
+        'inputStartTime'      => 'time',
+        'inputEndDate'        => 'dateEnd',
+        'inputEndTime'        => 'timeEnd',
+        'inputPlaceName'      => 'location',
+        'inputPlaceAddress'   => 'address',
+        'textareaDescription' => 'description',
+        'inputOrganizer'      => 'organizer',
+        'inputUrl'            => 'url',
+        'inputImageUrl'       => 'imageUrl',
+        'inputPublic'         => 'public',
+        'inputDelete'         => 'delete',
+        'inputJoinDaily'      => 'joinDaily',
     );
 
     protected function get_form_id(): string {
@@ -68,6 +70,7 @@ XML;
 
         $organizer   = $this->event->get_field( 'organizer' );
         $location    = $this->event->get_field( 'location' );
+        $address     = $this->event->get_field( 'address' );
         $title       = $this->event->get_field( 'title' );
         $date        = $this->event->get_field( 'date', gmdate( 'Y-m-d' ) );
         $time        = $this->event->get_field( 'time', '12:00' );
@@ -163,7 +166,7 @@ XML;
               </tr>
               <tr>
                 <td><label for="inputPlaceAddress">Adresse</label></td>
-                <td><input type="text" name="inputPlaceAddress" id="inputPlaceAddress" placeholder="Musterstr. 42" maxlength="100" data-target="form.placeAddress"></td>
+                <td><input type="text" name="inputPlaceAddress" id="inputPlaceAddress" placeholder="Musterstr. 42" maxlength="100" data-target="form.placeAddress" value="$address"></td>
               </tr>
               <tr>
                 <td></td>
