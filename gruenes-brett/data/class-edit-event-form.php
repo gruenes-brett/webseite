@@ -79,7 +79,6 @@ XML;
         $url         = $this->event->get_field( 'url' );
         $description = $this->event->get_field( 'description' );
         $image_url   = $this->event->get_field( 'imageUrl', $placeholder );
-        $public      = $this->event->get_field( 'public' );
 
         $join_daily_checked = $this->event->get_field( 'joinDaily' ) ? 'checked' : 'unchecked';
 
@@ -87,7 +86,7 @@ XML;
         $submitter_form_fields = $this->get_submitter_form_fields();
 
         $more_fields  = $this->get_privacy_consent_checkbox();
-        $more_fields .= $this->get_public_checkbox( $public );
+        $more_fields .= $this->get_public_checkbox();
         $more_fields .= $event_exists ? $this->get_delete_checkbox() : '';
 
         $submit_button_text = 'Veranstaltung eintragen';
@@ -212,7 +211,7 @@ XML;
     }
 
     protected function get_privacy_consent_checkbox() {
-        $checked = Comcal_User_Capabilities::administer_events() ? 'checked' : '';
+        $checked = Comcal_User_Capabilities::is_logged_in() ? 'checked' : '';
         return <<<XML
               <tr>
                 <td><label>Datenschutz</label></td>
@@ -228,11 +227,12 @@ XML;
 XML;
     }
 
-    protected function get_public_checkbox( bool $is_checked ) {
-        if ( ! Comcal_User_Capabilities::administer_events() ) {
+    protected function get_public_checkbox() {
+        if ( ! $this->event->current_user_can_edit() ) {
             return '';
         }
-        $checked = $is_checked ? 'checked' : '';
+        $public  = $this->event->get_field( 'public', 1 );
+        $checked = $public ? 'checked' : '';
         return <<<XML
               <tr>
                 <td></td>
@@ -249,7 +249,7 @@ XML;
     }
 
     protected function get_delete_checkbox() {
-        if ( ! Comcal_User_Capabilities::administer_events() ) {
+        if ( ! $this->event->current_user_can_edit() ) {
             return '';
         }
         return <<<XML
