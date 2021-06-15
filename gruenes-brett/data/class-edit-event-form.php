@@ -153,7 +153,7 @@ XML;
                 <td>
                   <div class="formgroup">
                     <div class="row">
-                      <input type="checkbox" name="inputJoinDaily" id="inputJoinDaily" data-target="form.joinDaily" data-action="form#setTimeState" $join_daily_checked>
+                      <input type="checkbox" name="inputJoinDaily" id="inputJoinDaily" $join_daily_checked>
                       <label for="inputJoinDaily">Bei mehrtägigen Veranstaltungen: Teilnahme an jedem Tag möglich</label>
                     </div>
                   </div>
