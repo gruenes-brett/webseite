@@ -12,6 +12,9 @@
 
     setAddressState() {
       this.placeAddressTarget.disabled = this.physicalSpaceTarget.checked;
+      if (this.physicalSpaceTarget.checked) {
+        this.placeAddressTarget.value = '';
+      }
     }
 
     uploadImage() {
