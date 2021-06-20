@@ -4,8 +4,24 @@
 
 Die Webseite basiert auf WordPress mit einigen Plugins. Zukünftig sollen das eigene Theme und eventuell notwendige Anpassungen an den Plugins hier veröffentlicht werden. Mitarbeit ist sehr willkommen, allerdings muss dazu hier zunächste eine gewisse Grundlage geschaffen werden. Wir bitten um Geduld.
 
-## Verwendung
+## Usage
 
-Damit dieses Theme funktioniert, muss eine aktuelle Version des
-[Community Calendar Wordpress Plugin](https://github.com/joergrs/community-calendar)
-installiert sein.
+### Dependency
+
+This theme relies on the functionality of the
+[Community Calendar Wordpress Plugin](https://github.com/joergrs/community-calendar).
+Please install the latest version of this plugin first and activate it before using
+the theme.
+
+### Initial setup steps
+
+This theme defines a couple of page templates that implement the main functionality. In your
+Wordpress setup you need to create the following pages:
+
+| Template | Suggested page name | Remarks |
+| --- | --- | --- |
+| calendar.php | Kalender | |
+| explore.php | Erkunden | |
+| addevent.php | Veranstaltung eintragen | |
+| event.php | Veranstaltung | Shows details of an event on a separate page. As of now, the URL Slug of this page must be 'veranstaltung'. Otherwise the generated event link will not work. |
+| categories.php | Kategorien bearbeiten | Should be visible to admin users only. |
