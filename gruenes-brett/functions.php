@@ -81,8 +81,9 @@ add_action(
             'gruenesbrett/v1',
             '/upload/',
             array(
-                'methods'  => 'POST',
-                'callback' => 'upload_image',
+                'methods'             => 'POST',
+                'callback'            => 'upload_image',
+                'permission_callback' => '__return_true',
             )
         );
     }
