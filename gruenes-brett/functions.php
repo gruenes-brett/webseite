@@ -29,6 +29,13 @@ XML;
     return $loaded;
 }
 
+add_action(
+    'after_setup_theme',
+    function() {
+        verify_community_calendar_loaded( true );
+    }
+);
+
 
 /**
  * Helper function that puts basic elements into the HTML

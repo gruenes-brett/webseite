@@ -5,13 +5,17 @@
  * @package GruenesBrett
  */
 
+if ( ! verify_community_calendar_loaded( true ) ) {
+    return;
+}
+
 ?>
 <aside>
   <nav>
     <div class="item">
       <a href="">Facebook-Veranstaltung importieren</a>
     </div>
-    
+
     <!-- TODO: make these links dynamic -->
 
     <?php if ( ! is_user_logged_in() ) : ?>
