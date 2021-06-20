@@ -22,7 +22,7 @@
 </aside>
 
 <?php
-  echo $detail_view->get_html();
+  echo $detail_view->get_main_html();
 ?>
 
 <?php get_footer(); ?>

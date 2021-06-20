@@ -33,7 +33,7 @@ XML;
 
     }
 
-    public function get_html() {
+    public function get_main_html() {
         $pretty = $this->pretty;
 
         $stylesheet_directory = esc_url( get_stylesheet_directory_uri() );
