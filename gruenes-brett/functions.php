@@ -50,6 +50,7 @@ require_once 'data/class-common-data.php';
 require_once 'data/class-event-popup.php';
 require_once 'data/class-edit-event-popup.php';
 require_once 'data/class-edit-event-form.php';
+require_once 'data/class-event-detail-view.php';
 
 // calendar.
 require_once 'data/class-calendar-table-builder.php';
