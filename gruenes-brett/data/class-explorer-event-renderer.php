@@ -37,6 +37,10 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
 
         $overlay = $this->get_overlay( $event );
 
+        $title = wp_trim_words( $pretty->title, 10, '...' );
+
+        $description = wp_trim_words( $pretty->description, 60, '...' );
+
         // TODO @sebastianlay: Format event on explorer page as desired.
         return <<<XML
         <article class="$private">
@@ -44,12 +48,12 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
             <section class="image" style="background-image: url($image_url);">
                 <a href="#" $featherlight_view_data></a>
             </section>
-            <h2><a href="#" $featherlight_view_data>$pretty->title</a></h2>
+            <h2><a href="#" $featherlight_view_data>$title</a></h2>
             <section class="meta">
             $pretty->pretty_date, $pretty->pretty_time$edit_link
             </section>
             <section class="description">
-            <p>$pretty->description</p>
+            <p>$description</p>
             <p class="details"><a href="#" $featherlight_view_data>mehr Informationen</a></p>
             </section>
         </article>
