@@ -13,13 +13,13 @@
   $event       = Comcal_Event::query_by_entry_id( $event_id );
   $detail_view = new Event_Detail_View( $event );
 ?>
-<aside>
+<!-- <aside>
   <nav>
     <div class="item">
       <?php echo $detail_view->get_aside_html(); ?>
     </div>
   <nav>
-</aside>
+</aside> -->
 
 <?php
   echo $detail_view->get_main_html();

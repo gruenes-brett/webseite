@@ -13,7 +13,7 @@
 <?php
 if ( verify_community_calendar_loaded( true ) ) {
     echo Event_Explorer_Builder::get_instance()->get_html();
-    echo_floating_buttons();
+    // echo_floating_buttons(); should this have any function here?
 }
 
 ?>
