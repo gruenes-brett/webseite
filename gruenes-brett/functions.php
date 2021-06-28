@@ -60,6 +60,10 @@ require_once 'data/class-table-event-renderer.php';
 require_once 'data/class-event-explorer-builder.php';
 require_once 'data/class-explorer-event-renderer.php';
 
+// admin view.
+require_once 'data/class-event-admin-view-builder.php';
+require_once 'data/class-admin-view-event-renderer.php';
+
 // helpers.
 require_once 'data/class-pretty-event.php';
 require_once 'data/class-category-provider.php';
