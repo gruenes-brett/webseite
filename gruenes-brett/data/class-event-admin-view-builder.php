@@ -65,13 +65,4 @@ class Event_Admin_View_Builder extends Comcal_Default_Display_Builder {
         parent::add_event( $event, $day );
         $this->last_rendered_event = $event;
     }
-
-    public function get_html() {
-        $html = parent::get_html();
-
-        return <<<XML
-        <h2>Event-Historie</h2>
-        $html
-XML;
-    }
 }
