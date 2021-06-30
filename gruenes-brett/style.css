@@ -413,6 +413,10 @@ aside nav a:hover, aside nav a:focus {
   width: 100%;
 }
 
+.adminview article.obsolete {
+  opacity: 0.4;
+}
+
 .adminview article section {
   margin-left: 30px;
 }
