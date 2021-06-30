@@ -7,10 +7,16 @@
 
 ?>
 <?php get_header(); ?>
-<?php get_sidebar( 'addevent' ); ?>
-<main class="editcategories">
-  <section class="note">
-    <?php the_content(); ?>
+<main class="adminview">
+
+  <section class="eventhistory">
+    <?php
+
+    if ( Comcal_User_Capabilities::administer_events() ) {
+
+        echo Event_Admin_View_Builder::get_instance()->get_html();
+    }
+    ?>
   </section>
 
   <section class="categories">
@@ -24,14 +30,5 @@
     ?>
   </section>
 
-  <section class="adminview">
-    <?php
-
-    if ( Comcal_User_Capabilities::administer_events() ) {
-
-        echo Event_Admin_View_Builder::get_instance()->get_html();
-    }
-    ?>
-  </section>
 </main>
 <?php get_footer(); ?>
