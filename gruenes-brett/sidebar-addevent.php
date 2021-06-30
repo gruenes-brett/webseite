@@ -29,7 +29,7 @@ if ( ! verify_community_calendar_loaded( true ) ) {
 
     <?php if ( Comcal_User_Capabilities::administer_events() ) : ?>
     <div class="item">
-      <a href="/kategorien-bearbeiten">Adminstration</a>
+      <a href="/kategorien-bearbeiten">Administration</a>
     </div>
     <?php endif; ?>
   </nav>
