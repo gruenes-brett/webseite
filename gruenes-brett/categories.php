@@ -13,7 +13,10 @@
     <?php
 
     if ( Comcal_User_Capabilities::administer_events() ) {
-
+        echo <<<XML
+        <h2>Event-Historie</h2>
+        <p>Events sortiert nach Datum der Eintragung.</p>
+XML;
         echo Event_Admin_View_Builder::get_instance()->get_html();
     }
     ?>
