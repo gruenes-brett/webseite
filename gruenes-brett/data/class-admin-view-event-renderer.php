@@ -34,10 +34,11 @@ class Admin_View_Event_Renderer extends Comcal_Default_Event_Renderer {
 
         $submitter = $event->get_field( 'submitterName' );
         $created   = $event->get_field( 'created' );
+        $obsolete  = $event->get_end_date_time()->is_before( Comcal_Date_Time::now() ) ? 'obsolete' : '';
 
         // TODO @sebastianlay: Format event on explorer page as desired.
         return <<<XML
-        <article class="$private">
+        <article class="$private $obsolete">
             <h3><a href="#" $featherlight_view_data>$title</a></h3>
             <section class="meta">
             $pretty->pretty_date, $pretty->pretty_time$edit_link &mdash; $submitter ($created)
