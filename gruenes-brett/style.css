@@ -409,6 +409,10 @@ aside nav a:hover, aside nav a:focus {
 
 /* Admin view page */
 
+.adminview {
+  margin-top: 20px;
+}
+
 .adminview article {
   width: 100%;
 }

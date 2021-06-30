@@ -13,6 +13,7 @@
     <?php the_content(); ?>
   </section>
 
+  <section class="categories">
   <?php
     if ( Comcal_User_Capabilities::edit_categories() ) {
         $categories      = Category_Provider::get_all();
@@ -20,16 +21,17 @@
         echo $categories_form->get_form_html();
     }
 
+    ?>
+  </section>
+
+  <section class="adminview">
+    <?php
+
     if ( Comcal_User_Capabilities::administer_events() ) {
 
-        ?>
-    <section class="adminview">
-        <?php
         echo Event_Admin_View_Builder::get_instance()->get_html();
-        ?>
-    </section>
-        <?php
     }
     ?>
+  </section>
 </main>
 <?php get_footer(); ?>
