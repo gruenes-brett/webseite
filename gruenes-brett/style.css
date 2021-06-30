@@ -240,7 +240,7 @@ main {
   background: var(--white);
 }
 
-main.explore, main.calendar, main.addevent {
+main.explore, main.calendar, main.addevent, main.adminview {
   display: flex;
 }
 
@@ -409,23 +409,19 @@ aside nav a:hover, aside nav a:focus {
 
 /* Admin view page */
 
-.adminview {
-  margin-top: 20px;
-}
-
-.adminview article {
+.eventhistory article {
   width: 100%;
 }
 
-.adminview article.obsolete {
+.eventhistory article.obsolete {
   opacity: 0.4;
 }
 
-.adminview article section {
+.eventhistory article section {
   margin-left: 30px;
 }
 
-.adminview article.private h3::before {
+.eventhistory article.private h3::before {
   content: ' ';
   width: 25px;
   height: 25px;
@@ -435,7 +431,7 @@ aside nav a:hover, aside nav a:focus {
   margin-left: 5px;
 }
 
-.adminview article.public h3::before {
+.eventhistory article.public h3::before {
   content: ' ';
   width: 25px;
   height: 25px;
@@ -637,6 +633,10 @@ aside nav a:hover, aside nav a:focus {
   }
 
   .addevent {
+    flex-direction: column;
+  }
+
+  .adminview {
     flex-direction: column;
   }
 
