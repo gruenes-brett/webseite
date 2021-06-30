@@ -28,7 +28,7 @@ class Admin_View_Event_Renderer extends Comcal_Default_Event_Renderer {
             $edit_link = ", <a href='#' $featherlight_edit_data>bearbeiten</a>";
         }
 
-        $private = $event->get_field( 'public' ) ? '' : 'private';
+        $private = $event->get_field( 'public' ) ? 'public' : 'private';
 
         $title = wp_trim_words( $pretty->title, 10, '...' );
 

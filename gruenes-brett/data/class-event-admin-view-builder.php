@@ -22,6 +22,20 @@ class Event_Admin_View_Builder extends Comcal_Default_Display_Builder {
     private static ?Event_Admin_View_Builder $instance = null;
 
     /**
+     * Only show single day instances.
+     *
+     * @var bool
+     */
+    protected static bool $is_multiday = false;
+
+    /**
+     * Keep track of last rendered event to detect day changes.
+     *
+     * @var Comcal_Event
+     */
+    protected ?Comcal_Event $last_rendered_event = null;
+
+    /**
      * Instantiates the Event_Explorer_Builder singleton and loads the
      * events from the database.
      */
@@ -40,6 +54,16 @@ class Event_Admin_View_Builder extends Comcal_Default_Display_Builder {
     protected function __construct( $earliest_date = null, $latest_date = null ) {
         parent::__construct( $earliest_date, $latest_date );
         $this->event_renderer = new Admin_View_Event_Renderer();
+    }
+
+    public function add_event( $event, $day ) {
+        if ( null === $this->last_rendered_event
+            || ! $this->last_rendered_event->get_created_date()->is_same_day( $event->get_created_date() ) ) {
+            $created_date = $event->get_created_date()->get_pretty_date();
+            $this->html  .= "<h3>$created_date</h3>";
+        }
+        parent::add_event( $event, $day );
+        $this->last_rendered_event = $event;
     }
 
     public function get_html() {
