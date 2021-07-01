@@ -171,13 +171,13 @@ function gruenes_brett_scripts() {
 add_action( 'wp_enqueue_scripts', 'gruenes_brett_scripts' );
 
 function gruenes_brett_styles() {
-    $version = '1.0';
-    wp_enqueue_style( 'style', get_stylesheet_uri(), '', '1.0' );
+    $version = '1.1';
+    wp_enqueue_style( 'style', get_stylesheet_uri(), '', $version );
     wp_enqueue_style(
         'featherlight',
         esc_url( get_stylesheet_directory_uri() ) . '/css/featherlight.min.css',
         '',
-        '1.0'
+        $version
     );
 }
 add_action( 'wp_print_styles', 'gruenes_brett_styles' );
