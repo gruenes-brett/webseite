@@ -130,7 +130,7 @@ add_action(
  * Enqueue scripts and styles.
  */
 function gruenes_brett_scripts() {
-    $version = '1.0';
+    $version = '1.1';
     wp_enqueue_script(
         'gruenes_brett_form_script',
         esc_url( get_stylesheet_directory_uri() . '/js/forms.js' ),
