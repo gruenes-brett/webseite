@@ -12,9 +12,13 @@ if ( ! verify_community_calendar_loaded( true ) ) {
 ?>
 <aside>
   <nav>
-    <div class="item">
-      <a href="">Facebook-Veranstaltung importieren</a>
-    </div>
+    <!--
+
+      !!! This has been moved into the edit-event-form to make it work with Stimulus
+
+       <div class="item">
+      <a href="#" id="importFacebookEvent" data-target="form.placeAddress" data-action="form#importFacebookEvent">Facebook-Veranstaltung importieren</a>
+    </div> -->
 
     <!-- TODO: make these links dynamic -->
 

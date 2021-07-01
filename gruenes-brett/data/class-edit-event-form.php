@@ -84,6 +84,7 @@ XML;
 
         $category_selector     = $this->get_category_selector();
         $submitter_form_fields = $this->get_submitter_form_fields();
+        $facebook_import       = $this->get_import_facebook_event_control();
 
         $more_fields  = $this->get_privacy_consent_checkbox();
         $more_fields .= $this->get_public_checkbox();
@@ -97,11 +98,13 @@ XML;
         $spacer = $this->get_spacer();
 
         return <<<XML
+
             <table>
               $submitter_form_fields
+              $facebook_import
               <tr>
                 <td><label for="inputTitle">Veranstaltungsname</label></td>
-                <td><input type="text" id="inputTitle" name="inputTitle" placeholder="Party im Hinterhof" maxlength="100" value="$title" required></td>
+                <td><input type="text" id="inputTitle" name="inputTitle" placeholder="Party im Hinterhof" maxlength="100" value="$title" data-target="form.title" required></td>
               </tr>
               <tr>
                 <td><label for="inputOrganizer">Veranstalter</label></td>
@@ -109,7 +112,7 @@ XML;
               </tr>
               <tr>
                 <td><label for="inputUrl">Veranstaltungslink</label></td>
-                <td><input type="text" id="inputUrl" name="inputUrl" placeholder="https://..." maxlength="100" value="$url"></td>
+                <td><input type="text" id="inputUrl" name="inputUrl" placeholder="https://..." maxlength="100" data-target="form.url" value="$url"></td>
               </tr>
               <tr>
                 <td>&nbsp;</td>
@@ -123,11 +126,11 @@ XML;
                   <div class="formgroup">
                     <div class="row">
                       <label for="inputStartDate">vom</label>
-                      <input type="date" name="inputStartDate" id="inputStartDate" value="$date" required>
+                      <input type="date" name="inputStartDate" id="inputStartDate" data-target="form.startDate" value="$date" required>
                     </div>
                     <div class="row">
                       <label for="inputEndDate">zum</label>
-                      <input type="date" name="inputEndDate" id="inputEndDate" value="$date_end">
+                      <input type="date" name="inputEndDate" id="inputEndDate" data-target="form.endDate" value="$date_end">
                     </div>
                   </div>
                 </td>
@@ -181,7 +184,7 @@ XML;
               $spacer
               <tr>
                 <td><label for="textareaDescription">Beschreibung</label></td>
-                <td><textarea name="textareaDescription" id="textareaDescription" rows="7">$description</textarea></td>
+                <td><textarea name="textareaDescription" id="textareaDescription" rows="7" data-target="form.description">$description</textarea></td>
               </tr>
 
               $category_selector
@@ -305,6 +308,19 @@ XML;
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
               </tr>
+XML;
+    }
+
+    protected function get_import_facebook_event_control() : string {
+        return <<<XML
+        <tr>
+          <td></td>
+          <td>
+            <a href="#" id="importFacebookEvent" data-action="form#importFacebookEvent">
+              Facebook-Veranstaltung importieren
+            </a>
+          </td>
+        </tr>
 XML;
     }
 

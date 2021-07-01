@@ -3,7 +3,10 @@
 
   application.register("form", class extends Stimulus.Controller {
     static get targets() {
-      return ["startTime", "endTime", "placeAddress", "physicalSpace", "image", "imagePreview", "imageUrl"]
+      return [
+        "startTime", "endTime", "placeAddress", "physicalSpace", "image", "imagePreview", "imageUrl",
+        "importFacebookEvent", "title", "startDate", "endDate", "description", "url"
+      ];
     }
 
     initialize() {
@@ -43,6 +46,38 @@
         imageUrl.value = result;
       })
       .catch(error => {
+        console.error("Error:", error);
+      });
+    }
+
+    importFacebookEvent() {
+      var url = prompt('Bitte die vollständige Addresse der Facebook-Veranstaltung eingeben:');
+
+      fetch(wp_api.root + "comcal/v1/import-event-url?url=" + url, {
+        method: "GET",
+        headers: {
+            "X-WP-Nonce": wp_api.nonce
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (data.data !== undefined && data.data.status !== 200) {
+          throw Error(data.message);
+        }
+
+        // Update form controls with data from Facebook event:
+        this.titleTarget.value = data.title;
+        this.startTimeTarget.value = data.time;
+        this.endTimeTarget.value = data.timeEnd;
+        this.startDateTarget.value = data.date;
+        this.endDateTarget.value = data.dateEnd;
+        this.placeAddressTarget.value = data.location;
+        this.descriptionTarget.value = data.description;
+        this.urlTarget.value = data.url;
+      })
+      .catch(error => {
+        alert(error);
         console.error("Error:", error);
       });
     }
