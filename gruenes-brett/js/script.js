@@ -52,6 +52,9 @@
 
     importFacebookEvent() {
       var url = prompt('Bitte die vollständige Addresse der Facebook-Veranstaltung eingeben:');
+      if (url === null) {
+        return;
+      }
 
       fetch(wp_api.root + "comcal/v1/import-event-url?url=" + url, {
         method: "GET",
