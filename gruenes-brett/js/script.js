@@ -5,7 +5,7 @@
     static get targets() {
       return [
         "startTime", "endTime", "placeAddress", "physicalSpace", "image", "imagePreview", "imageUrl",
-        "importFacebookEvent", "title", "startDate", "endDate", "description", "url"
+        "importFacebookEvent", "title", "startDate", "endDate", "description", "url", "table"
       ];
     }
 
@@ -56,13 +56,19 @@
         return;
       }
 
+      var table = this.tableTarget;
+      table.classList.add("loading");
+
       fetch(wp_api.root + "comcal/v1/import-event-url?url=" + url, {
         method: "GET",
         headers: {
             "X-WP-Nonce": wp_api.nonce
         }
       })
-      .then(response => response.json())
+      .then(response => {
+        table.classList.remove("loading");
+        return response.json()
+      })
       .then(data => {
         console.log(data);
         if (data.data !== undefined && data.data.status !== 200) {

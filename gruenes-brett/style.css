@@ -520,6 +520,10 @@ aside nav a:hover, aside nav a:focus {
   padding: 5px 10px;
 }
 
+.addevent form table.loading {
+  opacity: 0.3;  /* TODO: visualize loading state */
+}
+
 .addevent table tr td:first-child {
   vertical-align: top;
   padding-top: 12px;

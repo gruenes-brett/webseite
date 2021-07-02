@@ -99,7 +99,7 @@ XML;
 
         return <<<XML
 
-            <table>
+            <table data-target="form.table">
               $submitter_form_fields
               $facebook_import
               <tr>
