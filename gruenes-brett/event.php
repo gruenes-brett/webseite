@@ -20,8 +20,8 @@ if ( ! $image_url ) {
 get_header(
     null,
     array(
-        'title'       => $detail_view->pretty->title,
-        'description' => $detail_view->pretty->description,
+        'title'       => wp_trim_words( $detail_view->pretty->title, 10, '...' ),
+        'description' => wp_trim_words( $detail_view->pretty->description, 60, '...' ),
         'image'       => $image_url,
     )
 );
