@@ -6,12 +6,25 @@
  */
 
 ?>
-<?php get_header(); ?>
 
 <?php
-  $event_id    = get_query_var( 'event_id' );
-  $event       = Comcal_Event::query_by_entry_id( $event_id );
-  $detail_view = new Event_Detail_View( $event );
+
+$event_id    = get_query_var( 'event_id' );
+$event       = Comcal_Event::query_by_entry_id( $event_id );
+$detail_view = new Event_Detail_View( $event );
+$image_url   = $detail_view->pretty->image_url;
+if ( ! $image_url ) {
+    $image_url = esc_url( get_stylesheet_directory_uri() . '/img/placeholder.png' );
+}
+
+get_header(
+    null,
+    array(
+        'title'       => $detail_view->pretty->title,
+        'description' => $detail_view->pretty->description,
+        'image'       => $image_url,
+    )
+);
 ?>
 <!-- <aside>
   <nav>
