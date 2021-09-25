@@ -481,10 +481,14 @@ aside nav a:hover, aside nav a:focus {
 
 .calendar table td {
   padding: 10px 20px;
-  border-bottom: 1px solid var(--lightgray);
+  border-top: 1px solid var(--lightgray);
   text-align: center;
   width: 60px;
   vertical-align: top;
+}
+
+.calendar table tr:first-child td, .calendar table .sameDay td.date {
+  border-top: none;
 }
 
 .calendar table td:last-child {
