@@ -595,13 +595,19 @@ aside nav a:hover, aside nav a:focus {
   width: 50px;
 }
 
+.featherlight button.featherlight-close-icon {
+  position: sticky;
+}
+
 .featherlight title.featherlight-inner {
   display: none;
 }
 
 .featherlight main.featherlight-inner {
   margin-top: 0;
+  padding-top: 10px;
   display: flex;
+  text-align: left;
 }
 
 .featherlight div.featherlight-content {
@@ -610,6 +616,7 @@ aside nav a:hover, aside nav a:focus {
   max-height: 100vh;
   width: 1400px;
   max-width: 100vw;
+  text-align: right;
 }
 
 /* Media queries */
