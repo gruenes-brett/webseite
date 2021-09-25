@@ -26,11 +26,6 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
         $featherlight_view_data = Event_Popup::get_featherlight_attribute( $event );
         $featherlight_edit_data = Edit_Event_Popup::get_featherlight_attribute( $event );
 
-        $edit_link = $this->get_edit_link( $event );
-        if ( '' !== $edit_link ) {
-            $edit_link = ", <a href='#' $featherlight_edit_data>bearbeiten</a>";
-        }
-
         $private = $event->get_field( 'public' ) ? '' : 'private';
 
         $day_of_day     = '';
@@ -44,13 +39,20 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
             }
         }
 
-        $time     = $pretty->pretty_time;
+        $time     = $pretty->formatted_time;
         $location = $pretty->location;
         if ( '' !== $time && '' !== $location ) {
             $location = ', ' . $location;
         }
 
-        // TODO @sebastianlay: Format event on calendar page as desired.
+        $edit_link = $this->get_edit_link( $event );
+        if ( '' !== $edit_link ) {
+            $edit_link = "<a href='#' $featherlight_edit_data>bearbeiten</a>";
+        }
+        if ( '' !== $time && '' !== $edit_link ) {
+            $edit_link = ', ' . $edit_link;
+        }
+
         return <<<XML
       <article class="$private">
         <$header_tag><a href="#" $featherlight_view_data>$pretty->title$day_of_day</a></$header_tag>

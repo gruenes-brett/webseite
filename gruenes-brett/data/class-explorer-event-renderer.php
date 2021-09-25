@@ -28,9 +28,19 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
         $featherlight_view_data = Event_Popup::get_featherlight_attribute( $event );
         $featherlight_edit_data = Edit_Event_Popup::get_featherlight_attribute( $event );
 
+        $date = $pretty->formatted_date;
+        $time = $pretty->formatted_time;
+
+        if ( '' !== $time ) {
+            $time = ', ' . $time;
+        }
+
         $edit_link = $this->get_edit_link( $event );
         if ( '' !== $edit_link ) {
-            $edit_link = ", <a href='#' $featherlight_edit_data>bearbeiten</a>";
+            $edit_link = "<a href='#' $featherlight_edit_data>bearbeiten</a>";
+        }
+        if ( '' !== $date && '' !== $edit_link ) {
+            $edit_link = ', ' . $edit_link;
         }
 
         $private = $event->get_field( 'public' ) ? '' : 'private';
@@ -41,7 +51,6 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
 
         $description = wp_trim_words( $pretty->description, 60, '...' );
 
-        // TODO @sebastianlay: Format event on explorer page as desired.
         return <<<XML
         <article class="$private">
             $overlay
@@ -50,7 +59,7 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
             </section>
             <h2><a href="#" $featherlight_view_data>$title</a></h2>
             <section class="meta">
-            $pretty->pretty_date, $pretty->pretty_time$edit_link
+            $date$time$edit_link
             </section>
             <section class="description">
             <p>$description</p>

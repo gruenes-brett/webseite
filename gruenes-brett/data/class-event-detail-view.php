@@ -43,8 +43,13 @@ XML;
             $image_url = esc_url( get_stylesheet_directory_uri() . '/img/placeholder.png' );
         }
 
-        $date     = $pretty->pretty_date;
-        $time     = $pretty->pretty_time;
+        $date = $pretty->formatted_date;
+        $time = $pretty->formatted_time;
+
+        if ( '' !== $time ) {
+            $time = ', ' . $time;
+        }
+
         $location = $pretty->location;
 
         if ( '' !== $location ) {
@@ -67,7 +72,7 @@ XML;
         <section class="image" style="background-image: url('$image_url');"></section>
         <h2><a href="$permalink">$pretty->title</a></h2>
         <section class="meta">
-          $date, $time$location
+          $date$time$location
         </section>
         <section class="share" data-controller="share">
           <div class="group">
