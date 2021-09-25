@@ -484,6 +484,7 @@ aside nav a:hover, aside nav a:focus {
   border-bottom: 1px solid var(--lightgray);
   text-align: center;
   width: 60px;
+  vertical-align: top;
 }
 
 .calendar table td:last-child {
