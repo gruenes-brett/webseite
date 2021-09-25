@@ -12,19 +12,11 @@ if ( ! verify_community_calendar_loaded( true ) ) {
 ?>
 <aside>
   <nav>
-    <!--
-
-      !!! This has been moved into the edit-event-form to make it work with Stimulus
-
-       <div class="item">
-      <a href="#" id="importFacebookEvent" data-target="form.placeAddress" data-action="form#importFacebookEvent">Facebook-Veranstaltung importieren</a>
-    </div> -->
-
     <!-- TODO: make these links dynamic -->
 
     <?php if ( ! is_user_logged_in() ) : ?>
     <div class="item">
-      <a href="/wp-admin">Anmelden für sofortige Freischaltung</a>
+      <a href="/wp-login.php?redirect_to=/veranstaltung-eintragen">Anmelden für sofortige Freischaltung</a>
     </div>
     <div class="item">
       <a href="/wer-wir-sind/mitmachen">Account beantragen</a>
