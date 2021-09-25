@@ -51,6 +51,8 @@ XML;
             $location = ', ' . $location;
         }
 
+        $description = make_clickable( $pretty->description );
+
         $event_link = '';
         if ( $pretty->url ) {
             $event_link = "<br><a href='" . $pretty->url . "' class='more'>mehr Informationen "
@@ -90,7 +92,7 @@ XML;
       </section>
       <article>
         <section class="description">
-          $pretty->description
+          $description
           $event_link
         </section>
       </article>
