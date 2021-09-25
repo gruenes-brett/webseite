@@ -44,21 +44,57 @@ extract( wp_parse_args( $args, $defaults ) );
           <!-- <span>Grünes Brett</span> -->
         </a>
       </h1>
+      <nav class="menu">
+        <div class="row">
 <?php
 
 // TODO: move explore and calendar page into the same div and hide "veranstaltung" properly!
-$output = wp_page_menu(
+
+$event_page    = get_page_by_path( 'veranstaltung' )->ID;
+$explore_page  = get_page_by_path( 'erkunden' )->ID;
+$calendar_page = get_page_by_path( 'kalender' )->ID;
+
+$explore_entry = wp_page_menu(
     array(
-        'echo'      => 0,
-        'depth'     => 1,
-        'container' => 'nav',
-        'before'    => '',
-        'after'     => '',
-        'exclude'   => 67,
+        'echo'       => 0,
+        'depth'      => 1,
+        'container'  => 'false',
+        'before'     => '',
+        'after'      => '',
+        'include'    => $explore_page,
+        'items_wrap' => '%3$s',
     )
 );
 
-// TODO: replace with custom page walker in the wp_page_menu call!
-echo wp_kses_post( preg_replace( '/<li\s(.+?)>(.+?)<\/li>/is', '<div $1>$2</div>', $output ) );
+$calendar_entry = wp_page_menu(
+    array(
+        'echo'       => 0,
+        'depth'      => 1,
+        'container'  => 'false',
+        'before'     => '',
+        'after'      => '',
+        'include'    => $calendar_page,
+        'items_wrap' => '%3$s',
+    )
+);
+echo wp_kses_post( preg_replace( '/<li\s(.+?)>(.+?)<\/li>/is', '<div $1>$2</div>', $explore_entry ) );
+echo '<div>/</div>';
+echo wp_kses_post( preg_replace( '/<li\s(.+?)>(.+?)<\/li>/is', '<div $1>$2</div>', $calendar_entry ) );
 ?>
+        </div>
+<?php
+$other_entries = wp_page_menu(
+    array(
+        'echo'       => 0,
+        'depth'      => 1,
+        'container'  => 'false',
+        'before'     => '',
+        'after'      => '',
+        'exclude'    => "$explore_page,$calendar_page,$event_page",
+        'items_wrap' => '%3$s',
+    )
+);
+echo wp_kses_post( preg_replace( '/<li\s(.+?)>(.+?)<\/li>/is', '<div $1>$2</div>', $other_entries ) );
+?>
+      </nav>
     </header>

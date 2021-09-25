@@ -290,9 +290,19 @@ header nav {
   font-size: 24px;
 }
 
-header nav .item, header nav .page_item {
+header nav > div {
   margin-right: 40px;
   text-align: center;
+}
+
+header nav .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+header nav .row div {
+  margin-left: 5px;
 }
 
 header nav .current_page_item a, header nav .current_page_ancestor {
@@ -634,6 +644,17 @@ aside nav a:hover, aside nav a:focus {
     display: none;
   }
 
+  header nav {
+    flex-direction: column;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  header nav > div {
+    margin-right: 25px;
+    text-align: right;
+  }
+
   .explore article {
     width: 50%;
   }
@@ -676,17 +697,6 @@ aside nav a:hover, aside nav a:focus {
 
   main {
     padding: 30px 25px;
-  }
-
-  header nav {
-    flex-direction: column;
-    font-size: 18px;
-    font-weight: 700;
-  }
-
-  header nav .item, header nav .page_item {
-    margin-right: 25px;
-    text-align: right;
   }
 
   aside nav a {
