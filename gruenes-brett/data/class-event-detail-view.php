@@ -51,9 +51,18 @@ XML;
         }
 
         $location = $pretty->location;
-
         if ( '' !== $location ) {
-            $location = ', ' . $location;
+            $location = '<br>' . $location;
+        }
+
+        $address = $pretty->address;
+        if ( '' !== $address ) {
+            $address = '<br>' . $address;
+        }
+
+        $organizer = $pretty->organizer;
+        if ( '' !== $organizer ) {
+            $organizer = '<br>' . $organizer;
         }
 
         $description = make_clickable( $pretty->description );
@@ -72,18 +81,9 @@ XML;
         <section class="image" style="background-image: url('$image_url');"></section>
         <h2><a href="$permalink">$pretty->title</a></h2>
         <section class="meta">
-          $date$time$location
+          $date$time$location$address$organizer
         </section>
         <section class="share" data-controller="share">
-          <div class="group">
-            <label for="permalink">Link zur Veranstaltung</label>
-            <div class="formgroup">
-              <input type="text" id="permalink" data-target="share.permalink" value="$permalink" readonly>
-              <button data-target="share.clipboard" data-action="share#copyPermalink">
-                <img src="$stylesheet_directory/img/icons/clipboard-fill.svg" alt="Kopieren" data-target="share.clipboardIcon">
-              </button>
-            </div>
-          </div>
           <div class="group">
             <label>Veranstaltung teilen</label>
             <div class="formgroup">
@@ -91,6 +91,14 @@ XML;
               <button data-target="share.twitter" data-action="share#onTwitter"><img src="$stylesheet_directory/img/icons/twitter-fill.svg" alt="Twitter"></button>
               <button data-target="share.telegram" data-action="share#onTelegram"><img src="$stylesheet_directory/img/icons/telegram-fill.svg" alt="Telegram"></button>
               <button data-target="share.calendar" data-action="share#withCalendar"><img src="$stylesheet_directory/img/icons/calendar-event-fill.svg" alt="Kalender"></button>
+            </div>
+          </div>
+          <div class="group">
+            <div class="formgroup">
+              <input type="text" id="permalink" data-target="share.permalink" value="$permalink" readonly>
+              <button data-target="share.clipboard" data-action="share#copyPermalink">
+                <img src="$stylesheet_directory/img/icons/clipboard-fill.svg" alt="Kopieren" data-target="share.clipboardIcon">
+              </button>
             </div>
           </div>
         </section>
