@@ -104,7 +104,7 @@ XML;
               $facebook_import
               <tr>
                 <td><label for="inputTitle">Veranstaltungsname</label></td>
-                <td><input type="text" id="inputTitle" name="inputTitle" placeholder="Party im Hinterhof" maxlength="100" value="$title" data-target="form.title" required></td>
+                <td><input type="text" id="inputTitle" name="inputTitle" placeholder="Reinigung der Elbwiesen" maxlength="100" value="$title" data-target="form.title" required></td>
               </tr>
               <tr>
                 <td><label for="inputOrganizer">Veranstalter</label></td>
@@ -164,7 +164,7 @@ XML;
               $spacer
               <tr>
                 <td><label for="inputPlaceName">Veranstaltungsort</label></td>
-                <td><input type="text" name="inputPlaceName" id="inputPlaceName" placeholder="Unser Hinterhof" maxlength="50" value="$location"></td>
+                <td><input type="text" name="inputPlaceName" id="inputPlaceName" placeholder="Am Blauen Wunder" maxlength="50" value="$location"></td>
               </tr>
               <tr>
                 <td><label for="inputPlaceAddress">Adresse</label></td>
