@@ -20,14 +20,12 @@ extract( wp_parse_args( $args, $defaults ) );
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grünes Brett - Erkunden</title>
   <meta property="og:type" content="website">
-  <meta property="og:url" content="<?php echo esc_url( get_home_url() ); ?>">
   <meta property="og:title" content="<?php echo wp_strip_all_tags( $title ); ?>">
   <meta property="og:description" content="<?php echo wp_strip_all_tags( $description ); ?>">
   <meta property="og:image" content="<?php echo $image; ?>">
   <meta property="og:image:secure_url" content="<?php echo $image; ?>">
 
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="<?php echo esc_url( get_home_url() ); ?>">
   <meta property="twitter:title" content="<?php echo wp_strip_all_tags( $title ); ?>">
   <meta property="twitter:description" content="<?php echo wp_strip_all_tags( $description ); ?>">
   <meta property="twitter:image" content="<?php echo $image; ?>">

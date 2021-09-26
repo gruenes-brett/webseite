@@ -68,6 +68,13 @@ require_once 'data/class-admin-view-event-renderer.php';
 require_once 'data/class-pretty-event.php';
 require_once 'data/class-category-provider.php';
 
+remove_action( 'wp_head', 'wp_generator' );
+remove_action( 'wp_head', 'rel_canonical' );
+remove_action( 'wp_head', 'wp_shortlink_wp_head' );
+remove_action( 'wp_head', 'rsd_link' );
+remove_action( 'wp_head', 'rest_output_link_wp_head' );
+remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+
 // define custom media size.
 add_image_size( 'gruenesbrett', 960, 540 );
 
