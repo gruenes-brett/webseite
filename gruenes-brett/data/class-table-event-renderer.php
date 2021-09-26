@@ -49,7 +49,7 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
         if ( '' !== $edit_link ) {
             $edit_link = "<a href='#' $featherlight_edit_data>bearbeiten</a>";
         }
-        if ( '' !== $time && '' !== $edit_link ) {
+        if ( ( '' !== $time || '' !== $location ) && '' !== $edit_link ) {
             $edit_link = ', ' . $edit_link;
         }
 
