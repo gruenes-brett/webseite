@@ -20,6 +20,7 @@ extract( wp_parse_args( $args, $defaults ) );
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grünes Brett - Erkunden</title>
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="<?php bloginfo( 'name' ); ?>">
   <meta property="og:title" content="<?php echo wp_strip_all_tags( $title ); ?>">
   <meta property="og:description" content="<?php echo wp_strip_all_tags( $description ); ?>">
   <meta property="og:image" content="<?php echo $image; ?>">
