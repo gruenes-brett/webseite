@@ -15,6 +15,7 @@ function __submit_form(form) {
         success: function(response) {
             console.log(response);
             alert(response);
+            form[0].reset();
             location.reload();
         },
         error: function(response) {
