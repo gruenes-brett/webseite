@@ -40,9 +40,20 @@ add_action(
 /**
  * Helper function that puts basic elements into the HTML
  * - Floating buttons
+ *
+ * @param String $scroll_option Either 'scrollToToday' or 'scrollToTop'.
  */
-function echo_floating_buttons() {
-    echo comcal_floating_buttons_func( array( 'addEvent' => false ) );
+function echo_floating_buttons( $scroll_option = 'scrollToToday' ) {
+    $icon = array(
+        'scrollToToday' => 'calendar-event-fill.svg',
+        'scrollToTop'   => 'arrow-upward-to-rectangle-shape.svg',
+    )[ $scroll_option ];
+
+    $stylesheet_directory = esc_url( get_stylesheet_directory_uri() );
+    echo comcal_create_single_floating_button(
+        $scroll_option,
+        "$stylesheet_directory/img/icons/$icon"
+    );
 }
 
 require_once 'data/class-common-data.php';
