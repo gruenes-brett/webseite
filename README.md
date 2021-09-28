@@ -18,10 +18,12 @@ the theme.
 This theme defines a couple of page templates that implement the main functionality. In your
 Wordpress setup you need to create the following pages:
 
-| Template | Suggested page name | Remarks |
-| --- | --- | --- |
-| calendar.php | Kalender | |
-| explore.php | Erkunden | |
-| addevent.php | Veranstaltung eintragen | |
-| event.php | Veranstaltung | Shows details of an event on a separate page. As of now, the URL Slug of this page must be 'veranstaltung'. Otherwise the generated event link will not work. |
-| categories.php | Kategorien bearbeiten | Should be visible to admin users only. |
+| Template | Suggested page name | Required path name* | Remarks |
+| --- | --- | --- | --- |
+| calendar.php | Kalender | /kalender/ | |
+| explore.php | Erkunden | /erkunden/ | |
+| addevent.php | Veranstaltung eintragen | /veranstaltung-eintragen/ | |
+| event.php | Veranstaltung | /veranstaltung/ | Shows details of an event on a separate page. As of now, the URL Slug of this page must be 'veranstaltung'. Otherwise the generated event link will not work. |
+| categories.php | Kategorien bearbeiten | /kategorien-bearbeiten/ | Should be visible to admin users only. |
+
+*) During development, many links are still hard coded to these path names.
