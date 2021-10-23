@@ -356,13 +356,13 @@ aside nav a:hover, aside nav a:focus {
 .explore {
   display: flex;
   flex-wrap: wrap;
-  padding: 60px 10px 0 10px;
+  padding: 60px 10px 0;
 }
 
 .explore article {
   margin: 0;
   flex: unset;
-  padding: 30px 50px 30px 50px;
+  padding: 30px 50px;
   width: calc(100% / 3);
 }
 
@@ -382,7 +382,7 @@ aside nav a:hover, aside nav a:focus {
   content: ' ';
   width: 25px;
   height: 25px;
-  background-image: url(img/icons/eye-off.svg);
+  background-image: url('img/icons/eye-off.svg');
   display: inline-block;
   vertical-align: middle;
   margin-left: 5px;
@@ -430,7 +430,7 @@ aside nav a:hover, aside nav a:focus {
 }
 
 .eventhistory article.obsolete {
-  opacity: 0.4;
+  opacity: 40%;
 }
 
 .eventhistory article section {
@@ -441,7 +441,7 @@ aside nav a:hover, aside nav a:focus {
   content: ' ';
   width: 25px;
   height: 25px;
-  background-image: url(img/icons/eye-off.svg);
+  background-image: url('img/icons/eye-off.svg');
   display: inline-block;
   vertical-align: middle;
   margin-right: 5px;
@@ -451,7 +451,7 @@ aside nav a:hover, aside nav a:focus {
   content: ' ';
   width: 25px;
   height: 25px;
-  background-image: url(img/icons/eye-on.svg);
+  background-image: url('img/icons/eye-on.svg');
   display: inline-block;
   vertical-align: middle;
   margin-right: 5px;
@@ -465,7 +465,7 @@ aside nav a:hover, aside nav a:focus {
 
 .calendar h1 {
   background: var(--white);
-  padding: 42px 0 12px 0;
+  padding: 42px 0 12px;
   position: sticky;
   top: 0;
   border-bottom: 1px solid var(--lightgray);
@@ -513,7 +513,7 @@ aside nav a:hover, aside nav a:focus {
 }
 
 .calendar table td article.private {
-  background: url(img/icons/eye-off.svg) no-repeat;
+  background: url('img/icons/eye-off.svg') no-repeat;
   background-position: right center;
   padding-right: 25px;
 }
@@ -542,7 +542,7 @@ aside nav a:hover, aside nav a:focus {
 }
 
 .addevent form table.loading {
-  opacity: 0.3;  /* TODO: visualize loading state */
+  opacity: 30%;  /* TODO: visualize loading state */
 }
 
 .addevent table tr td:first-child {
