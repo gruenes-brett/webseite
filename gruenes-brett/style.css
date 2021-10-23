@@ -615,6 +615,20 @@ aside nav a:hover, aside nav a:focus {
   width: 50px;
 }
 
+.detail .share .group a {
+  width: 100%;
+  padding: 10px;
+  background: var(--green);
+}
+
+.detail .share .group a:hover {
+  background: var(--darkgray);
+}
+
+.detail .share .group a img {
+  margin: 0 auto;
+}
+
 .featherlight button.featherlight-close-icon {
   position: sticky;
 }

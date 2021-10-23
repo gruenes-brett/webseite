@@ -75,6 +75,25 @@ XML;
 
         $permalink = esc_url( get_home_url() . '/veranstaltung/' . $pretty->event_id );
 
+        $dtstamp = $this->event->get_created_date()->format( 'Ymd\THis' );
+        $dtstart = $this->event->get_start_date_time( 0 )->format( 'Ymd\THis' );
+        $dtend   = $this->event->get_end_date_time()->format( 'Ymd\THis' );
+
+        $ics_start = rawurlencode(
+            'BEGIN:VCALENDAR' . PHP_EOL
+            . 'VERSION:2.0' . PHP_EOL
+            . 'PRODID:-//gruenesbrett//NONSGML v1.0//EN' . PHP_EOL
+            . 'BEGIN:VEVENT' . PHP_EOL
+            . "UID:$pretty->event_id@gruenesbrett" . PHP_EOL
+            . "DTSTAMP:$dtstamp" . PHP_EOL
+            . "DTSTART:$dtstart" . PHP_EOL
+            . "DTEND:$dtend" . PHP_EOL
+            . "SUMMARY:$pretty->title" . PHP_EOL
+        );
+        $ics_desc  = 'DESCRIPTION: ' . str_replace( '<br />', '\\n', $pretty->description );
+        $ics_end   = rawurlencode( PHP_EOL . 'END:VEVENT' . PHP_EOL . 'END:VCALENDAR' );
+        $ics       = $ics_start . $ics_desc . $ics_end;
+
         return <<<XML
     <main class="detail">
       <section class="note">
@@ -90,7 +109,7 @@ XML;
               <button data-target="share.facebook" data-action="share#onFacebook"><img src="$stylesheet_directory/img/icons/facebook-fill.svg" alt="Facebook"></button>
               <button data-target="share.twitter" data-action="share#onTwitter"><img src="$stylesheet_directory/img/icons/twitter-fill.svg" alt="Twitter"></button>
               <button data-target="share.telegram" data-action="share#onTelegram"><img src="$stylesheet_directory/img/icons/telegram-fill.svg" alt="Telegram"></button>
-              <button data-target="share.calendar" data-action="share#withCalendar"><img src="$stylesheet_directory/img/icons/calendar-event-fill.svg" alt="Kalender"></button>
+              <a href="data:text/calendar;charset=utf8,$ics" download="cal.ics"><img src="$stylesheet_directory/img/icons/calendar-event-fill.svg" alt="Kalender"></a>
             </div>
           </div>
           <div class="group">

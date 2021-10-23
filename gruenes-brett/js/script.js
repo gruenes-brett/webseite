@@ -118,9 +118,5 @@
       var url = "https://t.me/share/url?url=" + this.permalinkTarget.value;
       window.open(url);
     }
-
-    withCalendar() {
-      // TODO: download ical file
-    }
   })
 })()
