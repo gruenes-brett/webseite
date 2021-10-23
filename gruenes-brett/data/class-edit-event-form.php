@@ -197,8 +197,12 @@ XML;
                   </div>
                   <div class="formgroup">&nbsp;</div>
                   <div class="formgroup">
-                    <div class="image" style="background-image: url('$image_url')" data-target="form.imagePreview" />
-                    <input type="hidden" value="$image_url" name="inputImageUrl" id="inputImageUrl" data-target="form.imageUrl">
+                    <div class="image" style="background-image: url('$image_url')" data-target="form.imagePreview"></div>
+                    <input type="hidden" value="$image_url" name="inputImageUrl" id="inputImageUrl" data-target="form.imageUrl" />
+                  </div>
+                  <div class="formgroup">&nbsp;</div>
+                  <div class="formgroup">
+                    Das Bild wird im Format 16:9 angezeigt werden. Die empfohlene Auflösung ist 960x540 Pixel. 
                   </div>
                 </td>
               </tr>
