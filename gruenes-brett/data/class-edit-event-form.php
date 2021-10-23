@@ -273,8 +273,7 @@ XML;
     protected function get_spacer() {
         return <<<XML
               <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
+                <td colspan="2">&nbsp;</td>
               </tr>
 XML;
     }
@@ -295,6 +294,8 @@ XML;
             }
         }
 
+        $spacer = $this->get_spacer();
+
         return <<<XML
               <tr>
                 <td><label for="inputName">Dein Name</label></td>
@@ -304,10 +305,7 @@ XML;
                 <td><label for="inputEmail">E-Mail-Adresse</label></td>
                 <td><input type="email" name="inputEmail" id="inputEmail" placeholder="max@mustermann.de" value="$email" required></td>
               </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-              </tr>
+              $spacer
 XML;
     }
 
