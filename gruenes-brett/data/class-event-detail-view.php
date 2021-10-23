@@ -69,8 +69,8 @@ XML;
 
         $event_link = '';
         if ( $pretty->url ) {
-            $event_link = "<br><a href='" . $pretty->url . "' class='more'>mehr Informationen "
-                          . "<img src='" . $stylesheet_directory . "/img/icons/arrow-right-line.svg' alt='Pfeil'></a>";
+            $event_link = "<br><a href='$pretty->url' class='more'>mehr Informationen "
+                          . "<img src='$stylesheet_directory/img/icons/arrow-right-line.svg' alt='Pfeil'></a><br>";
         }
 
         $permalink = esc_url( get_home_url() . '/veranstaltung/' . $pretty->event_id );
