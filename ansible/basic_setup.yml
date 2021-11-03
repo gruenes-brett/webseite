@@ -1,0 +1,4 @@
+- hosts: target
+  become: true
+  roles:
+    - basic/install_packages

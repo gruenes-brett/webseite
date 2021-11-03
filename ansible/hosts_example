@@ -1,0 +1,8 @@
+[target]
+john@target.example.com
+
+[target:vars]
+wp_mysql_db=gruenesbrett
+wp_mysql_user=gruenesbrett
+wp_mysql_password=<< your password here >>
+target_www_dir=/var/www/gruenesbrett

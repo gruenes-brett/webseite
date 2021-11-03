@@ -1,0 +1,6 @@
+- hosts: target
+  become: true
+  roles:
+    - wordpress/initialize_database
+    - wordpress/download_wordpress
+    # - wordpress/initialize_pages

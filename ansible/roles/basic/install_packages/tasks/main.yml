@@ -1,0 +1,39 @@
+---
+- name: install apache, php, mysql
+  become: true
+  apt:
+    pkg:
+    - python3
+    - python3-pymysql
+    - apache2
+    - apache2-utils
+    - libapache2-mod-php7.4
+    - mariadb-server
+    - php7.4
+    - php7.4-curl
+    - php7.4-bcmath
+    - php7.4-imagick
+    - php7.4-intl
+    - php7.4-json
+    - php7.4-mbstring
+    - php7.4-mysql
+    - php7.4-xml
+    - php7.4-zip
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Enable apache2 mod rewrite
+  apache2_module:
+    state: present
+    name: rewrite
+
+- name: Restart apache2
+  systemd:
+    name: apache2
+    state: restarted
+
+- name: Restart mysql
+  systemd:
+    name: mysql
+    state: restarted
