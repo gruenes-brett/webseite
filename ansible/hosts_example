@@ -1,8 +1,13 @@
 [target]
-john@target.example.com
+me@myhost.net
 
 [target:vars]
-wp_mysql_db=gruenesbrett
-wp_mysql_user=gruenesbrett
+instance_name=testing
+domain=mywebsite.net
 wp_mysql_password=<< your password here >>
-target_www_dir=/var/www/gruenesbrett
+
+target_www_dir=/var/www/{{ instance_name }}
+vhost_file={{ instance_name }}_vhost.conf
+
+wp_mysql_db=gb_{{ instance_name }}
+wp_mysql_user=gb_{{ instance_name }}

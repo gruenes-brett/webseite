@@ -4,3 +4,4 @@
     - wordpress/initialize_database
     - wordpress/download_wordpress
     # - wordpress/initialize_pages
+    - wordpress/create_vhost

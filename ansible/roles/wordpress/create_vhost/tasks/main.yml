@@ -1,0 +1,12 @@
+- name: Create virtual host for {{ instance_name }} on {{ domain }} ({{ vhost_file }})
+  template:
+    src: vhost.conf
+    dest: /etc/apache2/sites-available/{{ vhost_file }}
+
+- name: Enable virtual host for {{ instance_name }}
+  shell: /usr/sbin/a2ensite {{ vhost_file }}
+
+- name: Reload apache2
+  service:
+    name: apache2
+    state: reloaded

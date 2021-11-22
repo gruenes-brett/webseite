@@ -1,5 +1,5 @@
 ---
-- name: install apache, php, mysql
+- name: install apache, php, mariadb etc.
   become: true
   apt:
     pkg:
