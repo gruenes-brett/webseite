@@ -2,12 +2,18 @@
 me@myhost.net
 
 [target:vars]
+
+### Adjust the following variables:
+
 instance_name=testing
 domain=mywebsite.net
 db_password="<< your password here >>"
 admin_user=admin
 admin_password="123456"
 admin_email="me@testing.here"
+
+
+### Changing the following variables is optional:
 
 target_www_dir=/var/www/{{ instance_name }}
 wordpress_dir={{ target_www_dir }}/wordpress
