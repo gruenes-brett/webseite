@@ -2,3 +2,4 @@
   become: true
   roles:
     - basic/install_packages
+    - basic/install_wordpress_cli
