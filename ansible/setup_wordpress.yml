@@ -1,7 +1,8 @@
 - hosts: target
   become: true
   roles:
-    - wordpress/initialize_database
-    - wordpress/download_wordpress
+    # - wordpress/initialize_database
+    # - wordpress/download_wordpress
+    # - wordpress/create_vhost
+    - wordpress/basic_init
     # - wordpress/initialize_pages
-    - wordpress/create_vhost

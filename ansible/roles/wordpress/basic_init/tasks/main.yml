@@ -1,0 +1,33 @@
+---
+- name: WordPress create wp-config.php
+  command:
+    argv:
+      - sudo
+      - --user
+      - www-data
+      - --
+      - wp
+      - config
+      - create
+      - --dbname={{ db_name }}
+      - --dbuser={{ db_user }}
+      - --dbpass={{ db_password }}
+    chdir: "{{ wordpress_dir }}"
+    creates: wp-config.php
+
+- name: WordPress core install
+  command:
+    argv:
+      - sudo
+      - --user
+      - www-data
+      - --
+      - wp
+      - core
+      - install
+      - --url=http://{{ domain }}
+      - --title={{ page_title }}
+      - --admin_user=admin
+      - --admin_password={{ admin_password }}
+      - --admin_email={{ admin_email }}
+    chdir: "{{ wordpress_dir }}"

@@ -1,13 +1,13 @@
 ---
 - name: Initialize mysql database
   mysql_db:
-    name: "{{ wp_mysql_db }}"
+    name: "{{ db_name }}"
     state: present
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
 - name: Create mysql user
   mysql_user:
-    name: "{{ wp_mysql_user }}"
-    password: "{{ wp_mysql_password }}"
-    priv: "{{ wp_mysql_db }}.*:ALL"
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    priv: "{{ db_name }}.*:ALL"
     login_unix_socket: /var/run/mysqld/mysqld.sock

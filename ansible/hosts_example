@@ -4,10 +4,16 @@ me@myhost.net
 [target:vars]
 instance_name=testing
 domain=mywebsite.net
-wp_mysql_password=<< your password here >>
+db_password="<< your password here >>"
+admin_user=admin
+admin_password="123456"
+admin_email="me@testing.here"
 
 target_www_dir=/var/www/{{ instance_name }}
+wordpress_dir={{ target_www_dir }}/wordpress
 vhost_file={{ instance_name }}_vhost.conf
 
-wp_mysql_db=gb_{{ instance_name }}
-wp_mysql_user=gb_{{ instance_name }}
+page_title="Grünes Brett {{ instance_name }}"
+
+db_name=gb_{{ instance_name }}
+db_user=gb_{{ instance_name }}

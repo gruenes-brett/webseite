@@ -9,9 +9,13 @@
   file:
     dest: "{{ target_www_dir }}"
     state: directory
+    owner: www-data
+    group: www-data
 
 - name: Extract wordpress
   unarchive:
     src: /tmp/wordpress.tar.gz
     dest: "{{ target_www_dir }}"
     copy: no
+    owner: www-data
+    group: www-data
