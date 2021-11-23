@@ -31,3 +31,29 @@
       - --admin_password={{ admin_password }}
       - --admin_email={{ admin_email }}
     chdir: "{{ wordpress_dir }}"
+
+- name: Activate gruenes-brett theme
+  command:
+    argv:
+      - sudo
+      - --user
+      - www-data
+      - --
+      - wp
+      - theme
+      - activate
+      - gruenes-brett
+    chdir: "{{ wordpress_dir }}"
+
+- name: Activate community-calendar plugin
+  command:
+    argv:
+      - sudo
+      - --user
+      - www-data
+      - --
+      - wp
+      - plugin
+      - activate
+      - community-calendar
+    chdir: "{{ wordpress_dir }}"

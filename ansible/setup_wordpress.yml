@@ -1,8 +1,11 @@
 - hosts: target
   become: true
+  vars_files:
+    - group_vars/globals
   roles:
-    # - wordpress/initialize_database
-    # - wordpress/download_wordpress
-    # - wordpress/create_vhost
+    - wordpress/initialize_database
+    - wordpress/download_wordpress
+    - wordpress/create_vhost
+    - wordpress/install_theme_and_plugins
     - wordpress/basic_init
-    # - wordpress/initialize_pages
+    - wordpress/initialize_pages
