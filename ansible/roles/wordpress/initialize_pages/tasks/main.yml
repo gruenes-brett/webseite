@@ -1,0 +1,18 @@
+---
+- name: Create pages
+  command:
+    argv:
+      - sudo
+      - --user
+      - www-data
+      - --
+      - wp
+      - post
+      - create
+      - --post_type=page
+      - --post_status=publish
+      - "--post_title={{ item.title }}"
+      - "--meta_input={\"_wp_page_template\": \"{{ item.template }}\"}"
+    chdir: "{{ wordpress_dir }}"
+  with_items:
+    - "{{ pages }}"
