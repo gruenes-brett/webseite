@@ -1,0 +1,11 @@
+---
+- name: install certbot
+  become: true
+  apt:
+    pkg:
+      - certbot
+      - python3-certbot
+      - python3-certbot-apache
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600

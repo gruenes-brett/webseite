@@ -25,7 +25,7 @@
       - wp
       - core
       - install
-      - --url=http://{{ domain }}
+      - --url={{ http_prefix }}://{{ domain }}
       - --title={{ page_title }}
       - --admin_user=admin
       - --admin_password={{ admin_password }}

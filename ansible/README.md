@@ -25,17 +25,39 @@ values in each host file.
 
 ## Steps for creating a new instance
 
-1. Create a `hosts_myinstance` file from `hosts_example` and change values
-   * `instance_name` should only contain alphanumeric characters
+### 1. Create a `hosts_myinstance` file from `hosts_example` and change values
+   * `instance_name` should only contain alphanumeric characters (no umlauts, special characters, spaces etc.)
    * Change `domain` to the desired domain
    * Change db user name
    * Change admin user name, password, email
-2. Execute `basic_setup.yml` once on this server (only needed for the first instance)
+
+### 2. Execute `basic_setup.yml` once on this server (only needed for the first instance)
 ```
 ansible-playbook -i hosts_myinstance basic_setup.yml
 ```
-3. Execute `setup_wordpress.yml` once on this server
+
+### 3. Execute `setup_wordpress.yml` once on this server
 ```
 ansible-playbook -i hosts_myinstance setup_wordpress.yml
 ```
-4. ... to be continued
+
+The following things are currently not automated yet and need to be done manually:
+* Settings -> Permalinks ==> **Post name**
+* Deleting unwanted pages (e.g., *Sample page*)
+* Setting visibility of page "Kategorien bearbeiten" to *Private*
+* Setting the homepage to Kalender (Customize -> Homepage Settings)
+
+### 4. For initializing or renewing the Let's Encrypt certificate, execute
+```
+ansible-playbook -i hosts_myinstance update_letsencrypt.yml
+```
+
+This is required if `http_prefix` is set to `https` in the host config file.
+
+Normally this only has to be once because the certbot automatically renews the certificate
+when it's due.
+
+
+## Further manual setup steps
+* Creating user accounts for contributers, authors and editors
+* Chaning language, time zone etc.

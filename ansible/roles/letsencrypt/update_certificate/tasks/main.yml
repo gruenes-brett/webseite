@@ -1,0 +1,10 @@
+---
+- name: Renew certificate for {{ domain }}
+  become: true
+  command:
+    cmd: "certbot --apache -d {{ domain }} --agree-tos -n --redirect -m \"{{ admin_email }}\""
+  register: certbot_output
+
+- name: Certbot output
+  debug:
+    msg: "{{ certbot_output.stdout }}"

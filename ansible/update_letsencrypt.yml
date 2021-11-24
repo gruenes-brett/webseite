@@ -1,0 +1,8 @@
+- hosts: target
+  become: true
+  vars_files:
+    - group_vars/globals
+  roles:
+    - role: letsencrypt/install_certbot
+    - role: letsencrypt/update_certificate
+      when: http_prefix == 'https'

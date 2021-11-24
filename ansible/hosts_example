@@ -9,8 +9,10 @@ instance_name=testing
 domain=mywebsite.net
 db_password="<< your password here >>"
 admin_user=admin
-admin_password="123456"
-admin_email="me@testing.here"
+admin_password="<< your password here >>"
+admin_email="me@testing.net"
+http_prefix=https
+page_title="Grünes Brett {{ instance_name }}"
 
 
 ### Changing the following variables is optional:
@@ -18,8 +20,6 @@ admin_email="me@testing.here"
 target_www_dir=/var/www/{{ instance_name }}
 wordpress_dir={{ target_www_dir }}/wordpress
 vhost_file={{ instance_name }}_vhost.conf
-
-page_title="Grünes Brett {{ instance_name }}"
 
 db_name=gb_{{ instance_name }}
 db_user=gb_{{ instance_name }}
