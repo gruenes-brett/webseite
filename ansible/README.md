@@ -57,6 +57,14 @@ This is required if `http_prefix` is set to `https` in the host config file.
 Normally this only has to be done once because the certbot automatically renews the certificate
 when it's due.
 
+### 5. Install Event Scraper service (only neede once for all instances)
+```
+ansible-playbook -i hosts_myinstance install_eventscraper.yml
+```
+
+This creates a service at http://127.0.0.1:5050 that can be used for
+scraping event data from Facebook.
+
 ### Further manual setup steps
 * Creating user accounts for contributers, authors and editors
 * Chaning language, time zone etc.

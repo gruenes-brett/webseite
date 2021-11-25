@@ -1,0 +1,32 @@
+---
+- name: Checkout eventscraper to {{ eventscraper_dir }}
+  git:
+    repo: "{{ eventscraper_repo }}"
+    dest: "{{ eventscraper_dir }}"
+
+- name: Install eventscraper requirements
+  apt:
+    pkg:
+    - python3-virtualenv
+    - libapache2-mod-wsgi-py3
+    - apache2-utils
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Create eventscraper virtualenv
+  command: sudo ./init_venv.bash
+  args:
+    chdir: "{{ eventscraper_dir }}"
+
+- name: Create eventscraper virtual host
+  shell: sudo ./install_apache2_vhost.bash
+  args:
+    chdir: "{{ eventscraper_dir }}"
+
+- name: Fix eventscraper ownership
+  file:
+    path: "{{ eventscraper_dir }}"
+    owner: www-data
+    group: www-data
+    recurse: yes
