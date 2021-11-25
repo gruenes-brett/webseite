@@ -23,13 +23,13 @@ values in each host file.
   * Make sure that you can login via SSH from you machine
 * Install Ansible locally (e.g. `sudo apt install ansible`)
 
-## Steps for creating a new instance
+## Steps for creating a new instance (first time setup)
 
 ### 1. Create a `hosts_myinstance` file from `hosts_example` and change values
-   * `instance_name` should only contain alphanumeric characters (no umlauts, special characters, spaces etc.)
-   * Change `domain` to the desired domain
-   * Change db user name
-   * Change admin user name, password, email
+* `instance_name` should only contain alphanumeric characters (no umlauts, special characters, spaces etc.)
+* Change `domain` to the desired domain
+* Change db user name
+* Change admin user name, password, email
 
 ### 2. Execute `basic_setup.yml` once on this server (only needed for the first instance)
 ```
@@ -54,10 +54,18 @@ ansible-playbook -i hosts_myinstance update_letsencrypt.yml
 
 This is required if `http_prefix` is set to `https` in the host config file.
 
-Normally this only has to be once because the certbot automatically renews the certificate
+Normally this only has to be done once because the certbot automatically renews the certificate
 when it's due.
 
-
-## Further manual setup steps
+### Further manual setup steps
 * Creating user accounts for contributers, authors and editors
 * Chaning language, time zone etc.
+
+## Updating to the latest theme/plugin
+
+Run this every time the theme and plugin should be updated to the latest version:
+```
+ansible-playbook -i gbtesting_host update_theme.yml
+```
+**Caution**: This will overwrite any manual changes that have been done to the theme or
+plugin in the current instance!

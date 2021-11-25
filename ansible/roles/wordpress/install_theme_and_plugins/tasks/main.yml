@@ -1,30 +1,14 @@
 ---
-- name: Checkout latest gruenes-brett theme
-  git:
-    repo: "{{ gruenes_brett_repo }}"
-    dest: /root/gb-theme
-
-- name: Copy gruenes-brett theme to WordPress instance
-  command: cp -a /root/gb-theme/gruenes-brett "{{ wordpress_dir }}/wp-content/themes"
-
-- name: Fix ownership of theme
-  file:
-    path: "{{ wordpress_dir }}/wp-content/themes/gruenes-brett"
-    owner: www-data
-    group: www-data
-    recurse: yes
-
-- name: Checkout latest community-calendar plugin
-  git:
-    repo: "{{ community_calendar_repo }}"
-    dest: /root/community-calendar
-
-- name: Copy community-calendar plugin to WordPress instance
-  command: cp -a /root/community-calendar "{{ wordpress_dir }}/wp-content/plugins"
-
-- name: Fix ownership of plugin
-  file:
-    path: "{{ wordpress_dir }}/wp-content/plugins/community-calendar"
-    owner: www-data
-    group: www-data
-    recurse: yes
+- name: Checkout and copy repo
+  include: checkout_and_copy_repo.yml
+  with_items:
+    - gruenes_brett:
+      repo: "{{ gruenes_brett_repo }}"
+      name: gruenes-brett
+      src_dir: gruenes-brett/
+      target_dir: themes
+    - community_calendar:
+      repo: "{{ community_calendar_repo }}"
+      name: community-calendar
+      src_dir: ""
+      target_dir: plugins
