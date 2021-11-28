@@ -14,6 +14,13 @@ admin_email="me@testing.net"
 http_prefix=https
 page_title="Grünes Brett {{ instance_name }}"
 
+# The following information is required when email are to be sent via
+# an SMTP server which is set up in setup_email_smtp.yml
+email_address=
+email_password=
+email_smtp_host=
+email_smtp_port=
+email_user=
 
 ### Changing the following variables is optional:
 

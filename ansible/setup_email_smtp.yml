@@ -1,0 +1,6 @@
+- hosts: target
+  become: true
+  vars_files:
+    - group_vars/globals
+  roles:
+    - email/setup_smtp
