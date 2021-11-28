@@ -65,6 +65,17 @@ ansible-playbook -i hosts_myinstance install_eventscraper.yml
 This creates a service at http://127.0.0.1:5050 that can be used for
 scraping event data from Facebook.
 
+
+### 6. Setting up SMTP for outgoing emails
+This playbook install msmtp and sets it as default mail transport agent for outgoing
+emails on the target machine. The current setup only allows a single SMTP config
+that will be used by all running WordPress instances.
+
+Make sure to fill out the `email_...` variables in your hosts config file.
+```
+ansible-playbook -i hosts_myinstance setup_email_smtp.yml
+```
+
 ### Further manual setup steps
 * Creating user accounts for contributers, authors and editors
 * Chaning language, time zone etc.
@@ -73,7 +84,7 @@ scraping event data from Facebook.
 
 Run this every time the theme and plugin should be updated to the latest version:
 ```
-ansible-playbook -i gbtesting_host update_theme.yml
+ansible-playbook -i hosts_myinstance update_theme.yml
 ```
 **Caution**: This will overwrite any manual changes that have been done to the theme or
 plugin in the current instance!
