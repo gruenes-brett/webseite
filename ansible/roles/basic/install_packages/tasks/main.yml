@@ -9,6 +9,7 @@
     - apache2-utils
     - libapache2-mod-php7.4
     - mariadb-server
+    - git
     - php7.4
     - php7.4-curl
     - php7.4-bcmath
