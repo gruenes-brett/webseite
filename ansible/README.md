@@ -66,8 +66,8 @@ This creates a service at http://127.0.0.1:5050 that can be used for
 scraping event data from Facebook.
 
 ### Further manual setup steps
-* Creating user accounts for contributers, authors and editors
-* Chaning language, time zone etc.
+* Creating user accounts for contributors, authors and editors
+* Changing language, time zone etc.
 
 ## Updating to the latest theme/plugin
 

@@ -51,7 +51,7 @@
     }
 
     importFacebookEvent() {
-      var url = prompt('Bitte die vollständige Addresse der Facebook-Veranstaltung eingeben:');
+      var url = prompt('Bitte die vollständige Adresse der Facebook-Veranstaltung eingeben:');
       if (url === null) {
         return;
       }
