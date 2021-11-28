@@ -77,8 +77,8 @@ ansible-playbook -i hosts_myinstance setup_email_smtp.yml
 ```
 
 ### Further manual setup steps
-* Creating user accounts for contributers, authors and editors
-* Chaning language, time zone etc.
+* Creating user accounts for contributors, authors and editors
+* Changing language, time zone etc.
 
 ## Updating to the latest theme/plugin
 
