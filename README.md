@@ -6,13 +6,13 @@ Die Webseite basiert auf WordPress mit einigen Plugins. Zukünftig sollen das ei
 
 ## Usage
 
-### Dependency
-
-This theme relies on the functionality of the
-[Community Calendar Wordpress Plugin](https://github.com/joergrs/community-calendar).
-Please install the latest version of this plugin first and activate it before using
-the theme.
-
 ### Initial setup steps
 
 See the [Ansible README](ansible/README.md).
+
+### Dependency
+
+This theme relies on the functionality of the
+[Community Calendar Wordpress Plugin](https://github.com/gruenes-brett/community-calendar).
+Please install the latest version of this plugin first and activate it before using
+the theme.

@@ -1,6 +1,6 @@
 gruenes_brett_repo: https://github.com/gruenes-brett/webseite.git
-community_calendar_repo: https://github.com/joergrs/community-calendar.git
-eventscraper_repo: https://github.com/joergrs/eventscraper.git
+community_calendar_repo: https://github.com/gruenes-brett/community-calendar.git
+eventscraper_repo: https://github.com/gruenes-brett/eventscraper.git
 
 eventscraper_dir: /var/www/eventscraper
 

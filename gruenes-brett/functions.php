@@ -21,7 +21,7 @@ function verify_community_calendar_loaded( $echo_message = false ) : bool {
     if ( ! $loaded && $echo_message ) {
         echo <<<XML
             <p>
-                This theme requires the <a href="https://github.com/joergrs/community-calendar">
+                This theme requires the <a href="https://github.com/gruenes-brett/community-calendar">
                 Community Calendar plugin</a> to be installed!
             </p>
 XML;
