@@ -51,15 +51,17 @@
     }
 
     importFacebookEvent() {
-      var url = prompt('Bitte die vollständige Adresse der Facebook-Veranstaltung eingeben:');
-      if (url === null) {
+      var facebookUrl = prompt('Bitte die vollständige Adresse der Facebook-Veranstaltung eingeben:');
+      if (facebookUrl === null) {
         return;
       }
 
       var table = this.tableTarget;
-      table.classList.add("loading");
-
-      fetch(wp_api.root + "comcal/v1/import-event-url?url=" + url, {
+      table.classList.add('loading');
+      var apiUrl = wp_api.root + 'comcal/v1/import-event-url';
+      apiUrl += (apiUrl.indexOf('?') > 0) ? '&' : '?';
+      apiUrl += 'url=' + encodeURIComponent(facebookUrl);
+      fetch(apiUrl, {
         method: "GET",
         headers: {
             "X-WP-Nonce": wp_api.nonce
