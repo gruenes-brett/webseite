@@ -9,5 +9,8 @@ vendor/
 ansible/hosts
 ansible/hosts_myinstance
 
+# ignore failed playbook runs
+/ansible/*.retry
+
 # ignore command output
 nohup.out
