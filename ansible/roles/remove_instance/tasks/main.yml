@@ -1,0 +1,35 @@
+---
+- name: Remove WordPress instance {{ instance_name }} in {{ target_www_dir }} from {{ ansible_host }} and wipe all of its data?
+  pause:
+    prompt: Are you sure to remove this instance? Hit Enter to continue or Ctrl-C + a to abort.
+
+- name: Delete WordPress folder
+  file:
+    path: "{{ target_www_dir }}"
+    state: absent
+
+- name: Disable virtual host
+  shell: /usr/sbin/a2dissite {{ vhost_file }}
+  ignore_errors: yes
+
+- name: Remove virtual host
+  file:
+    path: "/etc/apache2/sites-available/{{ vhost_file }}"
+    state: absent
+
+- name: Reload apache2
+  service:
+    name: apache2
+    state: reloaded
+
+- name: Remove mysql user
+  mysql_user:
+    name: "{{ db_user }}"
+    state: absent
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Drop mysql database
+  mysql_db:
+    name: "{{ db_name }}"
+    state: absent
+    login_unix_socket: /var/run/mysqld/mysqld.sock

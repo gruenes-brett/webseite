@@ -88,3 +88,14 @@ ansible-playbook -i hosts_myinstance update_theme.yml
 ```
 **Caution**: This will overwrite any manual changes that have been done to the theme or
 plugin in the current instance!
+
+
+## Removing a site
+
+To remove a site, run the following playbook
+
+```
+ansible-playbook -i hosts_myinstance update_theme.yml
+```
+
+This deletes the page and the associated database. This cannot be undone!
