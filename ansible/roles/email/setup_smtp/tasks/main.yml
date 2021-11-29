@@ -13,7 +13,7 @@
     src: msmtprc
     dest: /etc/msmtprc
     owner: root
-    group: msmtp
+    group: www-data
     mode: 0640
 
 - name: Create msmtp log file
@@ -24,7 +24,12 @@
     mode: 0660
     state: touch
 
-- name: Make smstp the default MTA
+- name: Make msmtp the default MTA
   template:
     src: mail.rc
     dest: /etc/mail.rc
+
+- name: Restart msmtp service
+  service:
+    name: msmtpd
+    state: restarted
