@@ -1,0 +1,10 @@
+---
+- name: Execute wp-cli {{ args }}
+  command:
+    argv: "{{ ['sudo', '--user', 'www-data', '--', 'wp'] + args }}"
+    chdir: "{{ wordpress_dir }}"
+  register: wp_cli_result
+
+- name: wp-cli result
+  debug:
+    var: wp_cli_result.stdout

@@ -1,0 +1,15 @@
+---
+- name: Find page ID for page title {{ title }}
+  include_role:
+    name: wordpress/lib/wp-cli
+  vars:
+    args:
+      - post
+      - list
+      - --post_type=page
+      - "--title={{ title }}"
+      - --format=ids
+
+- name: Store resulting page_id
+  set_fact:
+    page_id: "{{ wp_cli_result.stdout }}"

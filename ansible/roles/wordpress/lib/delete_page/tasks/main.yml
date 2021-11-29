@@ -1,0 +1,14 @@
+---
+- name: Find page {{ title }}
+  include_role:
+    name: wordpress/lib/get_page_id
+
+- name: Delete page {{ title }}, if exists
+  include_role:
+    name: wordpress/lib/wp-cli
+  vars:
+    args:
+      - post
+      - delete
+      - "{{ page_id }}"
+  when: page_id != ''

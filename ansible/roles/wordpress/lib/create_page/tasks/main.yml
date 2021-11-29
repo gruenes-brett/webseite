@@ -1,0 +1,17 @@
+---
+- name: Check if page {{ title }} already exists
+  include_role:
+    name: wordpress/lib/get_page_id
+
+- name: Create page {{ title }} from {{ template }}
+  include_role:
+    name: wordpress/lib/wp-cli
+  vars:
+    args:
+      - post
+      - create
+      - --post_type=page
+      - --post_status=publish
+      - "--post_title={{ title }}"
+      - "--meta_input={\"_wp_page_template\": \"{{ template }}\"}"
+  when: page_id == ''
