@@ -43,8 +43,6 @@ ansible-playbook -i hosts_myinstance setup_wordpress.yml
 
 The following things are currently not automated yet and need to be done manually:
 * Settings -> Permalinks ==> **Post name**
-* Deleting unwanted pages (e.g., *Sample page*)
-* Setting visibility of page "Kategorien bearbeiten" to *Private*
 * Setting the homepage to Kalender (Customize -> Homepage Settings)
 
 ### 4. For initializing or renewing the Let's Encrypt certificate, execute
@@ -79,6 +77,7 @@ ansible-playbook -i hosts_myinstance setup_email_smtp.yml
 ### Further manual setup steps
 * Creating user accounts for contributors, authors and editors
 * Changing language, time zone etc.
+* Fill empty pages with content
 
 ## Updating to the latest theme/plugin
 

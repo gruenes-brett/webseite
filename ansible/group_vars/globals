@@ -8,15 +8,45 @@ pages:
   - calendar:
     title: Kalender
     template: calendar.php
+    parent:
   - explore:
     title: Erkunden
     template: explore.php
+    parent:
   - addevent:
     title: Veranstaltung eintragen
     template: addevent.php
+    parent:
   - event:
     title: Veranstaltung
     template: event.php
+    parent:
   - categories:
     title: Kategorien bearbeiten
     template: categories.php
+    parent: Veranstaltung eintragen
+  - wer_wir_sind:
+    title: Wer wir sind
+    template:
+    parent:
+
+  - wer_wir_sind:
+    title: Wer wir sind
+    template:
+    parent:
+  - bund_jugend:
+    title: BUNDjugend {{ instance_name }}
+    template:
+    parent: Wer wir sind
+  - datenschutz:
+    title: Datenschutzerklärung
+    template:
+    parent: Wer wir sind
+  - impressum:
+    title: Impressum
+    template:
+    parent: Wer wir sind
+  - mitmachen:
+    title: Mitmachen
+    template:
+    parent: Wer wir sind

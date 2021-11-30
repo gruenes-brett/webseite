@@ -13,3 +13,8 @@
 - name: Store resulting page_id
   set_fact:
     page_id: "{{ wp_cli_result.stdout }}"
+
+- name: Assert existence of {{ title }}
+  assert:
+    fail_msg: "Page with title {{ title }} was expected, but could not be found!"
+    that: "expect_exists is not defined or not expect_exists or page_id != ''"

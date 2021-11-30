@@ -1,0 +1,34 @@
+---
+- name: Get page ID of {{ title }}
+  block:
+    - name: Get ID
+      include_role:
+        name: wordpress/lib/get_page_id
+      vars:
+        expect_exists: yes
+    - name: Store ID
+      set_fact:
+        this_page_id: "{{ page_id }}"
+
+- name: Get page ID of {{ parent }}
+  block:
+    - name: Get ID
+      include_role:
+        name: wordpress/lib/get_page_id
+      vars:
+        title: "{{ parent }}"
+        expect_exists: yes
+    - name: Store ID
+      set_fact:
+        parent_page_id: "{{ page_id }}"
+
+- name: Set {{ parent }} as parent of {{ title }}
+  include_role:
+    name: wordpress/lib/wp-cli
+  vars:
+    args:
+      - post
+      - update
+      - --post_type=page
+      - "{{ this_page_id }}"
+      - "--post_parent={{ parent_page_id }}"

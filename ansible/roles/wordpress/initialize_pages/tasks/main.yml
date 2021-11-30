@@ -1,9 +1,12 @@
 ---
-- name: Delete sample-page
+- name: Delete unwanted pages
   include_role:
     name: wordpress/lib/delete_page
   vars:
-    title: "Sample Page"
+    title: "{{ item }}"
+  loop:
+    - "Sample Page"
+    - "Privacy Policy"
 
 - name: Create pages
   include_role:
@@ -11,5 +14,6 @@
   vars:
     title: "{{ item.title }}"
     template: "{{ item.template }}"
+    parent: "{{ item.parent }}"
   with_items:
     - "{{ pages }}"

@@ -15,3 +15,8 @@
       - "--post_title={{ title }}"
       - "--meta_input={\"_wp_page_template\": \"{{ template }}\"}"
   when: page_id == ''
+
+- name: Set parent page to {{ parent }}
+  include_role:
+    name: wordpress/lib/set_page_parent
+  when: parent != ''
