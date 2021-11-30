@@ -48,3 +48,12 @@
       - plugin
       - activate
       - community-calendar
+
+- name: Set permalink structure
+  include_role:
+    name: wordpress/lib/wp-cli
+  vars:
+    args:
+      - rewrite
+      - structure
+      - '%postname%/'

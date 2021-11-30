@@ -42,7 +42,6 @@ ansible-playbook -i hosts_myinstance setup_wordpress.yml
 ```
 
 The following things are currently not automated yet and need to be done manually:
-* Settings -> Permalinks ==> **Post name**
 * Setting the homepage to Kalender (Customize -> Homepage Settings)
 
 ### 4. For initializing or renewing the Let's Encrypt certificate, execute
