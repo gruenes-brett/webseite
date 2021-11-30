@@ -1,28 +1,28 @@
 ---
 - name: WordPress create wp-config.php
-  command:
-    argv:
-      - sudo
-      - --user
-      - www-data
-      - --
-      - wp
-      - config
-      - create
-      - --dbname={{ db_name }}
-      - --dbuser={{ db_user }}
-      - --dbpass={{ db_password }}
-    chdir: "{{ wordpress_dir }}"
-    creates: wp-config.php
+  block:
+  - name: Check if wp-config.php already exists
+    stat:
+      path: "{{ wordpress_dir }}/wp-config.php"
+    register: wp_config_stat
+
+  - name: Create wp-config.php
+    include_role:
+      name: wordpress/lib/wp-cli
+    vars:
+      args:
+        - config
+        - create
+        - --dbname={{ db_name }}
+        - --dbuser={{ db_user }}
+        - --dbpass={{ db_password }}
+    when: not wp_config_stat.stat.exists
 
 - name: WordPress core install
-  command:
-    argv:
-      - sudo
-      - --user
-      - www-data
-      - --
-      - wp
+  include_role:
+    name: wordpress/lib/wp-cli
+  vars:
+    args:
       - core
       - install
       - --url={{ http_prefix }}://{{ domain }}
@@ -30,30 +30,21 @@
       - --admin_user=admin
       - --admin_password={{ admin_password }}
       - --admin_email={{ admin_email }}
-    chdir: "{{ wordpress_dir }}"
 
 - name: Activate gruenes-brett theme
-  command:
-    argv:
-      - sudo
-      - --user
-      - www-data
-      - --
-      - wp
+  include_role:
+    name: wordpress/lib/wp-cli
+  vars:
+    args:
       - theme
       - activate
       - gruenes-brett
-    chdir: "{{ wordpress_dir }}"
 
 - name: Activate community-calendar plugin
-  command:
-    argv:
-      - sudo
-      - --user
-      - www-data
-      - --
-      - wp
+  include_role:
+    name: wordpress/lib/wp-cli
+  vars:
+    args:
       - plugin
       - activate
       - community-calendar
-    chdir: "{{ wordpress_dir }}"
