@@ -40,6 +40,12 @@ ansible-playbook -i hosts_myinstance basic_setup.yml
 ```
 ansible-playbook -i hosts_myinstance setup_wordpress.yml
 ```
+* Initializes the database for this instance and creates database user
+* Downloads latest WordPress
+* Creates Apache virtual host for the page, based on the domain
+* Pulls and activate gruenes-brett theme and community-calendar plugin from Github
+* Creates wp-config.php and sets all necessary settings
+* Creates all necessary pages
 
 ### 4. For initializing or renewing the Let's Encrypt certificate, execute
 ```
