@@ -17,3 +17,22 @@
     parent: "{{ item.parent }}"
   with_items:
     - "{{ pages }}"
+
+- name: Set homepage to {{ homepage }}
+  block:
+  - name: Get Page ID to set as page_on_front
+    include_role:
+      name: wordpress/lib/get_page_id
+    vars:
+      title: "{{ homepage }}"
+      expect_exists: yes
+
+  - name: Set as 'page_on_front'
+    include_role:
+      name: wordpress/lib/wp-cli
+    vars:
+      args:
+        - option
+        - set
+        - page_on_front
+        - "{{ page_id }}"
