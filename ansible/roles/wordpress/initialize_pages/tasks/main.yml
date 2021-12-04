@@ -36,3 +36,13 @@
         - set
         - page_on_front
         - "{{ page_id }}"
+
+  - name: Set to show a static page as homepage
+    include_role:
+      name: wordpress/lib/wp-cli
+    vars:
+      args:
+        - option
+        - set
+        - show_on_front
+        - page
