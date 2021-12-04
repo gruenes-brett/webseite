@@ -3,6 +3,7 @@
   git:
     repo: "{{ eventscraper_repo }}"
     dest: "{{ eventscraper_dir }}"
+    force: yes
 
 - name: Install eventscraper requirements
   apt:
