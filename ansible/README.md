@@ -36,7 +36,21 @@ values in each host file.
 ansible-playbook -i hosts_myinstance basic_setup.yml
 ```
 
-### 3. Execute `setup_wordpress.yml` once on this server
+### 3. Setting up SMTP for outgoing emails (only once on the target machine)
+This playbook installs msmtp and sets it as default mail transport agent for outgoing
+emails on the target machine. The current setup only allows a single SMTP config
+that will be used by all running WordPress instances.
+
+Make sure to fill out the `email_...` variables in your hosts config file.
+
+**Caution**: Some email providers only allow to send emails via SMTP if the from address matches
+the admin address of the current WordPress instance.
+
+```
+ansible-playbook -i hosts_myinstance setup_email_smtp.yml
+```
+
+### 4. Execute `setup_wordpress.yml` once on this server
 ```
 ansible-playbook -i hosts_myinstance setup_wordpress.yml
 ```
@@ -47,7 +61,7 @@ ansible-playbook -i hosts_myinstance setup_wordpress.yml
 * Creates wp-config.php and sets all necessary settings
 * Creates all necessary pages
 
-### 4. For initializing or renewing the Let's Encrypt certificate, execute
+### 5. For initializing or renewing the Let's Encrypt certificate, execute
 ```
 ansible-playbook -i hosts_myinstance update_letsencrypt.yml
 ```
@@ -57,7 +71,7 @@ This is required if `http_prefix` is set to `https` in the host config file.
 Normally this only has to be done once because the certbot automatically renews the certificate
 when it's due.
 
-### 5. Install Event Scraper service (only neede once for all instances)
+### 6. Install Event Scraper service (only needed once for all instances)
 ```
 ansible-playbook -i hosts_myinstance install_eventscraper.yml
 ```
@@ -65,20 +79,8 @@ ansible-playbook -i hosts_myinstance install_eventscraper.yml
 This creates a service at http://127.0.0.1:5050 that can be used for
 scraping event data from Facebook.
 
-
-### 6. Setting up SMTP for outgoing emails
-This playbook install msmtp and sets it as default mail transport agent for outgoing
-emails on the target machine. The current setup only allows a single SMTP config
-that will be used by all running WordPress instances.
-
-Make sure to fill out the `email_...` variables in your hosts config file.
-```
-ansible-playbook -i hosts_myinstance setup_email_smtp.yml
-```
-
 ### Further manual setup steps
 * Creating user accounts for contributors, authors and editors
-* Changing language, time zone etc.
 * Fill empty pages with content
 
 ## Updating to the latest theme/plugin
@@ -93,10 +95,10 @@ plugin in the current instance!
 
 ## Removing a site
 
-To remove a site, run the following playbook
+To remove a site, run the following playbook and confirm with Enter.
 
 ```
-ansible-playbook -i hosts_myinstance update_theme.yml
+ansible-playbook -i hosts_myinstance remove_instance.yml
 ```
 
 This deletes the page and the associated database. This cannot be undone!
