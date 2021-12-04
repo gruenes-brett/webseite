@@ -57,3 +57,11 @@
       - rewrite
       - structure
       - '%postname%/'
+
+- name: Flush permalink structure
+  include_role:
+    name: wordpress/lib/wp-cli
+  vars:
+    args:
+      - rewrite
+      - flush
