@@ -4,6 +4,7 @@
     argv: "{{ ['sudo', '--user', 'www-data', '--', 'wp'] + args }}"
     chdir: "{{ wordpress_dir }}"
   register: wp_cli_result
+  ignore_errors: "{{ do_ignore_errors is defined and do_ignore_errors }}"
 
 - name: wp-cli result
   debug:

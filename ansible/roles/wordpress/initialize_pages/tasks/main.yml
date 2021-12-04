@@ -5,8 +5,8 @@
   vars:
     title: "{{ item }}"
   loop:
-    - "Sample Page"
-    - "Privacy Policy"
+    - "Beispiel-Seite"
+    - "Datenschutzerklärung"
 
 - name: Create pages
   include_role:
