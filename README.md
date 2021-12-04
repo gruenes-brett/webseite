@@ -14,7 +14,7 @@ plugin and theme ready to go. Here are the steps:
 1. Go to the directory `ansible` and make a copy of the `hosts_example` file. Name it `hosts_myinstance`
 2. In the second line, add "  ansible_connection=local"
 3. Change the `domain=mywebsite.net` line to `domain=gruenes-brett.lndo.site`
-4. Change the `target_www_dir=/var/www/{{ instance_name }}` line to `target_www_dir=/app`
+4. Change the `target_www_dir={{ apache_www_dir }}{{ instance_name }}` line to `target_www_dir=/app`
 5. Run `lando start`
 
 It uses playbooks described in the [Ansible README](ansible/README.md).

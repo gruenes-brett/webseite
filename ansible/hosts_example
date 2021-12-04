@@ -24,7 +24,7 @@ email_user=
 
 ### Changing the following variables is optional:
 
-target_www_dir=/var/www/{{ instance_name }}
+target_www_dir={{ apache_www_dir }}{{ instance_name }}
 wordpress_dir={{ target_www_dir }}/wordpress
 vhost_file={{ instance_name }}_vhost.conf
 

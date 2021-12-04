@@ -46,3 +46,13 @@
         - set
         - show_on_front
         - page
+
+- name: Set permalink structure
+  include_role:
+    name: wordpress/lib/wp-cli
+  vars:
+    args:
+      - rewrite
+      - structure
+      - --hard
+      - '%postname%/'
