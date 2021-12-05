@@ -3,4 +3,5 @@
   vars_files:
     - group_vars/globals
   roles:
+    - check_preconditions
     - remove_instance

@@ -3,6 +3,7 @@
   vars_files:
     - group_vars/globals
   roles:
+    - role: check_preconditions
     - role: letsencrypt/install_certbot
     - role: letsencrypt/update_certificate
       when: http_prefix == 'https'

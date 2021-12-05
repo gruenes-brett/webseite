@@ -1,0 +1,5 @@
+---
+- name: Check if instance name is valid
+  assert:
+    that: "\"{{ instance_name | regex_search('[a-zA-Z_]\\w+') }}\" == instance_name"
+    msg: 'The instance name "{{ instance_name }}" is invalid! It should only contain characters a-zA-Z_0-9 and no spaces and must not start with a number!'

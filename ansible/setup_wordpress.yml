@@ -3,6 +3,7 @@
   vars_files:
     - group_vars/globals
   roles:
+    - check_preconditions
     - wordpress/initialize_database
     - wordpress/download_wordpress
     - wordpress/create_vhost
