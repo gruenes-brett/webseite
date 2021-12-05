@@ -1,0 +1,21 @@
+---
+- name: Create backup target directory
+  file:
+    path: "{{ backup_base_dir }}/{{ instance_name }}"
+    state: directory
+    owner: www-data
+    group: www-data
+
+- name: Create cron job for nightly database backup
+  cron:
+    name: "{{ instance_name }}_nightly_backup"
+    hour: "3"
+    minute: "0"
+    job: 'cd {{ wordpress_dir }} && sudo --user www-data -- wp db export "{{ backup_base_dir }}/{{ instance_name }}/db_$(date +\%F_\%H-\%M-\%S).sql"'
+
+- name: Create cron job for cleaning up old backups
+  cron:
+    name: "gruenes_brett_clean_old_backups"
+    hour: "2"
+    minute: "30"
+    job: 'find {{ backup_base_dir }}/**/db_*.sql -mtime +7 -exec rm {} \;'

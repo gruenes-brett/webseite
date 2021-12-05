@@ -4,6 +4,7 @@ eventscraper_repo: https://github.com/gruenes-brett/eventscraper.git
 
 apache_www_dir: /var/www/
 eventscraper_dir: "{{ apache_www_dir }}eventscraper"
+backup_base_dir: "{{ apache_www_dir }}gb_backups"
 
 pages:
   - calendar:

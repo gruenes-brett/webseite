@@ -9,3 +9,4 @@
     - wordpress/install_theme_and_plugins
     - wordpress/basic_init
     - wordpress/initialize_pages
+    - wordpress/install_backup_job

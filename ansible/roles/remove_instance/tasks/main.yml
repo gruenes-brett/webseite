@@ -12,6 +12,11 @@
   shell: /usr/sbin/a2dissite {{ vhost_file }}
   ignore_errors: yes
 
+- name: Remove backup cron job
+  cron:
+    name: "{{ instance_name }}_nightly_backup"
+    state: absent
+
 - name: Remove virtual host
   file:
     path: "/etc/apache2/sites-available/{{ vhost_file }}"

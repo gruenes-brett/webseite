@@ -59,7 +59,11 @@ ansible-playbook -i hosts_myinstance setup_wordpress.yml
 * Creates Apache virtual host for the page, based on the domain
 * Pulls and activate gruenes-brett theme and community-calendar plugin from Github
 * Creates wp-config.php and sets all necessary settings
-* Creates all necessary pages
+* Creates all necessary pages; removes unecessary default pages
+* Sets the permalink settings
+* Sets up a cron job for nightly backups of the WordPress database of this instance.
+  Target dir: `/var/www/gb_backups/<instance_name>/db_<timestamp>.sql`.
+  Another cron job is created that deletes backups that are older than 7 days.
 
 ### 5. For initializing or renewing the Let's Encrypt certificate, execute
 ```
