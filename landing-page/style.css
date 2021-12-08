@@ -1,0 +1,138 @@
+/* Web fonts */
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('fonts/firasans-regular-webfont.woff2') format('woff2'), url('fonts/firasans-regular-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Box sizing rules */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* Set default padding */
+ul, ol {
+  padding-left: 40px;
+}
+
+/* Remove default margin */
+body, h1, h2, h3, h4, p, ul, ol, li, figure, figcaption, blockquote, dl, dd {
+  margin: 0;
+}
+
+:root {
+  --green: #5ea318;
+  --red: #a31818;
+  --white: #fff;
+  --background: #f1f1f1;
+  --lightgray: #ddd;
+  --mediumgray: #c3c3c3;
+  --darkgray: #333;
+  --foreground: #181818;
+}
+
+/* Set core body defaults */
+
+body {
+  min-width: 350px;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.column {
+  padding: 0 50px;
+  width: 50%;
+}
+
+.logo {
+  max-height: 90px;
+  margin-bottom: 50px;
+}
+
+p {
+  margin: 10px 0;
+}
+
+a {
+  color: var(--green);
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:focus {
+  color: var(--foreground);
+}
+
+button:hover, button:focus, a.more:hover, a.more:focus {
+  background: var(--darkgray);
+}
+
+label, button, a.more {
+  font-weight: 600;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  line-height: normal;
+  letter-spacing: 0;
+  display: inline-block;
+  padding: 10px;
+}
+
+button, a.more {
+  background: var(--green);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1000px) {
+
+.wrapper {
+  flex-direction: column;
+}
+
+.column {
+  width: 100%;
+  max-width: 500px;
+  padding: 50px;
+}
+
+}
+
+/* SVG specific styles */
+
+svg a:link, svg a:visited {
+  cursor: pointer;
+}
+
+svg .background {
+  fill: #5ea318;
+}
+
+svg .letter {
+  fill: #fff;
+}
+
+svg a:hover .background, svg a:active .background {
+  fill: #333;
+}
