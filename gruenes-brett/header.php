@@ -18,7 +18,7 @@ extract( wp_parse_args( $args, $defaults ) );
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grünes Brett - Erkunden</title>
+  <title><?php wp_title( '-', true, 'right' ); ?><?php bloginfo( 'name' ); ?> <?php bloginfo( 'description' ); ?></title>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="<?php bloginfo( 'name' ); ?>">
   <meta property="og:title" content="<?php echo wp_strip_all_tags( $title ); ?>">
@@ -40,14 +40,12 @@ extract( wp_parse_args( $args, $defaults ) );
       <h1 class="logo">
         <a href="<?php echo esc_url( get_home_url() ); ?>">
           <img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/logo.svg" alt="Grünes Brett">
-          <!-- <span>Grünes Brett</span> -->
+          <span><?php bloginfo( 'description' ); ?></span>
         </a>
       </h1>
       <nav class="menu">
         <div class="row">
 <?php
-
-// TODO: move explore and calendar page into the same div and hide "veranstaltung" properly!
 
 $event_page    = get_page_by_path( 'veranstaltung' )->ID;
 $explore_page  = get_page_by_path( 'erkunden' )->ID;
