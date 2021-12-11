@@ -19,7 +19,7 @@ if ( ! verify_community_calendar_loaded( true ) ) {
       <a href="/wp-login.php?redirect_to=/veranstaltung-eintragen">Anmelden für sofortige Freischaltung</a>
     </div>
     <div class="item">
-      <a href="/wer-wir-sind/mitmachen">Account beantragen</a>
+      <a href="/wer-wir-sind">Account beantragen</a>
     </div>
     <?php endif; ?>
 
