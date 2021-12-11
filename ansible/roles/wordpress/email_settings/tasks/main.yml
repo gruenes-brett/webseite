@@ -1,0 +1,54 @@
+---
+- name: Enable SMTP settings
+  include_role:
+    name: wordpress/lib/set_option
+  vars:
+    option: "{{ item.o }}"
+    value: "{{ item.v }}"
+  with_items:
+    - o: 'comcal_use_smtp'
+      v: 'true'
+    - o: 'comcal_smtp_host'
+      v: "{{ email_smtp_host }}"
+    - o: 'comcal_smtp_auth'
+      v: 'true'
+    - o: 'comcal_smtp_port'
+      v: "{{ email_smtp_port }}"
+    - o: 'comcal_smtp_user'
+      v: "{{ email_user }}"
+    - o: 'comcal_smtp_pass'
+      v: "{{ email_password }}"
+    - o: 'comcal_smtp_secure'
+      v: "{{ email_smtp_secure }}"
+    - o: 'comcal_smtp_from'
+      v: "{{ email_address }}"
+    - o: 'comcal_smtp_name'
+      v: "{{ email_fromname }}"
+  when: email_address != ''
+
+- name: Disable SMTP settings
+  include_role:
+    name: wordpress/lib/set_option
+  vars:
+    option: "{{ item.o }}"
+    value: "{{ item.v }}"
+  with_items:
+    - o: 'comcal_use_smtp'
+      v: 'false'
+    - o: 'comcal_smtp_host'
+      v: ""
+    - o: 'comcal_smtp_auth'
+      v: 'true'
+    - o: 'comcal_smtp_port'
+      v: ""
+    - o: 'comcal_smtp_user'
+      v: ""
+    - o: 'comcal_smtp_pass'
+      v: ""
+    - o: 'comcal_smtp_secure'
+      v: ""
+    - o: 'comcal_smtp_from'
+      v: ""
+    - o: 'comcal_smtp_name'
+      v: ""
+  when: email_address == ''

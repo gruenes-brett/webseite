@@ -1,0 +1,10 @@
+---
+- name: Set option {{ option }} to {{ value }}
+  include_role:
+    name: wordpress/lib/wp-cli
+  vars:
+    args:
+      - option
+      - set
+      - "{{ option }}"
+      - "{{ value }}"

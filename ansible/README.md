@@ -36,7 +36,7 @@ values in each host file.
 ansible-playbook -i hosts_myinstance basic_setup.yml
 ```
 
-### 3. Setting up SMTP for outgoing emails (only once on the target machine)
+### 3. DEPRECATED Setting up SMTP for outgoing emails (only once on the target machine)
 This playbook installs msmtp and sets it as default mail transport agent for outgoing
 emails on the target machine. The current setup only allows a single SMTP config
 that will be used by all running WordPress instances.
@@ -59,6 +59,8 @@ ansible-playbook -i hosts_myinstance setup_wordpress.yml
 * Creates Apache virtual host for the page, based on the domain
 * Pulls and activate gruenes-brett theme and community-calendar plugin from Github
 * Creates wp-config.php and sets all necessary settings
+* Sets up SMTP configuration, if `email_address` is not empty (all other `email_*`
+  fields should be filled out, too). SMTP is disabled if `email_address` is empty.
 * Creates all necessary pages; removes unecessary default pages
 * Sets the permalink settings
 * Sets up a cron job for nightly backups of the WordPress database of this instance.

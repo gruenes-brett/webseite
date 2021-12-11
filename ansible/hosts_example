@@ -14,13 +14,15 @@ admin_email="me@testing.net"
 http_prefix=https
 page_title="Grünes Brett {{ instance_name }}"
 
-# The following information is required when email are to be sent via
-# an SMTP server which is set up in setup_email_smtp.yml
+# The following information is required if the SMTP settings
+# for outgoing emails are to be configured in WordPress
 email_address=
+email_fromname={{ page_title }}
 email_password=
 email_smtp_host=
 email_smtp_port=
-email_user=
+email_smtp_secure=tls
+email_user={{ email_address }}
 
 ### Changing the following variables is optional:
 
