@@ -45,6 +45,11 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
             $location = ', ' . $location;
         }
 
+        $organizer = $pretty->organizer;
+        if ( ( '' !== $time || '' !== $location ) && '' !== $organizer ) {
+            $organizer = ', ' . $organizer;
+        }
+
         $edit_link = $this->get_edit_link( $event );
         if ( '' !== $edit_link ) {
             $edit_link = "<a href='#' $featherlight_edit_data>bearbeiten</a>";
@@ -57,7 +62,7 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
       <article class="$private">
         <$header_tag><a href="#" $featherlight_view_data>$pretty->title$day_of_day</a></$header_tag>
         <section class="meta">
-            $time$location$edit_link
+            $time$location$organizer$edit_link
         </section>
       </article>
 XML;
