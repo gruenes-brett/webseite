@@ -89,6 +89,12 @@ remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
 // define custom media size.
 add_image_size( 'gruenesbrett', 960, 540 );
 
+function allow_mime_types( $mimes ) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter('upload_mimes', 'allow_mime_types');
+
 /**
  * Custom API route that handles the upload to the media library.
  *
