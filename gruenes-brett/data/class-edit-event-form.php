@@ -112,7 +112,7 @@ XML;
               </tr>
               <tr>
                 <td><label for="inputUrl">Veranstaltungslink</label></td>
-                <td><input type="text" id="inputUrl" name="inputUrl" placeholder="https://..." maxlength="100" data-target="form.url" value="$url"></td>
+                <td><input type="text" id="inputUrl" name="inputUrl" placeholder="https://..." maxlength="1000" data-target="form.url" value="$url"></td>
               </tr>
               <tr>
                 <td>&nbsp;</td>
@@ -164,11 +164,11 @@ XML;
               $spacer
               <tr>
                 <td><label for="inputPlaceName">Veranstaltungsort</label></td>
-                <td><input type="text" name="inputPlaceName" id="inputPlaceName" placeholder="Am Blauen Wunder" maxlength="50" value="$location"></td>
+                <td><input type="text" name="inputPlaceName" id="inputPlaceName" placeholder="Am Blauen Wunder" maxlength="250" value="$location"></td>
               </tr>
               <tr>
                 <td><label for="inputPlaceAddress">Adresse</label></td>
-                <td><input type="text" name="inputPlaceAddress" id="inputPlaceAddress" placeholder="Musterstr. 42" maxlength="100" data-target="form.placeAddress" value="$address"></td>
+                <td><input type="text" name="inputPlaceAddress" id="inputPlaceAddress" placeholder="Musterstr. 42" maxlength="250" data-target="form.placeAddress" value="$address"></td>
               </tr>
               <tr>
                 <td></td>
@@ -202,7 +202,7 @@ XML;
                   </div>
                   <div class="formgroup">&nbsp;</div>
                   <div class="formgroup">
-                    Das Bild wird im Format 16:9 angezeigt werden. Die empfohlene Auflösung ist 960x540 Pixel. 
+                    Das Bild wird im Format 16:9 angezeigt werden. Die empfohlene Auflösung ist 960x540 Pixel.
                   </div>
                 </td>
               </tr>
