@@ -665,10 +665,6 @@ aside nav a:hover, aside nav a:focus {
     margin-right: 0;
   }
 
-  header .logo span {
-    display: none;
-  }
-
   header nav {
     flex-direction: column;
     font-size: 18px;
@@ -718,6 +714,10 @@ aside nav a:hover, aside nav a:focus {
   .formgroup .row:first-child {
     margin-right: 0;
     margin-bottom: 10px;
+  }
+
+  header .logo span {
+    display: none;
   }
 
   main {
