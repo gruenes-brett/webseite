@@ -14,19 +14,18 @@
 
     if ( Comcal_User_Capabilities::administer_events() ) {
         echo <<<XML
-        <h2>Event-Historie</h2>
-        <p>Events sortiert nach Datum der Eintragung.</p>
+        <h2>Veranstaltungen nach Eintragungsdatum</h2>
 XML;
         echo Event_Admin_View_Builder::get_instance()->get_html();
     }
     ?>
   </section>
 
-  <section class="categories">
+  <section class="categories" data-controller="categories">
   <?php
     if ( Comcal_User_Capabilities::edit_categories() ) {
         $categories      = Category_Provider::get_all();
-        $categories_form = new Comcal_Edit_Categories_Form( $categories );
+        $categories_form = new Edit_Categories_Form( $categories );
         echo $categories_form->get_form_html();
     }
 

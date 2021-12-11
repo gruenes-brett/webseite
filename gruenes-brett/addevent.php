@@ -8,7 +8,7 @@
 ?>
 <?php get_header(); ?>
 <?php get_sidebar( 'addevent' ); ?>
-<main class="addevent">
+<main class="addevent" data-controller="form">
   <section class="note">
     <?php the_content(); ?>
   </section>

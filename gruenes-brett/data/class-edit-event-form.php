@@ -247,7 +247,7 @@ XML;
                   <div class="formgroup">
                     <div class="row">
                       <input type="checkbox" name="inputPublic" id="inputPublic" $checked>
-                      <label for="inputPublic">Event veröffentlichen</label>
+                      <label for="inputPublic">Veranstaltung ist veröffentlicht</label>
                     </div>
                   </div>
                 </td>
@@ -266,7 +266,7 @@ XML;
                   <div class="formgroup highlight">
                     <div class="row">
                       <input type="checkbox" name="inputDelete" id="inputDelete">
-                      <label for="inputDelete">Event löschen</label>
+                      <label for="inputDelete">Veranstaltung löschen</label>
                     </div>
                   </div>
                 </td>

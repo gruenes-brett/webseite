@@ -121,4 +121,25 @@
       window.open(url);
     }
   })
+
+  application.register("categories", class extends Stimulus.Controller {
+    initialize() {
+      Coloris({
+        el: ".coloris",
+        swatches: [],
+        alpha: false
+      });
+    }
+
+    colorUpdated(event) {
+      var style_input = document.getElementById(event.currentTarget.dataset.update);
+      var values = style_input.value.split(",");
+      if (event.currentTarget.dataset.role === "text") {
+        values[1] = event.currentTarget.value;
+      } else if (event.currentTarget.dataset.role === "background") {
+        values[0] = event.currentTarget.value;
+      }
+      style_input.value = values.join(",");
+    }
+  })
 })()

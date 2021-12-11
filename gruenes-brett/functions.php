@@ -74,6 +74,7 @@ require_once 'data/class-explorer-event-renderer.php';
 // admin view.
 require_once 'data/class-event-admin-view-builder.php';
 require_once 'data/class-admin-view-event-renderer.php';
+require_once 'data/class-edit-categories-form.php';
 
 // helpers.
 require_once 'data/class-pretty-event.php';
@@ -170,6 +171,13 @@ function gruenes_brett_scripts() {
         true
     );
     wp_enqueue_script(
+        'coloris',
+        esc_url( get_stylesheet_directory_uri() ) . '/js/coloris.min.js',
+        '',
+        $version,
+        true
+    );
+    wp_enqueue_script(
         'stimulus',
         esc_url( get_stylesheet_directory_uri() . '/js/stimulus.umd.js' ),
         '',
@@ -200,6 +208,12 @@ function gruenes_brett_styles() {
     wp_enqueue_style(
         'featherlight',
         esc_url( get_stylesheet_directory_uri() ) . '/css/featherlight.min.css',
+        '',
+        $version
+    );
+    wp_enqueue_style(
+        'coloris',
+        esc_url( get_stylesheet_directory_uri() ) . '/css/coloris.min.css',
         '',
         $version
     );

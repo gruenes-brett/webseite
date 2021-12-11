@@ -33,15 +33,32 @@ class Admin_View_Event_Renderer extends Comcal_Default_Event_Renderer {
         $title = wp_trim_words( $pretty->title, 10, '...' );
 
         $submitter = $event->get_field( 'submitterName' );
-        $created   = $event->get_field( 'created' );
+        $created   = new DateTime( $event->get_field( 'created' ) );
+        $created_f = $created->format( 'd.m.Y H:i' );
         $obsolete  = $event->get_end_date_time()->is_before( Comcal_Date_Time::now() ) ? 'obsolete' : '';
 
-        // TODO @sebastianlay: Format event on explorer page as desired.
+        $date = $pretty->formatted_date;
+        $time = $pretty->formatted_time;
+
+        if ( '' !== $time ) {
+            $time = ', ' . $time;
+        }
+
+        $location = $pretty->location;
+        if ( '' !== $time && '' !== $location ) {
+            $location = ', ' . $location;
+        }
+
+        $organizer = $pretty->organizer;
+        if ( ( '' !== $time || '' !== $location ) && '' !== $organizer ) {
+            $organizer = ', ' . $organizer;
+        }
+
         return <<<XML
         <article class="$private $obsolete">
             <h3><a href="#" $featherlight_view_data>$title</a></h3>
             <section class="meta">
-            $pretty->pretty_date, $pretty->pretty_time$edit_link &mdash; $submitter ($created)
+            $date$time$location$organizer$edit_link &mdash; $submitter ($created_f)
             </section>
         </article>
 XML;

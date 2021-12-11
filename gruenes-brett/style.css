@@ -207,6 +207,10 @@ option:checked {
   margin-right: 15px;
 }
 
+.formgroup .row:last-child {
+  margin-right: 0;
+}
+
 .formgroup label, .formgroup input, .formgroup button {
   margin-right: 10px;
 }
@@ -228,8 +232,8 @@ option:checked {
 }
 
 .formgroup.highlight {
-  background-color: var(--red);
-  color: #fff;
+  border: 2px solid var(--red);
+  color: var(--red);
   padding: 8px 12px;
 }
 
@@ -460,6 +464,22 @@ aside nav a:hover, aside nav a:focus {
   display: inline-block;
   vertical-align: middle;
   margin-right: 5px;
+}
+
+.categories {
+  flex: 1;
+}
+
+.categories table {
+  margin-bottom: 25px;
+}
+
+.categories table td {
+  padding: 5px 10px;
+}
+
+.categories .formgroup button {
+  margin-right: 0;
 }
 
 /* Calendar */
