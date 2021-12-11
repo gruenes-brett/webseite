@@ -110,6 +110,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
   line-height: 30px;
   overflow-wrap: anywhere;
+  margin: 20px 0;
 }
 
 h3 {
@@ -390,6 +391,7 @@ aside nav a:hover, aside nav a:focus {
 .explore article .image {
   position: relative;
   top: -30px;
+  margin-bottom: -30px;
   z-index: 100;
 }
 
@@ -468,6 +470,10 @@ aside nav a:hover, aside nav a:focus {
   position: sticky;
   top: 0;
   border-bottom: 1px solid var(--lightgray);
+}
+
+.calendar h1, .calendar h2, .calendar h3 {
+  margin: 0;
 }
 
 .calendar table {
