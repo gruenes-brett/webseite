@@ -93,7 +93,7 @@ function allow_mime_types( $mimes ) {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
 }
-add_filter('upload_mimes', 'allow_mime_types');
+add_filter( 'upload_mimes', 'allow_mime_types' );
 
 /**
  * Custom API route that handles the upload to the media library.
