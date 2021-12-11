@@ -438,6 +438,10 @@ aside nav a:hover, aside nav a:focus {
   margin-left: 30px;
 }
 
+.eventhistory h3 {
+  margin: 10px 0 0;
+}
+
 .eventhistory article.private h3:before {
   content: ' ';
   width: 25px;
