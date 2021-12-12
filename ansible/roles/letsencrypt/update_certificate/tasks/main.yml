@@ -7,11 +7,19 @@
     - "/etc/apache2/sites-enabled/{{ instance_name }}_vhost-le-ssl.conf"
     - "/etc/apache2/sites-available/{{ instance_name }}_vhost-le-ssl.conf"
 
-- name: Renew certificate for {{ domain }}
+- name: Renew certificate for {{ domain }} and its alias {{ domain_alias }}
   become: true
   command:
     cmd: "certbot --apache -d {{ domain }} -d {{ domain_alias }} --expand --agree-tos -n --redirect -m \"{{ admin_email }}\""
   register: certbot_output
+  when: domain_alias != ''
+
+- name: Renew certificate for {{ domain }}
+  become: true
+  command:
+    cmd: "certbot --apache -d {{ domain }} --expand --agree-tos -n --redirect -m \"{{ admin_email }}\""
+  register: certbot_output
+  when: domain_alias == ''
 
 - name: Certbot output
   debug:

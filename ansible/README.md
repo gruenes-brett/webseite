@@ -85,6 +85,16 @@ ansible-playbook -i hosts_myinstance install_eventscraper.yml
 This creates a service at http://127.0.0.1:5050 that can be used for
 scraping event data from Facebook.
 
+### 7. Installing the landing page
+A the landing page as implemented in the 'landing_page' folder of the gruenes-brett repo
+can be installed.
+
+1. In `group_vars/globals`, adjust the `landing_page_domain` and `landing_page_domain_alias`
+2. Execute the playbook
+```
+ansible-playbook -i hosts_myinstance install_eventscraper.yml
+```
+
 ### Further manual setup steps
 * Creating user accounts for contributors, authors and editors
 * Fill empty pages with content

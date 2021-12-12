@@ -1,0 +1,31 @@
+---
+- name: Checkout repo and copy landing_page
+  include_role:
+    name: lib/checkout_and_copy_repo
+  with_items:
+    - landing_page:
+      repo: "{{ gruenes_brett_repo }}"
+      name: gruenes-brett
+      src_dir: /landing-page/
+      target_dir: "{{ landing_page_dir }}"
+
+- name: Install landing page vhost
+  template:
+    src: 000-landing_page_vhost.conf
+    dest: /etc/apache2/sites-available/000-landing_page_vhost.conf
+
+- name: Enable virtual host for landing page
+  shell: /usr/sbin/a2ensite 000-landing_page_vhost.conf
+
+- name: Reload apache2
+  service:
+    name: apache2
+    state: reloaded
+
+- name: Setup Lets Encrypt for landing page
+  include_role:
+    name: letsencrypt/update_certificate
+  vars:
+    instance_name: "000-landing_page"
+    domain: "{{ landing_page_domain }}"
+    domain_alias: "{{ landing_page_domain_alias }}"
