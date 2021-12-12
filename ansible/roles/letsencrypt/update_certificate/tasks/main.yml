@@ -1,10 +1,23 @@
 ---
+- name: Delete current version of the SSL vhost (will be recreated by certbot)
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/etc/apache2/sites-enabled/{{ instance_name }}_vhost-le-ssl.conf"
+    - "/etc/apache2/sites-available/{{ instance_name }}_vhost-le-ssl.conf"
+
 - name: Renew certificate for {{ domain }}
   become: true
   command:
-    cmd: "certbot --apache -d {{ domain }} --agree-tos -n --redirect -m \"{{ admin_email }}\""
+    cmd: "certbot --apache -d {{ domain }} -d {{ domain_alias }} --expand --agree-tos -n --redirect -m \"{{ admin_email }}\""
   register: certbot_output
 
 - name: Certbot output
   debug:
     msg: "{{ certbot_output.stdout }}"
+
+- name: Reload apache2
+  service:
+    name: apache2
+    state: reloaded
