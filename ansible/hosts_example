@@ -7,6 +7,7 @@ me@myhost.net
 
 instance_name=testing
 domain=mywebsite.net
+domain_alias=
 db_password="<< your password here >>"
 admin_user=admin
 admin_password="<< your password here >>"

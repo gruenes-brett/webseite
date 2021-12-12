@@ -28,6 +28,8 @@ values in each host file.
 ### 1. Create a `hosts_myinstance` file from `hosts_example` and change values
 * `instance_name` should only contain alphanumeric characters (no umlauts, special characters, spaces etc.)
 * Change `domain` to the desired domain
+* Change `domain_alias` in case the site shall be reachable under an alternate domain (WordPress will
+  automatically forward this to the main domain, though)
 * Change db user name
 * Change admin user name, password, email
 
