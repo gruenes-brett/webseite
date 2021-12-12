@@ -1,14 +1,15 @@
 ---
 - name: Checkout and copy repo
-  include: checkout_and_copy_repo.yml
+  include_role:
+    name: lib/checkout_and_copy_repo
   with_items:
     - gruenes_brett:
       repo: "{{ gruenes_brett_repo }}"
       name: gruenes-brett
-      src_dir: gruenes-brett/
-      target_dir: themes
+      src_dir: /gruenes-brett
+      target_dir: "{{ wordpress_dir }}/wp-content/themes"
     - community_calendar:
       repo: "{{ community_calendar_repo }}"
       name: community-calendar
       src_dir: ""
-      target_dir: plugins
+      target_dir: "{{ wordpress_dir }}/wp-content/plugins"

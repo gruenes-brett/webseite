@@ -1,0 +1,15 @@
+---
+- name: Checkout latest {{ item.repo }}
+  git:
+    repo: "{{ item.repo }}"
+    dest: "/root/{{ item.name }}"
+
+- name: Mirror /root/{{ item.name }}{{ item.src_dir }} to {{ item.target_dir }}
+  command: rsync -a --delete "/root/{{ item.name }}{{ item.src_dir }}" "{{ item.target_dir }}"
+
+- name: Fix ownership of files
+  file:
+    path: "{{ item.target_dir }}"
+    owner: www-data
+    group: www-data
+    recurse: yes
