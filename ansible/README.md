@@ -89,7 +89,7 @@ scraping event data from Facebook.
 A the landing page as implemented in the 'landing_page' folder of the gruenes-brett repo
 can be installed.
 
-1. In `group_vars/globals`, adjust the `landing_page_domain` and `landing_page_domain_alias`
+1. In `group_vars/globals`, adjust the `landing_page_domain` and `landing_page_domain_alias` (the latter may be empty)
 2. Execute the playbook
 ```
 ansible-playbook -i hosts_myinstance install_eventscraper.yml
