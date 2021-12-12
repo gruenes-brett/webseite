@@ -12,6 +12,10 @@
   shell: /usr/sbin/a2dissite {{ vhost_file }}
   ignore_errors: yes
 
+- name: Disable virtual host for SSL
+  shell: /usr/sbin/a2dissite "{{ instance_name }}_vhost-le-ssl.conf"
+  ignore_errors: yes
+
 - name: Remove backup cron job
   cron:
     name: "{{ instance_name }}_nightly_backup"
@@ -20,6 +24,11 @@
 - name: Remove virtual host
   file:
     path: "/etc/apache2/sites-available/{{ vhost_file }}"
+    state: absent
+
+- name: Remove virtual host for SSL
+  file:
+    path: "/etc/apache2/sites-available/{{ instance_name }}_vhost-le-ssl.conf"
     state: absent
 
 - name: Reload apache2
