@@ -2,13 +2,21 @@
   become: true
   vars_files:
     - group_vars/globals
+  vars:
+    first_time_wordpress_setup: yes  # will automatically be changed to no in check_existing_instance
   roles:
     - check_preconditions
+    - wordpress/check_existing_instance
     - wordpress/initialize_database
-    - wordpress/download_wordpress
+    - role: wordpress/download_wordpress
+      when: first_time_wordpress_setup
     - wordpress/create_vhost
-    - wordpress/install_theme_and_plugins
-    - wordpress/basic_init
+    - role: wordpress/install_theme_and_plugins
+      when: first_time_wordpress_setup
+    - role: wordpress/basic_init
+      when: first_time_wordpress_setup
     - wordpress/email_settings
-    - wordpress/initialize_pages
-    - wordpress/install_backup_job
+    - role: wordpress/initialize_pages
+      when: first_time_wordpress_setup
+    - role: wordpress/install_backup_job
+      when: first_time_wordpress_setup

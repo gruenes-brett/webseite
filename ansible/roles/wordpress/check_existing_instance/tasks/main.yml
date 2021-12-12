@@ -1,0 +1,13 @@
+---
+- name: Check if wp-config.php already exists
+  stat:
+    path: "{{ wordpress_dir }}/wp-config.php"
+  register: wp_config_stat
+
+- name: Remember if this is a first time setup
+  set_fact:
+    first_time_wordpress_setup: "{{ not wp_config_stat.stat.exists }}"
+
+- name: Creating a new instance?
+  debug:
+    msg: "First time wordpress setup in {{ wordpress_dir }}: {{ first_time_wordpress_setup }}"

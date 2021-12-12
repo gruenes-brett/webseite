@@ -1,22 +1,15 @@
 ---
-- name: WordPress create wp-config.php
-  block:
-  - name: Check if wp-config.php already exists
-    stat:
-      path: "{{ wordpress_dir }}/wp-config.php"
-    register: wp_config_stat
-
-  - name: Create wp-config.php
-    include_role:
-      name: wordpress/lib/wp-cli
-    vars:
-      args:
-        - config
-        - create
-        - --dbname={{ db_name }}
-        - --dbuser={{ db_user }}
-        - --dbpass={{ db_password }}
-    when: not wp_config_stat.stat.exists
+- name: Create wp-config.php
+  include_role:
+    name: wordpress/lib/wp-cli
+  vars:
+    args:
+      - config
+      - create
+      - --dbname={{ db_name }}
+      - --dbuser={{ db_user }}
+      - --dbpass={{ db_password }}
+  when: first_time_wordpress_setup
 
 - name: WordPress core install
   include_role:
