@@ -29,7 +29,7 @@ values in each host file.
 * `instance_name` should only contain alphanumeric characters (no umlauts, special characters, spaces etc.)
 * Change `domain` to the desired domain
 * Change `domain_alias` in case the site shall be reachable under an alternate domain (WordPress will
-  automatically forward this to the main domain, though)
+  automatically forward this to the main domain, though). Multiple aliases may be comma separated (without spaces!).
 * Change db user name
 * Change admin user name, password, email
 
@@ -88,13 +88,15 @@ This creates a service at http://127.0.0.1:5050 that can be used for
 scraping event data from Facebook.
 
 ### 7. Installing the landing page
-A the landing page as implemented in the 'landing_page' folder of the gruenes-brett repo
-can be installed.
+A landing page, as implemented in the 'landing_page' folder of the gruenes-brett repo,
+can be installed. This playbook will also try to install Let's Encrypt certificates
+for all supplied domains.
 
-1. In `group_vars/globals`, adjust the `landing_page_domain` and `landing_page_domain_alias` (the latter may be empty)
+1. In `group_vars/globals`, adjust the `landing_page_domain` and `landing_page_domain_alias`
+   (the latter may be empty, or even a comma separated list of multiple domains without spaces).
 2. Execute the playbook
 ```
-ansible-playbook -i hosts_myinstance install_eventscraper.yml
+ansible-playbook -i hosts_myinstance setup_landing_page.yml
 ```
 
 ### Further manual setup steps
