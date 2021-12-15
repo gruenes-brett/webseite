@@ -43,7 +43,8 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
             $edit_link = ', ' . $edit_link;
         }
 
-        $private = $event->get_field( 'public' ) ? '' : 'private';
+        $private_class  = $event->get_field( 'public' ) ? '' : 'private';
+        $obsolete_class = $event->is_obsolete() ? 'obsolete' : '';
 
         $overlay = $this->get_overlay( $event );
 
@@ -52,7 +53,7 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
         $description = wp_trim_words( $pretty->description, 60, '...' );
 
         return <<<XML
-        <article class="$private">
+        <article class="$private_class $obsolete_class">
             $overlay
             <section class="image" style="background-image: url($image_url);">
                 <a href="#" $featherlight_view_data></a>

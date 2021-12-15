@@ -26,7 +26,8 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
         $featherlight_view_data = Event_Popup::get_featherlight_attribute( $event );
         $featherlight_edit_data = Edit_Event_Popup::get_featherlight_attribute( $event );
 
-        $private = $event->get_field( 'public' ) ? '' : 'private';
+        $private_class  = $event->get_field( 'public' ) ? '' : 'private';
+        $obsolete_class = $event->is_obsolete( $day ) ? 'obsolete' : '';
 
         $day_of_day     = '';
         $number_of_days = $event->get_number_of_days();
@@ -59,7 +60,7 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
         }
 
         return <<<XML
-      <article class="$private">
+      <article class="$private_class $obsolete_class">
         <$header_tag><a href="#" $featherlight_view_data>$pretty->title$day_of_day</a></$header_tag>
         <section class="meta">
             $time$location$organizer$edit_link

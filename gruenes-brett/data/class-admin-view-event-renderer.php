@@ -28,14 +28,15 @@ class Admin_View_Event_Renderer extends Comcal_Default_Event_Renderer {
             $edit_link = ", <a href='#' $featherlight_edit_data>bearbeiten</a>";
         }
 
-        $private = $event->get_field( 'public' ) ? 'public' : 'private';
+        $private_class = $event->get_field( 'public' ) ? 'public' : 'private';
 
         $title = wp_trim_words( $pretty->title, 10, '...' );
 
         $submitter = $event->get_field( 'submitterName' );
         $created   = new DateTime( $event->get_field( 'created' ) );
         $created_f = $created->format( 'd.m.Y H:i' );
-        $obsolete  = $event->get_end_date_time()->is_before( Comcal_Date_Time::now() ) ? 'obsolete' : '';
+
+        $obsolete_class = $event->is_obsolete() ? 'obsolete' : '';
 
         $date = $pretty->formatted_date;
         $time = $pretty->formatted_time;
@@ -55,7 +56,7 @@ class Admin_View_Event_Renderer extends Comcal_Default_Event_Renderer {
         }
 
         return <<<XML
-        <article class="$private $obsolete">
+        <article class="$private_class $obsolete_class">
             <h3><a href="#" $featherlight_view_data>$title</a></h3>
             <section class="meta">
             $date$time$location$organizer$edit_link &mdash; $submitter ($created_f)

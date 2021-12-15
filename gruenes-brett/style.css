@@ -355,6 +355,13 @@ aside nav a:hover, aside nav a:focus {
   background: var(--mediumgray);
 }
 
+/* Events generic */
+
+article.obsolete {
+  opacity: 60%;
+  text-decoration: line-through;
+}
+
 /* Explore page */
 
 .explore {
@@ -432,10 +439,6 @@ aside nav a:hover, aside nav a:focus {
 
 .eventhistory article {
   width: 100%;
-}
-
-.eventhistory article.obsolete {
-  opacity: 40%;
 }
 
 .eventhistory article section {
