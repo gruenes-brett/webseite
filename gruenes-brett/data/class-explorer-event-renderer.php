@@ -35,6 +35,11 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
             $time = ', ' . $time;
         }
 
+        $organizer = $pretty->organizer;
+        if ( '' !== $organizer ) {
+            $organizer = '<br>' . $organizer;
+        }
+
         $edit_link = $this->get_edit_link( $event );
         if ( '' !== $edit_link ) {
             $edit_link = "<a href='#' $featherlight_edit_data>bearbeiten</a>";
@@ -60,7 +65,7 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
             </section>
             <h2><a href="#" $featherlight_view_data>$title</a></h2>
             <section class="meta">
-            $date$time$edit_link
+            $date$time$organizer$edit_link
             </section>
             <section class="description">
             <p>$description</p>

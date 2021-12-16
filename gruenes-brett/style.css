@@ -416,6 +416,7 @@ article.obsolete {
 
 .explore article .meta {
   margin: 20px 0;
+  line-height: 1.15;
 }
 
 .explore article .description {
