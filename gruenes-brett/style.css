@@ -757,6 +757,8 @@ article.obsolete {
 
   .explore article {
     width: 100%;
+    padding-left: 25px;
+    padding-right: 15px;
   }
 
   .calendar {
