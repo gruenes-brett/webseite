@@ -1,0 +1,8 @@
+---
+- name: Prevent www-data user from writing to wordpress folder
+  file:
+    path: "{{ wordpress_dir }}"
+    owner: www-data
+    group: www-data
+    mode: 0550
+    recurse: yes

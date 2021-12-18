@@ -12,4 +12,5 @@
     path: "{{ item.target_dir }}"
     owner: www-data
     group: www-data
+    mode: 0770
     recurse: yes

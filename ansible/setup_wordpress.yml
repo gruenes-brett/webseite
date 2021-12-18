@@ -20,3 +20,4 @@
       when: first_time_wordpress_setup
     - role: wordpress/install_backup_job
       when: first_time_wordpress_setup
+    - wordpress/tighten_filesystem_permissions
