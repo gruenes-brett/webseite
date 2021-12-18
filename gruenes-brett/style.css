@@ -632,6 +632,16 @@ article.obsolete {
   margin-bottom: 0;
 }
 
+.detail .note.private h2:after {
+  content: ' ';
+  width: 25px;
+  height: 25px;
+  background-image: url('img/icons/eye-off.svg');
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
 .detail .share .group {
   margin: 20px 0;
 }

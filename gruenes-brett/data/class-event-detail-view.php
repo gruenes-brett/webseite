@@ -100,9 +100,11 @@ XML;
         $ics_end   = rawurlencode( PHP_EOL . 'END:VEVENT' . PHP_EOL . 'END:VCALENDAR' );
         $ics       = $ics_start . $ics_desc . $ics_end;
 
+        $private_class = $this->event->get_field( 'public' ) ? '' : 'private';
+
         return <<<XML
     <main class="detail">
-      <section class="note">
+      <section class="note $private_class">
         <section class="image" style="background-image: url('$image_url');"></section>
         <h2><a href="$permalink">$pretty->title</a></h2>
         <section class="meta">

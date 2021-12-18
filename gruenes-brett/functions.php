@@ -203,7 +203,7 @@ function gruenes_brett_scripts() {
 add_action( 'wp_enqueue_scripts', 'gruenes_brett_scripts' );
 
 function gruenes_brett_styles() {
-    $version = '1.1.3';
+    $version = '1.1.4';
     wp_enqueue_style( 'style', get_stylesheet_uri(), '', $version );
     wp_enqueue_style(
         'featherlight',
