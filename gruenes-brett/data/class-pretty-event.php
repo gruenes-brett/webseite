@@ -22,12 +22,12 @@ class Pretty_Event extends Comcal_Pretty_Event {
         };
 
         $map['formattedDate'] = function () {
-            $start = new DateTime( $this->date . 'T' . $this->time );
-            $end   = new DateTime( $this->date_end . 'T' . $this->time_end );
+            $start = Comcal_Date_Time::from_date_str_time_str( $this->date, $this->time );
+            $end   = Comcal_Date_Time::from_date_str_time_str( $this->date_end, $this->time_end );
 
-            $date = $start->format( 'd.m.Y' );
-            if ( $this->date !== $this->date_end ) {
-                $date .= ' – ' . $end->format( 'd.m.Y' );
+            $date = $start->get_short_weekday() . ' ' . $start->get_pretty_date();
+            if ( $this->is_multiday ) {
+                $date .= ' bis ' . $end->get_short_weekday() . ' ' . $end->get_pretty_date();
             }
             return $date;
         };
@@ -45,6 +45,10 @@ class Pretty_Event extends Comcal_Pretty_Event {
                 $time .= ' Uhr';
             }
             return $time;
+        };
+
+        $map['is_multiday'] = function() {
+            return $this->date !== $this->date_end;
         };
 
         return $map;

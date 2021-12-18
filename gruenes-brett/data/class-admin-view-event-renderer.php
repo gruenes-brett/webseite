@@ -23,8 +23,8 @@ class Admin_View_Event_Renderer extends Comcal_Default_Event_Renderer {
         $featherlight_view_data = Event_Popup::get_featherlight_attribute( $event );
         $featherlight_edit_data = Edit_Event_Popup::get_featherlight_attribute( $event );
 
-        $edit_link = $this->get_edit_link( $event );
-        if ( '' !== $edit_link ) {
+        $edit_link = '';
+        if ( $event->current_user_can_edit() ) {
             $edit_link = ", <a href='#' $featherlight_edit_data>bearbeiten</a>";
         }
 

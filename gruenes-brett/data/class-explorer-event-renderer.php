@@ -30,22 +30,19 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
 
         $date = $pretty->formatted_date;
         $time = $pretty->formatted_time;
+        $meta = $date;
+        if ( ! $pretty->is_multiday && '' !== $time ) {
+            // Hide time for multiday events.
+            $meta = "$date, $time";
+        }
 
-        if ( '' !== $time ) {
-            $time = ', ' . $time;
+        if ( $event->current_user_can_edit() ) {
+            $meta .= ", <a href='#' $featherlight_edit_data>bearbeiten</a>";
         }
 
         $organizer = $pretty->organizer;
         if ( '' !== $organizer ) {
-            $organizer = '<br>' . $organizer;
-        }
-
-        $edit_link = $this->get_edit_link( $event );
-        if ( '' !== $edit_link ) {
-            $edit_link = "<a href='#' $featherlight_edit_data>bearbeiten</a>";
-        }
-        if ( '' !== $date && '' !== $edit_link ) {
-            $edit_link = ', ' . $edit_link;
+            $meta .= '<br>' . $organizer;
         }
 
         $private_class  = $event->get_field( 'public' ) ? '' : 'private';
@@ -65,7 +62,7 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
             </section>
             <h2><a href="#" $featherlight_view_data>$title</a></h2>
             <section class="meta">
-            $date$time$organizer$edit_link
+            $meta
             </section>
             <section class="description">
             <p>$description</p>

@@ -51,12 +51,12 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
             $organizer = ', ' . $organizer;
         }
 
-        $edit_link = $this->get_edit_link( $event );
-        if ( '' !== $edit_link ) {
+        $edit_link = '';
+        if ( $event->current_user_can_edit() ) {
             $edit_link = "<a href='#' $featherlight_edit_data>bearbeiten</a>";
-        }
-        if ( ( '' !== $time || '' !== $location ) && '' !== $edit_link ) {
-            $edit_link = ', ' . $edit_link;
+            if ( '' !== $time || '' !== $location ) {
+                $edit_link = ', ' . $edit_link;
+            }
         }
 
         return <<<XML
