@@ -26,7 +26,6 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
         }
 
         $featherlight_view_data = Event_Popup::get_featherlight_attribute( $event );
-        $featherlight_edit_data = Edit_Event_Popup::get_featherlight_attribute( $event );
 
         $date = $pretty->formatted_date;
         $time = $pretty->formatted_time;
@@ -37,7 +36,8 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
         }
 
         if ( $event->current_user_can_edit() ) {
-            $meta .= ", <a href='#' $featherlight_edit_data>bearbeiten</a>";
+            $featherlight_edit_data = Edit_Event_Popup::get_featherlight_attribute( $event );
+            $meta                  .= ", <a href='#' $featherlight_edit_data>bearbeiten</a>";
         }
 
         $organizer = $pretty->organizer;
