@@ -65,6 +65,12 @@ XML;
             $organizer = '<br>' . $organizer;
         }
 
+        $edit_link = '';
+        if ( $this->event->current_user_can_edit() ) {
+            $featherlight_edit_data = Edit_Event_Popup::get_featherlight_attribute( $this->event );
+            $edit_link              = "<br><a href='#' $featherlight_edit_data>bearbeiten</a>";
+        }
+
         $description = make_clickable( $pretty->description );
 
         $event_link = '';
@@ -100,7 +106,7 @@ XML;
         <section class="image" style="background-image: url('$image_url');"></section>
         <h2><a href="$permalink">$pretty->title</a></h2>
         <section class="meta">
-          $date$time$location$address$organizer
+          $date$time$location$address$organizer$edit_link
         </section>
         <section class="share" data-controller="share">
           <div class="group">
