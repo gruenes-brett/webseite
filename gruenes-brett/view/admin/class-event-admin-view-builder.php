@@ -44,7 +44,18 @@ class Event_Admin_View_Builder extends Comcal_Default_Display_Builder {
             return static::$instance;
         }
 
-        $event_rows      = Comcal_Query_Event_Rows::query_events_by_creation();
+        $limit_userid = null;
+        if ( ! Comcal_User_Capabilities::administer_events() ) {
+            $limit_userid = Comcal_User_Capabilities::current_user_id();
+        }
+
+        $event_rows      = Comcal_Query_Event_Rows::query_events_by_creation(
+            null,
+            '',
+            null,
+            null,
+            $limit_userid
+        );
         $events_iterator = new Comcal_Event_Iterator( $event_rows );
 
         static::$instance = self::create_display( static::class, $events_iterator );

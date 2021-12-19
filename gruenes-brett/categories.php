@@ -12,7 +12,7 @@
   <section class="eventhistory">
     <?php
 
-    if ( Comcal_User_Capabilities::administer_events() ) {
+    if ( Comcal_User_Capabilities::has_edit_privileges() ) {
         echo <<<XML
         <h2>Veranstaltungen nach Eintragungsdatum</h2>
 XML;
