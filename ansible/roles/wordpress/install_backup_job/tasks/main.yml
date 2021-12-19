@@ -5,7 +5,7 @@
     state: directory
     owner: www-data
     group: www-data
-    mode: 0660
+    mode: 0770
 
 - name: Create cron job for nightly database backup
   cron:
