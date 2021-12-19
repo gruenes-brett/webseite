@@ -56,29 +56,31 @@ function echo_floating_buttons( $scroll_option = 'scrollToToday' ) {
     );
 }
 
+// data.
 require_once 'data/class-common-data.php';
 
-require_once 'data/class-event-popup.php';
-require_once 'data/class-edit-event-popup.php';
-require_once 'data/class-edit-event-form.php';
-require_once 'data/class-event-detail-view.php';
+// event.
+require_once 'view/event/class-event-popup.php';
+require_once 'edit/event/class-edit-event-popup.php';
+require_once 'edit/event/class-edit-event-form.php';
+require_once 'view/event/class-event-detail-view.php';
+require_once 'view/event/class-pretty-event.php';
 
 // calendar.
-require_once 'data/class-calendar-table-builder.php';
-require_once 'data/class-table-event-renderer.php';
+require_once 'view/calendar/class-calendar-table-builder.php';
+require_once 'view/calendar/class-table-event-renderer.php';
 
 // explorer.
-require_once 'data/class-event-explorer-builder.php';
-require_once 'data/class-explorer-event-renderer.php';
+require_once 'view/explorer/class-event-explorer-builder.php';
+require_once 'view/explorer/class-explorer-event-renderer.php';
 
-// admin view.
-require_once 'data/class-event-admin-view-builder.php';
-require_once 'data/class-admin-view-event-renderer.php';
-require_once 'data/class-edit-categories-form.php';
+// admin.
+require_once 'view/admin/class-event-admin-view-builder.php';
+require_once 'view/admin/class-admin-view-event-renderer.php';
 
-// helpers.
-require_once 'data/class-pretty-event.php';
-require_once 'data/class-category-provider.php';
+// categories.
+require_once 'view/categories/class-category-provider.php';
+require_once 'edit/categories/class-edit-categories-form.php';
 
 remove_action( 'wp_head', 'wp_generator' );
 remove_action( 'wp_head', 'rel_canonical' );
