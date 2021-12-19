@@ -65,11 +65,7 @@ XML;
             $organizer = '<br>' . $organizer;
         }
 
-        $edit_link = '';
-        if ( $this->event->current_user_can_edit() ) {
-            $featherlight_edit_data = Edit_Event_Popup::get_featherlight_attribute( $this->event );
-            $edit_link              = "<br><a href='#' $featherlight_edit_data>bearbeiten</a>";
-        }
+        $edit_link = Edit_Event_Popup::create_edit_links( $this->event, '<br>' );
 
         $description = make_clickable( $pretty->description );
 

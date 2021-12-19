@@ -35,10 +35,7 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
             $meta = "$date, $time";
         }
 
-        if ( $event->current_user_can_edit() ) {
-            $featherlight_edit_data = Edit_Event_Popup::get_featherlight_attribute( $event );
-            $meta                  .= ", <a href='#' $featherlight_edit_data>bearbeiten</a>";
-        }
+        $meta .= Edit_Event_Popup::create_edit_links( $event, ', ' );
 
         $organizer = $pretty->organizer;
         if ( '' !== $organizer ) {

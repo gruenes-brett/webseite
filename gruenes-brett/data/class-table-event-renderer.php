@@ -50,14 +50,7 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
             $organizer = ', ' . $organizer;
         }
 
-        $edit_link = '';
-        if ( $event->current_user_can_edit() ) {
-            $featherlight_edit_data = Edit_Event_Popup::get_featherlight_attribute( $event );
-            $edit_link              = "<a href='#' $featherlight_edit_data>bearbeiten</a>";
-            if ( '' !== $time || '' !== $location ) {
-                $edit_link = ', ' . $edit_link;
-            }
-        }
+        $edit_link = Edit_Event_Popup::create_edit_links( $event, ', ' );
 
         return <<<XML
       <article class="$private_class $obsolete_class">
