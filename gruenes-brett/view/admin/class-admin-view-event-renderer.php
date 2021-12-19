@@ -22,7 +22,7 @@ class Admin_View_Event_Renderer extends Comcal_Default_Event_Renderer {
 
         $featherlight_view_data = Event_Popup::get_featherlight_attribute( $event );
 
-        $edit_link = Edit_Event_Popup::create_edit_links( $event, ', ' );
+        $edit_link = Edit_Event_Popup::create_edit_links( $event, '<br>' );
 
         $private_class = $event->get_field( 'public' ) ? 'public' : 'private';
 
