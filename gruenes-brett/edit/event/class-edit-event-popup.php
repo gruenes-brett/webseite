@@ -47,9 +47,6 @@ class Edit_Event_Popup extends Comcal_Featherlight_Event_Popup {
 
         echo <<<XML
         <main class="addevent" data-controller="form">
-            <section class="note">
-            </section>
-
             $form_html
         </main>
         XML;
