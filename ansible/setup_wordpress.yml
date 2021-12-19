@@ -18,6 +18,5 @@
     - wordpress/email_settings
     - role: wordpress/initialize_pages
       when: first_time_wordpress_setup
-    - role: wordpress/install_backup_job
-      when: first_time_wordpress_setup
+    - wordpress/install_backup_job
     - wordpress/tighten_filesystem_permissions

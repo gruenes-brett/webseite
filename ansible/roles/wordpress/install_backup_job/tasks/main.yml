@@ -12,7 +12,10 @@
     name: "{{ instance_name }}_nightly_backup"
     hour: "3"
     minute: "0"
-    job: 'cd {{ wordpress_dir }} && sudo --user www-data -- wp db export "{{ backup_base_dir }}/{{ instance_name }}/db_$(date +\%F_\%H-\%M-\%S).sql"'
+    job: >
+      cd {{ wordpress_dir }} && sudo --user www-data --
+      wp db export "{{ backup_base_dir }}/{{ instance_name }}/db_$(date +\%F_\%H-\%M-\%S).sql"
+      >> "{{ backup_base_dir }}/{{ instance_name }}/backup.log"
 
 - name: Create cron job for cleaning up old backups
   cron:
