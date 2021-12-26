@@ -24,6 +24,7 @@ services:
         keychain
         openssh-server
         sudo
+        cron
       - 'echo "www-data ALL=NOPASSWD: ALL" >> /etc/sudoers'
       - mkdir -p /run/sshd /run/mysqld
       - chown mysql:mysql /run/mysqld
@@ -37,6 +38,7 @@ services:
       - service apache2 start
       - service mysql start
       - service ssh start
+      - cd ansible && ansible-playbook -i hosts_myinstance update_theme.yml
     run:
       - eval `keychain --eval --agents ssh`
     ssl: false
