@@ -1,0 +1,42 @@
+name: Cypress
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - .github
+      - ansible
+
+  workflow_dispatch:
+
+jobs:
+  build-docker-image-in-which-the-app-runs-during-Cypress-tests:
+    # Ensure test job passes before pushing image.
+    runs-on: ubuntu-20.04
+    #    if: github.event_name == 'push'
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login into Container Registry ${{ env.REGISTRY }}
+        uses: docker/login-action@v1.10.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract metadata for Docker
+        id: meta_tag
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ github.repository }}
+          tags: |
+            type=ref,event=tag
+      - name: Generate Dockerfile
+        run: .github/make_dockerfile.sh
+      - name: Build Docker image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ steps.meta_tag.outputs.tags }}
+          labels: ${{ steps.meta_tag.outputs.labels }}
