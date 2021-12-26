@@ -33,8 +33,10 @@
   systemd:
     name: apache2
     state: restarted
+  ignore_errors: yes
 
 - name: Restart mysql
   systemd:
     name: mysql
     state: restarted
+  ignore_errors: yes
