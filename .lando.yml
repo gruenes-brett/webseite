@@ -30,7 +30,7 @@ services:
       - chown mysql:mysql /run/mysqld
       - service mysql start
       - |
-        cd ansible
+        cd ansible || exit 10
         ansible-playbook -i hosts_myinstance basic_setup.yml
         ansible-playbook -i hosts_myinstance setup_wordpress.yml
     command: /usr/bin/systemctl
