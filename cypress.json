@@ -1,0 +1,12 @@
+{
+  "baseUrl": "http://testing/",
+  "chromeWebSecurity": false,
+  "viewportWidth": 960,
+  "viewportHeight": 700,
+
+  "screenshotsFolder": "./cypress/snapshots/actual",
+  "trashAssetsBeforeRuns": true,
+  "env": {
+    "failSilently": false
+  }
+}
