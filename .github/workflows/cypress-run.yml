@@ -1,0 +1,26 @@
+name: Cypress
+
+on:
+  push:
+
+  workflow_dispatch:
+
+jobs:
+  run-cypress-tests:
+    runs-on: ubuntu-20.04
+    container: ghcr.io/startnext/startnext-cypress:latest
+    services:
+      testing:
+        image: ${{ env.REGISTRY }}/${{ github.repository }}
+    steps:
+      - name: Run test
+        run: su node -c 'bash -c "cypress run --env type=actual cypress/integration/gruenesbrett.spec.js"'
+
+      - name: Archive Test Results
+        if: always()
+        uses: actions/upload-artifact@v1
+        with:
+          name: test-results
+          path: |
+            cypress/snapshots
+            cypress/videos
