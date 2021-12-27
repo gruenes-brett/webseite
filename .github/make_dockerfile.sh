@@ -44,7 +44,7 @@ EOF
 
 lando_section_to_bash run_as_root ENTRYPOINT
 # shellcheck disable=SC1087
-cat <<EOF >>docker-run_as_root.sh
+cat <<'EOF' >>docker-run_as_root.sh
   echo 127.0.0.1 testing >> /etc/hosts
   sed -i '2 i if (!empty($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"] === "https") $_SERVER["HTTPS"] = "on";' /var/www/testing/wordpress/wp-config.php
   sleep infinity

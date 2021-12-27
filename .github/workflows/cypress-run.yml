@@ -1,4 +1,4 @@
-name: Cypress
+name: Cypress run
 
 on:
   push:
@@ -11,12 +11,16 @@ jobs:
     container: ghcr.io/startnext/startnext-cypress:latest
     services:
       testing:
-        image: ${{ env.REGISTRY }}/${{ github.repository }}
+        image: ghcr.io/${{ github.repository }}
     steps:
+      - uses: actions/checkout@v2
+      - name: Copy node_modules within image
+        run: cp /usr/app/* . -r
+      - name: Make dir writable for screenshots and videos
+        run: chmod o+w . -R
       - name: Run test
         run: su node -c 'bash -c "cypress run --env type=actual cypress/integration/gruenesbrett.spec.js"'
-
-      - name: Archive Test Results
+      - name: Allow downloading screenshots and videos over the GitHub interface
         if: always()
         uses: actions/upload-artifact@v1
         with:
