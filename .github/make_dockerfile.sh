@@ -30,7 +30,8 @@ lando_section_to_bash() {
   chmod +x "$script"
 
   for i in $(seq 0 $((length - 1))); do
-    yq eval ".services.web.$1[$i]" ../.lando.yml >>"$script"
+    yq eval ".services.web.$1[$i]" ../.lando.yml | \
+      sed 's/hosts_lando/hosts_myinstance/' >>"$script"
   done
   echo "$2" ".github/$script" >>../Dockerfile
 }
