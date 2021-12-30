@@ -31,14 +31,14 @@ services:
       - service mysql start
       - |
         cd ansible || exit 10
-        ansible-playbook -i hosts_myinstance basic_setup.yml
-        ansible-playbook -i hosts_myinstance setup_wordpress.yml
+        ansible-playbook -i hosts_lando basic_setup.yml
+        ansible-playbook -i hosts_lando setup_wordpress.yml
     command: /usr/bin/systemctl
     run_as_root:
       - service apache2 start
       - service mysql start
       - service ssh start
-      - cd ansible && ansible-playbook -i hosts_myinstance update_theme.yml
+      - cd ansible && ansible-playbook -i hosts_lando update_theme.yml
     run:
       - eval `keychain --eval --agents ssh`
     ssl: false
@@ -46,7 +46,7 @@ services:
     webroot: .
     overrides:
       labels:
-        # Make sure that the domain here matches the domain in hosts_myinstance
+        # Make sure that the domain here matches the domain in hosts_lando
         - 'traefik.http.routers.gruenes-brett.rule=Host(`gruenes-brett.lndo.site`)'
         - 'traefik.http.routers.gruenes-brett.tls=false'
         - 'traefik.http.services.gruenes-brett.loadbalancer.server.port=80'
