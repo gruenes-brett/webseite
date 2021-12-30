@@ -20,9 +20,18 @@
       - install
       - --url={{ http_prefix }}://{{ domain }}
       - --title={{ page_title }}
+      - --title={{ page_title }}
       - --admin_user=admin
       - --admin_password={{ admin_password }}
       - --admin_email={{ admin_email }}
+
+- name: Set subtitle
+  include_role:
+    name: wordpress/lib/set_option
+  vars:
+    option: blogdescription
+    value: "{{ page_subtitle }}"
+  when: page_subtitle is defined
 
 - name: Activate gruenes-brett theme
   include_role:
