@@ -20,7 +20,6 @@
       - install
       - --url={{ http_prefix }}://{{ domain }}
       - --title={{ page_title }}
-      - --title={{ page_title }}
       - --admin_user=admin
       - --admin_password={{ admin_password }}
       - --admin_email={{ admin_email }}
