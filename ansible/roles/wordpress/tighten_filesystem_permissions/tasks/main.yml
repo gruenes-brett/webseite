@@ -6,3 +6,11 @@
     group: www-data
     mode: 0550
     recurse: yes
+
+- name: Upload folder must be writable
+  file:
+    path: "{{ wordpress_dir }}/wp-content/uploads"
+    owner: www-data
+    group: www-data
+    mode: 0770
+    recurse: yes
