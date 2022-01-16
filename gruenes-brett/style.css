@@ -375,6 +375,7 @@ article.obsolete {
   flex: unset;
   padding: 30px 50px;
   width: calc(100% / 3);
+  overflow-wrap: anywhere;
 }
 
 .explore article .event-overlay {
@@ -414,12 +415,7 @@ article.obsolete {
   left: 0;
 }
 
-.explore article .meta {
-  margin: 20px 0;
-  line-height: 1.15;
-}
-
-.explore article .description {
+.explore article .meta, .explore article .description {
   margin: 20px 0;
 }
 
