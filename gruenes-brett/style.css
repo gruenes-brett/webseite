@@ -4,7 +4,7 @@ Theme URI: https://gruenesbrett.net
 Author: Jörg und Sebastian
 Author URI: https://github.com/gruenes-brett/webseite
 Description: Ein Theme mit eingebautem Kalender und Veranstaltungsmanagement
-Version: 1.0
+Version: 1.1.5
 Text Domain: gruenes-brett
 */
 
@@ -764,8 +764,7 @@ article.obsolete {
 
   .explore article {
     width: 100%;
-    padding-left: 25px;
-    padding-right: 15px;
+    padding: 30px 25px;
   }
 
   .calendar {
