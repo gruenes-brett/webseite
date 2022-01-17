@@ -1,0 +1,40 @@
+---
+- name: Install goaccess
+  apt:
+    name: goaccess
+
+- name: VHost for viewing stats
+  template:
+    src: 010-stats_vhost.conf
+    dest: /etc/apache2/sites-available/010-{{ instance_name }}_stats_vhost.conf
+
+- name: Enable virtual host for stats
+  shell: /usr/sbin/a2ensite 010-{{ instance_name }}_stats_vhost.conf
+
+- name: Ensure stats html directory
+  file:
+    path: "{{ stats_base_dir }}/{{ domain }}"
+    state: directory
+
+- name: Reload apache2
+  service:
+    name: apache2
+    state: reloaded
+
+- name: Ensure cache directory
+  file:
+    path: "{{ log_cache_dir }}/{{ domain }}"
+    state: directory
+
+- name: Copy run_goaccess.bash
+  template:
+    src: run_goaccess.bash
+    dest: "{{ log_cache_dir }}/{{ domain }}/run_goaccess.bash"
+    mode: 0700
+
+- name: Create cron job for nightly stats update
+  cron:
+    name: "{{ instance_name }}_nightly_stats_collection"
+    hour: "0"
+    minute: "20"
+    job: "{{ log_cache_dir }}/{{ domain }}/run_goaccess.bash"

@@ -1,0 +1,7 @@
+- hosts: target
+  become: true
+  vars_files:
+    - group_vars/globals
+  roles:
+    - role: check_preconditions
+    - role: goaccess_stats

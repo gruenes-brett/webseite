@@ -10,6 +10,9 @@ landing_page_dir: "{{ apache_www_dir }}landing_page"
 landing_page_domain: "gruenesbrett.net"
 landing_page_domain_alias: "xn--grnesbrett-beb.net,www.gruenesbrett.net,www.xn--grnesbrett-beb.net"
 
+stats_base_dir: "{{ apache_www_dir }}goaccess"
+log_cache_dir: "{{ apache_www_dir }}apache_log_cache"
+
 pages:
   - calendar:
     title: Kalender
