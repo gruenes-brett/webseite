@@ -26,5 +26,8 @@ mkdir -p $LOG_CACHE_DIR
 # Copy yesterdays log file to cache dir
 cat $LOGFILE_BASE.1 | grep "^$DOMAIN" > $LOG_CACHE_DIR/access_$DAY.log
 
+# Additional expressions for lines that should be ignored in the log file
+FILTER_EXPRESSIONS=wp-cron\.php
+
 # Create HTML for given month
-zcat --force $LOG_CACHE_DIR/*.log | goaccess --output=$HTML_OUT_DIR/$MONTH.html --log-format=VCOMBINED -
+zcat --force $LOG_CACHE_DIR/*.log | grep -v -e $FILTER_EXPRESSIONS | goaccess --output=$HTML_OUT_DIR/$MONTH.html --log-format=VCOMBINED --ignore-crawlers --no-progress -
