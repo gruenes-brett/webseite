@@ -38,21 +38,7 @@ values in each host file.
 ansible-playbook -i hosts_myinstance basic_setup.yml
 ```
 
-### 3. DEPRECATED Setting up SMTP for outgoing emails (only once on the target machine)
-This playbook installs msmtp and sets it as default mail transport agent for outgoing
-emails on the target machine. The current setup only allows a single SMTP config
-that will be used by all running WordPress instances.
-
-Make sure to fill out the `email_...` variables in your hosts config file.
-
-**Caution**: Some email providers only allow to send emails via SMTP if the from address matches
-the admin address of the current WordPress instance.
-
-```
-ansible-playbook -i hosts_myinstance setup_email_smtp.yml
-```
-
-### 4. Execute `setup_wordpress.yml` once on this server
+### 3. Execute `setup_wordpress.yml` once on this server
 ```
 ansible-playbook -i hosts_myinstance setup_wordpress.yml
 ```
@@ -69,7 +55,7 @@ ansible-playbook -i hosts_myinstance setup_wordpress.yml
   Target dir: `/var/www/gb_backups/<instance_name>/db_<timestamp>.sql`.
   Another cron job is created that deletes backups that are older than 7 days.
 
-### 5. For initializing or renewing the Let's Encrypt certificate, execute
+### 4. For initializing or renewing the Let's Encrypt certificate, execute
 ```
 ansible-playbook -i hosts_myinstance update_letsencrypt.yml
 ```
@@ -79,7 +65,7 @@ This is required if `http_prefix` is set to `https` in the host config file.
 Normally this only has to be done once because the certbot automatically renews the certificate
 when it's due.
 
-### 6. Install Event Scraper service (only needed once for all instances)
+### 5. Install Event Scraper service (only needed once for all instances)
 ```
 ansible-playbook -i hosts_myinstance install_eventscraper.yml
 ```
@@ -87,7 +73,7 @@ ansible-playbook -i hosts_myinstance install_eventscraper.yml
 This creates a service at http://127.0.0.1:5050 that can be used for
 scraping event data from Facebook.
 
-### 7. Installing the landing page
+### 6. Installing the landing page
 A landing page, as implemented in the 'landing_page' folder of the gruenes-brett repo,
 can be installed. This playbook will also try to install Let's Encrypt certificates
 for all supplied domains.
@@ -99,9 +85,9 @@ for all supplied domains.
 ansible-playbook -i hosts_myinstance setup_landing_page.yml
 ```
 
-### 8. Install and use GoAccess for user access statistics
+### 7. Install and use GoAccess for user access statistics
 If desired, GoAccess (https://goaccess.io) may be used for analyzing user access. The access stats
-will be updated every day after midnight.
+will be updated every day after midnight. Monthly data is gathered into a single dashboard.
 ```
 ansible-playbook -i hosts_myinstance setup_goaccess.yml
 ```
