@@ -113,6 +113,11 @@ ansible-playbook -i hosts_myinstance update_theme.yml
 plugin in the current instance!
 
 
+## Updating to latest WordPress version
+```
+ansible-playbook -i hosts_myinstance update_wordpress.yml
+```
+
 ## Removing a site
 
 To remove a site, run the following playbook and confirm with Enter.

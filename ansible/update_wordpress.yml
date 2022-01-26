@@ -1,0 +1,11 @@
+- hosts: target
+  become: true
+  vars_files:
+    - group_vars/globals
+  vars:
+    first_time_wordpress_setup: yes  # will automatically be changed to no in check_existing_instance
+  roles:
+    - check_preconditions
+    - wordpress/check_existing_instance
+    - role: wordpress/update_wordpress
+      when: not first_time_wordpress_setup

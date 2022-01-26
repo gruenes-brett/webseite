@@ -1,0 +1,29 @@
+---
+- name: Ensure wp-cli cache directory
+  file:
+    path: "{{ apache_www_dir }}/.wp-cli"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0770
+    recurse: yes
+
+- name: Make wordpress folder writable
+  file:
+    path: "{{ wordpress_dir }}"
+    owner: www-data
+    group: www-data
+    mode: 0770
+    recurse: yes
+
+- name: update to latest wordpress version
+  include_role:
+    name: wordpress/lib/wp-cli
+  vars:
+    args:
+      - core
+      - update
+
+- name: Fix permissions
+  include_role:
+    name: wordpress/tighten_filesystem_permissions
