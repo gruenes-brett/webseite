@@ -99,6 +99,21 @@ for all supplied domains.
 ansible-playbook -i hosts_myinstance setup_landing_page.yml
 ```
 
+### 8. Install and use GoAccess for user access statistics
+If desired, GoAccess (https://goaccess.io) may be used for analyzing user access. The access stats
+will be updated every day after midnight.
+```
+ansible-playbook -i hosts_myinstance setup_goaccess.yml
+```
+
+The web dashboard is accessible via http://yourdomain.com/stats/
+(https is currently not supported). For security reasons, access to the stats page requires authentication.
+For that, a `.htpasswd` file with credentials needs to be created manually in `/var/www/goaccess`:
+```
+cd /var/www/goaccess
+sudo htpasswd -c .htpasswd myusername
+```
+
 ### Further manual setup steps
 * Creating user accounts for contributors, authors and editors
 * Fill empty pages with content
