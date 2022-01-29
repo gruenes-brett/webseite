@@ -69,4 +69,16 @@ class Common_Data {
         );
         return $events_iterator;
     }
+
+    public static function get_ical_calendar_begin() : string {
+        return 'BEGIN:VCALENDAR' . PHP_EOL
+             . 'VERSION:2.0' . PHP_EOL
+             . 'PRODID:-//gruenesbrett//NONSGML v1.0//EN' . PHP_EOL
+             . 'NAME:' . get_bloginfo( 'name' ) . PHP_EOL
+             . 'X-WR-CALNAME:' . get_bloginfo( 'name' ) . PHP_EOL;
+    }
+
+    public static function get_ical_calendar_end() : string {
+        return 'END:VCALENDAR';
+    }
 }

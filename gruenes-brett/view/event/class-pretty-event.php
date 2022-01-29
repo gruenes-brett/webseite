@@ -89,26 +89,24 @@ class Pretty_Event extends Comcal_Pretty_Event {
             return make_clickable( $this->description );
         };
 
-        $map['ics'] = function() {
+        $map['ical'] = function() {
             $dtstamp = $this->event->get_created_date()->format( 'Ymd\THis' );
             $dtstart = $this->event->get_start_date_time( 0 )->format( 'Ymd\THis' );
             $dtend   = $this->event->get_end_date_time()->format( 'Ymd\THis' );
 
-            $ics_start = rawurlencode(
-                'BEGIN:VCALENDAR' . PHP_EOL
-                . 'VERSION:2.0' . PHP_EOL
-                . 'PRODID:-//gruenesbrett//NONSGML v1.0//EN' . PHP_EOL
-                . 'BEGIN:VEVENT' . PHP_EOL
-                . "UID:$this->event_id@gruenesbrett" . PHP_EOL
-                . "DTSTAMP:$dtstamp" . PHP_EOL
-                . "DTSTART:$dtstart" . PHP_EOL
-                . "DTEND:$dtend" . PHP_EOL
-                . "SUMMARY:$this->title" . PHP_EOL
-            );
-            $ics_desc  = 'DESCRIPTION: ' . str_replace( '<br />', '\\n', $this->description );
-            $ics_end   = rawurlencode( PHP_EOL . 'END:VEVENT' . PHP_EOL . 'END:VCALENDAR' );
+            $description = str_replace( '<br>', '', $this->description );
+            $description = str_replace( '<br />', '', $description );
+            $description = trim( $description );
+            $description = str_replace( "\r\n", '\\n', $description );
 
-            return $ics_start . $ics_desc . $ics_end;
+            return 'BEGIN:VEVENT' . PHP_EOL
+                 . "UID:$this->event_id@gruenesbrett" . PHP_EOL
+                 . "DTSTAMP:$dtstamp" . PHP_EOL
+                 . "DTSTART:$dtstart" . PHP_EOL
+                 . "DTEND:$dtend" . PHP_EOL
+                 . "SUMMARY:$this->name" . PHP_EOL
+                 . "DESCRIPTION:$description" . PHP_EOL
+                 . 'END:VEVENT' . PHP_EOL;
         };
 
         $map['permalink'] = function() {
@@ -122,19 +120,19 @@ class Pretty_Event extends Comcal_Pretty_Event {
             return <<<XML
                 <script type="application/ld+json">
                 {
-                "@context": "https://schema.org",
-                "@type": "Event",
-                "location": {
-                    "@type": "Place",
-                    "name": "$this->location"
-                },
-                "name": "$this->title",
-                "startDate": "$dtstart",
-                "endDate": "$dtend",
-                "organizer": {
-                    "@type": "Organization",
-                    "name": "$pretty->organizer"
-                }
+                    "@context": "https://schema.org",
+                    "@type": "Event",
+                    "location": {
+                        "@type": "Place",
+                        "name": "$this->location"
+                    },
+                    "name": "$this->name",
+                    "startDate": "$dtstart",
+                    "endDate": "$dtend",
+                    "organizer": {
+                        "@type": "Organization",
+                        "name": "$pretty->organizer"
+                    }
                 }
                 </script>
             XML;

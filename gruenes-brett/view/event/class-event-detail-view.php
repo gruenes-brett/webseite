@@ -45,6 +45,7 @@ class Event_Detail_View {
         }
 
         $private_class = $this->event->get_field( 'public' ) ? '' : 'private';
+        $ical_link     = esc_url( get_home_url() ) . '/ical/' . $pretty->event_id;
 
         return <<<XML
     <main class="detail">
@@ -61,7 +62,7 @@ class Event_Detail_View {
               <button data-target="share.facebook" data-action="share#onFacebook"><img src="$stylesheet_directory/img/icons/facebook-fill.svg" alt="Facebook"></button>
               <button data-target="share.twitter" data-action="share#onTwitter"><img src="$stylesheet_directory/img/icons/twitter-fill.svg" alt="Twitter"></button>
               <button data-target="share.telegram" data-action="share#onTelegram"><img src="$stylesheet_directory/img/icons/telegram-fill.svg" alt="Telegram"></button>
-              <a href="data:text/calendar;charset=utf8,$pretty->ics" download="cal.ics"><img src="$stylesheet_directory/img/icons/calendar-event-fill.svg" alt="Kalender"></a>
+              <a href="$ical_link"><img src="$stylesheet_directory/img/icons/calendar-event-fill.svg" alt="Kalender"></a>
             </div>
           </div>
           <div class="group">

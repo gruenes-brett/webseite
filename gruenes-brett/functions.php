@@ -87,6 +87,10 @@ require_once 'edit/categories/class-edit-categories-form.php';
 require_once 'view/feed/class-event-feed-builder.php';
 require_once 'view/feed/class-feed-event-renderer.php';
 
+// ical.
+require_once 'view/ical/class-event-ical-builder.php';
+require_once 'view/ical/class-ical-event-renderer.php';
+
 remove_action( 'wp_head', 'wp_generator' );
 remove_action( 'wp_head', 'rel_canonical' );
 remove_action( 'wp_head', 'wp_shortlink_wp_head' );
@@ -140,8 +144,14 @@ add_action(
     'init',
     function() {
         add_rewrite_rule(
-            '^veranstaltung/(.+)/?',
+            '^veranstaltung/(.+)[/]?$',
             'index.php?pagename=veranstaltung&event_id=$matches[1]',
+            'top'
+        );
+
+        add_rewrite_rule(
+            '^ical/(.+)[/]?$',
+            'index.php?ical=$matches[1]',
             'top'
         );
     },
@@ -157,6 +167,21 @@ add_action(
     10,
     0
 );
+
+function gruenes_brett_query_vars( $query_vars ) {
+    $query_vars[] = 'ical';
+    return $query_vars;
+}
+add_filter( 'query_vars', 'gruenes_brett_query_vars' );
+
+function gruenes_brett_template_include( $template ) {
+    if ( ! empty( get_query_var( 'ical' ) ) ) {
+        return get_template_directory() . '/ical.php';
+    }
+
+    return $template;
+};
+add_action( 'template_include', 'gruenes_brett_template_include' );
 
 /**
  * Enqueue scripts and styles.
