@@ -17,47 +17,66 @@ pages:
   - calendar:
     title: Kalender
     template: calendar.php
+    status: publish
     parent:
   - explore:
     title: Erkunden
     template: explore.php
+    status: publish
     parent:
   - addevent:
     title: Veranstaltung eintragen
     template: addevent.php
+    status: publish
     parent:
   - event:
     title: Veranstaltung
     template: event.php
+    status: publish
     parent:
   - categories:
     title: Kategorien bearbeiten
     template: categories.php
+    status: private
+  - categories:
+    title: Neue Veranstaltungen
+    template: newevents.php
+    status: private
+  - categories:
+    title: Vergangene Veranstaltungen
+    template: pastevents.php
+    status: private
     parent: Veranstaltung eintragen
   - wer_wir_sind:
     title: Wer wir sind
     template:
+    status: publish
     parent:
 
   - wer_wir_sind:
     title: Wer wir sind
     template:
+    status: publish
     parent:
   - bund_jugend:
     title: BUNDjugend {{ instance_name }}
     template:
+    status: publish
     parent: Wer wir sind
   - datenschutz:
     title: Datenschutzerklärung
     template:
+    status: publish
     parent: Wer wir sind
   - impressum:
     title: Impressum
     template:
+    status: publish
     parent: Wer wir sind
   - mitmachen:
     title: Mitmachen
     template:
+    status: publish
     parent: Wer wir sind
 
 homepage: Erkunden

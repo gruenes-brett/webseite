@@ -35,7 +35,7 @@ class Calendar_Table_Builder extends Comcal_Table_Builder {
         static::$instance = self::create_display(
             static::class,
             $events_iterator,
-            Common_Data::get_earliest_display_date(),
+            Comcal_Date_Time::now(),
         );
         return static::$instance;
     }
@@ -82,9 +82,9 @@ class Calendar_Table_Builder extends Comcal_Table_Builder {
         $tr_class   = $is_new_day ? '' : 'sameDay';
         $date_class = ( '' === $text ) ? 'has-no-events' : 'has-events';
 
-        $this->html .= "<tr class='{$date_time->get_day_classes()} $tr_class day'>";
-        $this->html .= "<td class='date $date_class'>$day_of_month</td>";
-        $this->html .= "<td class='date $date_class'>$weekday</td>";
+        $this->html .= "<tr class='{$date_time->get_day_classes()} $tr_class day $date_class'>";
+        $this->html .= "<td class='date'>$day_of_month</td>";
+        $this->html .= "<td class='date'>$weekday</td>";
         $this->html .= "<td class='event'>$text</td></tr>\n";
     }
 

@@ -68,6 +68,7 @@ require_once 'view/event/class-pretty-event.php';
 
 // calendar.
 require_once 'view/calendar/class-calendar-table-builder.php';
+require_once 'view/calendar/class-past-calendar-table-builder.php';
 require_once 'view/calendar/class-table-event-renderer.php';
 
 // explorer.

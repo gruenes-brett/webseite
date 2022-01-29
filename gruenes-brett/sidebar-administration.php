@@ -1,6 +1,6 @@
 <?php
 /**
- * Navigation bar for the addevent page
+ * Navigation bar for the administrative pages
  *
  * @package GruenesBrett
  */
@@ -25,7 +25,19 @@ if ( ! verify_community_calendar_loaded( true ) ) {
 
     <?php if ( Comcal_User_Capabilities::has_edit_privileges() ) : ?>
     <div class="item">
-      <a href="/kategorien-bearbeiten">Administration</a>
+      <a href="/neue-veranstaltungen">Neueste Veranstaltungen</a>
+    </div>
+    <?php endif; ?>
+
+    <?php if ( Comcal_User_Capabilities::administer_events() ) : ?>
+    <div class="item">
+      <a href="/vergangene-veranstaltungen">Vergangene Veranstaltungen</a>
+    </div>
+    <?php endif; ?>
+
+    <?php if ( Comcal_User_Capabilities::edit_categories() ) : ?>
+    <div class="item">
+      <a href="/kategorien-bearbeiten">Kategorien bearbeiten</a>
     </div>
     <?php endif; ?>
   </nav>

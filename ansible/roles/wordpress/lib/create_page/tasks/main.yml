@@ -11,7 +11,7 @@
       - post
       - create
       - --post_type=page
-      - --post_status=publish
+      - --post_status={{ status }}
       - "--post_title={{ title }}"
       - "--meta_input={\"_wp_page_template\": \"{{ template }}\"}"
   when: page_id == ''

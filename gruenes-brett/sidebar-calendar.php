@@ -12,7 +12,6 @@ if ( ! verify_community_calendar_loaded( true ) ) {
 ?>
 <aside>
   <nav>
-
     <?php
       echo Category_Provider::get_category_buttons();
     ?>

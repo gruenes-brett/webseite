@@ -33,7 +33,7 @@ class Common_Data {
         $category      = static::get_active_category();
         $calendar_name = '';
         $latest_date   = null;
-        $start_date    = static::get_earliest_display_date();
+        $start_date    = Comcal_Date_Time::now();
 
         $events_iterator = Comcal_Event_Iterator::load_from_database(
             $category,
@@ -45,14 +45,20 @@ class Common_Data {
     }
 
     /**
-     * When to start to show events.
-     *
-     * @return Comcal_Date_Time Timestamp or null for all events.
+     * Create an Event iterator for past events.
      */
-    public static function get_earliest_display_date() {
-        if ( Comcal_User_Capabilities::administer_events() ) {
-            return null;
-        }
-        return Comcal_Date_Time::now();
+    public static function get_past_events_iterator() : Comcal_Event_Iterator {
+        $category      = static::get_active_category();
+        $calendar_name = '';
+        $latest_date   = Comcal_Date_Time::now();
+        $start_date    = null;
+
+        $events_iterator = Comcal_Event_Iterator::load_from_database(
+            $category,
+            $calendar_name,
+            $start_date ? $start_date->get_date_str() : null,
+            $latest_date ? $latest_date->get_date_str() : null
+        );
+        return $events_iterator;
     }
 }

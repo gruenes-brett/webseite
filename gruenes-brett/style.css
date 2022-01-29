@@ -357,9 +357,12 @@ aside nav a:hover, aside nav a:focus {
 
 /* Events generic */
 
-article.obsolete {
+.obsolete {
   opacity: 60%;
-  text-decoration: line-through;
+}
+
+.obsolete a {
+  color: var(--darkgray);
 }
 
 /* Explore page */
@@ -442,6 +445,10 @@ article.obsolete {
   margin-left: 30px;
 }
 
+.eventhistory h2 {
+  margin-top: 0;
+}
+
 .eventhistory h3 {
   margin: 10px 0 0;
 }
@@ -466,20 +473,13 @@ article.obsolete {
   margin-right: 5px;
 }
 
-.categories {
-  flex: 1;
+.categories .clr-field {
+  display: block;
 }
 
-.categories table {
-  margin-bottom: 25px;
-}
-
-.categories table td {
-  padding: 5px 10px;
-}
-
-.categories .formgroup button {
-  margin-right: 0;
+.categories + .note table {
+  position: sticky;
+  top: 50px;
 }
 
 /* Calendar */
@@ -566,7 +566,7 @@ article.obsolete {
   margin-right: 50px;
 }
 
-.addevent table td {
+.addevent table td, .adminview table td {
   padding: 5px 10px;
 }
 
@@ -574,7 +574,7 @@ article.obsolete {
   opacity: 30%;  /* TODO: visualize loading state */
 }
 
-.addevent table tr td:first-child {
+.addevent table tr td:first-child, .adminview table tr td:first-child {
   vertical-align: top;
   padding-top: 12px;
 }
