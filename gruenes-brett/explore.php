@@ -14,8 +14,6 @@ if ( verify_community_calendar_loaded( true ) ) {
     echo Event_Explorer_Builder::get_instance()->get_html();
     echo_floating_buttons( 'scrollToTop' );
 }
-
 ?>
-
 </main>
 <?php get_footer(); ?>

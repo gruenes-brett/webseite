@@ -27,6 +27,14 @@ class Common_Data {
     }
 
     /**
+     * Determine category name as specified by the Get parameters.
+     */
+    public static function get_active_category_name() : string {
+        $active_category = static::get_active_category();
+        return null !== $active_category ? $active_category->get_field( 'name' ) : '';
+    }
+
+    /**
      * Create an Event iterator.
      */
     public static function get_events_iterator() : Comcal_Event_Iterator {

@@ -83,6 +83,10 @@ require_once 'view/admin/class-admin-view-event-renderer.php';
 require_once 'view/categories/class-category-provider.php';
 require_once 'edit/categories/class-edit-categories-form.php';
 
+// feed.
+require_once 'view/feed/class-event-feed-builder.php';
+require_once 'view/feed/class-feed-event-renderer.php';
+
 remove_action( 'wp_head', 'wp_generator' );
 remove_action( 'wp_head', 'rel_canonical' );
 remove_action( 'wp_head', 'wp_shortlink_wp_head' );
@@ -222,3 +226,15 @@ function gruenes_brett_styles() {
     );
 }
 add_action( 'wp_print_styles', 'gruenes_brett_styles' );
+
+/**
+ * Register custom RSS feed and remove all other feeds.
+ */
+function gruenes_brett_rss() {
+    get_template_part( 'feed' );
+}
+remove_all_actions( 'do_feed_rdf' );
+remove_all_actions( 'do_feed_rss' );
+remove_all_actions( 'do_feed_rss2' );
+remove_all_actions( 'do_feed_atom' );
+add_action( 'do_feed_rss2', 'gruenes_brett_rss', 10, 1 );

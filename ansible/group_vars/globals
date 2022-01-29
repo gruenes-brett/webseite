@@ -78,5 +78,10 @@ pages:
     template:
     status: publish
     parent: Wer wir sind
+  - mitmachen:
+    title: Feeds
+    template: feeds.php
+    status: publish
+    parent: Wer wir sind
 
 homepage: Erkunden

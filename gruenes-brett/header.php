@@ -30,16 +30,18 @@ extract( wp_parse_args( $args, $defaults ) );
   <meta property="twitter:title" content="<?php echo wp_strip_all_tags( $title ); ?>">
   <meta property="twitter:description" content="<?php echo wp_strip_all_tags( $description ); ?>">
   <meta property="twitter:image" content="<?php echo $image; ?>">
+
   <?php wp_head(); ?>
   <link rel="icon" href="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/favicon.png">
   <link rel="shortcut icon" href="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/favicon.png">
+  <link rel="alternate" type="application/rss+xml" title="<?php bloginfo( 'name' ); ?> RSS Feed" href="<?php echo esc_url( get_home_url() ); ?>/feed" />
 </head>
 <body>
   <div class="wrapper">
     <header>
       <h1 class="logo">
         <a href="<?php echo esc_url( get_home_url() ); ?>">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/logo.svg" alt="Grünes Brett">
+          <img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/logo.svg" alt="<?php bloginfo( 'name' ); ?>">
           <span><?php bloginfo( 'description' ); ?></span>
         </a>
       </h1>

@@ -18,6 +18,10 @@ class Category_Provider {
         return Comcal_Category::get_all();
     }
 
+    public static function get_category_names() : array {
+        return array_map( fn( $category ) => $category->get_field( 'name' ), static::get_all() );
+    }
+
     public static function get_category_buttons() : string {
         $html = <<<XML
             <div class="item">
@@ -25,8 +29,7 @@ class Category_Provider {
             </div>
 XML;
 
-        $active_category      = Common_Data::get_active_category();
-        $active_category_name = null !== $active_category ? $active_category->get_field( 'name' ) : '';
+        $active_category_name = Common_Data::get_active_category_name();
 
         foreach ( static::get_all() as $category ) {
             list(
