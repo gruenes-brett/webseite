@@ -140,6 +140,10 @@ class Pretty_Event extends Comcal_Pretty_Event {
             XML;
         };
 
+        $map['name'] = function() {
+            return trim( $this->title );
+        };
+
         return $map;
     }
 }

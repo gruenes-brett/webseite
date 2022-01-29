@@ -46,7 +46,7 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
 
         $overlay = $this->get_overlay( $event );
 
-        $title = wp_trim_words( $pretty->title, 10, '...' );
+        $title = wp_trim_words( $pretty->name, 10, '...' );
 
         $description = wp_trim_words( $pretty->description, 60, '...' );
 

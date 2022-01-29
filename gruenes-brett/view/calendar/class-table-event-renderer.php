@@ -53,7 +53,7 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
 
         return <<<XML
       <article class="$private_class">
-        <$header_tag><a href="#" $featherlight_view_data>$pretty->title$day_of_day</a></$header_tag>
+        <$header_tag><a href="#" $featherlight_view_data>$pretty->name$day_of_day</a></$header_tag>
         <section class="meta">
             $time$location$organizer$edit_link
         </section>

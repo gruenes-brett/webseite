@@ -50,7 +50,7 @@ class Event_Detail_View {
     <main class="detail">
       <section class="note $private_class">
         <section class="image" style="background-image: url('$image_url');"></section>
-        <h2><a href="$pretty->permalink">$pretty->title</a></h2>
+        <h2><a href="$pretty->permalink">$pretty->name</a></h2>
         <section class="meta">
           $pretty->meta$edit_link
         </section>

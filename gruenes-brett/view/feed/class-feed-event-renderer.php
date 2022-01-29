@@ -34,7 +34,7 @@ class Feed_Event_Renderer extends Comcal_Default_Event_Renderer {
         return <<<XML
 
         <item>
-            <title>$pretty->title</title>
+            <title>$pretty->name</title>
             <link>$pretty->permalink</link>
             <dc:creator><![CDATA[$pretty->organizer]]></dc:creator>
             <pubDate>$created</pubDate>

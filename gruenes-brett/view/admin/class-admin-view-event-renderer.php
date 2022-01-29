@@ -26,7 +26,7 @@ class Admin_View_Event_Renderer extends Comcal_Default_Event_Renderer {
 
         $private_class = $event->get_field( 'public' ) ? 'public' : 'private';
 
-        $title = wp_trim_words( $pretty->title, 10, '...' );
+        $title = wp_trim_words( $pretty->name, 10, '...' );
 
         $submitter = $event->get_field( 'submitterName' );
         $created   = new DateTime( $event->get_field( 'created' ) );
