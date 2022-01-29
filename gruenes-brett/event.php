@@ -26,13 +26,6 @@ get_header(
     )
 );
 ?>
-<!-- <aside>
-  <nav>
-    <div class="item">
-      <?php echo $detail_view->get_aside_html(); ?>
-    </div>
-  <nav>
-</aside> -->
 
 <?php
   echo $detail_view->get_main_html();

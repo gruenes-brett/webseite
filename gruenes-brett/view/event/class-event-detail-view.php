@@ -26,13 +26,6 @@ class Event_Detail_View {
         $this->pretty = new Pretty_Event( $this->event );
     }
 
-    public function get_aside_html() {
-        return <<<XML
-            <a>{$this->pretty->title}</a>
-XML;
-
-    }
-
     public function get_main_html() {
         $pretty = $this->pretty;
 
@@ -133,6 +126,23 @@ XML;
         </section>
       </article>
     </main>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "location": {
+        "@type": "Place",
+        "name": "$pretty->location"
+      },
+      "name": "$pretty->title",
+      "startDate": "$dtstart",
+      "endDate": "$dtend",
+      "organizer": {
+        "@type": "Organization",
+        "name": "$pretty->organizer"
+      }
+    }
+    </script>
 XML;
 
     }

@@ -30,7 +30,7 @@ class Edit_Event_Popup extends Comcal_Featherlight_Event_Popup {
             $edit_link              = "<a href='#' $featherlight_edit_data>bearbeiten</a>";
 
             $featherlight_edit_copy_data = self::get_featherlight_attribute( $event, true );
-            $edit_link                   = "$prefix$edit_link <a href='#' $featherlight_edit_copy_data>kopieren</a>";
+            $edit_link                   = "$prefix$edit_link, <a href='#' $featherlight_edit_copy_data>kopieren</a>";
         }
         return $edit_link;
     }
