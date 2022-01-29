@@ -692,6 +692,25 @@ aside nav a:hover, aside nav a:focus {
   text-align: right;
 }
 
+.notfound {
+  overflow: hidden;
+  position: relative;
+  height: 180px;
+}
+
+.notfound h1 {
+  position: absolute;
+  z-index: 0;
+  transform: rotate(-35deg);
+  font-size: 250px;
+  color: var(--lightgray);
+}
+
+.notfound h2 {
+  position: absolute;
+  z-index: 1;
+}
+
 /* Media queries */
 
 @media only screen and (max-width: 1000px) {
@@ -789,5 +808,9 @@ aside nav a:hover, aside nav a:focus {
   .detail .formgroup {
     flex-direction: row;
     justify-content: stretch;
+  }
+
+  .notfound {
+    height: 120px;
   }
 }
