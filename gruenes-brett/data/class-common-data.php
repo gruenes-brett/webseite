@@ -71,7 +71,9 @@ class Common_Data {
     }
 
     /**
-     * Returns the permalink for a given event_id.
+     * Returns the permalink for an event.
+     *
+     * @param String $event_id The id of the given event.
      */
     public static function get_permalink( $event_id ) : string {
         return esc_url( get_home_url() . '/veranstaltung/' . $event_id );

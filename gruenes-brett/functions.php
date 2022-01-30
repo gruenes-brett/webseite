@@ -58,7 +58,7 @@ function echo_floating_buttons( $scroll_option = 'scrollToToday' ) {
 
 // data.
 require_once 'data/class-common-data.php';
-require_once 'data/class-sitemap-provider.php';
+require_once 'data/class-event-sitemap-provider.php';
 
 // event.
 require_once 'view/event/class-event-popup.php';

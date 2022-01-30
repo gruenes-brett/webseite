@@ -1,8 +1,16 @@
 <?php
 /**
- * Event_Sitemap_Provider
+ * A sitemap provider for the events.
  *
  * @package GruenesBrett
+ */
+
+if ( ! verify_community_calendar_loaded() ) {
+    return;
+}
+
+/**
+ * A sitemap provider for the events.
  */
 class Event_Sitemap_Provider extends WP_Sitemaps_Provider {
 
@@ -21,6 +29,7 @@ class Event_Sitemap_Provider extends WP_Sitemaps_Provider {
 
         foreach ( $sliced as $event ) {
             $sitemap_entry = array(
+                // phpcs:ignore
                 'loc' => Common_Data::get_permalink( $event->eventId ),
             );
 
