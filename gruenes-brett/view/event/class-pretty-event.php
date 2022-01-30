@@ -110,7 +110,7 @@ class Pretty_Event extends Comcal_Pretty_Event {
         };
 
         $map['permalink'] = function() {
-            return esc_url( get_home_url() . '/veranstaltung/' . $this->event_id );
+            return Common_Data::get_permalink( $this->event_id );
         };
 
         $map['json_schema'] = function() {

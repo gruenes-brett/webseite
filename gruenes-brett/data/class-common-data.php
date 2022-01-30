@@ -70,6 +70,16 @@ class Common_Data {
         return $events_iterator;
     }
 
+    /**
+     * Returns the permalink for a given event_id.
+     */
+    public static function get_permalink( $event_id ) : string {
+        return esc_url( get_home_url() . '/veranstaltung/' . $event_id );
+    }
+
+    /**
+     * Returns the beginning of an iCal calender.
+     */
     public static function get_ical_calendar_begin() : string {
         return 'BEGIN:VCALENDAR' . PHP_EOL
              . 'VERSION:2.0' . PHP_EOL
@@ -79,6 +89,9 @@ class Common_Data {
              . 'X-WR-TIMEZONE:Europe/Berlin' . PHP_EOL;
     }
 
+    /**
+     * Returns the end of an iCal calender.
+     */
     public static function get_ical_calendar_end() : string {
         return 'END:VCALENDAR';
     }

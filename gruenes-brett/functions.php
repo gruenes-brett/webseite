@@ -58,6 +58,7 @@ function echo_floating_buttons( $scroll_option = 'scrollToToday' ) {
 
 // data.
 require_once 'data/class-common-data.php';
+require_once 'data/class-sitemap-provider.php';
 
 // event.
 require_once 'view/event/class-event-popup.php';
@@ -263,3 +264,31 @@ remove_all_actions( 'do_feed_rss' );
 remove_all_actions( 'do_feed_rss2' );
 remove_all_actions( 'do_feed_atom' );
 add_action( 'do_feed_rss2', 'gruenes_brett_rss', 10, 1 );
+
+add_filter(
+    'wp_sitemaps_add_provider',
+    function( $provider, $name ) {
+        if ( 'users' === $name || 'taxonomies' === $name ) {
+            return false;
+        }
+        return $provider;
+    },
+    10,
+    2
+);
+
+add_filter(
+    'wp_sitemaps_post_types',
+    function( $post_types ) {
+        unset( $post_types['post'] );
+        return $post_types;
+    }
+);
+
+add_filter(
+    'init',
+    function() {
+        $provider = new Event_Sitemap_Provider();
+        wp_register_sitemap_provider( 'events', $provider );
+    }
+);
