@@ -56,11 +56,6 @@ pages:
     template:
     status: publish
     parent:
-  - bund_jugend:
-    title: BUNDjugend {{ instance_name }}
-    template:
-    status: publish
-    parent: Wer wir sind
   - datenschutz:
     title: Datenschutzerklärung
     template:
@@ -71,12 +66,7 @@ pages:
     template:
     status: publish
     parent: Wer wir sind
-  - mitmachen:
-    title: Mitmachen
-    template:
-    status: publish
-    parent: Wer wir sind
-  - mitmachen:
+  - feeds:
     title: Feeds
     template: feeds.php
     status: publish
