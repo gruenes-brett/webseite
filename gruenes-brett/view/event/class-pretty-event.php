@@ -63,6 +63,11 @@ class Pretty_Event extends Comcal_Pretty_Event {
             $date = $this->formatted_date;
             $time = $this->formatted_time;
 
+            $cancelled = $this->cancelled_html;
+            if ( '' !== $cancelled ) {
+                $cancelled .= '<br>';
+            }
+
             if ( '' !== $time ) {
                 $time = ', ' . $time;
             }
@@ -82,7 +87,14 @@ class Pretty_Event extends Comcal_Pretty_Event {
                 $organizer = '<br>' . $organizer;
             }
 
-            return $date . $time . $location . $address . $organizer;
+            return $cancelled . $date . $time . $location . $address . $organizer;
+        };
+
+        $map['cancelled_html'] = function() {
+            if ( $this->cancelled ) {
+                return '<span class="cancelled">ABGESAGT!</span> ';
+            }
+            return '';
         };
 
         $map['clickable_description'] = function() {
@@ -131,7 +143,7 @@ class Pretty_Event extends Comcal_Pretty_Event {
                     "endDate": "$dtend",
                     "organizer": {
                         "@type": "Organization",
-                        "name": "$pretty->organizer"
+                        "name": "$this->organizer"
                     }
                 }
                 </script>

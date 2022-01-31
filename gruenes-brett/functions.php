@@ -11,6 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once ABSPATH . 'wp-admin/includes/plugin.php';  // needed for is_plugin_active.
 
+define( 'GRUENESBRETT_VERSION', '1.1.6' );
+
 /**
  * Checks if the required Community Calendar plugin is loaded.
  *
@@ -188,7 +190,7 @@ add_action( 'template_include', 'gruenes_brett_template_include' );
  * Enqueue scripts and styles.
  */
 function gruenes_brett_scripts() {
-    $version = '1.1.1';
+    $version = GRUENESBRETT_VERSION;
     wp_enqueue_script(
         'gruenes_brett_form_script',
         esc_url( get_stylesheet_directory_uri() . '/js/forms.js' ),
@@ -236,7 +238,7 @@ function gruenes_brett_scripts() {
 add_action( 'wp_enqueue_scripts', 'gruenes_brett_scripts' );
 
 function gruenes_brett_styles() {
-    $version = '1.1.5';
+    $version = GRUENESBRETT_VERSION;
     wp_enqueue_style( 'style', get_stylesheet_uri(), '', $version );
     wp_enqueue_style(
         'featherlight',

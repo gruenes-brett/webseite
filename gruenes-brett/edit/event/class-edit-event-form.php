@@ -42,6 +42,7 @@ class Edit_Event_Form extends Comcal_Edit_Event_Form {
         'inputPublic'         => 'public',
         'inputDelete'         => 'delete',
         'inputJoinDaily'      => 'joinDaily',
+        'inputCancelled'      => 'cancelled',
     );
 
     protected function get_form_id(): string {
@@ -88,6 +89,7 @@ XML;
 
         $more_fields  = $this->get_privacy_consent_checkbox();
         $more_fields .= $this->get_public_checkbox();
+        $more_fields .= $this->get_cancelled_checkbox();
         $more_fields .= $event_exists ? $this->get_delete_checkbox() : '';
 
         $submit_button_text = 'Veranstaltung eintragen';
@@ -248,6 +250,27 @@ XML;
                     <div class="row">
                       <input type="checkbox" name="inputPublic" id="inputPublic" $checked>
                       <label for="inputPublic">Veranstaltung ist veröffentlicht</label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+XML;
+    }
+
+    protected function get_cancelled_checkbox() {
+        if ( ! $this->event->current_user_can_edit() ) {
+            return '';
+        }
+        $cancelled = $this->event->is_cancelled();
+        $checked   = $cancelled ? 'checked' : '';
+        return <<<XML
+              <tr>
+                <td></td>
+                <td>
+                  <div class="formgroup">
+                    <div class="row">
+                      <input type="checkbox" name="inputCancelled" id="inputCancelled" $checked>
+                      <label for="inputCancelled">Veranstaltung wurde <span class="cancelled">abgesagt</span></label>
                     </div>
                   </div>
                 </td>

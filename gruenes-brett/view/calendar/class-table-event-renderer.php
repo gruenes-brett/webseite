@@ -25,7 +25,7 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
 
         $featherlight_view_data = Event_Popup::get_featherlight_attribute( $event );
 
-        $private_class  = $event->get_field( 'public' ) ? '' : 'private';
+        $private_class = $event->get_field( 'public' ) ? '' : 'private';
 
         $day_of_day     = '';
         $number_of_days = $event->get_number_of_days();
@@ -51,11 +51,13 @@ class Table_Event_Renderer extends Comcal_Event_Renderer {
 
         $edit_link = Edit_Event_Popup::create_edit_links( $event, ', ' );
 
+        $cancelled = $pretty->cancelled_html;
+
         return <<<XML
       <article class="$private_class">
         <$header_tag><a href="#" $featherlight_view_data>$pretty->name$day_of_day</a></$header_tag>
         <section class="meta">
-            $time$location$organizer$edit_link
+            $cancelled$time$location$organizer$edit_link
         </section>
       </article>
 XML;

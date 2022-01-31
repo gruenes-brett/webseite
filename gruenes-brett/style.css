@@ -365,6 +365,13 @@ aside nav a:hover, aside nav a:focus {
   color: var(--darkgray);
 }
 
+.cancelled {
+  color: white;
+  background-color: red;
+  padding: 1px;
+  border-radius: 2px;
+}
+
 /* Explore page */
 
 .explore {

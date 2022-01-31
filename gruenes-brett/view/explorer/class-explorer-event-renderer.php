@@ -29,10 +29,15 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
 
         $date = $pretty->formatted_date;
         $time = $pretty->formatted_time;
-        $meta = $date;
+        $meta = '';
+        if ( $event->is_cancelled() ) {
+            $meta = $pretty->cancelled_html . '<br>';
+        }
         if ( ! $pretty->is_multiday && '' !== $time ) {
             // Hide time for multiday events.
-            $meta = "$date, $time";
+            $meta .= "$date, $time";
+        } else {
+            $meta .= $date;
         }
 
         $meta .= Edit_Event_Popup::create_edit_links( $event, ', ' );
@@ -42,7 +47,7 @@ class Explorer_Event_Renderer extends Comcal_Default_Event_Renderer {
             $meta .= '<br>' . $organizer;
         }
 
-        $private_class  = $event->get_field( 'public' ) ? '' : 'private';
+        $private_class = $event->get_field( 'public' ) ? '' : 'private';
 
         $overlay = $this->get_overlay( $event );
 
