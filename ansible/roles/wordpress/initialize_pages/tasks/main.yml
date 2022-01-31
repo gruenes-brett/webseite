@@ -15,6 +15,7 @@
     title: "{{ item.title }}"
     template: "{{ item.template }}"
     parent: "{{ item.parent }}"
+    status: "{{ item.status }}"
   with_items:
     - "{{ pages }}"
 

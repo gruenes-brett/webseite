@@ -19,25 +19,25 @@ if ( ! verify_community_calendar_loaded( true ) ) {
       <a href="/wp-login.php?redirect_to=/veranstaltung-eintragen">Anmelden für sofortige Freischaltung</a>
     </div>
     <div class="item">
-      <a href="/wer-wir-sind">Account beantragen</a>
+      <a href="/wer-wir-sind/">Account beantragen</a>
     </div>
     <?php endif; ?>
 
     <?php if ( Comcal_User_Capabilities::has_edit_privileges() ) : ?>
     <div class="item">
-      <a href="/neue-veranstaltungen">Neueste Veranstaltungen</a>
+      <a href="/veranstaltung-eintragen/neue-veranstaltungen/">Neueste Veranstaltungen</a>
     </div>
     <?php endif; ?>
 
     <?php if ( Comcal_User_Capabilities::administer_events() ) : ?>
     <div class="item">
-      <a href="/vergangene-veranstaltungen">Vergangene Veranstaltungen</a>
+      <a href="/veranstaltung-eintragen/vergangene-veranstaltungen/">Vergangene Veranstaltungen</a>
     </div>
     <?php endif; ?>
 
     <?php if ( Comcal_User_Capabilities::edit_categories() ) : ?>
     <div class="item">
-      <a href="/kategorien-bearbeiten">Kategorien bearbeiten</a>
+      <a href="/veranstaltung-eintragen/kategorien-bearbeiten/">Kategorien bearbeiten</a>
     </div>
     <?php endif; ?>
   </nav>
