@@ -24,7 +24,11 @@ class Event_Sitemap_Provider extends WP_Sitemaps_Provider {
 
         $length = wp_sitemaps_get_max_urls( $this->object_type );
         $offset = ( $page_num - 1 ) * $length;
-        $events = Comcal_Query_Event_Rows::query_events_by_date( null, '', Comcal_Date_Time::now() );
+        $events = Comcal_Query_Event_Rows::query_events_by_date(
+            null,
+            '',
+            Comcal_Date_Time::now()->get_date_str()
+        );
         $sliced = array_slice( $events, $offset, $length );
 
         foreach ( $sliced as $event ) {
@@ -39,7 +43,11 @@ class Event_Sitemap_Provider extends WP_Sitemaps_Provider {
     }
 
     public function get_max_num_pages( $object_subtype = '' ) {
-        $events = Comcal_Query_Event_Rows::query_events_by_date( null, '', Comcal_Date_Time::now() );
+        $events = Comcal_Query_Event_Rows::query_events_by_date(
+            null,
+            '',
+            Comcal_Date_Time::now()->get_date_str()
+        );
         return (int) ceil( count( $events ) / wp_sitemaps_get_max_urls( $this->object_type ) );
     }
 }
