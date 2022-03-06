@@ -158,7 +158,7 @@ XML;
                   <div class="formgroup">
                     <div class="row">
                       <input type="checkbox" name="inputJoinDaily" id="inputJoinDaily" $join_daily_checked>
-                      <label for="inputJoinDaily">Bei mehrtägigen Veranstaltungen: Teilnahme an jedem Tag möglich</label>
+                      <label for="inputJoinDaily">Bei mehrtägigen Veranstaltungen: Teilnahme an einzelnen Tagen möglich</label>
                     </div>
                   </div>
                 </td>
@@ -366,7 +366,8 @@ XML;
               <tr>
                 <td><label for="selectMainCategory">Primäre Kategorie</label></td>
                 <td>
-                  <select name="selectMainCategory" id="selectMainCategory">
+                  <select name="selectMainCategory" id="selectMainCategory" required>
+                    <option disabled selected value>Kategorie auswählen</option>
                     $main_cat_options
                   </select>
                 </td>
