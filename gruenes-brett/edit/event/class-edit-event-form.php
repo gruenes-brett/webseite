@@ -85,7 +85,7 @@ XML;
 
         $category_selector     = $this->get_category_selector();
         $submitter_form_fields = $this->get_submitter_form_fields();
-        $facebook_import       = $this->get_import_facebook_event_control();
+        $facebook_import       = '';
 
         $more_fields  = $this->get_privacy_consent_checkbox();
         $more_fields .= $this->get_public_checkbox();
