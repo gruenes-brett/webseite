@@ -90,8 +90,8 @@
         this.urlTarget.value = data.url;
       })
       .catch(error => {
-        alert(error);
         console.error("Error:", error);
+        alert(error.message);
       });
     }
   })
