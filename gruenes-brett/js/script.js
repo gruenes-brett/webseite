@@ -84,7 +84,7 @@
         this.startDateTarget.value = data.date;
         this.endDateTarget.value = data.dateEnd;
         this.placeAddressTarget.value = data.address;
-        this.placeLocationTarget.value = data.location;
+        this.placeNameTarget.value = data.location;
         this.descriptionTarget.value = data.description;
         this.urlTarget.value = data.url;
       })

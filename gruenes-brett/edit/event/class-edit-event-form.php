@@ -166,7 +166,7 @@ XML;
               $spacer
               <tr>
                 <td><label for="inputPlaceName">Veranstaltungsort</label></td>
-                <td><input type="text" name="inputPlaceName" id="inputPlaceName" placeholder="Am Blauen Wunder" maxlength="250" value="$location"></td>
+                <td><input type="text" name="inputPlaceName" id="inputPlaceName" placeholder="Am Blauen Wunder" maxlength="250" data-target="form.placeName" value="$location"></td>
               </tr>
               <tr>
                 <td><label for="inputPlaceAddress">Adresse</label></td>
