@@ -4,7 +4,7 @@
   application.register("form", class extends Stimulus.Controller {
     static get targets() {
       return [
-        "startTime", "endTime", "placeAddress", "physicalSpace", "image", "imagePreview", "imageUrl",
+        "startTime", "endTime", "placeAddress", "placeName", "physicalSpace", "image", "imagePreview", "imageUrl",
         "importEvent", "title", "startDate", "endDate", "description", "url", "table"
       ];
     }
