@@ -110,7 +110,7 @@ XML;
               </tr>
               <tr>
                 <td><label for="inputOrganizer">Veranstalter</label></td>
-                <td><input type="text" id="inputOrganizer" name="inputOrganizer" placeholder="Organisation XY" maxlength="100" value="$organizer"></td>
+                <td><input type="text" id="inputOrganizer" name="inputOrganizer" placeholder="Organisation XY" maxlength="100" data-target="form.organizer" value="$organizer"></td>
               </tr>
               <tr>
                 <td><label for="inputUrl">Veranstaltungslink</label></td>

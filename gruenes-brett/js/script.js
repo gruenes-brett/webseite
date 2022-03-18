@@ -5,7 +5,7 @@
     static get targets() {
       return [
         "startTime", "endTime", "placeAddress", "placeName", "physicalSpace", "image", "imagePreview", "imageUrl",
-        "importEvent", "title", "startDate", "endDate", "description", "url", "table"
+        "importEvent", "title", "startDate", "endDate", "description", "url", "table", "organizer"
       ];
     }
 
@@ -86,6 +86,7 @@
         this.placeAddressTarget.value = data.address;
         this.placeNameTarget.value = data.location;
         this.descriptionTarget.value = data.description;
+        this.organizerTarget.value = data.organizer;
         this.urlTarget.value = data.url;
       })
       .catch(error => {
