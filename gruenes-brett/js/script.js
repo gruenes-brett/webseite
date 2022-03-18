@@ -5,7 +5,7 @@
     static get targets() {
       return [
         "startTime", "endTime", "placeAddress", "physicalSpace", "image", "imagePreview", "imageUrl",
-        "importFacebookEvent", "title", "startDate", "endDate", "description", "url", "table"
+        "importEvent", "title", "startDate", "endDate", "description", "url", "table"
       ];
     }
 
@@ -50,9 +50,9 @@
       });
     }
 
-    importFacebookEvent() {
-      var facebookUrl = prompt('Bitte die vollständige Adresse der Facebook-Veranstaltung eingeben:');
-      if (facebookUrl === null) {
+    importEvent() {
+      var url = prompt('Bitte die vollständige Adresse der Veranstaltung eingeben:');
+      if (url === null) {
         return;
       }
 
@@ -60,7 +60,7 @@
       table.classList.add('loading');
       var apiUrl = wp_api.root + 'comcal/v1/import-event-url';
       apiUrl += (apiUrl.indexOf('?') > 0) ? '&' : '?';
-      apiUrl += 'url=' + encodeURIComponent(facebookUrl);
+      apiUrl += 'url=' + encodeURIComponent(url);
       fetch(apiUrl, {
         method: "GET",
         headers: {
@@ -77,13 +77,14 @@
           throw Error(data.message);
         }
 
-        // Update form controls with data from Facebook event:
+        // Update form controls with data from event:
         this.titleTarget.value = data.title;
         this.startTimeTarget.value = data.time;
         this.endTimeTarget.value = data.timeEnd;
         this.startDateTarget.value = data.date;
         this.endDateTarget.value = data.dateEnd;
-        this.placeAddressTarget.value = data.location;
+        this.placeAddressTarget.value = data.address;
+        this.placeLocationTarget.value = data.location;
         this.descriptionTarget.value = data.description;
         this.urlTarget.value = data.url;
       })

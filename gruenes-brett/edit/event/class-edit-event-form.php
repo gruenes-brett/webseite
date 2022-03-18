@@ -85,7 +85,7 @@ XML;
 
         $category_selector     = $this->get_category_selector();
         $submitter_form_fields = $this->get_submitter_form_fields();
-        $facebook_import       = '';
+        $import                = $this->get_import_event_control();
 
         $more_fields  = $this->get_privacy_consent_checkbox();
         $more_fields .= $this->get_public_checkbox();
@@ -103,7 +103,7 @@ XML;
 
             <table data-target="form.table">
               $submitter_form_fields
-              $facebook_import
+              $import
               <tr>
                 <td><label for="inputTitle">Veranstaltungsname</label></td>
                 <td><input type="text" id="inputTitle" name="inputTitle" placeholder="Reinigung der Elbwiesen" maxlength="100" value="$title" data-target="form.title" required></td>
@@ -336,13 +336,16 @@ XML;
 XML;
     }
 
-    protected function get_import_facebook_event_control() : string {
+    protected function get_import_event_control() : string {
+        if ( ! $this->event->current_user_can_edit() ) {
+            return '';
+        }
         return <<<XML
         <tr>
           <td></td>
           <td>
-            <a href="#" id="importFacebookEvent" data-action="form#importFacebookEvent">
-              Facebook-Veranstaltung importieren
+            <a href="#" id="importEvent" data-action="form#importEvent">
+              Veranstaltung von externer Seite importieren (experimentell)
             </a>
           </td>
         </tr>

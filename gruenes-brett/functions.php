@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once ABSPATH . 'wp-admin/includes/plugin.php';  // needed for is_plugin_active.
 
-define( 'GRUENESBRETT_VERSION', '1.1.6' );
+define( 'GRUENESBRETT_VERSION', '1.1.7' );
 
 /**
  * Checks if the required Community Calendar plugin is loaded.
