@@ -42,11 +42,15 @@
         return response.json()
       })
       .then(result => {
+        if (result.code === 'error') {
+          throw Error(result.message);
+        }
         preview.style.backgroundImage = "url(" + result + ")";
         imageUrl.value = result;
       })
       .catch(error => {
         console.error("Error:", error);
+        alert(error.message);
       });
     }
 

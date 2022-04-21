@@ -97,6 +97,8 @@ XML;
             $submit_button_text = 'Veranstaltung aktualisieren';
         }
 
+        $max_upload_size = esc_html( size_format( wp_max_upload_size() ) );
+
         $spacer = $this->get_spacer();
 
         return <<<XML
@@ -204,7 +206,7 @@ XML;
                   </div>
                   <div class="formgroup">&nbsp;</div>
                   <div class="formgroup">
-                    Das Bild wird im Format 16:9 angezeigt werden. Die empfohlene Auflösung ist 960x540 Pixel.
+                    Das Bild wird im Format 16:9 angezeigt werden. Die empfohlene Auflösung ist 960x540 Pixel. Maximale Bildgröße: $max_upload_size
                   </div>
                 </td>
               </tr>

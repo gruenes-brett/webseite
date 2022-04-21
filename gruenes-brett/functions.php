@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once ABSPATH . 'wp-admin/includes/plugin.php';  // needed for is_plugin_active.
 
-define( 'GRUENESBRETT_VERSION', '1.1.7' );
+define( 'GRUENESBRETT_VERSION', '1.1.8' );
 
 /**
  * Checks if the required Community Calendar plugin is loaded.
@@ -116,13 +116,22 @@ add_filter( 'upload_mimes', 'allow_mime_types' );
  * @param WP_REST_Request $data contains the uploaded image.
  */
 function upload_image( WP_REST_Request $data ) {
-    $image      = $data->get_file_params()['image'];
-    $attachment = media_handle_sideload( $image, 0 );
+    if ( isset( $data->get_file_params()['image'] ) ) {
+        $image      = $data->get_file_params()['image'];
+        $attachment = media_handle_sideload( $image, 0 );
+        has_image_size( 'blubb' );
 
-    if ( ! is_wp_error( $attachment ) ) {
-        $url = wp_get_attachment_image_url( $attachment, 'gruenesbrett' );
-        return $url;
+        if ( ! is_wp_error( $attachment ) ) {
+            $url = wp_get_attachment_image_url( $attachment, 'gruenesbrett' );
+            return $url;
+        }
     }
+    $max_upload_size = esc_html( size_format( wp_max_upload_size() ) );
+    return new WP_Error(
+        'error',
+        "Fehler bei der Verarbeitung des Bildes. Die maximal erlaubte Uploadgröße beträgt $max_upload_size",
+        array( 'status' => 400 )
+    );
 }
 
 add_action(
