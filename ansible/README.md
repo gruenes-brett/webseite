@@ -38,7 +38,7 @@ values in each host file.
 ansible-playbook -i hosts_myinstance basic_setup.yml
 ```
 
-### 3. Execute `setup_wordpress.yml` once on this server
+### 3. Execute `setup_wordpress.yml` once for every new instance
 ```
 ansible-playbook -i hosts_myinstance setup_wordpress.yml
 ```

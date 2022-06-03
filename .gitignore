@@ -24,3 +24,7 @@ nohup.out
 
 # ignore where Ansible puts WordPress
 /wordpress
+
+# never commit inventory files with private data
+/ansible/*_host
+/ansible/deploy-*
