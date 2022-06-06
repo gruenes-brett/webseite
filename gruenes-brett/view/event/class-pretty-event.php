@@ -111,6 +111,15 @@ class Pretty_Event extends Comcal_Pretty_Event {
             $description = trim( $description );
             $description = str_replace( "\r\n", '\\n', $description );
 
+            $url      = $this->url ? $this->url : $this->permalink;
+            $location = $this->location;
+
+            $categories = array();
+            foreach ( $this->categories as $cat ) {
+                $categories[] = $cat['name'];
+            }
+            $cats = implode( ',', $categories );
+
             return 'BEGIN:VEVENT' . PHP_EOL
                  . "UID:$this->event_id@gruenesbrett" . PHP_EOL
                  . "DTSTAMP:$dtstamp" . PHP_EOL
@@ -118,6 +127,9 @@ class Pretty_Event extends Comcal_Pretty_Event {
                  . "DTEND:$dtend" . PHP_EOL
                  . "SUMMARY:$this->name" . PHP_EOL
                  . "DESCRIPTION:$description" . PHP_EOL
+                 . "CATEGORIES:$cats" . PHP_EOL
+                 . "URL:$url" . PHP_EOL
+                 . "LOCATION:$location" . PHP_EOL
                  . 'END:VEVENT' . PHP_EOL;
         };
 
