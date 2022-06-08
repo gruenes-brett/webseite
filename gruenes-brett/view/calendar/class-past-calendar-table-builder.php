@@ -35,7 +35,7 @@ class Past_Calendar_Table_Builder extends Calendar_Table_Builder {
         static::$instance = self::create_display(
             static::class,
             $events_iterator,
-            null,
+            Comcal_Date_Time::from_date_str_time_str( '2022-01-01', '00:00' ),
             Comcal_Date_Time::now()
         );
         return static::$instance;
