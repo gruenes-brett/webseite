@@ -3,6 +3,7 @@
   git:
     repo: "{{ item.repo }}"
     dest: "/root/{{ item.name }}"
+    version: "{{ item.git_version }}"
 
 - name: Mirror /root/{{ item.name }}{{ item.src_dir }} to {{ item.target_dir }}
   command: rsync -a --delete "/root/{{ item.name }}{{ item.src_dir }}" "{{ item.target_dir }}"

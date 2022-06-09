@@ -8,8 +8,10 @@
       name: gruenes-brett
       src_dir: /gruenes-brett
       target_dir: "{{ wordpress_dir }}/wp-content/themes"
+      git_version: "{{ theme_git_version | default('main') }}"
     - community_calendar:
       repo: "{{ community_calendar_repo }}"
       name: community-calendar
       src_dir: ""
       target_dir: "{{ wordpress_dir }}/wp-content/plugins"
+      git_version: "{{ comcal_git_version | default('master') }}"

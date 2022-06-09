@@ -27,6 +27,8 @@ email_smtp_secure=tls
 email_user={{ email_address }}
 
 ### Changing the following variables is optional:
+comcal_git_version="master"
+theme_git_version="main"
 
 target_www_dir={{ apache_www_dir }}{{ instance_name }}
 wordpress_dir={{ target_www_dir }}/wordpress
