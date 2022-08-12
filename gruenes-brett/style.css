@@ -736,6 +736,12 @@ aside nav a:hover, aside nav a:focus {
   border-left-color: var(--green);
 }
 
+.language-switcher input.button {
+  width: unset;
+  line-height: unset;
+  padding: 0 5px;
+}
+
 /* Media queries */
 
 @media only screen and (max-width: 1000px) {
