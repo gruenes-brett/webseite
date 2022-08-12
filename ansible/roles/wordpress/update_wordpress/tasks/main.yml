@@ -1,4 +1,13 @@
 ---
+- name: Create wordpress database backup
+  include_role:
+    name: wordpress/lib/wp-cli
+  vars:
+    args:
+      - db
+      - export
+      - "{{ backup_base_dir }}/{{ instance_name }}/db_updatebackup_{{ ansible_date_time.iso8601_basic_short }}.sql"
+
 - name: Ensure wp-cli cache directory
   file:
     path: "{{ apache_www_dir }}/.wp-cli"
