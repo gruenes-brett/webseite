@@ -9,6 +9,11 @@ if ( ! verify_community_calendar_loaded( true ) ) {
     return;
 }
 
+$register_url = '/wer-wir-sind/';
+if ( '1' === get_option( 'users_can_register' ) ) {
+    $register_url = '/wp-login.php?action=register';
+}
+
 ?>
 <aside>
   <nav>
@@ -19,7 +24,7 @@ if ( ! verify_community_calendar_loaded( true ) ) {
       <a href="/wp-login.php?redirect_to=/veranstaltung-eintragen">Anmelden für sofortige Freischaltung</a>
     </div>
     <div class="item">
-      <a href="/wer-wir-sind/">Account beantragen</a>
+      <a href="<?php echo $register_url; ?>">Account beantragen</a>
     </div>
     <?php endif; ?>
 

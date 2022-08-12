@@ -32,8 +32,8 @@ extract( wp_parse_args( $args, $defaults ) );
   <meta property="twitter:image" content="<?php echo $image; ?>">
 
   <?php wp_head(); ?>
-  <link rel="icon" href="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/favicon.png">
-  <link rel="shortcut icon" href="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/favicon.png">
+  <link rel="icon" href="<?php echo get_image_url( 'favicon.png' ); ?>">
+  <link rel="shortcut icon" href="<?php echo get_image_url( 'favicon.png' ); ?>">
   <link rel="alternate" type="application/rss+xml" title="<?php bloginfo( 'name' ); ?> RSS Feed" href="<?php echo esc_url( get_home_url() ); ?>/feed" />
 </head>
 <body>
@@ -41,7 +41,7 @@ extract( wp_parse_args( $args, $defaults ) );
     <header>
       <h1 class="logo">
         <a href="<?php echo esc_url( get_home_url() ); ?>">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/img/logo.svg" alt="<?php bloginfo( 'name' ); ?>">
+          <img src="<?php echo get_logo_url(); ?>" alt="<?php bloginfo( 'name' ); ?>">
           <span><?php bloginfo( 'description' ); ?></span>
         </a>
       </h1>

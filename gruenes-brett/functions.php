@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once ABSPATH . 'wp-admin/includes/plugin.php';  // needed for is_plugin_active.
 
-define( 'GRUENESBRETT_VERSION', '1.1.8' );
+define( 'GRUENESBRETT_VERSION', '1.1.9' );
 
 /**
  * Checks if the required Community Calendar plugin is loaded.
@@ -56,6 +56,26 @@ function echo_floating_buttons( $scroll_option = 'scrollToToday' ) {
         $scroll_option,
         "$stylesheet_directory/img/icons/$icon"
     );
+}
+
+/**
+ * Return the URL of an image in the img folder.
+ *
+ * @param string $filename Name of the image file.
+ *
+ * @return string
+ */
+function get_image_url( $filename ) {
+    return esc_url( get_stylesheet_directory_uri() ) . "/img/$filename";
+}
+
+/**
+ * Return the logo URL.
+ *
+ * @return string
+ */
+function get_logo_url() {
+    return get_image_url( 'logo.svg' );
 }
 
 // data.
@@ -301,5 +321,47 @@ add_filter(
     function() {
         $provider = new Event_Sitemap_Provider();
         wp_register_sitemap_provider( 'events', $provider );
+    }
+);
+
+/**
+ * Custom message on the user registration page.
+ */
+function gb_register_user_message() {
+    $html = '
+        <div class="login-infobox">
+            <p>
+                Bitte gib einen Benutzernamen und eine E-Mail-Adresse für dich bzw. deine Initiative an.
+            </p>
+            <p>
+                Nach einer Prüfung werden wir dich freischalten, so dass selbstständig
+                Veranstaltungen eingetragen werden können.
+            </p>
+        </div>';
+    echo $html;
+}
+add_action( 'register_form', 'gb_register_user_message' );
+
+/**
+ * Custom logo on the user registration and login page.
+ */
+function gb_login_logo() {
+    ?>
+    <style type="text/css">
+        #login h1 a, .login h1 a {
+            background-image: url(<?php echo get_logo_url(); ?>);
+        }
+    </style>
+    <link rel="icon" href="<?php echo get_image_url( 'favicon.png' ); ?>">
+    <link rel="shortcut icon" href="<?php echo get_image_url( 'favicon.png' ); ?>">
+    <?php
+}
+
+add_action( 'login_enqueue_scripts', 'gb_login_logo' );
+add_action( 'login_enqueue_scripts', 'gruenes_brett_styles' );
+add_filter(
+    'login_headerurl',
+    function() {
+        return esc_url( get_home_url() );
     }
 );

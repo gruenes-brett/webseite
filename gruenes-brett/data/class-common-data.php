@@ -74,6 +74,8 @@ class Common_Data {
      * Returns the permalink for an event.
      *
      * @param String $event_id The id of the given event.
+     *
+     * @deprecated Replaced by Comcal_Pretty_Event::get_permalink()
      */
     public static function get_permalink( $event_id ) : string {
         return esc_url( get_home_url() . '/veranstaltung/' . $event_id );

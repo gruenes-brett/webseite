@@ -127,7 +127,7 @@ td {
   padding: 10px 20px;
 }
 
-input, textarea, select, button {
+input, textarea, select, button, .login .button {
   width: 100%;
   padding: 10px;
   font-family: 'Fira Sans', sans-serif;
@@ -147,14 +147,14 @@ input:disabled {
   background: var(--lightgray);
 }
 
-button, a.more {
+button, a.more, .login .button {
   background: var(--green);
   color: var(--white);
   border: none;
   cursor: pointer;
 }
 
-label, button, a.more {
+label, button, a.more, .login .button {
   font-weight: 600;
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 18px;
@@ -162,7 +162,7 @@ label, button, a.more {
   display: inline-block;
 }
 
-button:hover, button:focus, a.more:hover, a.more:focus {
+button:hover, button:focus, a.more:hover, a.more:focus, .login .button:hover, .login .button:focus {
   background: var(--darkgray);
 }
 
@@ -718,6 +718,22 @@ aside nav a:hover, aside nav a:focus {
 .notfound h2 {
   position: absolute;
   z-index: 1;
+}
+
+/* Login page */
+
+.login .login-infobox {
+  border: 2px solid var(--green);
+  margin: 5px 0;
+  padding: 5px;
+}
+
+.login .login-infobox p {
+  margin: 5px 0;
+}
+
+.login p.message.register {
+  border-left-color: var(--green);
 }
 
 /* Media queries */
