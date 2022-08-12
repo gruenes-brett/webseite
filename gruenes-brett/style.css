@@ -732,7 +732,7 @@ aside nav a:hover, aside nav a:focus {
   margin: 5px 0;
 }
 
-.login p.message.register {
+.login p.message {
   border-left-color: var(--green);
 }
 
