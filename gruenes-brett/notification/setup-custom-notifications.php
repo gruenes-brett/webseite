@@ -63,13 +63,13 @@ function gb_new_user_notification_email( $content, $user, $blogname ) {
     $username           = $user->data->display_name;
     $content['message'] = "Hallo $username,
 
-Herzlich Willkommen auf unserer Webseite \"$blogname\"!
+Herzlich Willkommen auf unserer Webseite $blogname!
 
 Nicht wundern, aktuell sind Deine Berechtigungen noch eingeschränkt.
 Wir vom Grünen Brett melden uns bei Dir in einer persönlichen Mail,
 sobald wir Deinen Account überprüft haben. Danke Dir!
 
-Bevor du dich einloggen kannst, musst du unter folgendem Link ein Passwort anlegen.
+Bevor Du Dich einloggen kannst, musst Du unter folgendem Link ein Passwort anlegen.
 
 " . $content['message'];
     return $content;
