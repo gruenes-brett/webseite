@@ -114,6 +114,9 @@ require_once 'view/feed/class-feed-event-renderer.php';
 require_once 'view/ical/class-event-ical-builder.php';
 require_once 'view/ical/class-ical-event-renderer.php';
 
+// notifications.
+require_once 'notification/setup-custom-notifications.php';
+
 remove_action( 'wp_head', 'wp_generator' );
 remove_action( 'wp_head', 'rel_canonical' );
 remove_action( 'wp_head', 'wp_shortlink_wp_head' );
@@ -321,47 +324,5 @@ add_filter(
     function() {
         $provider = new Event_Sitemap_Provider();
         wp_register_sitemap_provider( 'events', $provider );
-    }
-);
-
-/**
- * Custom message on the user registration page.
- */
-function gb_register_user_message() {
-    $html = '
-        <div class="login-infobox">
-            <p>
-                Bitte gib einen Benutzernamen und eine E-Mail-Adresse für dich bzw. deine Initiative an.
-            </p>
-            <p>
-                Nach einer Prüfung werden wir dich freischalten, so dass selbstständig
-                Veranstaltungen eingetragen werden können.
-            </p>
-        </div>';
-    echo $html;
-}
-add_action( 'register_form', 'gb_register_user_message' );
-
-/**
- * Custom logo on the user registration and login page.
- */
-function gb_login_logo() {
-    ?>
-    <style type="text/css">
-        #login h1 a, .login h1 a {
-            background-image: url(<?php echo get_logo_url(); ?>);
-        }
-    </style>
-    <link rel="icon" href="<?php echo get_image_url( 'favicon.png' ); ?>">
-    <link rel="shortcut icon" href="<?php echo get_image_url( 'favicon.png' ); ?>">
-    <?php
-}
-
-add_action( 'login_enqueue_scripts', 'gb_login_logo' );
-add_action( 'login_enqueue_scripts', 'gruenes_brett_styles' );
-add_filter(
-    'login_headerurl',
-    function() {
-        return esc_url( get_home_url() );
     }
 );
