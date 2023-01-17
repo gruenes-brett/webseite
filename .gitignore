@@ -28,3 +28,4 @@ nohup.out
 # never commit inventory files with private data
 /ansible/*_host
 /ansible/deploy-*
+/ansible/ansible-all.bash
