@@ -7,6 +7,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Barlow Condensed';
+  src: url('fonts/barlowcondensed-medium-webfont.woff2') format('woff2'), url('fonts/barlowcondensed-medium-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
 /* Box sizing rules */
 html {
   box-sizing: border-box;
@@ -18,7 +25,7 @@ html {
 
 /* Set default padding */
 ul, ol {
-  padding-left: 40px;
+  padding-left: 0px;
 }
 
 /* Remove default margin */
@@ -61,8 +68,14 @@ body {
 }
 
 .column {
-  padding: 0 50px;
+  padding: 50px;
   width: 50%;
+}
+
+.wrapper .column:last-child {
+  background: #fff;
+  padding-top: 30px;
+  margin-right: 50px;
 }
 
 .logo {
@@ -84,25 +97,43 @@ a:hover, a:focus {
   color: var(--foreground);
 }
 
-button:hover, button:focus, a.more:hover, a.more:focus {
-  background: var(--darkgray);
-}
-
-label, button, a.more {
-  font-weight: 600;
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 18px;
-  line-height: normal;
   letter-spacing: 0;
-  display: inline-block;
-  padding: 10px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 30px;
+  overflow-wrap: anywhere;
+  margin: 20px 0;
 }
 
-button, a.more {
-  background: var(--green);
+h3 {
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+li {
+  display: block;
+  list-style: none;
+  border-bottom: 1px solid var(--lightgray);
+}
+
+li a {
+  display: block;
+  padding: 0 15px;
+  line-height: 40px;
+}
+
+li a:hover, li a:focus {
   color: var(--white);
-  border: none;
-  cursor: pointer;
+  background-color: var(--green);
+  background-image: url('img/icons/arrow-right-line.svg');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+ul li:last-child {
+  border-bottom: none;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -117,22 +148,8 @@ button, a.more {
   padding: 50px;
 }
 
+.wrapper .column:last-child {
+  margin-right: 0;
 }
 
-/* SVG specific styles */
-
-svg a:link, svg a:visited {
-  cursor: pointer;
-}
-
-svg .background {
-  fill: #5ea318;
-}
-
-svg .letter {
-  fill: #fff;
-}
-
-svg a:hover .background, svg a:active .background {
-  fill: #333;
 }
