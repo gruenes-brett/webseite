@@ -8,6 +8,7 @@
       name: gruenes-brett
       src_dir: /landing-page/
       target_dir: "{{ landing_page_dir }}"
+      git_version: "main"
 
 - name: Install landing page vhost
   template:
