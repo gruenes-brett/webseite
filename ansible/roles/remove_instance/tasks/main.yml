@@ -36,6 +36,11 @@
     path: "/etc/apache2/sites-available/{{ instance_name }}_vhost-le-ssl.conf"
     state: absent
 
+- name: Remove subfolder host config
+  file:
+    path: "/etc/apache2/conf-available/gbsubfolder_{{ instance_name }}.conf"
+    state: absent
+
 - name: Disable virtual host for stats collection
   shell: /usr/sbin/a2dissite 010-{{ instance_name }}_stats_vhost.conf
   ignore_errors: yes
@@ -43,6 +48,11 @@
 - name: Remove virtual host for stats collection
   file:
     path: "/etc/apache2/sites-available/010-{{ instance_name }}_stats_vhost.conf"
+    state: absent
+
+- name: Remove config for stats collection
+  file:
+    path: "/etc/apache2/conf-available/gbstats_{{ instance_name }}.conf"
     state: absent
 
 - name: Reload apache2
