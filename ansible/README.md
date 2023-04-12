@@ -11,7 +11,7 @@ Tested on Ubuntu 20.04 LTS
 * Create Apache virtual host for the website
 * Initialize Let's Encrypt certificate (TODO)
 
-See file `hosts_example` for required settings.
+See file `hosts_example` for required and optional settings.
 
 A server can host multiple website instances. Simply use different `instance_name` and `domain`
 values in each host file.

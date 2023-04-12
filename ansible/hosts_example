@@ -8,6 +8,7 @@ me@myhost.net
 instance_name=testing
 domain=mywebsite.net
 domain_alias=
+domain_subfolder=  # If set, the site will be hosted as subfolder of the main (i.e. landing page) domain instead of a separate virtual host
 db_password="<< your password here >>"
 admin_user=admin
 admin_password="<< your password here >>"

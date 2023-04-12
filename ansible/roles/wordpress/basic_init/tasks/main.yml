@@ -18,7 +18,7 @@
     args:
       - core
       - install
-      - --url={{ http_prefix }}://{{ domain }}
+      - --url={{ http_prefix }}://{{ domain }}/{{ domain_subfolder | default('') }}
       - --title={{ page_title }}
       - --admin_user=admin
       - --admin_password={{ admin_password }}

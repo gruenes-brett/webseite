@@ -2,9 +2,17 @@
   template:
     src: vhost.conf
     dest: /etc/apache2/sites-available/{{ vhost_file }}
+  when: domain_subfolder is not defined or domain_subfolder == ''
 
 - name: Enable virtual host for {{ instance_name }}
   shell: /usr/sbin/a2ensite {{ vhost_file }}
+  when: domain_subfolder is not defined or domain_subfolder == ''
+
+- name: Create an alias config for {{ instance_name }} on {{ domain }}/{{ domain_subfolder }}
+  template:
+    src: subfolder.conf
+    dest: /etc/apache2/conf-available/gbsubfolder_{{ instance_name }}.conf
+  when: domain_subfolder is defined and domain_subfolder != ''
 
 - name: Reload apache2
   service:
