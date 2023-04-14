@@ -14,6 +14,16 @@
     dest: /etc/apache2/conf-available/gbsubfolder_{{ instance_name }}.conf
   when: domain_subfolder is defined and domain_subfolder != ''
 
+- name: Create a redirect config
+  template:
+    src: redirect_vhost.conf
+    dest: /etc/apache2/sites-available/{{ vhost_file }}
+  when: domain_subfolder is defined and domain_subfolder != '' and redirect_domain is defined and redirect_domain != ''
+
+- name: Enable virtual host for {{ instance_name }}
+  shell: /usr/sbin/a2ensite {{ vhost_file }}
+  when: domain_subfolder is defined and domain_subfolder != '' and redirect_domain is defined and redirect_domain != ''
+
 - name: Reload apache2
   service:
     name: apache2

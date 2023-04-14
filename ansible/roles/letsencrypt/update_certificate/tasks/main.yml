@@ -7,29 +7,18 @@
     - "/etc/apache2/sites-enabled/{{ instance_name }}_vhost-le-ssl.conf"
     - "/etc/apache2/sites-available/{{ instance_name }}_vhost-le-ssl.conf"
 
-- name: Renew certificate for {{ domain }} and its alias {{ domain_alias }}
-  become: true
-  command:
-    cmd: "certbot --apache -d {{ domain }} -d {{ domain_alias }} --expand --agree-tos -n --redirect -m \"{{ admin_email }}\""
-  register: certbot_output1
-  when: domain_alias != ''
+- name: Update main domain {{ domain }} certificate
+  include_tasks: call_certbot.yml
+  vars:
+    domains:
+      - "{{ domain }}"
+      - "{{ domain_alias }}"
+  when: redirect_domain is not defined or redirect_domain == ''
 
-- name: Certbot output
-  debug:
-    msg: "{{ certbot_output1 }}"
-
-- name: Renew certificate for {{ domain }}
-  become: true
-  command:
-    cmd: "certbot --apache -d {{ domain }} --expand --agree-tos -n --redirect -m \"{{ admin_email }}\""
-  register: certbot_output2
-  when: domain_alias == ''
-
-- name: Certbot output
-  debug:
-    msg: "{{ certbot_output2 }}"
-
-- name: Reload apache2
-  service:
-    name: apache2
-    state: reloaded
+- name: Update redirect domain {{ redirect_domain }} certificate
+  include_tasks: call_certbot.yml
+  vars:
+    domains:
+      - "{{ redirect_domain }}"
+      - "{{ redirect_domain_alias }}"
+  when: redirect_domain is defined and redirect_domain != ''

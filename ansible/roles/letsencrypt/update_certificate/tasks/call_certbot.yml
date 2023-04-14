@@ -1,0 +1,27 @@
+---
+- name: Determine domains
+  vars:
+    domain_list:  ""
+  loop: "{{ domains }}"
+  when: item | default('') != ''
+  set_fact:
+    domain_list:  '{{ domain_list }} -d {{ item }}'
+
+- name: Debug domain list
+  debug:
+    var: domain_list
+
+- name: Renew certificate for the domains
+  become: true
+  command:
+    cmd: "certbot --apache {{ domain_list }} --expand --agree-tos -n --redirect -m \"{{ admin_email }}\""
+  register: certbot_output2
+
+- name: Certbot output
+  debug:
+    msg: "{{ certbot_output2 }}"
+
+- name: Reload apache2
+  service:
+    name: apache2
+    state: reloaded
