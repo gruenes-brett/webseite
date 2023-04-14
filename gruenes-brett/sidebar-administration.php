@@ -14,6 +14,10 @@ if ( '1' === get_option( 'users_can_register' ) ) {
     $register_url = '/wp-login.php?action=register';
 }
 
+function echo_link( $target, $text ) {
+    echo '<a href="' . home_url( $target ) . "\">$text</a>";
+}
+
 ?>
 <aside>
   <nav>
@@ -21,28 +25,28 @@ if ( '1' === get_option( 'users_can_register' ) ) {
 
     <?php if ( ! is_user_logged_in() ) : ?>
     <div class="item">
-      <a href="/wp-login.php?redirect_to=/veranstaltung-eintragen">Anmelden für sofortige Freischaltung</a>
+        <?php echo_link( '/wp-login.php?redirect_to=veranstaltung-eintragen', 'Anmelden für sofortige Freischaltung' ); ?>
     </div>
     <div class="item">
-      <a href="<?php echo $register_url; ?>">Account beantragen</a>
+        <?php echo_link( $register_url, 'Account beantragen' ); ?>
     </div>
     <?php endif; ?>
 
     <?php if ( Comcal_User_Capabilities::has_edit_privileges() ) : ?>
     <div class="item">
-      <a href="/veranstaltung-eintragen/neue-veranstaltungen/">Neueste Veranstaltungen</a>
+        <?php echo_link( '/veranstaltung-eintragen/neue-veranstaltungen/', 'Neueste Veranstaltungen' ); ?>
     </div>
     <?php endif; ?>
 
     <?php if ( Comcal_User_Capabilities::administer_events() ) : ?>
     <div class="item">
-      <a href="/veranstaltung-eintragen/vergangene-veranstaltungen/">Vergangene Veranstaltungen</a>
+        <?php echo_link( '/veranstaltung-eintragen/vergangene-veranstaltungen/', 'Vergangene Veranstaltungen' ); ?>
     </div>
     <?php endif; ?>
 
     <?php if ( Comcal_User_Capabilities::edit_categories() ) : ?>
     <div class="item">
-      <a href="/veranstaltung-eintragen/kategorien-bearbeiten/">Kategorien bearbeiten</a>
+        <?php echo_link( '/veranstaltung-eintragen/kategorien-bearbeiten/', 'Kategorien bearbeiten' ); ?>
     </div>
     <?php endif; ?>
   </nav>
