@@ -36,7 +36,7 @@ fi
 
 # Additional expressions for lines that should be ignored in the log file
 FILTER_EXPRESSIONS='wp-cron\.php|wp-login\.php|ical\/all|ical\/ev|xmlrpc\.php|wp-json|wp-content|wp-includes|wp-admin|wp-sitemap'
-FILTER_EXPRESSIONS=$FILTER_EXPRESSIONS'|Uptime-Kuma|SemrushBot|\?author='
+FILTER_EXPRESSIONS=$FILTER_EXPRESSIONS'|Uptime-Kuma|Bot|\?author='
 
 # Create HTML for given month
 zcat --force $LOG_CACHE_DIR/*.log | grep -v -E -e $FILTER_EXPRESSIONS | goaccess --output=$HTML_OUT_DIR/$MONTH.html --log-format=VCOMBINED --ignore-crawlers --no-progress -
