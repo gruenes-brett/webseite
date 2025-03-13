@@ -1,0 +1,99 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject ITextService TextService
+
+@{
+  var login = TextService.GetText(Constants.Text.Account.Login);
+  var logout = TextService.GetText(Constants.Text.Account.Logout);
+  var myAccount = TextService.GetText(Constants.Text.Account.MyAccount);
+  var editAccounts = TextService.GetText(Constants.Text.Accounts.EditAccounts);
+  var settings = TextService.GetText(Constants.Text.Settings.EditSettings);
+  var aboutUs = TextService.GetText(Constants.Text.Content.AboutUs);
+  var feeds = TextService.GetText(Constants.Text.Feeds.Index);
+  var addEvent = SystemTexts.CreateEvent;
+  var editEvents = TextService.GetText(Constants.Text.Events.Edit);
+
+  var controller = ViewContext?.RouteData?.Values?["Controller"]?.ToString() ?? string.Empty;
+  var action = ViewContext?.RouteData?.Values?["Action"]?.ToString() ?? string.Empty;
+
+  var editAccountsActions = new HashSet<string>
+  {
+    nameof(Accounts.Create),
+    nameof(Accounts.Index),
+    nameof(Accounts.Ban),
+    nameof(Accounts.Unban),
+    nameof(Accounts.Delete),
+    nameof(Accounts.EditRole),
+    nameof(Accounts.ShowAuditLog)
+  };
+  var myAccountActions = new HashSet<string>
+  {
+    nameof(Account.Index),
+    nameof(Account.EditName),
+    nameof(Account.EditPassword),
+    nameof(Account.EditPasswordConfirmation)
+  };
+  var settingsActions = new HashSet<string>
+  {
+    nameof(Settings.EditSettings),
+    nameof(Settings.EditCategories),
+    nameof(Settings.EditTexts),
+    nameof(Settings.AddCategory),
+    nameof(Settings.EditCategory),
+    nameof(Settings.EditText),
+    nameof(Settings.DeleteCategory)
+  };
+  var editEventsActions = new HashSet<string>
+  {
+    nameof(Events.ShowAuditLog),
+    nameof(Events.Index)
+  };
+  var editEventActions = new HashSet<string>
+  {
+    nameof(Event.Create),
+    nameof(Event.Approve),
+    nameof(Event.Edit),
+    nameof(Event.Delete)
+  };
+
+  var isLogin = controller == nameof(Account) && action == nameof(Account.Login);
+  var isMyAccount = controller == nameof(Account) && myAccountActions.Contains(action);
+  var isEditAccounts = controller == nameof(Accounts) && editAccountsActions.Contains(action);
+  var isSettings = controller == nameof(Settings) && settingsActions.Contains(action);
+  var isAboutUs = controller == nameof(Content) && action == nameof(Content.AboutUs);
+  var isFeeds = controller == nameof(Feeds) && action == nameof(Feeds.Index);
+  var isAddEvent = controller == nameof(Event) && action == nameof(Event.Create);
+  var isEditEvents = controller == nameof(Events) && editEventsActions.Contains(action)
+                     || controller == nameof(Event) && editEventActions.Contains(action);
+
+  var active = "active";
+
+  var isSignedIn = SignInManager.IsSignedIn(User);
+}
+
+<nav id="sub">
+  @if (isSignedIn)
+  {
+    var isAdministrator = User.IsInRole(Constants.Roles.Administrator);
+
+    <a asp-controller="@nameof(Events)" asp-action="@nameof(Events.Index)" class="@(isEditEvents ? active : string.Empty)">@editEvents</a>
+    @if (isAdministrator)
+    {
+      <a asp-controller="@nameof(Accounts)" asp-action="@nameof(Accounts.Index)" class="@(isEditAccounts ? active : string.Empty)">@editAccounts</a>
+      <a asp-controller="@nameof(Settings)" asp-action="@nameof(Settings.EditSettings)" class="@(isSettings ? active : string.Empty)">@settings</a>
+    }
+    <a asp-controller="@nameof(Account)" asp-action="@nameof(Account.Index)" class="@(isMyAccount ? active : string.Empty)">@myAccount</a>
+    <a asp-controller="@nameof(Account)" asp-action="@nameof(Account.Logout)">@logout</a>
+  }
+  else
+  {
+    <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Create)" class="@(isAddEvent ? active : string.Empty)">@addEvent</a>
+    <a asp-controller="@nameof(Content)" asp-action="@nameof(Content.AboutUs)" class="@(isAboutUs ? active : string.Empty)">@aboutUs</a>
+    <a asp-controller="@nameof(Feeds)" asp-action="@nameof(Feeds.Index)" class="@(isFeeds? active : string.Empty)">@feeds</a>
+    <a asp-controller="@nameof(Account)" asp-action="@nameof(Account.Login)" class="@(isLogin ? active : string.Empty)">@login</a>
+  }
+</nav>

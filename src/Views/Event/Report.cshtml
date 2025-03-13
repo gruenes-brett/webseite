@@ -1,0 +1,35 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+@using GruenesBrett.ViewModels.Event
+
+@inject ITextService TextService
+
+@model ReportViewModel
+
+@{
+  var abort = TextService.GetText(Constants.Text.Event.Abort);
+
+  var title = TextService.GetText(Constants.Text.Event.Report);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="../Shared/_SidebarLinks" />
+</aside>
+<section>
+  <form method="post">
+    <h1>@title</h1>
+    <div asp-validation-summary="ModelOnly" class="error" role="alert"></div>
+
+    <fieldset class="double">
+      <label asp-for="Reason">@Html.DisplayNameFor(m => m.Reason)</label>
+      <select asp-for="Reason" asp-items="Model.Reasons" aria-required="true" required></select>
+      <span asp-validation-for="Reason" class="warning"></span>
+    </fieldset>
+
+    <div class="row">
+      <button type="submit">@title</button>
+      <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Index)" asp-route-eventid="@Model.EventId" class="button">@abort</a>
+    </div>
+  </form>
+</section>

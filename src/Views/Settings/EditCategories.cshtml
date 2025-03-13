@@ -1,0 +1,47 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+@using GruenesBrett.ViewModels.Settings
+
+@inject ITextService TextService
+
+@model EditCategoriesViewModel
+
+@{
+  var key = TextService.GetText(Constants.Text.Settings.Key);
+  var action = TextService.GetText(Constants.Text.Settings.Action);
+  var edit = TextService.GetText(Constants.Text.Settings.Edit);
+  var delete = TextService.GetText(Constants.Text.Settings.Delete);
+
+  var title = TextService.GetText(Constants.Text.Settings.EditCategories);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <h1>@title</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>@key</th>
+        <th></th>
+        <th>@action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var category in Model.Categories)
+      {
+        <tr>
+          <th style="color: @category.ForegroundColor; background-color: @category.BackgroundColor; padding: 10px;">@category.Name</th>
+          <td>&nbsp;</td>
+          <td>
+            <a asp-controller="@nameof(Settings)" asp-action="@nameof(Settings.EditCategory)" asp-route-id="@category.Id">@edit</a>
+            <span>/</span>
+            <a asp-controller="@nameof(Settings)" asp-action="@nameof(Settings.DeleteCategory)" asp-route-id="@category.Id" class="text-error">@delete</a>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

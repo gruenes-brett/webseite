@@ -1,0 +1,31 @@
+﻿@using GruenesBrett.Properties
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@ViewData["Title"] - @SystemTexts.SiteName</title>
+  <script type="importmap"></script>
+  <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+  <link rel="icon" href="~/favicon.png" asp-append-version="true" />
+  <link rel="shortcut icon" href="~/favicon.png" asp-append-version="true" />
+  @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+  <div id="wrapper">
+    <header>
+      <partial name="_Logo" />
+      <partial name="_MainNavigation" />
+      <partial name="_SubNavigation" />
+    </header>
+
+    <main>
+      @RenderBody()
+    </main>
+  </div>
+
+  <script src="~/js/scripts.js" asp-append-version="true"></script>
+  @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

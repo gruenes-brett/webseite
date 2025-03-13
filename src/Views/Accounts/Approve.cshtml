@@ -1,0 +1,37 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+@using GruenesBrett.ViewModels.Accounts
+
+@inject ITextService TextService
+
+@model AccountActionViewModel
+
+@{
+  var name = SystemTexts.Name;
+  var email = SystemTexts.Email;
+  var created = TextService.GetText(Constants.Text.Accounts.Created);
+  var abort = TextService.GetText(Constants.Text.Accounts.Abort);
+
+  var title = TextService.GetText(Constants.Text.Accounts.Approve);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <form method="post">
+    <h1>@title</h1>
+    <div asp-validation-summary="ModelOnly" class="error" role="alert"></div>
+
+    <p><strong>@name</strong><br />@Model.Name</p>
+    <p><strong>@email</strong><br />@Model.Email</p>
+    <p><strong>@created</strong><br />@Model.Created</p>
+
+    <div class="row">
+      <button type="submit">@title</button>
+      <a asp-controller="@nameof(Accounts)" asp-action="@nameof(Accounts.Index)" class="button">@abort</a>
+    </div>
+  </form>
+</section>

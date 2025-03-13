@@ -1,0 +1,71 @@
+﻿@using GruenesBrett.Interfaces
+@using GruenesBrett.ViewModels.Account
+
+@inject ITextService TextService
+
+@model AccountSettingsViewModel
+
+@{
+  var settings = TextService.GetText(Constants.Text.Account.Settings);
+  var emailSettings = TextService.GetText(Constants.Text.Account.EmailSettings);
+  var receiveOptionalEmailsExplanation = TextService.GetText(Constants.Text.Account.ReceiveOptionalEmailsExplanation);
+  var receiveReportingEmailsExplanation = TextService.GetText(Constants.Text.Account.ReceiveReportingEmailsExplanation);
+  var save = TextService.GetText(Constants.Text.Account.Save);
+  var otherSettings = TextService.GetText(Constants.Text.Account.OtherSettings);
+  var defaultPageExplanation = TextService.GetText(Constants.Text.Account.DefaultPageExplanation);
+
+  var title = TextService.GetText(Constants.Text.Account.MyAccount);
+  ViewData["Title"] = title;
+}
+
+@section Styles {
+  <link rel="stylesheet" href="~/css/leaflet/leaflet.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/css/leaflet/leaflet.fullscreen.css" asp-append-version="true" />
+}
+
+@section Scripts {
+  <script src="~/js/leaflet/leaflet.js" asp-append-version="true"></script>
+  <script src="~/js/leaflet/Leaflet.fullscreen.min.js" asp-append-version="true"></script>
+  <script src="~/js/leaflet/scripts.js" asp-append-version="true"></script>
+}
+
+<aside>
+  <partial name="_Information" />
+</aside>
+<section>
+  <form method="post">
+    <h1>@settings</h1>
+    <div asp-validation-summary="ModelOnly" class="error" role="alert"></div>
+
+    <h2>@emailSettings</h2>
+
+    <div class="row checkbox">
+      <fieldset>
+        <input asp-for="ReceiveOptionalEmails" />
+        <label asp-for="ReceiveOptionalEmails">@Html.DisplayNameFor(m => m.ReceiveOptionalEmails)</label>
+      </fieldset>
+      <p>@receiveOptionalEmailsExplanation</p>
+    </div>
+
+    <div class="row checkbox">
+      <fieldset>
+        <input asp-for="ReceiveReportingEmails" />
+        <label asp-for="ReceiveReportingEmails">@Html.DisplayNameFor(m => m.ReceiveReportingEmails)</label>
+      </fieldset>
+      <p>@receiveReportingEmailsExplanation</p>
+    </div>
+
+    <h2>@otherSettings</h2>
+
+    <div class="row">
+      <fieldset>
+        <label asp-for="DefaultPage">@Html.DisplayNameFor(m => m.DefaultPage)</label>
+        <select asp-for="DefaultPage" asp-items="Model.DefaultPages" aria-required="true" required></select>
+        <span asp-validation-for="DefaultPage" class="warning"></span>
+      </fieldset>
+      <p>@defaultPageExplanation</p>
+    </div>
+
+    <button type="submit">@save</button>
+  </form>
+</section>

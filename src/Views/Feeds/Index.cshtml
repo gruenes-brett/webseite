@@ -1,0 +1,62 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Extensions
+@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+@using GruenesBrett.ViewModels.Feeds
+
+@inject ITextService TextService
+
+@model FeedsViewModel
+
+@{
+  var apiLink = TextService.GetText(Constants.Text.Feeds.ApiLink);
+  var apiText = TextService.GetText(Constants.Text.Feeds.ApiText);
+  var apiTitle = TextService.GetText(Constants.Text.Feeds.ApiTitle);
+
+  var atomLink = TextService.GetText(Constants.Text.Feeds.AtomLink);
+  var atomText = TextService.GetText(Constants.Text.Feeds.AtomText);
+  var atomTitle = TextService.GetText(Constants.Text.Feeds.AtomTitle);
+
+  var intro = TextService.GetText(Constants.Text.Feeds.Intro);
+
+  var icalLink = TextService.GetText(Constants.Text.Feeds.IcalLink);
+  var icalText = TextService.GetText(Constants.Text.Feeds.IcalText);
+  var icalTitle = TextService.GetText(Constants.Text.Feeds.IcalTitle);
+
+  var title = TextService.GetText(Constants.Text.Feeds.Index);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="../Shared/_Filters" for="FilterViewModel" />
+  <partial name="../Shared/_SidebarLinks" />
+</aside>
+<section>
+  <h1>@title</h1>
+
+  @Html.Raw(intro)
+
+  <h2>@icalTitle</h2>
+
+  @Html.Raw(icalText)
+
+  <p>
+    <a href="@Model.IcalUrl" target="_blank">@icalLink</a>
+  </p>
+
+  <h2>@atomTitle</h2>
+
+  @Html.Raw(atomText)
+
+  <p>
+    <a href="@Model.AtomUrl" target="_blank">@atomLink</a>
+  </p>
+
+  <h2>@apiTitle</h2>
+
+  @Html.Raw(apiText)
+
+  <p>
+    <a href="@Model.ApiUrl" target="_blank">@apiLink</a>
+  </p>
+</section>

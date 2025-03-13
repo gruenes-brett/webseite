@@ -1,0 +1,3 @@
+﻿Coloris({
+  alpha: false
+});

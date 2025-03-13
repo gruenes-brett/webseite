@@ -1,0 +1,36 @@
+﻿@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+
+@inject ITextService TextService
+
+@{
+  var text = TextService.GetText(Constants.Text.Content.AboutUsText);
+  var financedBy = TextService.GetText(Constants.Text.Content.FinancedBy);
+  var projectBy = TextService.GetText(Constants.Text.Content.ProjectBy);
+
+  var title = TextService.GetText(Constants.Text.Content.AboutUs);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <h1>@title</h1>
+
+  @Html.Raw(text)
+
+  <div class="feature">
+    <a href="https://www.bundjugend-sachsen.de/" target="_blank">
+      <img src="~/img/logo-bundjugend.svg" alt="@SystemTexts.ProjectByName" asp-append-version="true" />
+    </a>
+    <p>@projectBy</p>
+  </div>
+
+  <div class="feature">
+    <a href="https://www.eku.sachsen.de/praemierungen-eku-erfolg-2024-5163.html" target="_blank">
+      <img src="~/img/logo-saxony.svg" alt="Sachsen" asp-append-version="true" />
+    </a>
+    <p>@financedBy</p>
+  </div>
+</section>

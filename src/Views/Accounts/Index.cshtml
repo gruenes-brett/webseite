@@ -1,0 +1,114 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Extensions
+@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+@using GruenesBrett.ViewModels.Accounts
+
+@inject ITextService TextService
+
+@model EditAccountsViewModel
+
+@{
+  var name = SystemTexts.Name;
+  var email = SystemTexts.Email;
+  var role = SystemTexts.Role;
+  var actions = SystemTexts.Actions;
+  var lastLogin = TextService.GetText(Constants.Text.Accounts.LastLogin);
+
+  var ban = TextService.GetText(Constants.Text.Accounts.BanAction);
+  var unban = TextService.GetText(Constants.Text.Accounts.UnbanAction);
+  var delete = TextService.GetText(Constants.Text.Accounts.DeleteAction);
+
+  var title = TextService.GetText(Constants.Text.Accounts.EditAccounts);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <h1>@title</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>@name</th>
+        <th>@email</th>
+        <th class="single">@role</th>
+        <th class="single">@lastLogin</th>
+        <th class="double">@actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var account in Model.Accounts)
+      {
+        <tr>
+          <th>@account.Name</th>
+          <td><a href="mailto:@account.Email">@account.Email</a></td>
+          @if (account.Role is null)
+          {
+            <td>
+              <a asp-controller="@nameof(Accounts)" asp-action="@nameof(Accounts.Approve)" asp-route-email="@account.Email" class="text-warning">
+                @SystemTexts.WaitingForApproval
+              </a>
+            </td>
+          }
+          else
+          {
+            <td>
+              @if (User?.Identity is not null && account.Email == User.Identity.Name)
+              {
+                <span class="text-info">@Constants.Roles.GetDisplayName(account.Role)</span>
+              }
+              else
+              {
+                <a asp-controller="@nameof(Accounts)" asp-action="@nameof(Accounts.EditRole)" asp-route-email="@account.Email" class="text-info">
+                  @Constants.Roles.GetDisplayName(account.Role)
+                </a>
+              }
+            </td>
+          }
+          @if (account.LastLogin.HasValue)
+          {
+            <td>@account.LastLogin</td>
+          }
+          else
+          {
+            <td>@SystemTexts.NeverLoggedIn</td>
+          }
+          <td>
+            @if (User?.Identity is not null && account.Email != User.Identity.Name)
+            {
+              if (account.Banned)
+              {
+                <a asp-controller="@nameof(Accounts)" asp-action="@nameof(Accounts.Unban)" asp-route-email="@account.Email" class="text-info">
+                  @unban
+                </a>
+              }
+              else
+              {
+                <a asp-controller="@nameof(Accounts)" asp-action="@nameof(Accounts.Ban)" asp-route-email="@account.Email" class="text-error">
+                  @ban
+                </a>
+              }
+              <span>/</span>
+              <a asp-controller="@nameof(Accounts)" asp-action="@nameof(Accounts.Delete)" asp-route-email="@account.Email" class="text-error">
+                @delete
+              </a>
+            }
+
+            @if (account.Role.HasValue() && account.Role != Constants.Roles.Normal && User?.Identity is not null && account.Email != User.Identity.Name)
+            {
+              <span>/</span>
+            }
+            @if (account.Role.HasValue() && account.Role != Constants.Roles.Normal)
+            {
+              <a asp-controller="@nameof(Accounts)" asp-action="@nameof(Accounts.EditResponsibility)" asp-route-email="@account.Email" class="text-info">
+                Zuständigkeit
+              </a>
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

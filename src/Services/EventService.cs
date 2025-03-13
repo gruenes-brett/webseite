@@ -1,0 +1,256 @@
+﻿using System.Security.Claims;
+using GruenesBrett.Interfaces;
+using GruenesBrett.Models;
+using Microsoft.EntityFrameworkCore;
+using NetTopologySuite.Geometries;
+
+namespace GruenesBrett.Services;
+
+public class EventService(ApplicationDbContext context, IUserService userService) : IEventService
+{
+  /// <inheritdoc />
+  public async Task<SingleEvent?> GetApprovedEventAsync(string externalId, ClaimsPrincipal? principal = null)
+  {
+    var approvedEvents = await GetApprovedEventsAsync(principal);
+    if (approvedEvents is null)
+      return null;
+
+    return await approvedEvents.FirstOrDefaultAsync(e => e.ExternalId == externalId);
+  }
+
+  /// <inheritdoc />
+  public async Task<SingleEvent?> GetApprovedEventAsync(Guid internalId, ClaimsPrincipal? principal = null)
+  {
+    var approvedEvents = await GetApprovedEventsAsync(principal);
+    if (approvedEvents is null)
+      return null;
+
+    return await approvedEvents.FirstOrDefaultAsync(e => e.InternalId == internalId);
+  }
+
+  /// <inheritdoc />
+  public async Task<SingleEvent?> GetDraftEventAsync(string externalId, ClaimsPrincipal principal)
+  {
+    var draftEvents = await GetDraftEventsAsync(principal);
+    if (draftEvents is null)
+      return null;
+
+    return await draftEvents.FirstOrDefaultAsync(e => e.ExternalId == externalId);
+  }
+
+  /// <inheritdoc />
+  public async Task<SingleEvent?> GetDraftEventAsync(Guid internalId, ClaimsPrincipal principal)
+  {
+    var draftEvents = await GetDraftEventsAsync(principal);
+    if (draftEvents is null)
+      return null;
+
+    return await draftEvents.FirstOrDefaultAsync(e => e.InternalId == internalId);
+  }
+
+  /// <inheritdoc />
+  public async Task<SingleEvent?> GetApprovedOrDraftEventAsync(Guid internalId, ClaimsPrincipal principal)
+  {
+    var approvedEvent = await GetApprovedEventAsync(internalId, principal);
+    return approvedEvent ?? await GetDraftEventAsync(internalId, principal);
+  }
+
+  /// <inheritdoc />
+  public async Task<List<SingleEvent>> GetApprovedEventsAsync(HashSet<Category> categories, Point? coordinates = null,
+    double? searchDistanceInMeters = null, ClaimsPrincipal? principal = null)
+  {
+    var approvedEvents = await GetApprovedEventsAsync(principal);
+    if (approvedEvents is null)
+      return [];
+
+    approvedEvents = ApplyCategoriesFilter(approvedEvents, categories);
+    approvedEvents = ApplyLocationFilter(approvedEvents, coordinates, searchDistanceInMeters);
+    approvedEvents = ApplyOrdering(approvedEvents);
+    return await approvedEvents.ToListAsync();
+  }
+
+  /// <inheritdoc />
+  public async Task<List<SingleEvent>> GetDraftEventsAsync(HashSet<Category> categories, ClaimsPrincipal principal)
+  {
+    var draftEvents = await GetDraftEventsAsync(principal);
+    if (draftEvents is null)
+      return [];
+
+    draftEvents = ApplyCategoriesFilter(draftEvents, categories);
+    draftEvents = ApplyOrdering(draftEvents);
+    return await draftEvents.ToListAsync();
+  }
+
+  /// <inheritdoc />
+  public async Task<List<SingleEvent>> GetRejectedEventsAsync(HashSet<Category> categories, ClaimsPrincipal principal)
+  {
+    var rejectedEvents = await GetRejectedEventsAsync(principal);
+    if (rejectedEvents is null)
+      return [];
+
+    rejectedEvents = ApplyCategoriesFilter(rejectedEvents, categories);
+    return await rejectedEvents.ToListAsync();
+  }
+
+  /// <summary>
+  /// Returns a queryable for events in the approved workflow status
+  /// (with all the necessary includes and filters already applied)
+  /// </summary>
+  /// <returns></returns>
+  private async Task<IQueryable<SingleEvent>?> GetApprovedEventsAsync(ClaimsPrincipal? principal)
+  {
+    var approvedEvents = context.SingleEvents.AsQueryable();
+    if (principal is not null)
+      approvedEvents = await ApplyUserFilter(approvedEvents, principal);
+    approvedEvents = ApplyWorkflowFilter(approvedEvents, WorkflowStatus.Approved);
+    approvedEvents = ApplyDateFilter(approvedEvents);
+    approvedEvents = ApplyIncludes(approvedEvents);
+    return approvedEvents;
+  }
+
+  /// <summary>
+  /// Returns a queryable for events in the draft workflow status
+  /// (with all the necessary includes and filters already applied)
+  /// </summary>
+  /// <param name="principal"></param>
+  /// <returns></returns>
+  private async Task<IQueryable<SingleEvent>?> GetDraftEventsAsync(ClaimsPrincipal principal)
+  {
+    var draftEvents = context.SingleEvents.AsQueryable();
+    draftEvents = await ApplyUserFilter(draftEvents, principal);
+    draftEvents = ApplyWorkflowFilter(draftEvents, WorkflowStatus.Draft);
+    draftEvents = ApplyDateFilter(draftEvents);
+    draftEvents = ApplyIncludes(draftEvents);
+    return draftEvents;
+  }
+
+  /// <summary>
+  /// Returns a queryable for events in the rejected workflow status
+  /// (with all the necessary includes and filters already applied)
+  /// </summary>
+  /// <param name="principal"></param>
+  /// <returns></returns>
+  private async Task<IQueryable<SingleEvent>?> GetRejectedEventsAsync(ClaimsPrincipal principal)
+  {
+    var rejectedEvents = context.SingleEvents.AsQueryable();
+    rejectedEvents = await ApplyUserFilter(rejectedEvents, principal);
+    rejectedEvents = ApplyWorkflowFilter(rejectedEvents, WorkflowStatus.Rejected);
+    rejectedEvents = ApplyDateFilter(rejectedEvents);
+    rejectedEvents = ApplyIncludes(rejectedEvents);
+    return rejectedEvents;
+  }
+
+  /// <summary>
+  /// Applies the filter for the given principal to the given source
+  /// </summary>
+  /// <param name="source"></param>
+  /// <param name="principal"></param>
+  /// <returns></returns>
+  private async Task<IQueryable<SingleEvent>> ApplyUserFilter(IQueryable<SingleEvent> source, ClaimsPrincipal? principal)
+  {
+    if (principal is null)
+      return source;
+
+    var user = await userService.GetUserAsync(principal);
+    if (user is null)
+      return source;
+
+    var isEditor = principal.IsInRole(Constants.Roles.Editor);
+    if (isEditor)
+    {
+      var radius = user.Radius * 1000;
+      return source.Where(e => e.EventLocation.Coordinates.IsWithinDistance(user.Coordinates, radius) || (e.CreatedBy != null && e.CreatedBy.Equals(user)));
+    }
+
+    var isNormal = principal.IsInRole(Constants.Roles.Normal);
+    if (isNormal)
+      return source.Where(e => e.CreatedBy != null && e.CreatedBy.Equals(user));
+
+    return source;
+  }
+
+  /// <summary>
+  /// Applies the filter for the given categories to the given source
+  /// </summary>
+  /// <param name="source"></param>
+  /// <param name="categories"></param>
+  /// <returns></returns>
+  private static IQueryable<SingleEvent> ApplyCategoriesFilter(IQueryable<SingleEvent> source, HashSet<Category> categories)
+  {
+    if (categories is null || categories.Count == 0)
+      return source;
+
+    return source.Where(e => categories.Contains(e.PrimaryCategory) || e.AdditionalCategories.Any(c => categories.Contains(c)));
+  }
+
+  /// <summary>
+  /// Applies the filter for the given coordinates and search distance to the given source
+  /// </summary>
+  /// <param name="source"></param>
+  /// <param name="coordinates"></param>
+  /// <param name="searchDistanceInMeters"></param>
+  /// <returns></returns>
+  private static IQueryable<SingleEvent> ApplyLocationFilter(IQueryable<SingleEvent> source, Point? coordinates, double? searchDistanceInMeters)
+  {
+    if (coordinates is null || searchDistanceInMeters is null)
+      return source;
+
+    return source.Where(e => e.EventLocation.Coordinates.IsWithinDistance(coordinates, searchDistanceInMeters.Value));
+  }
+
+  /// <summary>
+  /// Applies the current date filter to the given source
+  /// </summary>
+  /// <param name="source"></param>
+  /// <returns></returns>
+  private static IQueryable<SingleEvent> ApplyDateFilter(IQueryable<SingleEvent> source)
+  {
+    var today = DateOnly.FromDateTime(DateTime.Now);
+    return source.Where(e => (e.EndDate != null && e.EndDate >= today) || (e.EndDate == null && e.StartDate >= today));
+  }
+
+  /// <summary>
+  /// Applies the filter for the given workflow status to the given source
+  /// </summary>
+  /// <param name="source"></param>
+  /// <param name="workflowStatus"></param>
+  /// <returns></returns>
+  private static IQueryable<SingleEvent> ApplyWorkflowFilter(IQueryable<SingleEvent> source, WorkflowStatus? workflowStatus)
+  {
+    if (workflowStatus is null)
+      return source;
+
+    return source.Where(e => e.WorkflowStatus == workflowStatus);
+  }
+
+  /// <summary>
+  /// Applies all necessary includes to the given source
+  /// </summary>
+  /// <param name="source"></param>
+  /// <returns></returns>
+  private static IQueryable<SingleEvent> ApplyIncludes(IQueryable<SingleEvent> source)
+  {
+    var sourceWithIncludes = source
+      .Include(e => e.EventImage)
+      .Include(e => e.EventLocation)
+      .Include(e => e.CreatedBy)
+      .Include(e => e.PrimaryCategory)
+      .Include(e => e.AdditionalCategories);
+
+    return sourceWithIncludes;
+  }
+
+  /// <summary>
+  /// Applies the default ordering to the given source
+  /// </summary>
+  /// <param name="source"></param>
+  /// <returns></returns>
+  private static IQueryable<SingleEvent> ApplyOrdering(IQueryable<SingleEvent> source)
+  {
+    var orderedSource = source
+      .OrderBy(e => e.StartDate)
+      .ThenBy(e => e.StartTime);
+
+    return orderedSource;
+  }
+}

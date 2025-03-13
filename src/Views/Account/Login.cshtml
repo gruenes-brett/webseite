@@ -1,0 +1,70 @@
+﻿@using GruenesBrett.Interfaces
+@using GruenesBrett.ViewModels.Account
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+
+@inject ISettingsService SettingsService
+@inject ITextService TextService
+
+@model LoginViewModel
+
+@{
+  var noAccountYetHeading = TextService.GetText(Constants.Text.Account.NoAccountYetHeading);
+  var noAccountYetText = TextService.GetText(Constants.Text.Account.NoAccountYetText);
+  var forgotPasswordHeading = TextService.GetText(Constants.Text.Account.ForgotPasswordHeading);
+  var forgotPasswordText = TextService.GetText(Constants.Text.Account.ForgotPasswordText);
+
+  var confirmEmailTrigger = ViewData.ModelState[nameof(LoginViewModel.ConfirmEmailTrigger)];
+  var showConfirmEmailTrigger = confirmEmailTrigger?.ValidationState == ModelValidationState.Invalid;
+  var confirmEmailTriggerMessage = confirmEmailTrigger?.Errors?.FirstOrDefault()?.ErrorMessage ?? string.Empty;
+
+  var emailPlaceholder = TextService.GetText(Constants.Text.Account.EmailPlaceholder);
+  var passwordPlaceholder = TextService.GetText(Constants.Text.Account.PasswortPlaceholder);
+
+  var selfRegistrationEnabled = await SettingsService.GetBoolSettingAsync(Constants.Settings.SelfRegistration);
+
+  var title = TextService.GetText(Constants.Text.Account.Login);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  @if (selfRegistrationEnabled)
+  {
+    <h2>@noAccountYetHeading</h2>
+    @Html.Raw(noAccountYetText)
+  }
+
+  <h2>@forgotPasswordHeading</h2>
+  @Html.Raw(forgotPasswordText)
+
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <form method="post">
+    <h1>@title</h1>
+    <div asp-validation-summary="ModelOnly" class="error" role="alert"></div>
+
+    @if (showConfirmEmailTrigger)
+    {
+      <div class="error" role="alert">@Html.Raw(confirmEmailTriggerMessage)</div>
+    }
+
+    <fieldset>
+      <label asp-for="Email">@Html.DisplayNameFor(m => m.Email)</label>
+      <input asp-for="Email" autocomplete="email" aria-required="true" placeholder="@emailPlaceholder" required />
+      <span asp-validation-for="Email" class="warning"></span>
+    </fieldset>
+
+    <fieldset>
+      <label asp-for="Password">@Html.DisplayNameFor(m => m.Password)</label>
+      <input asp-for="Password" autocomplete="current-password" aria-required="true" placeholder="@passwordPlaceholder" required />
+      <span asp-validation-for="Password" class="warning"></span>
+    </fieldset>
+
+    <fieldset>
+      <input asp-for="RememberMe" />
+      <label asp-for="RememberMe">@Html.DisplayNameFor(m => m.RememberMe)</label>
+    </fieldset>
+
+    <button type="submit">@title</button>
+  </form>
+</section>

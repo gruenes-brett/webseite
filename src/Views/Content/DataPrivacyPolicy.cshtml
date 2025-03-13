@@ -1,0 +1,51 @@
+﻿@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+
+@inject ITextService TextService
+
+@{
+  var cookieDeclaration = TextService.GetText(Constants.Text.Content.CookieDeclaration);
+  var cookieDeclarationText = TextService.GetText(Constants.Text.Content.CookieDeclarationText);
+  var antiforgeryCookie = SystemTexts.AntiforgeryCookie;
+  var applicationCookie = SystemTexts.ApplicationCookie;
+  var postCodeCookie = SystemTexts.PostCodeCookie;
+  var searchDistanceCookie = SystemTexts.SearchDistanceCookie;
+  var selectedCategoriesCookie = SystemTexts.SelectedCategoriesCookie;
+  var statusCookie = SystemTexts.StatusCookie;
+
+  var dataPrivacyPolicyText = TextService.GetText(Constants.Text.Content.DataPrivacyPolicyText);
+  var title = TextService.GetText(Constants.Text.Content.DataPrivacyPolicy);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <h1>@title</h1>
+  @Html.Raw(dataPrivacyPolicyText)
+
+  <h2>@cookieDeclaration</h2>
+  @Html.Raw(cookieDeclarationText)
+  
+  <ul>
+    <li>
+      <strong>@Constants.Cookie.Antiforgery</strong> (@Html.Raw(antiforgeryCookie))
+    </li>
+    <li>
+      <strong>@Constants.Cookie.Application</strong> (@Html.Raw(applicationCookie))
+    </li>
+    <li>
+      <strong>@Constants.Cookie.PostCode</strong> (@Html.Raw(postCodeCookie))
+    </li>
+    <li>
+      <strong>@Constants.Cookie.SearchDistance</strong> (@Html.Raw(searchDistanceCookie))
+    </li>
+    <li>
+      <strong>@Constants.Cookie.SelectedCategories</strong> (@Html.Raw(selectedCategoriesCookie))
+    </li>
+    <li>
+      <strong>@Constants.Cookie.Status</strong> (@Html.Raw(statusCookie))
+    </li>
+  </ul>
+</section>

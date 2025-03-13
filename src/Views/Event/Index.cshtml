@@ -1,0 +1,121 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Extensions
+@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+@using Linkernizer
+@using System.Web
+@using System.Globalization
+
+@inject ITextService TextService
+@inject ILinkernizer Linkernizer
+@inject IUrlService UrlService
+
+@model SingleEvent
+
+@{
+  var notApprovedYet = TextService.GetText(Constants.Text.Event.NotApprovedYet);
+
+  var information = TextService.GetText(Constants.Text.Event.Information);
+  var formattedTimeSpan = TextService.GetFormattedDateTimeSpan(Model);
+
+  var longitude = Model.EventLocation.Coordinates.X.ToString(NumberFormatInfo.InvariantInfo);
+  var latitude = Model.EventLocation.Coordinates.Y.ToString(NumberFormatInfo.InvariantInfo);
+
+  var shareEvent = TextService.GetText(Constants.Text.Event.Share);
+  var moreInformation = TextService.GetText(Constants.Text.Event.MoreInformation);
+  var report = TextService.GetText(Constants.Text.Event.Report);
+
+  var description = Linkernizer.Linkernize(Model.EventDescription);
+  description = description.Replace("\n", "<br />");
+  var permalink = UrlService.GetPermalink(Model);
+  var encodedPermalink = UrlService.GetEncodedPermalink(Model);
+  var eventId = Model.ExternalId;
+  var values = new { eventId };
+  var icalLink = UrlService.GetAbsoluteUrl(nameof(Feeds), nameof(Feeds.IcalEvent), values);
+
+  var start = TextService.GetFormattedStartDateAndTime(Model);
+  var end = TextService.GetFormattedEndDateAndTime(Model);
+
+  var title = Model.EventName;
+  ViewData["Title"] = title;
+}
+
+@section Styles {
+  <link rel="stylesheet" href="~/css/leaflet/leaflet.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/css/leaflet/leaflet.fullscreen.css" asp-append-version="true" />
+}
+
+@section Scripts {
+  <script src="~/js/leaflet/leaflet.js" asp-append-version="true"></script>
+  <script src="~/js/leaflet/Leaflet.fullscreen.min.js" asp-append-version="true"></script>
+  <script src="~/js/leaflet/scripts.js" asp-append-version="true"></script>
+}
+
+@if (Model.WorkflowStatus == WorkflowStatus.Draft)
+{
+  <div class="warning">@notApprovedYet</div>
+}
+<aside>
+  @if (Model.EventImage?.FileName?.HasValue() ?? false)
+  {
+    <img src="/@Model.EventImage?.FileName" alt="@title" class="main" asp-append-version="true" />
+  }
+  else
+  {
+    <img src="/img/placeholder.svg" alt="@title" class="main" asp-append-version="true" />
+  }
+  <h3>@information</h3>
+  <p>@formattedTimeSpan</p>
+  <p>
+    @Model.EventLocation.Name
+    @if (Model.EventLocation.Address.HasValue())
+    {
+      <br />
+      @Model.EventLocation.Address
+    }
+  </p>
+  <p>@Model.OrganizerName</p>
+  <div class="row">
+    <div id="map" data-longitude="@longitude" data-latitude="@latitude" data-zoom="13"></div>
+  </div>
+  @if (Model.WorkflowStatus == WorkflowStatus.Approved)
+  {
+    <h3>@shareEvent</h3>
+    <ul class="share">
+      <li><a href="https://www.facebook.com/sharer.php?u=@encodedPermalink" target="_blank" class="button primary"><img src="~/img/facebook-fill.svg" alt="@SystemTexts.Facebook" asp-append-version="true" /></a></li>
+      <li><a href="https://t.me/share/url?url=@encodedPermalink" target="_blank" class="button primary"><img src="~/img/bluesky-fill.svg" alt="@SystemTexts.Bluesky" asp-append-version="true" /></a></li>
+      <li><a href="https://bsky.app/intent/compose?text=@encodedPermalink" target="_blank" class="button primary"><img src="~/img/telegram-fill.svg" alt="@SystemTexts.Telegram" asp-append-version="true" /></a></li>
+      <li><a href="@icalLink" class="button primary"><img src="~/img/ical-fill.svg" alt="@SystemTexts.iCal" asp-append-version="true" /></a></li>
+    </ul>
+    <div class="row">
+      <input type="text" value="@permalink" id="permalink" readonly />
+      <a class="button primary image" id="copyToClipboard"><img src="/img/clipboard-fill.svg" /></a>
+    </div>
+    <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Report)" asp-route-eventid="@Model.ExternalId" class="button">@report</a>
+  }
+</aside>
+<section>
+  <h1>@title</h1>
+  <p>@Html.Raw(description)</p>
+  @if (Model.EventLink.HasValue())
+  {
+    <a href="@Model.EventLink" target="_blank" class="button primary">&#x2B62; @moreInformation</a>
+  }
+</section>
+<script type="application/ld+json">
+  {
+    "@@context": "https://schema.org",
+    "@@type": "Event",
+    "location": {
+        "@@type": "Place",
+        "name": "@Model.EventLocation.Name"
+    },
+    "name": "@Model.EventName",
+    "startDate": "@start",
+    "endDate": "@end",
+    "organizer": {
+        "@@type": "Organization",
+        "name": "@Model.OrganizerName"
+    }
+  }
+</script>

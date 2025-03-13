@@ -1,0 +1,47 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+@using GruenesBrett.ViewModels.Account
+
+@inject ITextService TextService
+
+@model EditNameViewModel
+
+@{
+  var displayNamePlaceholder = TextService.GetText(Constants.Text.Account.DisplayNamePlaceholder);
+  var abort = TextService.GetText(Constants.Text.Account.Abort);
+
+  var title = TextService.GetText(Constants.Text.Account.EditName);
+  ViewData["Title"] = title;
+}
+
+@section Styles {
+  <link rel="stylesheet" href="~/css/leaflet/leaflet.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/css/leaflet/leaflet.fullscreen.css" asp-append-version="true" />
+}
+
+@section Scripts {
+  <script src="~/js/leaflet/leaflet.js" asp-append-version="true"></script>
+  <script src="~/js/leaflet/Leaflet.fullscreen.min.js" asp-append-version="true"></script>
+  <script src="~/js/leaflet/scripts.js" asp-append-version="true"></script>
+}
+
+<aside>
+  <partial name="_Information" />
+</aside>
+<section>
+  <form method="post">
+    <h1>@title</h1>
+    <div asp-validation-summary="ModelOnly" class="error" role="alert"></div>
+
+    <fieldset>
+      <label asp-for="Name">@Html.DisplayNameFor(m => m.Name)</label>
+      <input asp-for="Name" autocomplete="name" aria-required="true" placeholder="@displayNamePlaceholder" required />
+      <span asp-validation-for="Name" class="warning"></span>
+    </fieldset>
+
+    <div class="row">
+      <button type="submit">@title</button>
+      <a asp-controller="@nameof(Account)" asp-action="@nameof(Account.Index)" class="button">@abort</a>
+    </div>
+  </form>
+</section>

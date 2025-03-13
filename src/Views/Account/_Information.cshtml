@@ -1,0 +1,64 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+@using Microsoft.AspNetCore.Identity
+@using System.Globalization
+
+@inject UserManager<ApplicationUser> UserManager
+@inject ITextService TextService
+@inject IUserService UserService
+
+@{
+  var title = TextService.GetText(Constants.Text.Account.MyAccount);
+
+  var user = await UserService.GetUserAsync(User);
+  var nameTitle = SystemTexts.Name;
+  var nameValue = user?.DisplayName ?? string.Empty;
+  var nameLink = TextService.GetText(Constants.Text.Account.EditName);
+  var emailTitle = SystemTexts.Email;
+  var emailValue = user?.Email ?? string.Empty;
+  var createdTitle = TextService.GetText(Constants.Text.Account.Created);
+  var createdValue = DateOnly.FromDateTime(user?.Created ?? DateTime.MinValue);
+  var changedTitle = TextService.GetText(Constants.Text.Account.PasswordChanged);
+  var changedValue = DateOnly.FromDateTime(user?.PasswordChanged ?? DateTime.MinValue);
+  var changedLink = TextService.GetText(Constants.Text.Account.EditPassword);
+
+  var areaOfResponsibility = TextService.GetText(Constants.Text.Account.AreaOfResponsibility);
+  var longitude = user?.Coordinates?.X.ToString(NumberFormatInfo.InvariantInfo) ?? string.Empty;
+  var latitude = user?.Coordinates?.Y.ToString(NumberFormatInfo.InvariantInfo) ?? string.Empty;
+  var radius = user?.Radius ?? Constants.Locations.DefaultRadius;
+  var roleTitle = SystemTexts.Role;
+  var role = user is not null ? await UserService.GetRoleAsync(user) : string.Empty;
+  var roleName = role is not null ? Constants.Roles.GetDisplayName(role) : string.Empty;
+}
+
+<h2>@title</h2>
+<p>
+  <strong>@nameTitle</strong><br />
+  @nameValue<br />
+  <a asp-action="@nameof(Account.EditName)">@nameLink</a>
+</p>
+<p>
+  <strong>@emailTitle</strong><br />
+  @emailValue
+</p>
+<p>
+  <strong>@createdTitle</strong><br />
+  @createdValue
+</p>
+<p>
+  <strong>@changedTitle</strong><br />
+  @changedValue<br />
+  <a asp-action="@nameof(Account.EditPassword)">@changedLink</a>
+</p>
+<p>
+  <strong>@roleTitle</strong><br />
+  @roleName
+</p>
+@if (role != Constants.Roles.Normal)
+{
+  <p>
+    <strong>@areaOfResponsibility</strong>
+  </p>
+  <div id="map" data-longitude="@longitude" data-latitude="@latitude" data-radius="@radius"></div>
+}

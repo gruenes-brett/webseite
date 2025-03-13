@@ -1,0 +1,39 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+
+@inject ITextService TextService
+
+@model IEnumerable<Audit>
+
+@{
+  var timestamp = TextService.GetText(Constants.Text.Accounts.Timestamp);
+  var message = TextService.GetText(Constants.Text.Accounts.Message);
+
+  var title = TextService.GetText(Constants.Text.Events.ShowAuditLog);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <h1>@title</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>@timestamp</th>
+        <th>@message</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var audit in Model)
+      {
+        <tr>
+          <th>@audit.Timestamp.ToLocalTime()</th>
+          <td>@audit.Message</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

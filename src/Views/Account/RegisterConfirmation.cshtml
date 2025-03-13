@@ -1,0 +1,18 @@
+﻿@using GruenesBrett.Interfaces
+
+@inject ITextService TextService
+
+@{
+  var text = TextService.GetText(Constants.Text.Account.RegistrationConfirmationText);
+
+  var title = TextService.GetText(Constants.Text.Account.RegistrationConfirmation);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <h1>@title</h1>
+  @Html.Raw(text)
+</section>

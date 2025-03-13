@@ -1,0 +1,58 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+@using GruenesBrett.ViewModels.Accounts
+
+@inject ITextService TextService
+
+@model CreateAccountViewModel
+
+@{
+  var displayNameExplanation = TextService.GetText(Constants.Text.Account.DisplayNameExplanation);
+  var displayNamePlaceholder = TextService.GetText(Constants.Text.Account.DisplayNamePlaceholder);
+  var emailExplanation = TextService.GetText(Constants.Text.Account.EmailExplanation);
+  var emailPlaceholder = TextService.GetText(Constants.Text.Account.EmailPlaceholder);
+  var abort = TextService.GetText(Constants.Text.Accounts.Abort);
+
+  var title = TextService.GetText(Constants.Text.Accounts.Create);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <form method="post">
+    <h1>@title</h1>
+    <div asp-validation-summary="ModelOnly" class="error" role="alert"></div>
+
+    <div class="row">
+      <fieldset>
+        <label asp-for="Name">@Html.DisplayNameFor(m => m.Name)</label>
+        <input asp-for="Name" autocomplete="name" aria-required="true" placeholder="@displayNamePlaceholder" required />
+        <span asp-validation-for="Name" class="warning"></span>
+      </fieldset>
+      <p>@displayNameExplanation</p>
+    </div>
+
+    <div class="row">
+      <fieldset>
+        <label asp-for="Email">@Html.DisplayNameFor(m => m.Email)</label>
+        <input asp-for="Email" autocomplete="email" aria-required="true" placeholder="@emailPlaceholder" required />
+        <span asp-validation-for="Email" class="warning"></span>
+      </fieldset>
+      <p>@emailExplanation</p>
+    </div>
+
+    <fieldset>
+      <label asp-for="Role">@Html.DisplayNameFor(m => m.Role)</label>
+      <select asp-for="Role" asp-items="Model.Roles" aria-required="true" required></select>
+      <span asp-validation-for="Role" class="warning"></span>
+    </fieldset>
+
+    <div class="row">
+      <button type="submit">@title</button>
+      <a asp-controller="@nameof(Accounts)" asp-action="@nameof(Accounts.Index)" class="button">@abort</a>
+    </div>
+  </form>
+</section>

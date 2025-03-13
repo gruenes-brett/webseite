@@ -1,0 +1,19 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+
+@inject ITextService TextService
+
+@{
+  var links = TextService.GetText(Constants.Text.Settings.Links);
+  var editTexts = TextService.GetText(Constants.Text.Settings.EditTexts);
+  var editCategories = TextService.GetText(Constants.Text.Settings.EditCategories);
+  var addCategory = TextService.GetText(Constants.Text.Settings.AddCategory);
+}
+
+<h2>@links</h2>
+
+<ul>
+  <li><a asp-controller="@nameof(Settings)" asp-action="@nameof(Settings.EditTexts)">@editTexts</a></li>
+  <li><a asp-controller="@nameof(Settings)" asp-action="@nameof(Settings.EditCategories)">@editCategories</a></li>
+  <li><a asp-controller="@nameof(Settings)" asp-action="@nameof(Settings.AddCategory)">@addCategory</a></li>
+</ul>

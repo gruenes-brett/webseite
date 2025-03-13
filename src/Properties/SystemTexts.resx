@@ -1,0 +1,533 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ConcurrencyFailure" xml:space="preserve">
+    <value>Fehler bei mehreren gleichzeitigen Aktionen. Bitte versuche es noch einmal.</value>
+    <comment>Error when optimistic concurrency fails</comment>
+  </data>
+  <data name="DefaultError" xml:space="preserve">
+    <value>Es ist ein Fehler aufgetreten. Bitte versuche es noch einmal.</value>
+    <comment>Default identity result error message</comment>
+  </data>
+  <data name="DuplicateEmail" xml:space="preserve">
+    <value>Der Account mit der E-Mail-Adresse "{0}" existiert bereits.</value>
+    <comment>Error for duplicate emails</comment>
+  </data>
+  <data name="DuplicateRoleName" xml:space="preserve">
+    <value>Die Rolle "{0}" existiert bereits.</value>
+    <comment>Error for duplicate roles</comment>
+  </data>
+  <data name="DuplicateUserName" xml:space="preserve">
+    <value>Der Account mit der E-Mail-Adresse "{0}" existiert bereits.</value>
+    <comment>Error for duplicate user names</comment>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Die E-Mail-Adresse hat ein ungültiges Format.</value>
+    <comment>Invalid email</comment>
+  </data>
+  <data name="InvalidManagerType" xml:space="preserve">
+    <value>Der Typ {0} muss von {1}&lt;{2}&gt; erben.</value>
+    <comment>Error when the manager type is not derived correctly</comment>
+  </data>
+  <data name="InvalidPasswordHasherCompatibilityMode" xml:space="preserve">
+    <value>Der Kompatibilitätsmodus für den PasswordHasher ist nicht gültig.</value>
+    <comment>Error when the password hasher doesn't understand the format it's being asked to produce.</comment>
+  </data>
+  <data name="InvalidPasswordHasherIterationCount" xml:space="preserve">
+    <value>Die Anzahl der Iterationen muss eine positive Ganzzahl sein.</value>
+    <comment>Error when the iteration count is &lt; 1.</comment>
+  </data>
+  <data name="InvalidRoleName" xml:space="preserve">
+    <value>Der Name der Rolle "{0}" ist ungültig.</value>
+    <comment>Error for invalid role names</comment>
+  </data>
+  <data name="InvalidToken" xml:space="preserve">
+    <value>Der Link ist abgelaufen und nicht mehr gültig. Bitte lass dir einen neuen Link zuschicken.</value>
+    <comment>Error when a token is not recognized</comment>
+  </data>
+  <data name="InvalidUserName" xml:space="preserve">
+    <value>Der Name des Accounts "{0}" ist ungültig.</value>
+    <comment>User names can only contain letters or digits</comment>
+  </data>
+  <data name="LoginAlreadyAssociated" xml:space="preserve">
+    <value>Der Account existiert bereits.</value>
+    <comment>Error when a login already linked</comment>
+  </data>
+  <data name="MustCallAddIdentity" xml:space="preserve">
+    <value>AddIdentity muss auf der Service Collection ausgeführt werden.</value>
+    <comment>Error when AddIdentity is not called</comment>
+  </data>
+  <data name="NoTokenProvider" xml:space="preserve">
+    <value>Es wurde kein IUserTwoFactorTokenProvider&lt;{0}&gt; mit dem Namen "{1}" ist registriert.</value>
+    <comment>Error when there is no IUserTwoFactorTokenProvider</comment>
+  </data>
+  <data name="NullSecurityStamp" xml:space="preserve">
+    <value>Der SecurityStamp darf nicht leer sein.</value>
+    <comment>Error when a user's security stamp is null.</comment>
+  </data>
+  <data name="PasswordMismatch" xml:space="preserve">
+    <value>Das Password ist nicht korrekt.</value>
+    <comment>Error when a password doesn't match</comment>
+  </data>
+  <data name="PasswordRequiresDigit" xml:space="preserve">
+    <value>Das Passwort muss mindestens eine Zahl enthalten.</value>
+    <comment>Error when passwords do not have a digit</comment>
+  </data>
+  <data name="PasswordRequiresLower" xml:space="preserve">
+    <value>Das Passwort muss mindestens einen Kleinbuchstaben enthalten.</value>
+    <comment>Error when passwords do not have a lowercase letter</comment>
+  </data>
+  <data name="PasswordRequiresNonAlphanumeric" xml:space="preserve">
+    <value>Das Passwort muss mindestens ein Sonderzeichen enthalten.</value>
+    <comment>Error when password does not have enough non alphanumeric characters</comment>
+  </data>
+  <data name="PasswordRequiresUpper" xml:space="preserve">
+    <value>Das Passwort muss mindestens einen Großbuchstaben enthalten.</value>
+    <comment>Error when passwords do not have an uppercase letter</comment>
+  </data>
+  <data name="PasswordTooShort" xml:space="preserve">
+    <value>Das Passwort muss mindestens {0} Zeichen lang sein.</value>
+    <comment>Error message for passwords that are too short</comment>
+  </data>
+  <data name="RoleNotFound" xml:space="preserve">
+    <value>Die Rolle "{0}" existiert nicht.</value>
+    <comment>Error when a role does not exist</comment>
+  </data>
+  <data name="StoreNotIQueryableRoleStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IQueryableRoleStore&lt;TRole&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="StoreNotIQueryableUserStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IQueryableUserStore&lt;TUser&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="StoreNotIRoleClaimStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IRoleClaimStore&lt;TRole&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="StoreNotIUserAuthenticationTokenStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IUserAuthenticationTokenStore&lt;User&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="StoreNotIUserClaimStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IUserClaimStore&lt;TUser&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="StoreNotIUserConfirmationStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IUserConfirmationStore&lt;TUser&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="StoreNotIUserEmailStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IUserEmailStore&lt;TUser&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="StoreNotIUserLockoutStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IUserLockoutStore&lt;TUser&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="StoreNotIUserLoginStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IUserLoginStore&lt;TUser&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="StoreNotIUserPasswordStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IUserPasswordStore&lt;TUser&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="StoreNotIUserPhoneNumberStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IUserPhoneNumberStore&lt;TUser&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="StoreNotIUserRoleStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IUserRoleStore&lt;TUser&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="StoreNotIUserSecurityStampStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IUserSecurityStampStore&lt;TUser&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="StoreNotIUserAuthenticatorKeyStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IUserAuthenticatorKeyStore&lt;User&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="StoreNotIUserTwoFactorStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IUserTwoFactorStore&lt;TUser&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="RecoveryCodeRedemptionFailed" xml:space="preserve">
+    <value>Das Anwendung des Wiederherstellungscodes ist fehlgeschlagen.</value>
+    <comment>Error when a recovery code is not redeemed.</comment>
+  </data>
+  <data name="UserAlreadyHasPassword" xml:space="preserve">
+    <value>Der Account hat bereits ein Passwort.</value>
+    <comment>Error when AddPasswordAsync called when a user already has a password</comment>
+  </data>
+  <data name="UserAlreadyInRole" xml:space="preserve">
+    <value>Der Account ist bereits der Rolle "{0}" zugewiesen.</value>
+    <comment>Error when a user is already in a role</comment>
+  </data>
+  <data name="UserLockedOut" xml:space="preserve">
+    <value>Der Accounts ist gesperrt.</value>
+    <comment>Error when a user is locked out</comment>
+  </data>
+  <data name="UserLockoutNotEnabled" xml:space="preserve">
+    <value>Der Account kann nicht gesperrt werden.</value>
+    <comment>Error when lockout is not enabled</comment>
+  </data>
+  <data name="UserNameNotFound" xml:space="preserve">
+    <value>Der Accounts "{0}" existiert nicht.</value>
+    <comment>Error when a user does not exist</comment>
+  </data>
+  <data name="UserNotInRole" xml:space="preserve">
+    <value>Dem Account ist die Rolle "{0}" nicht zugewiesen.</value>
+    <comment>Error when a user is not in the role</comment>
+  </data>
+  <data name="StoreNotIUserTwoFactorRecoveryCodeStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IUserTwoFactorRecoveryCodeStore&lt;User&gt;.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="PasswordRequiresUniqueChars" xml:space="preserve">
+    <value>Das Passwort muss mindestens {0} verschiedene Zeichen enhalten.</value>
+    <comment>Error message for passwords that are based on similar characters</comment>
+  </data>
+  <data name="NoRoleType" xml:space="preserve">
+    <value>Es wurde kein Rollen-Typ angegeben, versuche AddRoles&lt;TRole&gt;().</value>
+    <comment>Error when the IdentityBuilder.RoleType was not specified</comment>
+  </data>
+  <data name="StoreNotIProtectedUserStore" xml:space="preserve">
+    <value>Der Store implementiert nicht IProtectedUserStore&lt;TUser&gt;, was notwendig ist wenn ProtectPersonalData auf true gesetzt ist.</value>
+    <comment>Error when the store does not implement this interface</comment>
+  </data>
+  <data name="NoPersonalDataProtector" xml:space="preserve">
+    <value>Kein IPersonalDataProtector-Dienst wurde registriert, was notwendig ist wenn ProtectPersonalData auf true gesetzt ist.</value>
+    <comment>Error when there is no IPersonalDataProtector</comment>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-Mail-Adresse</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="PasswordTooShortOrTooLong" xml:space="preserve">
+    <value>Das {0} muss zwischen {2} und {1} Zeichen lang sein.</value>
+  </data>
+  <data name="PasswordRepeat" xml:space="preserve">
+    <value>Passwort wiederholen</value>
+  </data>
+  <data name="PasswordRepeatMismatch" xml:space="preserve">
+    <value>Das Passwort und das wiederholte Passwort stimmen nicht überein.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="FieldRequired" xml:space="preserve">
+    <value>Das Feld "{0}" muss ausgefüllt werden.</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Angemeldet bleiben, wenn der Browser geschlossen wird</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="NeverLoggedIn" xml:space="preserve">
+    <value>Noch nie</value>
+  </data>
+  <data name="WaitingForApproval" xml:space="preserve">
+    <value>Wartet auf Freigabe</value>
+  </data>
+  <data name="ReceiveOptionalEmails" xml:space="preserve">
+    <value>Ich möchte optionale E-Mails vom Grünen Brett bekommen</value>
+  </data>
+  <data name="ReceiveReportingEmails" xml:space="preserve">
+    <value>Ich möchte E-Mails vom Grünen Brett erhalten, wenn eine Veranstaltung gemeldet wurde</value>
+  </data>
+  <data name="DefaultPage" xml:space="preserve">
+    <value>Standard-Seite</value>
+  </data>
+  <data name="Calendar" xml:space="preserve">
+    <value>Kalender</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Karte</value>
+  </data>
+  <data name="Explore" xml:space="preserve">
+    <value>Erkunden</value>
+  </data>
+  <data name="Administrator" xml:space="preserve">
+    <value>Administrator(in)</value>
+  </data>
+  <data name="Editor" xml:space="preserve">
+    <value>Redakteur(in)</value>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>Normale(r) Nutzer(in)</value>
+  </data>
+  <data name="MyAccount" xml:space="preserve">
+    <value>Mein Account</value>
+  </data>
+  <data name="CreateEvent" xml:space="preserve">
+    <value>Veranstaltung anlegen</value>
+  </data>
+  <data name="GlobalOptOut" xml:space="preserve">
+    <value>E-Mail-Sperrliste</value>
+  </data>
+  <data name="ForegroundColor" xml:space="preserve">
+    <value>Vordergrundfarbe</value>
+  </data>
+  <data name="BackgroundColor" xml:space="preserve">
+    <value>Hintergrundfarbe</value>
+  </data>
+  <data name="CreatedByEmail" xml:space="preserve">
+    <value>Deine E-Mail-Adresse</value>
+  </data>
+  <data name="CreatedByName" xml:space="preserve">
+    <value>Dein Name</value>
+  </data>
+  <data name="EventName" xml:space="preserve">
+    <value>Veranstaltungsname</value>
+  </data>
+  <data name="OrganizerName" xml:space="preserve">
+    <value>Name des Veranstalters</value>
+  </data>
+  <data name="EventLink" xml:space="preserve">
+    <value>Veranstaltungslink</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Startdatum</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Enddatum</value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>Startzeit</value>
+  </data>
+  <data name="EndTime" xml:space="preserve">
+    <value>Endzeit</value>
+  </data>
+  <data name="JoinEveryDay" xml:space="preserve">
+    <value>Teilnahme an einzelnen Tagen möglich</value>
+  </data>
+  <data name="LocationName" xml:space="preserve">
+    <value>Veranstaltungsort</value>
+  </data>
+  <data name="LocationAddress" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>Längengrad</value>
+  </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Breitengrad</value>
+  </data>
+  <data name="EventDescription" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="PrimaryCategory" xml:space="preserve">
+    <value>Primäre Kategorie</value>
+  </data>
+  <data name="AdditionalCategories" xml:space="preserve">
+    <value>Weitere Kategorien</value>
+  </data>
+  <data name="EventImage" xml:space="preserve">
+    <value>Veranstaltungsbild</value>
+  </data>
+  <data name="ConfirmImageRights" xml:space="preserve">
+    <value>Bildrechte bestätigen</value>
+  </data>
+  <data name="ConfirmPrivacyPolicy" xml:space="preserve">
+    <value>Datenschutzerklärung bestätigen</value>
+  </data>
+  <data name="MustBeChecked" xml:space="preserve">
+    <value>Du musst die {0}.</value>
+  </data>
+  <data name="Until" xml:space="preserve">
+    <value>bis</value>
+  </data>
+  <data name="Clock" xml:space="preserve">
+    <value>Uhr</value>
+  </data>
+  <data name="Facebook" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="Telegram" xml:space="preserve">
+    <value>Telegram</value>
+  </data>
+  <data name="iCal" xml:space="preserve">
+    <value>iCal</value>
+  </data>
+  <data name="Bluesky" xml:space="preserve">
+    <value>Bluesky</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>Grund</value>
+  </data>
+  <data name="SiteName" xml:space="preserve">
+    <value>Grünes Brett</value>
+  </data>
+  <data name="ProjectByName" xml:space="preserve">
+    <value>BUNDjugend</value>
+  </data>
+  <data name="Radius" xml:space="preserve">
+    <value>Radius</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="AllStatuses" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>Freigegeben</value>
+  </data>
+  <data name="Rejected" xml:space="preserve">
+    <value>Abgelehnt</value>
+  </data>
+  <data name="EventStatus" xml:space="preserve">
+    <value>Veranstaltungsstatus</value>
+  </data>
+  <data name="StringLength" xml:space="preserve">
+    <value>Das Feld "{0}" muss zwischen {2} und {1} Zeichen lang sein.</value>
+  </data>
+  <data name="SelfRegistration" xml:space="preserve">
+    <value>Selbstregistrierung</value>
+  </data>
+  <data name="MaximumEventLength" xml:space="preserve">
+    <value>Maximale Veranstaltungslänge</value>
+  </data>
+  <data name="AntiforgeryCookie" xml:space="preserve">
+    <value>zur Verhinderung von &lt;a href="https://de.wikipedia.org/wiki/Cross-Site-Request-Forgery" target="_blank"&gt;Cross-Site-Request-Forgery-Angriffen&lt;/a&gt;</value>
+  </data>
+  <data name="ApplicationCookie" xml:space="preserve">
+    <value>zur Authentifizerung und Autorisierung von angemeldeten Personen</value>
+  </data>
+  <data name="PostCodeCookie" xml:space="preserve">
+    <value>zur Filterung der angezeigten Veranstaltungen nach einer Postleitzahl</value>
+  </data>
+  <data name="SearchDistanceCookie" xml:space="preserve">
+    <value>zur Filterung der angezeigten Veranstaltungen nach einem Suchradius</value>
+  </data>
+  <data name="SelectedCategoriesCookie" xml:space="preserve">
+    <value>zur Filterung der angezeigten Veranstaltungen nach ausgewählten Kategorien</value>
+  </data>
+  <data name="StatusCookie" xml:space="preserve">
+    <value>zur Filterung der angezeigten Veranstaltungen nach ihrem Freigabe-Status</value>
+  </data>
+</root>

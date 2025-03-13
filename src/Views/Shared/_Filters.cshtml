@@ -1,0 +1,59 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+@using GruenesBrett.ViewModels.Events
+@using GruenesBrett.ViewModels.Shared
+
+@model GetFilterViewModel
+
+@inject ITextService TextService
+
+@{
+  var filter = TextService.GetText(Constants.Text.Events.Filter);
+  var location = TextService.GetText(Constants.Text.Events.Location);
+  var changeLocation = TextService.GetText(Constants.Text.Events.ChangeLocation);
+  var searchDistance = TextService.GetText(Constants.Text.Events.SearchDistance);
+  var local = TextService.GetText(Constants.Text.Events.Local);
+  var supraregional = TextService.GetText(Constants.Text.Events.Supraregional);
+  var categories = TextService.GetText(Constants.Text.Events.Categories);
+  var applyFilters = TextService.GetText(Constants.Text.Events.ApplyFilters);
+}
+
+<h2>@filter</h2>
+
+<form method="post" asp-controller="@nameof(Filters)" asp-action="@nameof(Filters.SetFilter)">
+  <input type="hidden" id="Redirect" name="Redirect" value="@Model.Redirect" />
+
+  <fieldset>
+    <label>@location</label>
+    <span>@Model.PostCode?.CityName (<a asp-controller="@nameof(Homepage)" asp-action="@nameof(Homepage.Index)">@changeLocation</a>)</span>
+  </fieldset>
+
+  <fieldset>
+    <label for="SearchDistance">@searchDistance</label>
+    <input id="SearchDistance" name="SearchDistance" type="range" list="SearchDistanceValues" min="1" max="5" value="@Model.SearchDistance" />
+    <datalist id="SearchDistanceValues">
+      <option value="1" label="@local"></option>
+      <option value="2" label=""></option>
+      <option value="3" label=""></option>
+      <option value="4" label=""></option>
+      <option value="5" label="@supraregional"></option>
+    </datalist>
+  </fieldset>
+
+  <fieldset class="categories">
+    <label>@categories</label>
+    <ul>
+      @foreach (var category in Model.Categories)
+      {
+        var isChecked = Model.SelectedCategories.Contains(category);
+        <li>
+          <input type="checkbox" name="SelectedCategories" value="@category.Id" @(isChecked ? "checked" : string.Empty) />
+          <label style="color: @category.ForegroundColor; background-color: @category.BackgroundColor;">@category.Name</label>
+        </li>
+      }
+    </ul>
+  </fieldset>
+
+  <button type="submit">@applyFilters</button>
+</form>

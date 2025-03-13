@@ -1,0 +1,35 @@
+﻿@using GruenesBrett.Interfaces
+@using GruenesBrett.ViewModels.Error
+
+@inject ITextService TextService
+
+@model ErrorViewModel
+
+@{
+  var error404 = TextService.GetText(Constants.Text.Error.Error404);
+  var error403 = TextService.GetText(Constants.Text.Error.Error403);
+  var generic = TextService.GetText(Constants.Text.Error.Generic);
+
+  var title = TextService.GetText(Constants.Text.Error.Heading);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <h1>@title @Model.StatusCode</h1>
+
+  @if (Model.StatusCode == 404)
+  {
+    <p>@Html.Raw(error404)</p>
+  }
+  else if (Model.StatusCode == 403)
+  {
+    <p>@Html.Raw(error403)</p>
+  }
+  else
+  {
+    <p>@Html.Raw(generic)</p>
+  }
+</section>

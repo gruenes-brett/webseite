@@ -1,0 +1,67 @@
+﻿@using GruenesBrett.Interfaces
+
+@inject ITextService TextService
+
+@{
+  var licenses = TextService.GetText(Constants.Text.Content.Licenses);
+  var licensesText = TextService.GetText(Constants.Text.Content.LicensesText);
+  var termsOfService = TextService.GetText(Constants.Text.Content.TermsOfService);
+  var termsOfServiceText = TextService.GetText(Constants.Text.Content.TermsOfServiceText);
+  var imprintText = TextService.GetText(Constants.Text.Content.ImprintText);
+
+  var title = TextService.GetText(Constants.Text.Content.Imprint);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <h2>@title</h2>
+  @Html.Raw(imprintText)
+
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <h1>@termsOfService</h1>
+  @Html.Raw(termsOfServiceText)
+
+  <h1>@licenses</h1>
+  @Html.Raw(licensesText)
+
+  <ul>
+    <li>
+      <a href="https://github.com/TarekRaafat/autoComplete.js" target="_blank">autoComplete.js</a> (<a href="https://github.com/TarekRaafat/autoComplete.js/blob/master/LICENSE" target="_blank">Apache License 2.0</a>)
+    </li>
+    <li>
+      <a href="https://github.com/mdbassit/Coloris" target="_blank">Coloris</a> (<a href="https://github.com/mdbassit/Coloris/blob/main/LICENSE" target="_blank">MIT License</a>)
+    </li>
+    <li>
+      <a href="https://github.com/npgsql/efcore.pg" target="_blank">Entity Framework Core provider for PostgreSQL</a> (<a href="https://github.com/npgsql/efcore.pg/blob/main/LICENSE" target="_blank">PostgreSQL License</a>)
+    </li>
+    <li>
+      <a href="https://github.com/AllanBishop/ImageCropper" target="_blank">ImageCropper</a> (<a href="https://github.com/AllanBishop/ImageCropper/blob/master/LICENSE.md" target="_blank">MIT License</a>)
+    </li>
+    <li>
+      <a href="https://github.com/SixLabors/ImageSharp" target="_blank">ImageSharp</a> (<a href="https://github.com/SixLabors/ImageSharp/blob/main/LICENSE" target="_blank">Six Labors Split License</a>)
+    </li>
+    <li>
+      <a href="https://github.com/Leaflet/Leaflet" target="_blank">Leaflet</a> (<a href="https://github.com/Leaflet/Leaflet/blob/main/LICENSE" target="_blank">BSD 2-Clause License</a>)
+    </li>
+    <li>
+      <a href="https://github.com/sebastianlay/Linkernizer" target="_blank">Linkernizer</a> (<a href="https://github.com/sebastianlay/Linkernizer/blob/main/LICENSE" target="_blank">MIT License</a>)
+    </li>
+    <li>
+      <a href="https://github.com/jstedfast/MailKit" target="_blank">MailKit</a> (<a href="https://github.com/jstedfast/MailKit/blob/master/LICENSE" target="_blank">MIT License</a>)
+    </li>
+    <li>
+      <a href="https://github.com/scalar/scalar" target="_blank">Scalar</a> (<a href="https://github.com/scalar/scalar/blob/main/LICENSE" target="_blank">MIT License</a>)
+    </li>
+    <li>
+      <a href="https://github.com/serilog/serilog-aspnetcore" target="_blank">Serilog</a> (<a href="https://github.com/serilog/serilog-aspnetcore/blob/dev/LICENSE" target="_blank">Apache License 2.0</a>)
+    </li>
+    <li>
+      <a href="https://github.com/sqids/sqids-dotnet" target="_blank">Sqids</a> (<a href="https://github.com/sqids/sqids-dotnet/blob/main/LICENSE" target="_blank">MIT License</a>)
+    </li>
+    <li>
+      <a href="https://github.com/slab/quill" target="_blank">Quill</a> (<a href="https://github.com/slab/quill/blob/main/LICENSE" target="_blank">BSD 3-Clause License</a>)
+    </li>
+  </ul>
+</section>

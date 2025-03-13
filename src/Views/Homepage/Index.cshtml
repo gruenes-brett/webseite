@@ -1,0 +1,60 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Extensions
+@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+@using System.Web
+@using System.Globalization
+
+@inject ITextService TextService
+
+@{
+  var introduction = TextService.GetText(Constants.Text.Homepage.Introduction);
+  var searchCityOrPostCode = TextService.GetText(Constants.Text.Homepage.SearchCityOrPostCode);
+  var whereToSearch = TextService.GetText(Constants.Text.Homepage.WhereToSearch);
+  var projectBy = TextService.GetText(Constants.Text.Homepage.ProjectBy);
+
+  var title = TextService.GetText(Constants.Text.Homepage.Index);
+  ViewData["Title"] = title;
+}
+
+@section Styles {
+  <link rel="stylesheet" href="~/css/autocomplete/autoComplete.css" asp-append-version="true" />
+}
+
+@section Scripts {
+  <script src="~/js/autocomplete/autoComplete.min.js" asp-append-version="true"></script>
+  <script src="~/js/autocomplete/scripts.js" asp-append-version="true"></script>
+}
+
+<section id="left">
+  <img src="~/img/logo-text.svg" alt="@SystemTexts.SiteName" asp-append-version="true" />
+  @Html.Raw(introduction)
+</section>
+<section id="right">
+  <h2>@whereToSearch</h2>
+
+  <form method="post" asp-controller="@nameof(Filters)" asp-action="@nameof(Filters.SetFilter)">
+
+    <input type="hidden" id="redirect" name="redirect" value="@nameof(Events)/@nameof(Events.Explore)" />
+
+    <fieldset class="full">
+      <ul>
+        <li><a data-postcode="01307 Dresden">Dresden</a></li>
+        <li><a data-postcode="04109 Leipzig">Leipzig</a></li>
+        <li><a data-postcode="09112 Chemnitz">Chemnitz</a></li>
+        <li><a data-postcode="08523 Plauen">Plauen</a></li>
+      </ul>
+    </fieldset>
+
+    <fieldset class="row full">
+      <input id="postCode" name="postCode" autocomplete="off" placeholder="@searchCityOrPostCode" />
+      <a class="button primary image"><img src="/img/search-fill.svg" /></a>
+    </fieldset>
+  </form>
+</section>
+<footer>
+  <p>@projectBy</p>
+  <a href="https://www.bundjugend-sachsen.de/" target="_blank">
+    <img src="~/img/logo-bundjugend.svg" alt="@SystemTexts.ProjectByName" asp-append-version="true" />
+  </a>
+</footer>

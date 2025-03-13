@@ -1,0 +1,18 @@
+﻿@using GruenesBrett.Interfaces
+
+@inject ITextService TextService
+
+@model string
+
+@{
+  var title = TextService.GetText(Constants.Text.Account.ConfirmEmail);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <h1>@title</h1>
+  @Model
+</section>

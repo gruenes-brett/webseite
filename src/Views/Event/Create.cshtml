@@ -1,0 +1,250 @@
+﻿@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+@using GruenesBrett.ViewModels.Event
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@inject ITextService TextService
+
+@model CreateViewModel
+
+@{
+  var loginHeading = TextService.GetText(Constants.Text.Event.LoginHeading);
+  var loginText = TextService.GetText(Constants.Text.Event.LoginText);
+  var rulesHeading = TextService.GetText(Constants.Text.Event.RulesHeading);
+  var rulesText = TextService.GetText(Constants.Text.Event.RulesText);
+
+  var createdByNamePlaceholder = TextService.GetText(Constants.Text.Event.CreatedByNamePlaceholder);
+  var createdByNameExplanation = TextService.GetText(Constants.Text.Event.CreatedByNameExplanation);
+  var createdByEmailPlaceholder = TextService.GetText(Constants.Text.Event.CreatedByEmailPlaceholder);
+  var createdByEmailExplanation = TextService.GetText(Constants.Text.Event.CreatedByEmailExplanation);
+
+  var eventNamePlaceholder = TextService.GetText(Constants.Text.Event.EventNamePlaceholder);
+  var eventNameExplanation = TextService.GetText(Constants.Text.Event.EventNameExplanation);
+  var organizerNamePlaceholder = TextService.GetText(Constants.Text.Event.OrganizerNamePlaceholder);
+  var organizerNameExplanation = TextService.GetText(Constants.Text.Event.OrganizerNameExplanation);
+  var eventLinkPlaceholder = TextService.GetText(Constants.Text.Event.EventLinkPlaceholder);
+  var eventLinkExplanation = TextService.GetText(Constants.Text.Event.EventLinkExplanation);
+
+  var datePlaceholder = TextService.GetText(Constants.Text.Event.DatePlaceholder);
+  var dateExplanation = TextService.GetText(Constants.Text.Event.DateExplanation);
+  var timePlaceholder = TextService.GetText(Constants.Text.Event.TimePlaceholder);
+  var timeExplanation = TextService.GetText(Constants.Text.Event.TimeExplanation);
+  var participationPossibleEveryDayExplanation = TextService.GetText(Constants.Text.Event.JoinEveryDayExplanation);
+
+  var locationNamePlaceholder = TextService.GetText(Constants.Text.Event.LocationNamePlaceholder);
+  var locationNameExplanation = TextService.GetText(Constants.Text.Event.LocationNameExplanation);
+  var locationAddressPlaceholder = TextService.GetText(Constants.Text.Event.LocationAddressPlaceholder);
+  var locationAddressExplanation = TextService.GetText(Constants.Text.Event.LocationAddressExplanation);
+
+  var eventDescriptionPlaceholder = TextService.GetText(Constants.Text.Event.EventDescriptionPlaceholder);
+  var eventDescriptionExplanation = TextService.GetText(Constants.Text.Event.EventDescriptionExplanation);
+
+  var categoryExplanation = TextService.GetText(Constants.Text.Event.CategoryExplanation);
+  var eventImageExplanation = TextService.GetText(Constants.Text.Event.EventImageExplanation);
+
+  var confirmImageRights = TextService.GetText(Constants.Text.Event.ConfirmImageRights);
+  var confirmPrivacyPolicy = TextService.GetText(Constants.Text.Event.ConfirmPrivacyPolicy);
+
+  var title = SystemTexts.CreateEvent;
+  ViewData["Title"] = title;
+
+  var isSignedIn = SignInManager.IsSignedIn(User);
+}
+
+@section Styles {
+  <link rel="stylesheet" href="~/css/leaflet/leaflet.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/css/leaflet/leaflet.fullscreen.css" asp-append-version="true" />
+}
+
+@section Scripts {
+  <script src="~/js/cropper/ImageCropper.min.js" asp-append-version="true"></script>
+  <script src="~/js/cropper/scripts.js" asp-append-version="true"></script>
+  <script src="~/js/leaflet/leaflet.js" asp-append-version="true"></script>
+  <script src="~/js/leaflet/Leaflet.fullscreen.min.js" asp-append-version="true"></script>
+  <script src="~/js/leaflet/scripts.js" asp-append-version="true"></script>
+}
+
+<aside>
+  @if (!isSignedIn)
+  {
+    <h2>@loginHeading</h2>
+    @Html.Raw(loginText)
+  }
+
+  <h2>@rulesHeading</h2>
+  @Html.Raw(rulesText)
+
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <form enctype="multipart/form-data" method="post">
+    <h1>@title</h1>
+    <div asp-validation-summary="ModelOnly" class="error" role="alert"></div>
+
+    @if (!isSignedIn)
+    {
+      <div class="row">
+        <fieldset>
+          <label asp-for="CreatedByName">@Html.DisplayNameFor(m => m.CreatedByName)</label>
+          <input asp-for="CreatedByName" autocomplete="name" aria-required="true" placeholder="@createdByNamePlaceholder" required />
+          <span asp-validation-for="CreatedByName" class="warning"></span>
+        </fieldset>
+        <p>@createdByNameExplanation</p>
+      </div>
+
+      <div class="row">
+        <fieldset>
+          <label asp-for="CreatedByEmail">@Html.DisplayNameFor(m => m.CreatedByEmail)</label>
+          <input asp-for="CreatedByEmail" autocomplete="email" aria-required="true" placeholder="@createdByEmailPlaceholder" required />
+          <span asp-validation-for="CreatedByEmail" class="warning"></span>
+        </fieldset>
+        <p>@createdByEmailExplanation</p>
+      </div>
+    }
+
+    <div class="row offset">
+      <fieldset class="double">
+        <label asp-for="EventName">@Html.DisplayNameFor(m => m.EventName)</label>
+        <input asp-for="EventName" aria-required="true" placeholder="@eventNamePlaceholder" required />
+        <span asp-validation-for="EventName" class="warning"></span>
+      </fieldset>
+      <p>@eventNameExplanation</p>
+    </div>
+
+    <div class="row">
+      <fieldset class="double">
+        <label asp-for="OrganizerName">@Html.DisplayNameFor(m => m.OrganizerName)</label>
+        <input asp-for="OrganizerName" aria-required="true" placeholder="@organizerNamePlaceholder" required />
+        <span asp-validation-for="OrganizerName" class="warning"></span>
+      </fieldset>
+      <p>@organizerNameExplanation</p>
+    </div>
+
+    <div class="row">
+      <fieldset class="double">
+        <label asp-for="EventLink">@Html.DisplayNameFor(m => m.EventLink)</label>
+        <input asp-for="EventLink" placeholder="@eventLinkPlaceholder" />
+        <span asp-validation-for="EventLink" class="warning"></span>
+      </fieldset>
+      <p>@eventLinkExplanation</p>
+    </div>
+
+    <div class="row offset">
+      <fieldset>
+        <label asp-for="StartDate">@Html.DisplayNameFor(m => m.StartDate)</label>
+        <input asp-for="StartDate" aria-required="true" placeholder="@datePlaceholder" required />
+        <span asp-validation-for="StartDate" class="warning"></span>
+      </fieldset>
+      <fieldset>
+        <label asp-for="EndDate">@Html.DisplayNameFor(m => m.EndDate)</label>
+        <input asp-for="EndDate" placeholder="@datePlaceholder" />
+        <span asp-validation-for="EndDate" class="warning"></span>
+      </fieldset>
+      <p>@dateExplanation</p>
+    </div>
+
+    <div class="row">
+      <fieldset>
+        <label asp-for="StartTime">@Html.DisplayNameFor(m => m.StartTime)</label>
+        <input asp-for="StartTime" placeholder="@timePlaceholder" />
+        <span asp-validation-for="StartTime" class="warning"></span>
+      </fieldset>
+      <fieldset>
+        <label asp-for="EndTime">@Html.DisplayNameFor(m => m.EndTime)</label>
+        <input asp-for="EndTime" placeholder="@timePlaceholder" />
+        <span asp-validation-for="EndTime" class="warning"></span>
+      </fieldset>
+      <p>@timeExplanation</p>
+    </div>
+
+    <div class="row checkbox">
+      <fieldset>
+        <input asp-for="JoinEveryDay" />
+        <label asp-for="JoinEveryDay">@Html.DisplayNameFor(m => m.JoinEveryDay)</label>
+      </fieldset>
+      <p>@participationPossibleEveryDayExplanation</p>
+    </div>
+
+    <div class="row offset">
+      <fieldset class="double">
+        <label asp-for="LocationName">@Html.DisplayNameFor(m => m.LocationName)</label>
+        <input asp-for="LocationName" aria-required="true" placeholder="@locationNamePlaceholder" required />
+        <span asp-validation-for="LocationName" class="warning"></span>
+      </fieldset>
+      <p>@locationNameExplanation</p>
+    </div>
+
+    <div class="row">
+      <fieldset class="double">
+        <label asp-for="LocationAddress">@Html.DisplayNameFor(m => m.LocationAddress)</label>
+        <input asp-for="LocationAddress" placeholder="@locationAddressPlaceholder" />
+        <span asp-validation-for="LocationAddress" class="warning"></span>
+      </fieldset>
+      <p>@locationAddressExplanation</p>
+    </div>
+
+    <div class="row">
+      <fieldset class="double">
+        <div id="map" data-longitude="@Model.Longitude" data-latitude="@Model.Latitude" data-zoom="5"></div>
+        <input asp-for="Longitude" id="longitude" type="hidden" />
+        <input asp-for="Latitude" id="latitude" type="hidden" />
+      </fieldset>
+    </div>
+
+    <div class="row offset">
+      <fieldset class="double">
+        <label asp-for="EventDescription">@Html.DisplayNameFor(m => m.EventDescription)</label>
+        <textarea asp-for="EventDescription" aria-required="true" placeholder="@eventDescriptionPlaceholder" minlength="20" required></textarea>
+        <span asp-validation-for="EventDescription" class="warning"></span>
+      </fieldset>
+      <p>@eventDescriptionExplanation</p>
+    </div>
+
+    <div class="row">
+      <fieldset>
+        <label asp-for="PrimaryCategory">@Html.DisplayNameFor(m => m.PrimaryCategory)</label>
+        <select asp-for="PrimaryCategory" asp-items="Model.AvailableCategories" aria-required="true" required></select>
+        <span asp-validation-for="PrimaryCategory" class="warning"></span>
+      </fieldset>
+      <fieldset>
+        <label asp-for="AdditionalCategories">@Html.DisplayNameFor(m => m.AdditionalCategories)</label>
+        <select asp-for="AdditionalCategories" asp-items="Model.AvailableCategories" multiple></select>
+        <span asp-validation-for="AdditionalCategories" class="warning"></span>
+      </fieldset>
+      <p>@categoryExplanation</p>
+    </div>
+
+    <div class="row">
+      <fieldset class="double">
+        <label asp-for="EventImage">@Html.DisplayNameFor(m => m.EventImage)</label>
+        <input asp-for="EventImage" id="eventImage" accept="image/png, image/jpeg" />
+        <span asp-validation-for="EventImage" class="warning"></span>
+      </fieldset>
+      <p>@eventImageExplanation</p>
+    </div>
+
+    <fieldset class="double">
+      <canvas id="eventImageCanvas"></canvas>
+    </fieldset>
+
+    <input asp-for="EventImageCropLeft" id="eventImageCropLeft" type="hidden" />
+    <input asp-for="EventImageCropTop" id="eventImageCropTop" type="hidden" />
+    <input asp-for="EventImageCropWidth" id="eventImageCropWidth" type="hidden" />
+
+    <fieldset class="double">
+      <input asp-for="ConfirmImageRights" />
+      <label asp-for="ConfirmImageRights">@Html.Raw(confirmImageRights)</label>
+    </fieldset>
+    <span asp-validation-for="ConfirmImageRights" class="warning"></span>
+
+    <fieldset class="double">
+      <input asp-for="ConfirmPrivacyPolicy" />
+      <label asp-for="ConfirmPrivacyPolicy">@Html.Raw(confirmPrivacyPolicy)</label>
+    </fieldset>
+    <span asp-validation-for="ConfirmPrivacyPolicy" class="warning"></span>
+
+    <button type="submit">@title</button>
+  </form>
+</section>

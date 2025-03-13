@@ -1,0 +1,106 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+@using GruenesBrett.ViewModels.Events
+
+@model EditViewModel
+
+@inject ITextService TextService
+@inject IUserService UserService
+
+@{
+  var name = TextService.GetText(Constants.Text.Events.Name);
+  var createdBy = TextService.GetText(Constants.Text.Events.CreatedBy);
+  var created = TextService.GetText(Constants.Text.Events.Created);
+  var actions = TextService.GetText(Constants.Text.Events.Actions);
+  var approve = TextService.GetText(Constants.Text.Events.Approve);
+  var edit = TextService.GetText(Constants.Text.Events.EditAction);
+  var delete = TextService.GetText(Constants.Text.Events.Delete);
+  var approved = TextService.GetText(Constants.Text.Events.Approved);
+  var waitingForApproval = TextService.GetText(Constants.Text.Events.WaitingForApproval);
+
+  var noResults = TextService.GetText(Constants.Text.Events.NoResults);
+
+  var loggedIn = TextService.GetText(Constants.Text.Events.LoggedIn);
+  var notLoggedIn = TextService.GetText(Constants.Text.Events.NotLoggedIn);
+
+  var user = await UserService.GetUserAsync(User);
+  var role = user is not null ? await UserService.GetRoleAsync(user) : string.Empty;
+
+  var title = TextService.GetText(Constants.Text.Events.Edit);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+  <partial name="_EditFilters" />
+</aside>
+<section>
+  <h1>@title</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>@name</th>
+        <th class="single">@createdBy</th>
+        <th class="single">@created</th>
+        <th class="single">@actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (Model.Events.Count == 0)
+      {
+        <tr>
+          <td colspan="4">@noResults</td>
+        </tr>
+      }
+      @foreach (var editEvent in Model.Events)
+      {
+        var formattedTimeSpan = TextService.GetFormattedDateTimeSpan(editEvent);
+
+        <tr>
+          <td>
+            <div class="category" style="background-color: @editEvent.PrimaryCategory.BackgroundColor;"></div>
+            <h2>
+              <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Index)" asp-route-eventid="@editEvent.ExternalId">
+                @editEvent.EventName
+              </a>
+            </h2>
+            <p>@formattedTimeSpan</p>
+          </td>
+          <td>
+            @if (editEvent.CreatedBy is not null)
+            {
+              <span><a href="mailto:@editEvent.CreatedBy.Email">@editEvent.CreatedBy.DisplayName</a><br />(@loggedIn)</span>
+            }
+            else
+            {
+              <span><a href="mailto:@editEvent.CreatedByEmail">@editEvent.CreatedByName</a><br />(@notLoggedIn)</span>
+            }
+          </td>
+          <td>
+            <span>@editEvent.Created.ToLocalTime().ToString("g")</span><br />
+            @if (editEvent.WorkflowStatus == WorkflowStatus.Draft)
+            {
+              <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Approve)" asp-route-eventid="@editEvent.InternalId" class="text-warning">
+                @waitingForApproval
+              </a>
+            }
+            else
+            {
+              <span class="text-info">@approved</span>
+            }
+          </td>
+          <td>
+            <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Edit)" asp-route-eventid="@editEvent.InternalId" class="text-info">
+              @edit
+            </a>
+            <span>/</span>
+            <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Delete)" asp-route-eventid="@editEvent.InternalId" class="text-error">
+              @delete
+            </a>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

@@ -1,0 +1,61 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+@using GruenesBrett.ViewModels.Accounts
+
+@inject ITextService TextService
+
+@model EditResponsibilityViewModel
+
+@{
+  var name = SystemTexts.Name;
+  var email = SystemTexts.Email;
+  var role = SystemTexts.Role;
+
+  var abort = TextService.GetText(Constants.Text.Accounts.Abort);
+  
+  var title = TextService.GetText(Constants.Text.Accounts.EditResponsibility);
+  ViewData["Title"] = title;
+}
+
+@section Styles {
+  <link rel="stylesheet" href="~/css/leaflet/leaflet.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/css/leaflet/leaflet.fullscreen.css" asp-append-version="true" />
+}
+
+@section Scripts {
+  <script src="~/js/leaflet/leaflet.js" asp-append-version="true"></script>
+  <script src="~/js/leaflet/Leaflet.fullscreen.min.js" asp-append-version="true"></script>
+  <script src="~/js/leaflet/scripts.js" asp-append-version="true"></script>
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <form method="post">
+    <h1>@title</h1>
+    <div asp-validation-summary="ModelOnly" class="error" role="alert"></div>
+
+    <p><strong>@name</strong><br />@Model.Name</p>
+    <p><strong>@email</strong><br />@Model.Email</p>
+    <p><strong>@role</strong><br />@Model.Role</p>
+
+    <fieldset>
+      <label asp-for="Radius">@Html.DisplayNameFor(m => m.Radius)</label>
+      <input asp-for="Radius" id="radius"></input>
+      <span asp-validation-for="Radius" class="warning"></span>
+    </fieldset>
+
+    <fieldset class="double">
+      <div id="map" data-longitude="@Model.Longitude" data-latitude="@Model.Latitude" data-radius="@Model.Radius"></div>
+      <input asp-for="Longitude" id="longitude" type="hidden" />
+      <input asp-for="Latitude" id="latitude" type="hidden" />
+    </fieldset>
+
+    <div class="row">
+      <button type="submit">@title</button>
+      <a asp-controller="@nameof(Accounts)" asp-action="@nameof(Accounts.Index)" class="button">@abort</a>
+    </div>
+  </form>
+</section>

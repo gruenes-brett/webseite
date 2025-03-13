@@ -1,0 +1,41 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+@using GruenesBrett.ViewModels.Events
+
+@model EditViewModel
+
+@inject ITextService TextService
+
+@{
+  var filter = TextService.GetText(Constants.Text.Events.Filter);
+  var categories = TextService.GetText(Constants.Text.Events.Categories);
+  var applyFilters = TextService.GetText(Constants.Text.Events.ApplyFilters);
+}
+
+<h2>@filter</h2>
+
+<form method="post" asp-controller="@nameof(Filters)" asp-action="@nameof(Filters.SetFilter)">
+  <input type="hidden" id="Redirect" name="Redirect" value="@nameof(Events)/@nameof(Events.Index)" />
+
+  <fieldset>
+    <label asp-for="EventStatus">@Html.DisplayNameFor(m => m.EventStatus)</label>
+    <select asp-for="EventStatus" asp-items="Model.Statuses" aria-required="true" required></select>
+  </fieldset>
+
+  <fieldset class="categories">
+    <label>@categories</label>
+    <ul>
+      @foreach (var category in Model.Categories)
+      {
+        var isChecked = Model.SelectedCategories.Contains(category);
+        <li>
+          <input type="checkbox" name="SelectedCategories" value="@category.Id" @(isChecked ? "checked" : string.Empty) />
+          <label style="color: @category.ForegroundColor; background-color: @category.BackgroundColor;">@category.Name</label>
+        </li>
+      }
+    </ul>
+  </fieldset>
+
+  <button type="submit">@applyFilters</button>
+</form>

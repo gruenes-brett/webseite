@@ -1,0 +1,52 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+@using GruenesBrett.ViewModels.Settings
+
+@inject ITextService TextService
+
+@model AddCategoryViewModel
+
+@{
+  var title = TextService.GetText(Constants.Text.Settings.AddCategory);
+  ViewData["Title"] = title;
+}
+
+@section Styles {
+  <link rel="stylesheet" href="~/css/coloris/coloris.min.css" asp-append-version="true" />
+}
+
+@section Scripts {
+  <script src="~/js/coloris/coloris.min.js" asp-append-version="true"></script>
+  <script src="~/js/coloris/scripts.js" asp-append-version="true"></script>
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <form method="post">
+    <h1>@title</h1>
+
+    <div asp-validation-summary="ModelOnly" class="error" role="alert"></div>
+
+    <fieldset>
+      <label asp-for="Name">@Html.DisplayNameFor(m => m.Name)</label>
+      <input asp-for="Name" type="text" aria-required="true" required />
+      <span asp-validation-for="Name" class="warning"></span>
+    </fieldset>
+
+    <fieldset>
+      <label asp-for="ForegroundColor">@Html.DisplayNameFor(m => m.ForegroundColor)</label>
+      <input asp-for="ForegroundColor" type="text" aria-required="true" required data-coloris />
+      <span asp-validation-for="ForegroundColor" class="warning"></span>
+    </fieldset>
+
+    <fieldset>
+      <label asp-for="BackgroundColor">@Html.DisplayNameFor(m => m.BackgroundColor)</label>
+      <input asp-for="BackgroundColor" type="text" aria-required="true" required data-coloris />
+      <span asp-validation-for="BackgroundColor" class="warning"></span>
+    </fieldset>
+
+    <button type="submit">@title</button>
+  </form>
+</section>

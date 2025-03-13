@@ -1,0 +1,66 @@
+﻿@using GruenesBrett.Interfaces
+@using GruenesBrett.ViewModels.Settings
+
+@inject ITextService TextService
+
+@model EditSettingsViewModel
+
+@{
+  var emailSettings = TextService.GetText(Constants.Text.Settings.EmailSettings);
+  var globalOptOutExplanation = TextService.GetText(Constants.Text.Settings.GlobalOptOutExplanation);
+
+  var eventSettings = TextService.GetText(Constants.Text.Settings.EventSettings);
+  var maximumEventLengthExplanation = TextService.GetText(Constants.Text.Settings.MaximumEventLengthExplanation);
+
+  var accountSettings = TextService.GetText(Constants.Text.Settings.AccountSettings);
+  var selfRegistrationExplanation = TextService.GetText(Constants.Text.Settings.SelfRegistrationExplanation);
+
+  var save = TextService.GetText(Constants.Text.Settings.Save);
+
+  var title = TextService.GetText(Constants.Text.Settings.EditSettings);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <form method="post">
+    <h1>@title</h1>
+    <div asp-validation-summary="ModelOnly" class="error" role="alert"></div>
+
+    <h2>@emailSettings</h2>
+
+    <div class="row">
+      <fieldset>
+        <label asp-for="GlobalOptOut">@Html.DisplayNameFor(m => m.GlobalOptOut)</label>
+        <input asp-for="GlobalOptOut" />
+        <span asp-validation-for="GlobalOptOut" class="warning"></span>
+      </fieldset>
+      <p>@globalOptOutExplanation</p>
+    </div>
+
+    <h2>@eventSettings</h2>
+
+    <div class="row">
+      <fieldset>
+        <label asp-for="MaximumEventLength">@Html.DisplayNameFor(m => m.MaximumEventLength)</label>
+        <input asp-for="MaximumEventLength" />
+        <span asp-validation-for="MaximumEventLength" class="warning"></span>
+      </fieldset>
+      <p>@maximumEventLengthExplanation</p>
+    </div>
+
+    <h2>@accountSettings</h2>
+
+    <div class="row checkbox">
+      <fieldset>
+        <input asp-for="SelfRegistration" />
+        <label asp-for="SelfRegistration">@Html.DisplayNameFor(m => m.SelfRegistration)</label>
+      </fieldset>
+      <p>@selfRegistrationExplanation</p>
+    </div>
+
+    <button type="submit">@save</button>
+  </form>
+</section>

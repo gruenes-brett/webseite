@@ -1,0 +1,51 @@
+.autoComplete_wrapper {
+  position: relative;
+  width: 100%;
+}
+
+  .autoComplete_wrapper > ul {
+    position: absolute;
+    max-height: 300px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+    margin: -2px 0 0 0;
+    padding: 0;
+    z-index: 1;
+    list-style: none;
+    background-color: var(--background);
+    border: 2px solid var(--green);
+  }
+
+    .autoComplete_wrapper > ul[hidden],
+    .autoComplete_wrapper > ul:empty {
+      display: block;
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    .autoComplete_wrapper > ul > li {
+      margin: 0;
+      padding: 10px;
+      background-color: var(--background);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: normal;
+    }
+
+      .autoComplete_wrapper > ul > li mark {
+        background-color: transparent;
+        color: var(--green);
+        font-weight: bold;
+      }
+
+      .autoComplete_wrapper > ul > li:hover,
+      .autoComplete_wrapper > ul > li:hover mark,
+      .autoComplete_wrapper > ul > li[aria-selected="true"],
+      .autoComplete_wrapper > ul > li[aria-selected="true"] mark {
+        cursor: pointer;
+        background-color: var(--green);
+        color: var(--white);
+      }

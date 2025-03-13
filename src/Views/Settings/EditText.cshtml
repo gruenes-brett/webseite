@@ -1,0 +1,64 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Extensions
+@using GruenesBrett.Interfaces
+@using GruenesBrett.ViewModels.Settings
+
+@inject ITextService TextService
+
+@model EditTextViewModel
+
+@{
+  var save = TextService.GetText(Constants.Text.Settings.Save);
+  var abort = TextService.GetText(Constants.Text.Settings.Abort);
+
+  var title = TextService.GetText(Constants.Text.Settings.EditText);
+  ViewData["Title"] = title;
+}
+
+@section Styles {
+  @if (Model.IsRichText)
+  {
+    <link rel="stylesheet" href="~/css/quill/quill.snow.css" asp-append-version="true" />
+  }
+}
+
+@section Scripts {
+  @if (Model.IsRichText)
+  {
+    <script src="~/js/quill/quill.js" asp-append-version="true"></script>
+    <script src="~/js/quill/scripts.js" asp-append-version="true"></script>
+  }
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <form method="post">
+    <h1>@title: @Model.Key</h1>
+    <div asp-validation-summary="ModelOnly" class="error" role="alert"></div>
+
+    @if (Model.IsRichText)
+    {
+      <fieldset class="full">
+        <input asp-for="Value" type="hidden" aria-required="true" required id="editorValue" />
+        <div id="editor">
+          @Html.Raw(Model.Value)
+        </div>
+        <span asp-validation-for="Value" class="warning"></span>
+      </fieldset>
+    }
+    else
+    {
+      <fieldset class="full">
+        <input asp-for="Value" type="text" aria-required="true" required />
+        <span asp-validation-for="Value" class="warning"></span>
+      </fieldset>
+    }
+
+    <div class="row">
+      <button type="submit">@save</button>
+      <a asp-controller="@nameof(Settings)" asp-action="@nameof(Settings.EditTexts)" class="button">@abort</a>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,58 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+
+@inject ITextService TextService
+
+@model SingleEvent
+
+@{
+  var name = TextService.GetText(Constants.Text.Event.Name);
+  var formattedTimeSpan = TextService.GetFormattedDateTimeSpan(Model);
+
+  var createdBy = TextService.GetText(Constants.Text.Event.CreatedBy);
+  var created = TextService.GetText(Constants.Text.Event.Created);
+
+  var loggedIn = TextService.GetText(Constants.Text.Event.LoggedIn);
+  var notLoggedIn = TextService.GetText(Constants.Text.Event.NotLoggedIn);
+
+  var abort = TextService.GetText(Constants.Text.Event.Abort);
+
+  var title = TextService.GetText(Constants.Text.Event.Delete);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="../Events/_SidebarLinks" />
+</aside>
+<section>
+  <form method="post">
+    <h1>@title</h1>
+    <div asp-validation-summary="ModelOnly" class="error" role="alert"></div>
+
+    <p>
+      <strong>@name</strong><br />
+      @Model.EventName<br />
+      @formattedTimeSpan
+    </p>
+    <p>
+      <strong>@createdBy</strong><br />
+      @if (Model.CreatedBy is not null)
+      {
+        <span><a href="mailto:@Model.CreatedBy.Email">@Model.CreatedBy.DisplayName</a> (@loggedIn)</span>
+      }
+      else
+      {
+        <span><a href="mailto:@Model.CreatedByEmail">@Model.CreatedByName</a> (@notLoggedIn)</span>
+      }
+    </p>
+    <p>
+      <strong>@created</strong><br />
+      @Model.Created
+    </p>
+
+    <div class="row">
+      <button type="submit" class="error">@title</button>
+      <a asp-controller="@nameof(Events)" asp-action="@nameof(Events.Index)" class="button">@abort</a>
+    </div>
+  </form>
+</section>

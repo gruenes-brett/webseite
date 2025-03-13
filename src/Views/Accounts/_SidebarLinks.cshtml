@@ -1,0 +1,24 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Interfaces
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject ITextService TextService
+
+@{
+  var links = TextService.GetText(Constants.Text.Accounts.Links);
+  var create = TextService.GetText(Constants.Text.Accounts.Create);
+  var showLog = TextService.GetText(Constants.Text.Accounts.ShowAuditLog);
+
+  var isSignedIn = SignInManager.IsSignedIn(User);
+}
+
+@if (isSignedIn)
+{
+  <h2>@links</h2>
+
+  <ul>
+    <li><a asp-controller="@nameof(Accounts)" asp-action="@nameof(Accounts.Create)">@create</a></li>
+    <li><a asp-controller="@nameof(Accounts)" asp-action="@nameof(Accounts.ShowAuditLog)">@showLog</a></li>
+  </ul>
+}

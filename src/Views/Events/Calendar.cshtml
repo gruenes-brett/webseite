@@ -1,0 +1,107 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Extensions
+@using GruenesBrett.Interfaces
+@using GruenesBrett.Properties
+@using GruenesBrett.ViewModels.Events
+
+@inject ITextService TextService
+
+@model CalendarViewModel
+
+@{
+  var noResults = TextService.GetText(Constants.Text.Events.NoResults);
+  var adjustFilters = TextService.GetText(Constants.Text.Events.AdjustFilters);
+
+  var title = SystemTexts.Calendar;
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="../Shared/_Filters" for="FilterViewModel" />
+  <partial name="../Shared/_SidebarLinks" />
+</aside>
+<section>
+  @{
+    var currentMonth = -1;
+    var today = DateOnly.FromDateTime(DateTime.Now);
+  }
+
+  @if (Model.DateEvents.Count == 0)
+  {
+    <h1>@noResults</h1>
+    @Html.Raw(adjustFilters)
+  }
+
+  @foreach (var dateEvent in Model.DateEvents)
+  {
+    var isWeekend = dateEvent.Key.IsWeekend();
+    var isWeekendClass = isWeekend ? "weekend" : string.Empty;
+    var isToday = dateEvent.Key.IsToday();
+    var isTodayClass = isToday ? "today" : string.Empty;
+    var numberOfEvents = dateEvent.Value.Count;
+    var isFirstOfDay = true;
+
+    if (currentMonth != dateEvent.Key.Month)
+    {
+      if (currentMonth != -1)
+      {
+        @:</table>
+        @:</div>
+      }
+
+      var anchor = dateEvent.Key.ToString("MMM-yyyy");
+
+      @:<div>
+      <h1><a href="#@anchor" id="@anchor">@dateEvent.Key.ToString("Y")</a></h1>
+      @:<table class="calendar">
+    }
+
+    if (dateEvent.Value.Count == 0)
+    {
+      <tr class="@isTodayClass @isWeekendClass">
+        <td>@dateEvent.Key.ToString("dd")</td>
+        <td>@dateEvent.Key.ToString("ddd")</td>
+        <td></td>
+      </tr>
+    }
+
+    foreach (var publishedEvent in dateEvent.Value)
+    {
+      var formattedTimeSpan = TextService.GetFormattedTimeSpan(publishedEvent);
+      var locationName = publishedEvent.EventLocation.Name;
+      var organizerName = publishedEvent.OrganizerName;
+      var additionalInformation = $"{locationName}, {organizerName}";
+      if (formattedTimeSpan.HasValue())
+        additionalInformation = $"{formattedTimeSpan}, {additionalInformation}";
+
+      @:<tr class="@isTodayClass @isWeekendClass">
+
+      @if (isFirstOfDay)
+      {
+        isFirstOfDay = false;
+
+        @:<td rowspan="@numberOfEvents">@dateEvent.Key.ToString("dd")</td>
+        @:<td rowspan="@numberOfEvents">@dateEvent.Key.ToString("ddd")</td>
+      }
+
+        @:<td>
+          <div class="category" style="background-color: @publishedEvent.PrimaryCategory.BackgroundColor;"></div>
+          <h2>
+            <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Index)" asp-route-eventid="@publishedEvent.ExternalId">
+              @publishedEvent.EventName
+            </a>
+          </h2>
+          <p>@additionalInformation</p>
+        @:</td>
+      @:</tr>
+    }
+
+    currentMonth = dateEvent.Key.Month;
+  }
+
+  @if (Model.DateEvents.Count > 0)
+  {
+    @:</table>
+    @:</div>
+  }
+</section>

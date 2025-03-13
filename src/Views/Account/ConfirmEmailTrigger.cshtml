@@ -1,0 +1,17 @@
+﻿@using GruenesBrett.Interfaces
+
+@inject ITextService TextService
+
+@{
+  var text = TextService.GetText(Constants.Text.Account.ConfirmEmailTriggerText);
+  var title = TextService.GetText(Constants.Text.Account.ConfirmEmailTrigger);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <h1>@title</h1>
+  @text
+</section>

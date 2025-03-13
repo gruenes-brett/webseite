@@ -1,0 +1,869 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Account.ConfirmAccountEmailSubject" xml:space="preserve">
+    <value>Bestätige deine E-Mail-Adresse für das Grüne Brett</value>
+  </data>
+  <data name="Account.ConfirmEmail" xml:space="preserve">
+    <value>E-Mail-Adresse bestätigen</value>
+  </data>
+  <data name="Account.ForgotPassword" xml:space="preserve">
+    <value>Passwort vergessen</value>
+  </data>
+  <data name="Account.ForgotPasswordHeading" xml:space="preserve">
+    <value>Du hast dein Passwort vergessen?</value>
+  </data>
+  <data name="Account.ForgotPasswordText" xml:space="preserve">
+    <value>Wenn du dein Passwort vergessen hast, dann kannst du dein &lt;a href="/account/passwort-vergessen"&gt;Passwort zurücksetzen&lt;/a&gt;.</value>
+  </data>
+  <data name="Account.Login" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="Account.Registration" xml:space="preserve">
+    <value>Account anlegen</value>
+  </data>
+  <data name="Account.RegistrationConfirmation" xml:space="preserve">
+    <value>Account angelegt</value>
+  </data>
+  <data name="Account.RegistrationConfirmationText" xml:space="preserve">
+    <value>Dein Account wurde erfolgreich angelegt. Du solltest in Kürze eine E-Mail mit weiteren Informationen bekommen.</value>
+  </data>
+  <data name="Account.RegistrationBenefitsHeading" xml:space="preserve">
+    <value>Warum sollte ich einen Account anlegen?</value>
+  </data>
+  <data name="Account.RegistrationBenefitsText" xml:space="preserve">
+    <value>Einen Account anzulegen hat viele Vorteile! Du sparst ein wenig Zeit beim Anlegen von Veranstaltungen, weil du nicht immer aufs Neue deinen Namen und deine E-Mail-Adresse eingeben musst. Außerdem werden deine Veranstaltungen direkt nach dem Anlegen automatisch freigegeben und sind so schneller auf der Seite sichtbar. Und falls dir beim Anlegen mal ein Fehler passiert ist, kann du deine eigenen Veranstaltungen nachträglich bearbeiten.</value>
+  </data>
+  <data name="Account.RegistrationError" xml:space="preserve">
+    <value>Dein Account wurde angelegt, aber dabei ist ein Fehler aufgetreten. Jemand wird sich bei dir melden.</value>
+  </data>
+  <data name="Account.ResetPassword" xml:space="preserve">
+    <value>Passwort zurücksetzen</value>
+  </data>
+  <data name="Account.ResetPasswordConfirmation" xml:space="preserve">
+    <value>Passwort wurde zurückgesetzt</value>
+  </data>
+  <data name="Account.ResetPasswordConfirmationText" xml:space="preserve">
+    <value>Dein Passwort wurde erfolgreich zurückgesetzt. Du kannst dich jetzt &lt;a href="/account/anmelden"&gt;wieder einloggen&lt;/a&gt;. Willkommen zurück!</value>
+  </data>
+  <data name="Account.ResetPasswordEmailBody" xml:space="preserve">
+    <value>&lt;h1&gt;Passwort zurücksetzen&lt;/h1&gt;&lt;p&gt;Du kannst &lt;a href="{0}"&gt;diesen Link&lt;/a&gt; nutzen, um dein Passwort für das Grüne Brett zurückzusetzen. Falls dir dein Passwort in der Zwischenzeit wieder eingefallen ist, kannst du diese E-Mail ignorieren.&lt;/p&gt;</value>
+  </data>
+  <data name="Account.ResetPasswordEmailSubject" xml:space="preserve">
+    <value>Passwort für das Grüne Brett zurücksetzen</value>
+  </data>
+  <data name="Account.LockedOut" xml:space="preserve">
+    <value>Du hast zu oft ein falsches Passwort eingegeben. Daher ist dein Account vorübergehend gesperrt. Probiere es in ein paar Minuten noch einmal.</value>
+  </data>
+  <data name="Account.NotConfirmed" xml:space="preserve">
+    <value>Die E-Mail-Adresse für deinen Accounts ist noch nicht bestätigt. Klicke dazu in der E-Mail auf den Link zum Bestätigen. Wenn du keine E-Mail bekommen hast, dann kannst du eine &lt;a href="{0}"&gt;weitere E-Mail anfordern&lt;/a&gt;.</value>
+  </data>
+  <data name="Account.LoginFailed" xml:space="preserve">
+    <value>Die Anmeldung hat leider nicht geklappt.</value>
+  </data>
+  <data name="Account.ConfirmEmailError" xml:space="preserve">
+    <value>Da hat etwas beim Bestätigen deiner E-Mail-Adresse nicht geklappt.</value>
+  </data>
+  <data name="Account.ConfirmEmailAlreadyConfirmed" xml:space="preserve">
+    <value>Die E-Mail-Adresse für diesen Account wurde schon bestätigt.</value>
+  </data>
+  <data name="Account.ConfirmEmailSuccess" xml:space="preserve">
+    <value>Deine E-Mail-Adresse wurde erfolgreich bestätigt. Jetzt muss dein Account nur noch von einer Person aus unserem Team freigeschaltet werden. Du bekommst eine weitere E-Mail, wenn das passiert ist.</value>
+  </data>
+  <data name="Account.ResetPasswordError" xml:space="preserve">
+    <value>Da hat etwas beim Zurücksetzen deines Passworts nicht geklappt.</value>
+  </data>
+  <data name="Account.ForgotPasswordConfirmation" xml:space="preserve">
+    <value>E-Mail gesendet</value>
+  </data>
+  <data name="Account.ForgotPasswordConfirmationText" xml:space="preserve">
+    <value>Du solltest in Kürze eine E-Mail mit einem Link zum Zurücksetzen deines Passworts bekommen.</value>
+  </data>
+  <data name="Error.Heading" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="Error.Error404" xml:space="preserve">
+    <value>Die Seite konnte nicht gefunden werden. Hier kommst du &lt;a href="/"&gt;zurück zur Startseite&lt;/a&gt;.</value>
+  </data>
+  <data name="Error.Generic" xml:space="preserve">
+    <value>Es ist ein Fehler aufgetreten. Hier kommst du &lt;a href="/"&gt;zurück zur Startseite&lt;/a&gt;.</value>
+  </data>
+  <data name="Content.Imprint" xml:space="preserve">
+    <value>Impressum</value>
+  </data>
+  <data name="Content.DataPrivacyPolicy" xml:space="preserve">
+    <value>Datenschutzerklärung</value>
+  </data>
+  <data name="Content.Links" xml:space="preserve">
+    <value>Sonstige Links</value>
+  </data>
+  <data name="Content.ImprintText" xml:space="preserve">
+    <value>&lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.&lt;/p&gt;</value>
+  </data>
+  <data name="Content.TermsOfService" xml:space="preserve">
+    <value>Nutzungsbedingungen</value>
+  </data>
+  <data name="Content.TermsOfServiceText" xml:space="preserve">
+    <value>&lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.&lt;/p&gt;</value>
+  </data>
+  <data name="Content.DataPrivacyPolicyText" xml:space="preserve">
+    <value>&lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.&lt;/p&gt;</value>
+  </data>
+  <data name="Account.Logout" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
+  <data name="Events.Edit" xml:space="preserve">
+    <value>Veranstaltungen bearbeiten</value>
+  </data>
+  <data name="Account.MyAccount" xml:space="preserve">
+    <value>Mein Account</value>
+  </data>
+  <data name="Account.EditPassword" xml:space="preserve">
+    <value>Passwort ändern</value>
+  </data>
+  <data name="Account.EditName" xml:space="preserve">
+    <value>Name ändern</value>
+  </data>
+  <data name="Account.Created" xml:space="preserve">
+    <value>Account angelegt</value>
+  </data>
+  <data name="Account.EditError" xml:space="preserve">
+    <value>Da hat etwas nicht geklappt.</value>
+  </data>
+  <data name="Account.PasswordChanged" xml:space="preserve">
+    <value>Passwort zuletzt geändert</value>
+  </data>
+  <data name="Account.EditPasswordConfirmation" xml:space="preserve">
+    <value>Passwort geändert</value>
+  </data>
+  <data name="Account.EditPasswordConfirmationText" xml:space="preserve">
+    <value>Das Passwort wurde erfolgreich geändert.</value>
+  </data>
+  <data name="Event.Edit" xml:space="preserve">
+    <value>Veranstaltung bearbeiten</value>
+  </data>
+  <data name="Event.Delete" xml:space="preserve">
+    <value>Veranstaltung löschen</value>
+  </data>
+  <data name="Account.NoAccountYetHeading" xml:space="preserve">
+    <value>Du hast noch keinen Account?</value>
+  </data>
+  <data name="Account.NoAccountYetText" xml:space="preserve">
+    <value>Wenn du häufiger Veranstaltungen anlegst, dann empfehlen wir dir einen &lt;a href="/account/registrieren"&gt;Account anzulegen&lt;/a&gt;.</value>
+  </data>
+  <data name="Content.AboutUs" xml:space="preserve">
+    <value>Wer wir sind</value>
+  </data>
+  <data name="Content.AboutUsText" xml:space="preserve">
+    <value>&lt;p&gt;Eine Gruppe von Menschen, die sich dachte „Für Veranstaltungen im Nachhaltigkeitsbereich brauchen wir sowas wie ein &lt;strong&gt;schwarzes Brett, nur halt in Grün!&lt;/strong&gt;“. Nun sind wir froh, dass das Grüne Brett steht und freuen uns, wenn Du Lust hast, uns zu unterstützen!&lt;/p&gt;
+&lt;h2&gt;So kannst du mitmachen&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Regelmäßig Veranstaltungen hochladen:&lt;/strong&gt; Das Grüne Brett lebt davon, dass viele Menschen Veranstaltungen eintragen. Deshalb freuen wir uns riesig, wenn Du dies regelmäßg machen möchtest. Um Dir das Hochladen zu vereinfachen, kannst Du einen Account beantragen, mit dem Du Veranstaltungen erstellen und direkt (ohne Prüfung) hochladen kannst.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Das Grüne Brett in Deiner Region bewerben:&lt;/strong&gt; Erfreulicherweise haben wir viele Postkarten, Sticker und Poster, die das Grüne Brett bekannter machen können. Schreib uns gerne eine Mail an gruenesbrett(at)bund-dresden.de mit Deiner Adresse und der Stückzahl und wir senden Dir das Material zu.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Beim Kernteam des Grünen Brettes mitwirken:&lt;/strong&gt; Es gibt einen Kreis von Menschen, die für die überregionale Organisation und Umsetzung des Grünen Brettes verantwortlich sind. Hierzu gehört, Projektanträge zu schreiben, das Grüne Brett zu bewerben und den Austausch mit unseren Webentwicklern zu führen. Hast Du hierzu Lust? Dann schreib uns gerne (gruenesbrett[at]bund-dresden.de), wir können jede helfende Hand gebrauchen.&lt;/li&gt;
+&lt;/ul&gt;
+</value>
+  </data>
+  <data name="Accounts.EditAccounts" xml:space="preserve">
+    <value>Accounts bearbeiten</value>
+  </data>
+  <data name="Accounts.LastLogin" xml:space="preserve">
+    <value>Letzte Anmeldung</value>
+  </data>
+  <data name="Accounts.Links" xml:space="preserve">
+    <value>Administrative Links</value>
+  </data>
+  <data name="Accounts.Create" xml:space="preserve">
+    <value>Account anlegen</value>
+  </data>
+  <data name="Accounts.Approve" xml:space="preserve">
+    <value>Account freigeben</value>
+  </data>
+  <data name="Accounts.ApprovalEmailSubject" xml:space="preserve">
+    <value>Dein Account für das Grüne Brett wurde freigegeben</value>
+  </data>
+  <data name="Accounts.ApprovalEmailBody" xml:space="preserve">
+    <value>&lt;h1&gt;Account freigegeben&lt;/h1&gt;&lt;p&gt;Gute Nachrichten! Dein Account für das Grüne Brett wurde eben freigegeben. Wenn du deine E-Mail-Adresse schon bestätigt hast, dann kannst du dich jetzt &lt;a href="{0}"&gt;auf der Seite einloggen&lt;/a&gt;.&lt;/p&gt;</value>
+  </data>
+  <data name="Account.Banned" xml:space="preserve">
+    <value>Dein Account ist gesperrt.</value>
+  </data>
+  <data name="Accounts.Ban" xml:space="preserve">
+    <value>Account sperren</value>
+  </data>
+  <data name="Accounts.UnbanAction" xml:space="preserve">
+    <value>Entsperren</value>
+  </data>
+  <data name="Accounts.DeleteAction" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Accounts.BanAction" xml:space="preserve">
+    <value>Sperren</value>
+  </data>
+  <data name="Accounts.Unban" xml:space="preserve">
+    <value>Account entsperren</value>
+  </data>
+  <data name="Accounts.Delete" xml:space="preserve">
+    <value>Account löschen</value>
+  </data>
+  <data name="Accounts.BanOrUnbanYourself" xml:space="preserve">
+    <value>Du kannst nicht deinen eigenen Account sperren oder entsperren.</value>
+  </data>
+  <data name="Accounts.DeleteYourself" xml:space="preserve">
+    <value>Du kannst nicht deinen eigenen Account löschen.</value>
+  </data>
+  <data name="Accounts.EditRole" xml:space="preserve">
+    <value>Rolle bearbeiten</value>
+  </data>
+  <data name="Accounts.EditRoleOfYourself" xml:space="preserve">
+    <value>Du kannst nicht die Rolle deines eigenen Accounts bearbeiten.</value>
+  </data>
+  <data name="Settings.EditSettings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Settings.EditTexts" xml:space="preserve">
+    <value>Texte bearbeiten</value>
+  </data>
+  <data name="Settings.EditCategories" xml:space="preserve">
+    <value>Kategorien bearbeiten</value>
+  </data>
+  <data name="Settings.Links" xml:space="preserve">
+    <value>Weitere Einstellungen</value>
+  </data>
+  <data name="Account.ConfirmEmailTrigger" xml:space="preserve">
+    <value>E-Mail noch einmal anfordern</value>
+  </data>
+  <data name="Account.ConfirmEmailTriggerText" xml:space="preserve">
+    <value>Wir haben dir noch eine E-Mail zum Bestätigen deiner E-Mail-Adresse gesendet. Bitte überprüfe auch deinen Spam-Ordner!</value>
+  </data>
+  <data name="Account.EmailSettings" xml:space="preserve">
+    <value>E-Mail-Einstellungen</value>
+  </data>
+  <data name="Account.ReceiveOptionalEmailsExplanation" xml:space="preserve">
+    <value>Optionale E-Mails sind zum Beispiel Erinnerungen, wenn ein Account oder eine Veranstaltung auf Freigabe wartet. Notwendige E-Mails, wie zum Beispiel die E-Mail zum Zurücksetzen deines Passworts, senden wir dir in jedem Fall.</value>
+  </data>
+  <data name="Account.Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Account.Settings" xml:space="preserve">
+    <value>Account-Einstellungen</value>
+  </data>
+  <data name="Account.OtherSettings" xml:space="preserve">
+    <value>Sonstige Einstellungen</value>
+  </data>
+  <data name="Account.ReceiveReportingEmailsExplanation" xml:space="preserve">
+    <value>Du wirst maximal eine E-Mail pro Tag und Veranstaltung bekommen, selbst wenn dieselbe Veranstaltung mehrfach am selben Tag gemeldet wurde.</value>
+  </data>
+  <data name="Account.DefaultPageExplanation" xml:space="preserve">
+    <value>Das ist die Seite, auf die du immer nach deiner Anmeldung geleitet wirst.</value>
+  </data>
+  <data name="Account.NewUserEmailSubject" xml:space="preserve">
+    <value>Ein neuer Nutzer hat sich für das Grüne Brett registriert</value>
+  </data>
+  <data name="Account.NewUserEmailBody" xml:space="preserve">
+    <value>&lt;h1&gt;Neuer Nutzer&lt;/h1&gt;&lt;p&gt;Du kannst jetzt den &lt;a href="{0}"&gt;Nutzer freischalten&lt;/a&gt; oder warten, bis es jemand anderes gemacht hat.&lt;/p&gt;</value>
+  </data>
+  <data name="Account.DisplayNameExplanation" xml:space="preserve">
+    <value>Wenn du eine Initiative oder einen Verein vertrittst, dann sollte das der Name der Initiative oder des Vereins sein. Der Name ist nicht öffentlich sichtbar.</value>
+  </data>
+  <data name="Account.EmailExplanation" xml:space="preserve">
+    <value>Die E-Mail-Adresse wird zur Anmeldung und für Benachrichtigungen genutzt. Sie ist nicht öffentlich sichtbar und kann später nicht geändert werden.</value>
+  </data>
+  <data name="Account.DisplayNamePlaceholder" xml:space="preserve">
+    <value>Vorname Nachname</value>
+  </data>
+  <data name="Account.ConfirmAccountEmailBody" xml:space="preserve">
+    <value>&lt;h1&gt;Willkommen!&lt;/h1&gt;&lt;p&gt;Dein Account für das Grüne Brett wurde erfolgreich angelegt. Jetzt musst du nur noch deine &lt;a href="{0}"&gt;E-Mail-Adresse bestätigen&lt;/a&gt; und von einer Person aus unserem Team freigeschaltet werden. Danach kannst du loslegen!&lt;/p&gt;</value>
+  </data>
+  <data name="Account.EmailPlaceholder" xml:space="preserve">
+    <value>email@example.org</value>
+  </data>
+  <data name="Account.PasswortPlaceholder" xml:space="preserve">
+    <value>******</value>
+  </data>
+  <data name="Error.Error403" xml:space="preserve">
+    <value>Auf diese Seite hast du keinen Zugriff.</value>
+  </data>
+  <data name="Settings.GlobalOptOutExplanation" xml:space="preserve">
+    <value>Eine kommaseparierte Liste von E-Mail-Adressen, welche niemals E-Mails vom Grünen Brett bekommen. Das betrifft auch notwendige E-Mails.</value>
+  </data>
+  <data name="Settings.Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Settings.EditText" xml:space="preserve">
+    <value>Text bearbeiten</value>
+  </data>
+  <data name="Settings.Action" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="Settings.Key" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Settings.Value" xml:space="preserve">
+    <value>Wert</value>
+  </data>
+  <data name="Settings.Edit" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="Settings.AddCategory" xml:space="preserve">
+    <value>Kategorie hinzufügen</value>
+  </data>
+  <data name="Settings.Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Settings.Abort" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Settings.EditCategory" xml:space="preserve">
+    <value>Kategorie bearbeiten</value>
+  </data>
+  <data name="Settings.DeleteCategory" xml:space="preserve">
+    <value>Kategorie löschen</value>
+  </data>
+  <data name="Account.Abort" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Accounts.Abort" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Accounts.CreateError" xml:space="preserve">
+    <value>Es ist ein Fehler beim Anlegen des Accounts aufgetreten.</value>
+  </data>
+  <data name="Accounts.SetPasswordEmailSubject" xml:space="preserve">
+    <value>Account für das Grüne Brett angelegt</value>
+  </data>
+  <data name="Accounts.SetPasswordEmailBody" xml:space="preserve">
+    <value>&lt;h1&gt;Account angelegt&lt;/h1&gt;&lt;p&gt;Für dich wurde ein Account für das Grüne Brett angelegt. Jetzt musst du nur noch &lt;a href="{0}"&gt;ein Passwort vergeben&lt;/a&gt; und dann kannst du dich anmelden und Veranstaltungen erstellen. Bitte beachte, dass der Link zum Setzen des Passworts nur zwei Wochen gültig ist.&lt;/p&gt;</value>
+  </data>
+  <data name="Accounts.AlreadyHasPassword" xml:space="preserve">
+    <value>Für den Account wurde bereits ein Passwort vergeben.</value>
+  </data>
+  <data name="Accounts.SetPassword" xml:space="preserve">
+    <value>Passwort setzen</value>
+  </data>
+  <data name="Accounts.SetPasswordConfirmation" xml:space="preserve">
+    <value>Passwort erfolgreich gesetzt</value>
+  </data>
+  <data name="Accounts.SetPasswordConfirmationText" xml:space="preserve">
+    <value>Du hast erfolgreich ein Passwort für deinen Account vergeben und deine E-Mail-Adresse bestätigt. Du kannst dich &lt;a href="/account/anmelden"&gt;jetzt anmelden&lt;/a&gt; und Veranstaltungen erstellen.</value>
+  </data>
+  <data name="Accounts.ShowAuditLog" xml:space="preserve">
+    <value>Aktivitäten ansehen</value>
+  </data>
+  <data name="Accounts.Message" xml:space="preserve">
+    <value>Eintrag</value>
+  </data>
+  <data name="Accounts.Timestamp" xml:space="preserve">
+    <value>Zeitpunkt</value>
+  </data>
+  <data name="Event.LoginHeading" xml:space="preserve">
+    <value>Du hast einen Account?</value>
+  </data>
+  <data name="Event.LoginText" xml:space="preserve">
+    <value>Dann solltest du dich &lt;a href="/account/anmelden?ReturnUrl=%2Fveranstaltung%2Fanlegen"&gt;jetzt anmelden&lt;/a&gt;, damit die Veranstaltung mit deinem Account verknüpft und sofort freigeschaltet wird.</value>
+  </data>
+  <data name="Event.RulesHeading" xml:space="preserve">
+    <value>Ein paar Hinweise</value>
+  </data>
+  <data name="Event.RulesText" xml:space="preserve">
+    <value>&lt;p&gt;Du hast eine Veranstaltung, die im Kalender veröffentlicht werden soll? Super!&lt;/p&gt;
+&lt;p&gt;Bevor Du den Termin erstellst, vergewissere Dich bitte, dass die Veranstaltung zum Grünen Brett passt.&lt;/p&gt;
+&lt;p&gt;Die Veranstaltung…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;nimmt Bezug zu Ökologie, Umweltschutz, Klimaschutz oder Nachhaltigkeit&lt;/li&gt;
+&lt;li&gt;hat keinen kommerziellen Charakter&lt;/li&gt;
+&lt;li&gt;ist für alle zugänglich&lt;/li&gt;
+&lt;li&gt;enthält keine parteipolitische Werbung im Veranstaltungsnamen oder im Veranstaltungsbild&lt;/li&gt;
+&lt;li&gt;hat einen eindeutigen Veranstaltungscharakter, so dass man in einem abgeschlossenen Zeitraum an ihr teilnehmen kann. Anmeldeaufrufe oder Hinweise zu Projekten, die langfristig angelegt sind, entsprechen nicht den Kriterien.&lt;/li&gt;
+&lt;li&gt;findet zu jedem Zeitpunkt des angegeben Zeitraums statt. Wenn Du mehrere zusammenhängende Veranstaltungen in einem längeren Zeitraum unterbringen möchtest, erstelle bitte mehrere einzelne Veranstaltungen.&lt;/li&gt;
+&lt;li&gt;bekennt sich klar für eine offene Gesellschaft, in der alle willkommen sind, unabhängig vom Geschlecht, Nationalität oder Religion&lt;/li&gt;
+&lt;li&gt;beinhaltet nicht das Begehen einer Straftat&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Solltest Du einen Fehler in einer Veranstaltung finden oder diese löschen wollen, wende Dich bitte an: gruenesbrett(at)bund-dresden.de&lt;/p&gt;</value>
+  </data>
+  <data name="Event.CreatedByNamePlaceholder" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Event.CreatedByNameExplanation" xml:space="preserve">
+    <value>Deinen Namen nutzen wir nur für den Kontakt mit dir, wenn wir Rückfragen zur Veranstaltung haben. Er wird nicht veröffentlicht.</value>
+  </data>
+  <data name="Event.CreatedByEmailPlaceholder" xml:space="preserve">
+    <value>email@example.org</value>
+  </data>
+  <data name="Event.CreatedByEmailExplanation" xml:space="preserve">
+    <value>Deine E-Mail-Adresse nutzen wir nur dafür, dass du deine eigene Veranstaltung später noch bearbeiten kannst oder wenn wir Kontakt zu dir aufnehmen wollen. Sie wird nicht veröffentlicht.</value>
+  </data>
+  <data name="Event.EventNamePlaceholder" xml:space="preserve">
+    <value>Reinigung der Elbwiesen</value>
+  </data>
+  <data name="Event.EventNameExplanation" xml:space="preserve">
+    <value>Der Name sollte, wenn möglich, nicht länger als 70 Zeichen sein.</value>
+  </data>
+  <data name="Event.OrganizerNamePlaceholder" xml:space="preserve">
+    <value>Unsere Stadt soll schöner werden e.V.</value>
+  </data>
+  <data name="Event.OrganizerNameExplanation" xml:space="preserve">
+    <value>Das ist der Name der Person oder der Initiative, welche die Veranstaltung organisiert.</value>
+  </data>
+  <data name="Event.EventLinkPlaceholder" xml:space="preserve">
+    <value>https://...</value>
+  </data>
+  <data name="Event.EventLinkExplanation" xml:space="preserve">
+    <value>Das ist der Link zur offiziellen Webseite der Veranstaltung, wenn es eine gibt.</value>
+  </data>
+  <data name="Event.DatePlaceholder" xml:space="preserve">
+    <value>TT.MM.JJJJ</value>
+  </data>
+  <data name="Event.DateExplanation" xml:space="preserve">
+    <value>Findet die Veranstaltung nur an einem Tag statt, dann kannst du das Enddatum leer lassen.</value>
+  </data>
+  <data name="Event.TimePlaceholder" xml:space="preserve">
+    <value>--:--</value>
+  </data>
+  <data name="Event.TimeExplanation" xml:space="preserve">
+    <value>Wenn es eine ganztägige Veranstaltung ist, dann kannst du die Uhrzeiten leer lassen.</value>
+  </data>
+  <data name="Event.JoinEveryDayExplanation" xml:space="preserve">
+    <value>Diese Angabe ist nur relevant für mehrtägige Veranstaltungen. Sie entscheidet darüber, ob die Veranstaltung für jeden Tag oder nur für das Startdatum im Kalender angezeigt wird.</value>
+  </data>
+  <data name="Event.LocationNamePlaceholder" xml:space="preserve">
+    <value>Elbwiesen</value>
+  </data>
+  <data name="Event.LocationNameExplanation" xml:space="preserve">
+    <value>Bei Online-Veranstaltungen kannst du hier den Namen der verwendeten Software eintragen.</value>
+  </data>
+  <data name="Event.LocationAddressPlaceholder" xml:space="preserve">
+    <value>An der schönen Aue 1</value>
+  </data>
+  <data name="Event.LocationAddressExplanation" xml:space="preserve">
+    <value>Wenn die Veranstaltung keine genaue Adresse hat, dann kannst du das Feld leer lassen.</value>
+  </data>
+  <data name="Event.EventDescriptionPlaceholder" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="Event.EventDescriptionExplanation" xml:space="preserve">
+    <value>Die Beschreibung sollte alle wichtigen Informationen enthalten, die man für eine Teilnahme benötigt (zum Beispiel ob eine Anmeldung nötig ist oder ob die Teilnahme etwas kostet). Links zu Webseiten und E-Mail-Adressen werden nach dem Anlegen der Veranstaltung automatisch anklickbar gemacht.</value>
+  </data>
+  <data name="Event.CategoryExplanation" xml:space="preserve">
+    <value>Eine Veranstaltung kann mehreren Kategorien zugeordnet werden.</value>
+  </data>
+  <data name="Event.EventImageExplanation" xml:space="preserve">
+    <value>Das Bild wird im Format 16:9 angezeigt werden und die empfohlene Auflösung beträgt 960x540 Pixel. Die maximale Bildgröße beträgt 10 MB und das Bild muss im JPEG- oder im PNG-Format sein.</value>
+  </data>
+  <data name="Event.ConfirmImageRights" xml:space="preserve">
+    <value>Ich bestätige, die notwendigen Rechte am hochgeladenen Bild zu besitzen und dass damit keine Rechte Dritter verletzt werden.</value>
+  </data>
+  <data name="Event.ConfirmPrivacyPolicy" xml:space="preserve">
+    <value>Ich stimme zu, dass meine eingegebenen Daten, wie in der &lt;a href="/inhalte/datenschutz" target="_blank"&gt;Datenschutzerklärung&lt;/a&gt; vom Grünen Brett beschrieben, gesammelt und verarbeitet werden dürfen.</value>
+  </data>
+  <data name="Events.Links" xml:space="preserve">
+    <value>Administrative Links</value>
+  </data>
+  <data name="Events.ShowAuditLog" xml:space="preserve">
+    <value>Aktivitäten ansehen</value>
+  </data>
+  <data name="Events.Message" xml:space="preserve">
+    <value>Eintrag</value>
+  </data>
+  <data name="Events.Timestamp" xml:space="preserve">
+    <value>Zeitpunkt</value>
+  </data>
+  <data name="Event.CreateConfirmation" xml:space="preserve">
+    <value>Veranstaltung angelegt</value>
+  </data>
+  <data name="Event.CreateError" xml:space="preserve">
+    <value>Es ist ein Fehler beim Anlegen der Veranstaltung aufgetreten.</value>
+  </data>
+  <data name="Event.InvalidImage" xml:space="preserve">
+    <value>Das Bild muss ein JPG- oder ein PNG-Bild sein und darf nicht größer als 10 MB sein.</value>
+  </data>
+  <data name="Events.MoreInformation" xml:space="preserve">
+    <value>mehr Informationen</value>
+  </data>
+  <data name="Event.Share" xml:space="preserve">
+    <value>Veranstaltung teilen</value>
+  </data>
+  <data name="Event.Information" xml:space="preserve">
+    <value>Informationen</value>
+  </data>
+  <data name="Event.Report" xml:space="preserve">
+    <value>Veranstaltung melden</value>
+  </data>
+  <data name="Event.ReportDoesNotFitSite" xml:space="preserve">
+    <value>Die Veranstaltung passt nicht zum Grünen Brett.</value>
+  </data>
+  <data name="Event.ReportIsSpam" xml:space="preserve">
+    <value>Die Veranstaltung ist Spam oder ein Betrug.</value>
+  </data>
+  <data name="Event.ReportIsCanceled" xml:space="preserve">
+    <value>Die Veranstaltung wurde abgesagt.</value>
+  </data>
+  <data name="Event.ReportIsNotPublic" xml:space="preserve">
+    <value>Die Veranstaltung ist nicht öffentlich.</value>
+  </data>
+  <data name="Event.ReportIsOther" xml:space="preserve">
+    <value>Die Veranstaltung passt aus einem anderen Grund nicht.</value>
+  </data>
+  <data name="Event.ReportIsIllegal" xml:space="preserve">
+    <value>Die Veranstaltung ist verboten oder ruft zu Straftaten auf.</value>
+  </data>
+  <data name="Event.Abort" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Homepage.Index" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="Homepage.Introduction" xml:space="preserve">
+    <value>&lt;p&gt;Das Grüne Brett ist ein Kalender für Veranstaltungen mit Bezug zu Ökologie, Umweltschutz, Klimaschutz oder Nachhaltigkeit. Wähle deine Stadt oder Postleitzahl und erkunde, welche Veranstaltungen demnächst in deiner Nähe stattfinden!&lt;/p&gt;
+&lt;p&gt;Bitte beachte, dass beim Nutzen der Webseite gegebenenfalls Cookies in deinem Browser gesetzt werden. Genauere Information dazu findest du in unserer &lt;a href="/inhalte/datenschutz"&gt;Datenschutzerklärung&lt;/a&gt;.&lt;/p&gt;</value>
+  </data>
+  <data name="Homepage.ProjectBy" xml:space="preserve">
+    <value>Ein Projekt der</value>
+  </data>
+  <data name="Homepage.SearchCityOrPostCode" xml:space="preserve">
+    <value>Suche nach deiner Stadt oder Postleitzahl</value>
+  </data>
+  <data name="Homepage.WhereToSearch" xml:space="preserve">
+    <value>In welcher Stadt möchtest du suchen?</value>
+  </data>
+  <data name="Events.Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Events.Location" xml:space="preserve">
+    <value>Ort:</value>
+  </data>
+  <data name="Events.SearchDistance" xml:space="preserve">
+    <value>Suchradius:</value>
+  </data>
+  <data name="Events.ChangeLocation" xml:space="preserve">
+    <value>ändern</value>
+  </data>
+  <data name="Events.Local" xml:space="preserve">
+    <value>10 km</value>
+  </data>
+  <data name="Events.Supraregional" xml:space="preserve">
+    <value>150 km</value>
+  </data>
+  <data name="Events.Categories" xml:space="preserve">
+    <value>Kategorien</value>
+  </data>
+  <data name="Events.ApplyFilters" xml:space="preserve">
+    <value>Filter anwenden</value>
+  </data>
+  <data name="Events.NoResults" xml:space="preserve">
+    <value>Keine Veranstaltungen gefunden</value>
+  </data>
+  <data name="Events.AdjustFilters" xml:space="preserve">
+    <value>&lt;p&gt;Wir haben keine Veranstaltungen für den gewählten Ort und die gewählten Kategorien gefunden. Passe die Filter an, um mehr Veranstaltungen zu finden.&lt;/p&gt;</value>
+  </data>
+  <data name="Events.Created" xml:space="preserve">
+    <value>Erstellt am</value>
+  </data>
+  <data name="Events.CreatedBy" xml:space="preserve">
+    <value>Erstellt von</value>
+  </data>
+  <data name="Events.Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Events.Name" xml:space="preserve">
+    <value>Name der Veranstaltung</value>
+  </data>
+  <data name="Events.WaitingForApproval" xml:space="preserve">
+    <value>Wartet auf Freigabe</value>
+  </data>
+  <data name="Events.Approved" xml:space="preserve">
+    <value>Freigegeben</value>
+  </data>
+  <data name="Events.LoggedIn" xml:space="preserve">
+    <value>angemeldet</value>
+  </data>
+  <data name="Events.NotLoggedIn" xml:space="preserve">
+    <value>nicht angemeldet</value>
+  </data>
+  <data name="Accounts.EditResponsibility" xml:space="preserve">
+    <value>Zuständigkeit bearbeiten</value>
+  </data>
+  <data name="Account.AreaOfResponsibility" xml:space="preserve">
+    <value>Zuständigkeitsbereich</value>
+  </data>
+  <data name="Events.Actions" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="Events.Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Events.Approve" xml:space="preserve">
+    <value>Freigeben</value>
+  </data>
+  <data name="Event.Approve" xml:space="preserve">
+    <value>Veranstaltung freigeben</value>
+  </data>
+  <data name="Events.EditAction" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="Event.ApprovedEmailSubject" xml:space="preserve">
+    <value>Deine Veranstaltung wurde freigegeben</value>
+  </data>
+  <data name="Event.ApprovedEmailBody" xml:space="preserve">
+    <value>&lt;h1&gt;Veranstaltung freigegeben&lt;/h1&gt;&lt;p&gt;Gute Neuigkeiten! &lt;a href="{0}"&gt;Deine Veranstaltung&lt;/a&gt; wurde von unseren Redakteuren für gut befunden und ist jetzt auf dem Grünen Brett sichtbar. Danke für deine Hilfe!&lt;/p&gt;</value>
+  </data>
+  <data name="Event.ApprovalEmailSubject" xml:space="preserve">
+    <value>Eine neue Veranstaltung wartet auf Freigabe</value>
+  </data>
+  <data name="Event.ApprovalEmailBody" xml:space="preserve">
+    <value>&lt;h1&gt;Veranstaltung wartet auf Freigabe&lt;/h1&gt;&lt;p&gt;Es wurde eine neue Veranstaltung auf dem Grünen Brett eingetragen und wartet jetzt auf &lt;a href="{0}"&gt;deine Freigabe&lt;/a&gt;.</value>
+  </data>
+  <data name="Event.ReportConfirmation" xml:space="preserve">
+    <value>Veranstaltung gemeldet</value>
+  </data>
+  <data name="Event.ReportEmailSubject" xml:space="preserve">
+    <value>Eine Veranstaltung wurde gemeldet</value>
+  </data>
+  <data name="Event.ReportEmailBody" xml:space="preserve">
+    <value>&lt;h1&gt;Veranstaltung gemeldet&lt;/h1&gt;&lt;p&gt;Eine Person hat &lt;a href="{0}"&gt;diese Veranstaltung&lt;/a&gt; auf dem Grünen Brett aus folgendem Grund gemeldet:&lt;/p&gt;&lt;p&gt;{1}&lt;/p&gt;</value>
+  </data>
+  <data name="Event.ReportConfirmationText" xml:space="preserve">
+    <value>&lt;p&gt;Die Veranstaltung wurde unserem Team gemeldet. Wir werden die Veranstaltung prüfen und gegebenenfalls löschen. Vielen Dank für deine Hilfe!&lt;/p&gt;</value>
+  </data>
+  <data name="Event.NotApprovedYet" xml:space="preserve">
+    <value>Die Veranstaltung ist noch nicht freigegeben und damit nicht öffentlich sichtbar.</value>
+  </data>
+  <data name="Content.ReportIssue" xml:space="preserve">
+    <value>Einen Fehler melden</value>
+  </data>
+  <data name="Event.CreateConfirmationText" xml:space="preserve">
+    <value>&lt;p&gt;Die Veranstaltung wurde erfolgreich angelegt. Wenn du möchtest, kannst du noch &lt;a href="/veranstaltung/anlegen"&gt;eine weitere Veranstaltung anlegen&lt;/a&gt;.</value>
+  </data>
+  <data name="Event.EditError" xml:space="preserve">
+    <value>Es ist ein Fehler beim Bearbeiten der Veranstaltung aufgetreten.</value>
+  </data>
+  <data name="Feeds.Index" xml:space="preserve">
+    <value>Feeds / Abos</value>
+  </data>
+  <data name="Feeds.Intro" xml:space="preserve">
+    <value>&lt;p&gt;Du möchtest immer über die neuesten Veranstaltungen informiert bleiben ohne regelmäßig das Grüne Brett checken zu müssen? Kein Problem! Hier gibt es ein paar Möglichkeiten, wie du immer auf dem Laufenden bleiben kannst.&lt;/p&gt;
+&lt;p&gt;Bitte beachte, dass die Links auf dieser Seite durch die Filter-Funktion beeinflusst werden. Wenn du also nur an Veranstaltungen von bestimmten Kategorien interessiert bist, dann wähle links die entsprechenden Kategorien aus und klicke auf "Filter anwenden".&lt;/p&gt;</value>
+  </data>
+  <data name="Feeds.IcalTitle" xml:space="preserve">
+    <value>Kalender abonnieren (iCal)</value>
+  </data>
+  <data name="Feeds.AtomTitle" xml:space="preserve">
+    <value>Feed abonnieren (Atom / RSS)</value>
+  </data>
+  <data name="Feeds.IcalText" xml:space="preserve">
+    <value>&lt;p&gt;Wenn du bereits einen digitalen Kalender (wie zum Beispiel &lt;a href="https://calendar.google.com/calendar/u/0/r/settings/addbyurl" target="_blank"&gt;Google Calendar&lt;/a&gt; oder &lt;a href="https://support.apple.com/de-de/guide/calendar/icl1022/mac" target="_blank"&gt;Apple Calendar&lt;/a&gt;) nutzt, dann kannst du einfach den Kalender des Grünen Bretts abonnieren. Dazu benötigst du die Adresse, die hinter folgendem Link hinterlegt ist (und die du per Rechtsklick "Adresse des Links kopieren" oder "Link-Adresse kopieren" bekommst):&lt;/p&gt;</value>
+  </data>
+  <data name="Feeds.AtomText" xml:space="preserve">
+    <value>&lt;p&gt;Wenn du bereits einen Feedreader (wie zum Beispiel &lt;a href="https://feedly.com/news-reader" target="_blank"&gt;Feedly&lt;/a&gt; oder &lt;a href="https://www.inoreader.com/" target="_blank"&gt;Inoreader&lt;/a&gt;) nutzt, dann empfehlen wir dir diese Variante. Dazu benötigst du die Adresse des Feeds, die hinter folgendem Link hinterlegt ist (und die du per Rechtsklick "Adresse des Links kopieren" oder "Link-Adresse kopieren" bekommst):&lt;/p&gt;</value>
+  </data>
+  <data name="Feeds.IcalLink" xml:space="preserve">
+    <value>Link zum Kalender</value>
+  </data>
+  <data name="Feeds.AtomLink" xml:space="preserve">
+    <value>Link zum Feed</value>
+  </data>
+  <data name="Content.Licenses" xml:space="preserve">
+    <value>Lizenzen</value>
+  </data>
+  <data name="Content.LicensesText" xml:space="preserve">
+    <value>&lt;p&gt;Diese Webseite nutzt die folgenden Software-Bibliotheken:&lt;/p&gt;</value>
+  </data>
+  <data name="Accounts.Created" xml:space="preserve">
+    <value>Account angelegt</value>
+  </data>
+  <data name="Event.Name" xml:space="preserve">
+    <value>Name der Veranstaltung</value>
+  </data>
+  <data name="Event.Created" xml:space="preserve">
+    <value>Erstellt am</value>
+  </data>
+  <data name="Event.CreatedBy" xml:space="preserve">
+    <value>Erstellt von</value>
+  </data>
+  <data name="Event.LoggedIn" xml:space="preserve">
+    <value>angemeldet</value>
+  </data>
+  <data name="Event.NotLoggedIn" xml:space="preserve">
+    <value>nicht angemeldet</value>
+  </data>
+  <data name="Event.MoreInformation" xml:space="preserve">
+    <value>mehr Informationen</value>
+  </data>
+  <data name="Settings.SelfRegistrationExplanation" xml:space="preserve">
+    <value>Legt fest, ob anonyme Personen sich selbst einen Account anlegen können.</value>
+  </data>
+  <data name="Settings.MaximumEventLengthExplanation" xml:space="preserve">
+    <value>Die maximale Anzahl von Tagen, die eine Veranstaltung lang sein darf.</value>
+  </data>
+  <data name="Settings.EmailSettings" xml:space="preserve">
+    <value>E-Mail-Einstellungen</value>
+  </data>
+  <data name="Settings.EventSettings" xml:space="preserve">
+    <value>Veranstaltungs-Einstellungen</value>
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
+    <value>Account-Einstellungen</value>
+  </data>
+  <data name="Settings.AccountSettings" xml:space="preserve">
+    <value>Account-Einstellungen</value>
+  </data>
+  <data name="Event.InvalidEventLength" xml:space="preserve">
+    <value>Die Veranstaltung darf maximal {0} Tage lang sein. Trage lieber konkrete Veranstaltungen ein (also zum Beispiel einzelne Workshops oder Vorträge auf einem Festival oder die Vernissage bei einer Ausstellung).</value>
+  </data>
+  <data name="Event.InvalidDate" xml:space="preserve">
+    <value>Das Datum darf nicht in der Vergangenheit liegen.</value>
+  </data>
+  <data name="Event.InvalidDates" xml:space="preserve">
+    <value>Das Enddatum muss nach dem Startdatum liegen.</value>
+  </data>
+  <data name="Event.InvalidImageRights" xml:space="preserve">
+    <value>Du musst bestätigen, die Rechte am hochgeladenen Bild zu besitzen.</value>
+  </data>
+  <data name="Event.InvalidLink" xml:space="preserve">
+    <value>Der Link muss eine gültige Adresse haben (und zum Beispiel mit http:// oder https:// starten).</value>
+  </data>
+  <data name="Content.CookieDeclaration" xml:space="preserve">
+    <value>Verwendung von Cookies</value>
+  </data>
+  <data name="Content.CookieDeclarationText" xml:space="preserve">
+    <value>&lt;p&gt;Bei der Nutzung der Webseite werden, wenn technisch notwendig, folgende Cookies gesetzt:&lt;/p&gt;</value>
+  </data>
+  <data name="Content.ReportIssueText" xml:space="preserve">
+    <value>&lt;p&gt;Du hast einen Fehler auf dem Grünen Brett gefunden? Dann würden wir uns freuen, wenn du uns schreibst! Wie du das am besten machen kannst, hängt von der Art des Fehlers ab.&lt;/p&gt;
+&lt;h2&gt;Redaktionelle Fehler&lt;/h2&gt;
+&lt;p&gt;Wenn du eine Veranstaltung mit falschen Informationen gefunden hast, dann benutze am besten die eingebaute Melde-Funktion. Dazu klickst du auf der Seite der Veranstaltung auf den "Veranstaltung melden"-Button und kannst dort den passenden Grund auswählen. Wenn der Fehler schwieriger zu beschreiben ist oder nicht einer bestimmten Veranstaltung zugeordnet werden, dann schreib uns am besten eine E-Mail. Unsere Kontaktdaten findest du im &lt;a href="/inhalte/impressum"&gt;Impressum&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Technische Fehler&lt;/h2&gt;
+&lt;p&gt;Wenn dir ein technischer Fehler auf der Seite aufgefallen ist oder du einen Verbesserungsvorschlag hast, dann erstelle am besten ein Issue bei &lt;a href="https://github.com/gruenes-brett/webseite/issues"&gt;unserem GitHub-Projekt&lt;/a&gt;. Dort sammeln wir alle gemeldeten Fehler und unsere Ideen für zukünftige Verbesserungen. Um dort ein Issue zu erstellen benötigst du einen GitHub-Account. Der ist aber kostenlos und kann auch für andere Projekte genutzt werden, die ihre Arbeit dort koordinieren.&lt;/p&gt;</value>
+  </data>
+  <data name="Feeds.ApiTitle" xml:space="preserve">
+    <value>API-Integration (REST)</value>
+  </data>
+  <data name="Feeds.ApiLink" xml:space="preserve">
+    <value>Link zur API-Referenz</value>
+  </data>
+  <data name="Feeds.ApiText" xml:space="preserve">
+    <value>Wenn du selbst Software entwickelst und die Veranstaltungen des Grünen Bretts dort nutzen willst, dann empfehlen wir dir unsere REST-API. Eine Implementierung sollte nicht schwierig sein, da über die API nur ohnehin öffentliche Daten abgerufen werden können und wir deshalb bisher auf eine Authentifizierung verzichten können.</value>
+  </data>
+  <data name="Content.ProjectBy" xml:space="preserve">
+    <value>Das Grüne Brett ist ein Projekt der BUNDjugend Sachsen.</value>
+  </data>
+  <data name="Content.FinancedBy" xml:space="preserve">
+    <value>Diese Maßnahme wird finanziert durch Steuermittel auf der Grundlage des vom Sächsischen Landtag beschlossenen Haushalts. Für die Inhalte der Publikationen ist allein die bezuschusste Institution verantwortlich. Die hier dargestellten Positionen geben nicht zwingend den Standpunkt des Freistaats Sachsen oder des Sächsischen Staatsministeriums für Kultus wieder.</value>
+  </data>
+</root>

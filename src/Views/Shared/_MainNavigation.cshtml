@@ -1,0 +1,23 @@
+﻿@using GruenesBrett.Controllers
+@using GruenesBrett.Properties
+
+@{
+  var explore = SystemTexts.Explore;
+  var calendar = SystemTexts.Calendar;
+  var map = SystemTexts.Map;
+
+  var controller = ViewContext?.RouteData?.Values?["Controller"]?.ToString();
+  var action = ViewContext?.RouteData?.Values?["Action"]?.ToString();
+
+  var isExplore = controller == nameof(Events) && action == nameof(Events.Explore);
+  var isCalendar = controller == nameof(Events) && action == nameof(Events.Calendar);
+  var isMap = controller == nameof(Events) && action == nameof(Events.Map);
+
+  var active = "active";
+}
+
+<nav id="main">
+  <a asp-controller="@nameof(Events)" asp-action="@nameof(Events.Explore)" class="@(isExplore ? active : string.Empty)">@explore</a>
+  <a asp-controller="@nameof(Events)" asp-action="@nameof(Events.Calendar)" class="@(isCalendar ? active : string.Empty)">@calendar</a>
+ @*  <a asp-controller="@nameof(Events)" asp-action="@nameof(Events.Map)" class="@(isMap ? active : string.Empty)">@map</a> *@
+</nav>
