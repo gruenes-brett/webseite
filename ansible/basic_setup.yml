@@ -1,7 +1,0 @@
-- hosts: target
-  become: true
-  vars_files:
-    - group_vars/globals
-  roles:
-    - basic/install_packages
-    - basic/install_wordpress_cli

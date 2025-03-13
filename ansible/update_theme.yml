@@ -1,7 +1,0 @@
-- hosts: target
-  become: true
-  vars_files:
-    - group_vars/globals
-  roles:
-    - check_preconditions
-    - wordpress/install_theme_and_plugins

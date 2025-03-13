@@ -1,6 +1,0 @@
-- hosts: target
-  become: yes
-  vars_files:
-    - group_vars/globals
-  roles:
-    - eventscraper/setup
