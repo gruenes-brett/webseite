@@ -36,7 +36,7 @@ internal static class App
     // configure reverse proxy handling
     app.UseForwardedHeaders(new ForwardedHeadersOptions
     {
-      ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+      ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedProto
     });
 
     // configure the exception pages
