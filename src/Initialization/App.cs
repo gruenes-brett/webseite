@@ -18,6 +18,8 @@ internal static class App
   /// <returns></returns>
   internal static async Task ConfigureAsync(WebApplication app)
   {
+    app.UseRequestLocalization("de-DE");
+
     // automatically apply all available database migrations and create roles if necessary
     await using (var scope = app.Services.CreateAsyncScope())
     await using (var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
