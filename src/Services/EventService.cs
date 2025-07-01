@@ -49,10 +49,55 @@ public class EventService(ApplicationDbContext context, IUserService userService
   }
 
   /// <inheritdoc />
+  public async Task<SingleEvent?> GetRejectedEventAsync(string externalId, ClaimsPrincipal principal)
+  {
+    var rejectedEvents = await GetRejectedEventsAsync(principal);
+    if (rejectedEvents is null)
+      return null;
+
+    return await rejectedEvents.FirstOrDefaultAsync(e => e.ExternalId == externalId);
+  }
+
+  /// <inheritdoc />
+  public async Task<SingleEvent?> GetRejectedEventAsync(Guid internalId, ClaimsPrincipal principal)
+  {
+    var rejectedEvents = await GetRejectedEventsAsync(principal);
+    if (rejectedEvents is null)
+      return null;
+
+    return await rejectedEvents.FirstOrDefaultAsync(e => e.InternalId == internalId);
+  }
+
+  /// <inheritdoc />
   public async Task<SingleEvent?> GetApprovedOrDraftEventAsync(Guid internalId, ClaimsPrincipal principal)
   {
     var approvedEvent = await GetApprovedEventAsync(internalId, principal);
     return approvedEvent ?? await GetDraftEventAsync(internalId, principal);
+  }
+
+  /// <inheritdoc />
+  public async Task<SingleEvent?> GetDraftOrRejectedEventAsync(string externalId, ClaimsPrincipal principal)
+  {
+    var draftEvent = await GetDraftEventAsync(externalId, principal);
+    return draftEvent ?? await GetRejectedEventAsync(externalId, principal);
+  }
+
+  /// <inheritdoc />
+  public async Task<SingleEvent?> GetDraftOrRejectedEventAsync(Guid internalId, ClaimsPrincipal principal)
+  {
+    var draftEvent = await GetDraftEventAsync(internalId, principal);
+    return draftEvent ?? await GetRejectedEventAsync(internalId, principal);
+  }
+
+  /// <inheritdoc />
+  public async Task<SingleEvent?> GetApprovedOrDraftOrRejectedEventAsync(Guid internalId, ClaimsPrincipal principal)
+  {
+    var approvedEvent = await GetApprovedEventAsync(internalId, principal);
+    if (approvedEvent is not null)
+      return approvedEvent;
+
+    var draftEvent = await GetDraftEventAsync(internalId, principal);
+    return draftEvent ?? await GetRejectedEventAsync(internalId, principal);
   }
 
   /// <inheritdoc />
@@ -123,6 +168,13 @@ public class EventService(ApplicationDbContext context, IUserService userService
     return false;
   }
 
+  /// <inheritdoc />
+  public async Task<bool> EventExists(string externalId)
+  {
+    var singleEvent = await context.SingleEvents.FirstOrDefaultAsync(e => e.ExternalId == externalId);
+    return singleEvent is not null;
+  }
+
   /// <summary>
   /// Returns a queryable for events in the approved workflow status
   /// (with all the necessary includes and filters already applied)
@@ -179,11 +231,18 @@ public class EventService(ApplicationDbContext context, IUserService userService
   /// <returns></returns>
   private async Task<IQueryable<SingleEvent>> ApplyUserFilter(IQueryable<SingleEvent> source, ClaimsPrincipal? principal)
   {
-    if (principal is null)
-      return source;
+    if (principal?.Identity is null)
+      return source.Where(_ => false);
+
+    if (!principal.Identity.IsAuthenticated)
+      return source.Where(_ => false);
 
     var user = await userService.GetUserAsync(principal);
     if (user is null)
+      return source.Where(_ => false);
+
+    var isAdministrator = principal.IsInRole(Constants.Roles.Administrator);
+    if (isAdministrator)
       return source;
 
     var isEditor = principal.IsInRole(Constants.Roles.Editor);
@@ -197,7 +256,7 @@ public class EventService(ApplicationDbContext context, IUserService userService
     if (isNormal)
       return source.Where(e => e.CreatedBy != null && e.CreatedBy.Equals(user));
 
-    return source;
+    return source.Where(_ => false);
   }
 
   /// <summary>

@@ -49,9 +49,16 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
     if (approvedEvent is not null)
       return View(approvedEvent);
 
-    var draftEvent = await eventService.GetDraftEventAsync(eventId, User);
-    if (draftEvent is not null)
-      return View(draftEvent);
+    var draftOrRejectedEvent = await eventService.GetDraftOrRejectedEventAsync(eventId, User);
+    if (draftOrRejectedEvent is not null)
+      return View(draftOrRejectedEvent);
+
+    var eventExists = await eventService.EventExists(eventId);
+    if (eventExists)
+    {
+      var returnUrl = Url.Action(nameof(Index), nameof(Event), new { eventId });
+      return RedirectToAction(nameof(Account.Login), nameof(Account), new { returnUrl });
+    }
 
     return RedirectToAction(nameof(Error.Index), nameof(Error), new { statusCode = 404 });
   }
@@ -153,11 +160,11 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
   [Route("freigeben")]
   public async Task<IActionResult> Approve(Guid eventId)
   {
-    var draftedEvent = await eventService.GetDraftEventAsync(eventId, User);
-    if (draftedEvent is null)
+    var draftOrRejectedEvent = await eventService.GetDraftOrRejectedEventAsync(eventId, User);
+    if (draftOrRejectedEvent is null)
       return RedirectToAction(nameof(Edit));
 
-    return View(draftedEvent);
+    return View(draftOrRejectedEvent);
   }
 
   /// <summary>
@@ -169,11 +176,10 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
   [HttpPost]
   [ValidateAntiForgeryToken]
   [Route("freigeben")]
-  public async Task<IActionResult> Approve(ApproveViewModel viewModel)
+  public async Task<IActionResult> Approve(ApproveOrRejectViewModel viewModel)
   {
-    var internalId = viewModel.EventId;
-    var draftEvent = await eventService.GetDraftEventAsync(internalId, User);
-    if (draftEvent is null)
+    var draftOrRejectedEvent = await eventService.GetDraftOrRejectedEventAsync(viewModel.EventId, User);
+    if (draftOrRejectedEvent is null)
       return RedirectToAction(nameof(Events.Index), nameof(Events));
 
     var user = await userService.GetUserAsync(User);
@@ -182,19 +188,66 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
 
     // if we are approving an edit for an already approved event
     // then we need to delete the already approved version first
-    var externalId = draftEvent.ExternalId;
+    var externalId = draftOrRejectedEvent.ExternalId;
     var approvedEvent = await eventService.GetApprovedEventAsync(externalId);
     if (approvedEvent is not null)
       context.Remove(approvedEvent);
 
-    draftEvent.WorkflowStatus = WorkflowStatus.Approved;
-    draftEvent.Updated = DateTime.UtcNow;
+    draftOrRejectedEvent.WorkflowStatus = WorkflowStatus.Approved;
+    draftOrRejectedEvent.Updated = DateTime.UtcNow;
 
     await context.SaveChangesAsync();
     await auditService.LogEventActivityAsync("Event {event} was approved by {email}", externalId, user.Email);
 
-    if (draftEvent.CreatedByEmail.HasValue())
-      await SendApprovedEmailAsync(draftEvent.CreatedByEmail, draftEvent.ExternalId);
+    if (draftOrRejectedEvent.CreatedByEmail.HasValue())
+      await SendApprovedEmailAsync(draftOrRejectedEvent.CreatedByEmail, draftOrRejectedEvent.ExternalId);
+
+    return RedirectToAction(nameof(Events.Index), nameof(Events));
+  }
+
+  /// <summary>
+  /// Shows the form for rejecting the event with the given ID
+  /// </summary>
+  /// <param name="eventId"></param>
+  /// <returns></returns>
+  [Authorize]
+  [Route("ablehnen")]
+  public async Task<IActionResult> Reject(Guid eventId)
+  {
+    var approvedOrDraftEvent = await eventService.GetApprovedOrDraftEventAsync(eventId, User);
+    if (approvedOrDraftEvent is null)
+      return RedirectToAction(nameof(Edit));
+
+    return View(approvedOrDraftEvent);
+  }
+
+  /// <summary>
+  /// Handles the inputs for the form for approving the event with the given ID
+  /// </summary>
+  /// <param name="viewModel"></param>
+  /// <returns></returns>
+  [Authorize]
+  [HttpPost]
+  [ValidateAntiForgeryToken]
+  [Route("ablehnen")]
+  public async Task<IActionResult> Reject(ApproveOrRejectViewModel viewModel)
+  {
+    var approvedOrDraftEvent = await eventService.GetApprovedOrDraftEventAsync(viewModel.EventId, User);
+    if (approvedOrDraftEvent is null)
+      return RedirectToAction(nameof(Events.Index), nameof(Events));
+
+    var user = await userService.GetUserAsync(User);
+    if (user is null)
+      return RedirectToAction(nameof(Events.Index), nameof(Events));
+
+    approvedOrDraftEvent.WorkflowStatus = WorkflowStatus.Rejected;
+    approvedOrDraftEvent.Updated = DateTime.UtcNow;
+
+    await context.SaveChangesAsync();
+    await auditService.LogEventActivityAsync("Event {event} was rejected by {email}", approvedOrDraftEvent.ExternalId, user.Email);
+
+    if (approvedOrDraftEvent.CreatedByEmail.HasValue())
+      await SendRejectedEmailAsync(approvedOrDraftEvent.CreatedByEmail, approvedOrDraftEvent.EventName);
 
     return RedirectToAction(nameof(Events.Index), nameof(Events));
   }
@@ -208,7 +261,7 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
   [Route("bearbeiten")]
   public async Task<IActionResult> Edit(Guid eventId)
   {
-    var eventToEdit = await eventService.GetApprovedOrDraftEventAsync(eventId, User);
+    var eventToEdit = await eventService.GetApprovedOrDraftOrRejectedEventAsync(eventId, User);
     if (eventToEdit is null)
       return RedirectToAction(nameof(Error.Index), nameof(Error), new { statusCode = 404 });
 
@@ -250,7 +303,7 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
   [Route("bearbeiten")]
   public async Task<IActionResult> Edit(EditViewModel viewModel)
   {
-    var eventToEdit = await eventService.GetApprovedOrDraftEventAsync(viewModel.EventId, User);
+    var eventToEdit = await eventService.GetApprovedOrDraftOrRejectedEventAsync(viewModel.EventId, User);
     if (eventToEdit is null)
       return RedirectToAction(nameof(Error.Index), nameof(Error), new { statusCode = 404 });
 
@@ -290,7 +343,7 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
   [Route("loeschen")]
   public async Task<IActionResult> Delete(Guid eventId)
   {
-    var eventToDelete = await eventService.GetApprovedOrDraftEventAsync(eventId, User);
+    var eventToDelete = await eventService.GetApprovedOrDraftOrRejectedEventAsync(eventId, User);
     if (eventToDelete is not null)
       return View(eventToDelete);
 
@@ -308,7 +361,7 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
   [Route("loeschen")]
   public async Task<IActionResult> Delete(DeleteViewModel viewModel)
   {
-    var eventToDelete = await eventService.GetApprovedOrDraftEventAsync(viewModel.EventId, User);
+    var eventToDelete = await eventService.GetApprovedOrDraftOrRejectedEventAsync(viewModel.EventId, User);
     if (eventToDelete is null)
       return RedirectToAction(nameof(Events.Index), nameof(Events));
 
@@ -852,15 +905,15 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
       var relevantUsers = await userService.GetRelevantUsersAsync(singleEvent);
       if (relevantUsers.Count > 0)
       {
-        var eventId = singleEvent.InternalId;
-        var eventApprovalLink = urlService.GetAbsoluteUrl(nameof(Event), nameof(Approve), new { eventId });
+        var eventId = singleEvent.ExternalId;
+        var eventApprovalLink = urlService.GetAbsoluteUrl(nameof(Event), nameof(Index), new { eventId });
         foreach (var user in relevantUsers)
           await SendApprovalEmailAsync(user, eventApprovalLink);
       }
     }
     catch (Exception e)
     {
-      logger.LogError(e, "Failed to send email about new event {eventId}", singleEvent.InternalId);
+      logger.LogError(e, "Failed to send email about new event {eventId}", singleEvent.ExternalId);
     }
   }
 
@@ -885,6 +938,28 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
     catch (Exception e)
     {
       logger.LogError(e, "Failed to send email about approved event to user {email}", email);
+    }
+  }
+
+  /// <summary>
+  /// Sends the email that the event for the given ID was rejected to the given email address
+  /// </summary>
+  /// <param name="email"></param>
+  /// <param name="eventName"></param>
+  /// <returns></returns>
+  private async Task SendRejectedEmailAsync(string email, string eventName)
+  {
+    try
+    {
+      var subject = textService.GetText(Constants.Text.Event.RejectedEmailSubject);
+      var body = textService.GetText(Constants.Text.Event.RejectedEmailBody);
+      body = string.Format(body, eventName);
+
+      await emailService.SendEmailAsync(email, subject, body, EmailType.Optional);
+    }
+    catch (Exception e)
+    {
+      logger.LogError(e, "Failed to send email about rejected event to user {email}", email);
     }
   }
 

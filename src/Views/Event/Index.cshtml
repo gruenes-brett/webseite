@@ -14,7 +14,14 @@
 @model SingleEvent
 
 @{
+  var approved = Model.WorkflowStatus == WorkflowStatus.Approved;
+  var rejected = Model.WorkflowStatus == WorkflowStatus.Rejected;
+  var waitingForApproval = Model.WorkflowStatus == WorkflowStatus.Draft;
+
+  var wasRejected = TextService.GetText(Constants.Text.Event.WasRejected);
   var notApprovedYet = TextService.GetText(Constants.Text.Event.NotApprovedYet);
+  var approve = TextService.GetText(Constants.Text.Event.Approve);
+  var reject = TextService.GetText(Constants.Text.Event.Reject);
 
   var information = TextService.GetText(Constants.Text.Event.Information);
   var formattedTimeSpan = TextService.GetFormattedDateTimeSpan(Model);
@@ -56,9 +63,13 @@
   <script src="~/js/leaflet/scripts.js" asp-append-version="true"></script>
 }
 
-@if (Model.WorkflowStatus == WorkflowStatus.Draft)
+@if (waitingForApproval)
 {
   <div class="warning">@notApprovedYet</div>
+}
+else if (rejected)
+{
+  <div class="error">@wasRejected</div>
 }
 <aside>
   @if (Model.EventImage?.FileName?.HasValue() ?? false)
@@ -83,7 +94,7 @@
   <div class="row">
     <div id="map" data-longitude="@longitude" data-latitude="@latitude" data-zoom="13"></div>
   </div>
-  @if (Model.WorkflowStatus == WorkflowStatus.Approved)
+  @if (approved)
   {
     <h3>@shareEvent</h3>
     <ul class="share">
@@ -111,6 +122,16 @@
     <div class="actions">
       <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Edit)" asp-route-eventid="@Model.InternalId" class="button primary">@edit</a>
       <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Delete)" asp-route-eventid="@Model.InternalId" class="button error">@delete</a>
+    </div>
+    <div class="actions">
+      @if (waitingForApproval || rejected)
+      {
+        <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Approve)" asp-route-eventid="@Model.InternalId" class="button primary">@approve</a>
+      }
+      @if (waitingForApproval || approved)
+      {
+        <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Reject)" asp-route-eventid="@Model.InternalId" class="button error">@reject</a>
+      }
     </div>
   }
 </section>

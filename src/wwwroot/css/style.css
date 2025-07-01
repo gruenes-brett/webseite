@@ -269,7 +269,7 @@ main {
     padding: 50px;
   }
 
-  main > .warning {
+  main > .warning, main > .error {
     width: 100%;
   }
 

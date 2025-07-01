@@ -1506,6 +1506,42 @@ namespace GruenesBrett.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Veranstaltung ablehnen.
+        /// </summary>
+        public static string Event_Reject {
+            get {
+                return ResourceManager.GetString("Event.Reject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abgelehnt.
+        /// </summary>
+        public static string Event_Rejected {
+            get {
+                return ResourceManager.GetString("Event.Rejected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;h1&gt;Veranstaltung abgelehnt&lt;/h1&gt;&lt;p&gt;Leider wurde deine Veranstaltung mit dem Namen &quot;{0}&quot; von unseren Redakteuren abgelehnt. Das bedeutet, dass sie nicht öffentlich auf dem Grünen Brett erscheinen wird. Das kann verschiedene Gründe haben. Vielleicht passt sie nicht so gut zum Grünen Brett oder vielleicht gibt es diese Veranstaltung schon auf der Seite. Vergewissere dich bitte, dass die Veranstaltung unseren Kriterien entspricht und nicht bereits eingetragen wurde, wenn du das nächste Mal eine Veranstaltung ei [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Event_RejectedEmailBody {
+            get {
+                return ResourceManager.GetString("Event.RejectedEmailBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deine Veranstaltung wurde abgelehnt.
+        /// </summary>
+        public static string Event_RejectedEmailSubject {
+            get {
+                return ResourceManager.GetString("Event.RejectedEmailSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Veranstaltung melden.
         /// </summary>
         public static string Event_Report {
@@ -1654,6 +1690,15 @@ namespace GruenesBrett.Properties {
         public static string Event_TimePlaceholder {
             get {
                 return ResourceManager.GetString("Event.TimePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Die Veranstaltung wurde abgelehnt und ist damit nicht öffentlich sichtbar..
+        /// </summary>
+        public static string Event_WasRejected {
+            get {
+                return ResourceManager.GetString("Event.WasRejected", resourceCulture);
             }
         }
         
@@ -1852,6 +1897,15 @@ namespace GruenesBrett.Properties {
         public static string Events_NotLoggedIn {
             get {
                 return ResourceManager.GetString("Events.NotLoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abgelehnt.
+        /// </summary>
+        public static string Events_Rejected {
+            get {
+                return ResourceManager.GetString("Events.Rejected", resourceCulture);
             }
         }
         

@@ -218,6 +218,7 @@ internal static class Constants
       Event.ConfirmPrivacyPolicy,
       Event.CreateConfirmationText,
       Event.LoginText,
+      Event.RejectedEmailBody,
       Event.ReportConfirmationText,
       Event.ReportEmailBody,
       Event.RulesText,
@@ -425,6 +426,10 @@ internal static class Constants
       internal const string NotLoggedIn = "Event.NotLoggedIn";
       internal const string OrganizerNameExplanation = "Event.OrganizerNameExplanation";
       internal const string OrganizerNamePlaceholder = "Event.OrganizerNamePlaceholder";
+      internal const string Reject = "Event.Reject";
+      internal const string Rejected = "Event.Rejected";
+      internal const string RejectedEmailBody = "Event.RejectedEmailBody";
+      internal const string RejectedEmailSubject = "Event.RejectedEmailSubject";
       internal const string Report = "Event.Report";
       internal const string ReportConfirmation = "Event.ReportConfirmation";
       internal const string ReportConfirmationText = "Event.ReportConfirmationText";
@@ -441,6 +446,7 @@ internal static class Constants
       internal const string Share = "Event.Share";
       internal const string TimeExplanation = "Event.TimeExplanation";
       internal const string TimePlaceholder = "Event.TimePlaceholder";
+      internal const string WasRejected = "Event.WasRejected";
     }
 
     /// <summary>
@@ -470,6 +476,7 @@ internal static class Constants
       internal const string Name = "Events.Name";
       internal const string NoResults = "Events.NoResults";
       internal const string NotLoggedIn = "Events.NotLoggedIn";
+      internal const string Rejected = "Events.Rejected";
       internal const string SearchDistance = "Events.SearchDistance";
       internal const string ShowAuditLog = "Events.ShowAuditLog";
       internal const string Status = "Events.Status";

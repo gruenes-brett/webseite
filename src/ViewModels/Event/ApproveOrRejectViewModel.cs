@@ -1,6 +1,6 @@
 ﻿namespace GruenesBrett.ViewModels.Event;
 
-public class ApproveViewModel
+public class ApproveOrRejectViewModel
 {
   public required Guid EventId { get; set; }
 }

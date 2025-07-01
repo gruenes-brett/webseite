@@ -16,6 +16,7 @@
   var edit = TextService.GetText(Constants.Text.Events.EditAction);
   var delete = TextService.GetText(Constants.Text.Events.Delete);
   var approved = TextService.GetText(Constants.Text.Events.Approved);
+  var rejected = TextService.GetText(Constants.Text.Events.Rejected);
   var waitingForApproval = TextService.GetText(Constants.Text.Events.WaitingForApproval);
 
   var noResults = TextService.GetText(Constants.Text.Events.NoResults);
@@ -81,13 +82,21 @@
             <span>@editEvent.Created.ToLocalTime().ToString("g")</span><br />
             @if (editEvent.WorkflowStatus == WorkflowStatus.Draft)
             {
-              <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Approve)" asp-route-eventid="@editEvent.InternalId" class="text-warning">
+              <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Index)" asp-route-eventid="@editEvent.ExternalId" class="text-warning">
                 @waitingForApproval
+              </a>
+            }
+            else if (editEvent.WorkflowStatus == WorkflowStatus.Rejected)
+            {
+              <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Index)" asp-route-eventid="@editEvent.ExternalId" class="text-error">
+                @rejected
               </a>
             }
             else
             {
-              <span class="text-info">@approved</span>
+              <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Index)" asp-route-eventid="@editEvent.ExternalId" class="text-info">
+                @approved
+              </a>
             }
           </td>
           <td>

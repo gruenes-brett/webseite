@@ -866,4 +866,22 @@
   <data name="Content.FinancedBy" xml:space="preserve">
     <value>Diese Maßnahme wird finanziert durch Steuermittel auf der Grundlage des vom Sächsischen Landtag beschlossenen Haushalts. Für die Inhalte der Publikationen ist allein die bezuschusste Institution verantwortlich. Die hier dargestellten Positionen geben nicht zwingend den Standpunkt des Freistaats Sachsen oder des Sächsischen Staatsministeriums für Kultus wieder.</value>
   </data>
+  <data name="Event.Reject" xml:space="preserve">
+    <value>Veranstaltung ablehnen</value>
+  </data>
+  <data name="Event.Rejected" xml:space="preserve">
+    <value>Abgelehnt</value>
+  </data>
+  <data name="Event.RejectedEmailSubject" xml:space="preserve">
+    <value>Deine Veranstaltung wurde abgelehnt</value>
+  </data>
+  <data name="Event.RejectedEmailBody" xml:space="preserve">
+    <value>&lt;h1&gt;Veranstaltung abgelehnt&lt;/h1&gt;&lt;p&gt;Leider wurde deine Veranstaltung mit dem Namen "{0}" von unseren Redakteuren abgelehnt. Das bedeutet, dass sie nicht öffentlich auf dem Grünen Brett erscheinen wird. Das kann verschiedene Gründe haben. Vielleicht passt sie nicht so gut zum Grünen Brett oder vielleicht gibt es diese Veranstaltung schon auf der Seite. Vergewissere dich bitte, dass die Veranstaltung unseren Kriterien entspricht und nicht bereits eingetragen wurde, wenn du das nächste Mal eine Veranstaltung einträgst.&lt;/p&gt;&lt;p&gt;Bei Fragen kannst du gerne direkt auf diese E-Mail antworten.&lt;/p&gt;</value>
+  </data>
+  <data name="Events.Rejected" xml:space="preserve">
+    <value>Abgelehnt</value>
+  </data>
+  <data name="Event.WasRejected" xml:space="preserve">
+    <value>Die Veranstaltung wurde abgelehnt und ist damit nicht öffentlich sichtbar.</value>
+  </data>
 </root>
