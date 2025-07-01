@@ -73,4 +73,12 @@ public interface IEventService
   /// <param name="categories"></param>
   /// <returns></returns>
   Task<List<SingleEvent>> GetRejectedEventsAsync(HashSet<Category> categories, ClaimsPrincipal principal);
+
+  /// <summary>
+  /// Returns whether the given user can edit the given event
+  /// </summary>
+  /// <param name="singleEvent"></param>
+  /// <param name="principal"></param>
+  /// <returns></returns>
+  Task<bool> CanEditEventAsync(SingleEvent singleEvent, ClaimsPrincipal principal);
 }

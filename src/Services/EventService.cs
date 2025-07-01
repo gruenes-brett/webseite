@@ -92,6 +92,37 @@ public class EventService(ApplicationDbContext context, IUserService userService
     return await rejectedEvents.ToListAsync();
   }
 
+  /// <inheritdoc />
+  public async Task<bool> CanEditEventAsync(SingleEvent singleEvent, ClaimsPrincipal principal)
+  {
+    if (principal is null)
+      return false;
+
+    var user = await userService.GetUserAsync(principal);
+    if (user is null)
+      return false;
+
+    var isAdministrator = principal.IsInRole(Constants.Roles.Administrator);
+    if (isAdministrator)
+      return true;
+
+    var isEditor = principal.IsInRole(Constants.Roles.Editor);
+    if (isEditor)
+    {
+      var radius = user.Radius * 1000;
+      if (singleEvent.EventLocation.Coordinates.IsWithinDistance(user.Coordinates, radius))
+        return true;
+
+      return singleEvent.CreatedBy?.Equals(user) == true;
+    }
+
+    var isNormal = principal.IsInRole(Constants.Roles.Normal);
+    if (isNormal)
+      return singleEvent.CreatedBy?.Equals(user) == true;
+
+    return false;
+  }
+
   /// <summary>
   /// Returns a queryable for events in the approved workflow status
   /// (with all the necessary includes and filters already applied)

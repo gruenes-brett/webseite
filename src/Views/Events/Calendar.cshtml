@@ -4,6 +4,7 @@
 @using GruenesBrett.Properties
 @using GruenesBrett.ViewModels.Events
 
+@inject IEventService EventService
 @inject ITextService TextService
 
 @model CalendarViewModel
@@ -11,6 +12,7 @@
 @{
   var noResults = TextService.GetText(Constants.Text.Events.NoResults);
   var adjustFilters = TextService.GetText(Constants.Text.Events.AdjustFilters);
+  var edit = TextService.GetText(Constants.Text.Event.Edit);
 
   var title = SystemTexts.Calendar;
   ViewData["Title"] = title;
@@ -68,12 +70,13 @@
     foreach (var publishedEvent in dateEvent.Value)
     {
       var formattedTimeSpan = TextService.GetFormattedTimeSpan(publishedEvent);
+      var canEditEvent = await EventService.CanEditEventAsync(publishedEvent, User);
       var locationName = publishedEvent.EventLocation.Name;
       var organizerName = publishedEvent.OrganizerName;
       var additionalInformation = $"{locationName}, {organizerName}";
       if (formattedTimeSpan.HasValue())
         additionalInformation = $"{formattedTimeSpan}, {additionalInformation}";
-
+        
       @:<tr class="@isTodayClass @isWeekendClass">
 
       @if (isFirstOfDay)
@@ -92,6 +95,12 @@
             </a>
           </h2>
           <p>@additionalInformation</p>
+          @if (canEditEvent)
+          {
+            <p>
+              <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Edit)" asp-route-eventid="@publishedEvent.InternalId">@edit</a>
+            </p>
+          }
         @:</td>
       @:</tr>
     }

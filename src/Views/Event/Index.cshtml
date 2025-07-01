@@ -6,6 +6,7 @@
 @using System.Web
 @using System.Globalization
 
+@inject IEventService EventService
 @inject ITextService TextService
 @inject ILinkernizer Linkernizer
 @inject IUrlService UrlService
@@ -35,6 +36,10 @@
 
   var start = TextService.GetFormattedStartDateAndTime(Model);
   var end = TextService.GetFormattedEndDateAndTime(Model);
+
+  var canEditEvent = await EventService.CanEditEventAsync(Model, User);
+  var edit = TextService.GetText(Constants.Text.Event.Edit);
+  var delete = TextService.GetText(Constants.Text.Event.Delete);
 
   var title = Model.EventName;
   ViewData["Title"] = title;
@@ -100,6 +105,13 @@
   @if (Model.EventLink.HasValue())
   {
     <a href="@Model.EventLink" target="_blank" class="button primary">&#x2B62; @moreInformation</a>
+  }
+  @if (canEditEvent)
+  {
+    <div class="actions">
+      <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Edit)" asp-route-eventid="@Model.InternalId" class="button primary">@edit</a>
+      <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Delete)" asp-route-eventid="@Model.InternalId" class="button error">@delete</a>
+    </div>
   }
 </section>
 <script type="application/ld+json">

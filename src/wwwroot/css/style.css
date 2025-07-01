@@ -290,13 +290,13 @@ main {
       max-width: calc(100% + 100px);
     }
 
-    main > footer {
-      width: 100%;
-      padding: 50px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  main > footer {
+    width: 100%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
   main.homepage {
     background: var(--background);
@@ -477,18 +477,18 @@ button, .button {
       outline-color: var(--green);
     }
 
-    button[type="submit"].error {
+    button[type="submit"].error, a.error {
       background-color: var(--red);
       border-color: var(--red);
       color: var(--white);
     }
 
-      button[type="submit"].error:hover {
+      button[type="submit"].error:hover, a.error:hover {
         background-color: var(--darkgray);
         border-color: var(--darkgray);
       }
 
-      button[type="submit"].error:focus {
+      button[type="submit"].error:focus, a.error:focus {
         background-color: var(--white);
         color: var(--red);
         outline-color: var(--red);
@@ -863,13 +863,13 @@ th, td {
   position: relative;
 }
 
-td.single, th.single {
-  width: 150px;
-}
+  td.single, th.single {
+    width: 150px;
+  }
 
-td.double, th.double {
-  width: 300px;
-}
+  td.double, th.double {
+    width: 300px;
+  }
 
 table h2 {
   margin: 0;
@@ -880,13 +880,13 @@ table p {
   margin: 0;
 }
 
-  .calendar td:nth-child(1), .calendar td:nth-child(2) {
-    width: 50px;
-    text-align: center;
-    font-family: var(--barlow);
-    font-size: 18px;
-    font-weight: 500;
-  }
+.calendar td:nth-child(1), .calendar td:nth-child(2) {
+  width: 50px;
+  text-align: center;
+  font-family: var(--barlow);
+  font-size: 18px;
+  font-weight: 500;
+}
 
 .calendar .weekend td:nth-child(1), .calendar .weekend td:nth-child(2) {
   color: var(--green);
@@ -964,6 +964,18 @@ td:has(.category) {
       left: -10px;
     }
 
+.actions {
+  background: var(--lightgray);
+  margin-top: 20px;
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.actions a {
+  margin: 0;
+}
+
 .share {
   list-style: none;
   padding: 0;
@@ -1028,146 +1040,150 @@ main > footer {
   max-width: 600px;
 }
 
-.feature img {
-  max-height: 150px;
+  .feature img {
+    max-height: 150px;
+  }
+
+@media only screen and (max-width: 1200px) {
+
+  .articles article {
+    width: calc(50% - 25px);
+  }
 }
 
-  @media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1000px) {
+
+  .row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+    .row > *, .row.checkbox > * {
+      margin: 10px 0 0 0;
+    }
+
+  fieldset.double {
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+
+  .articles article {
+    width: 100%;
+  }
+
+  .calendar td:nth-child(1), .calendar td:nth-child(2) {
+    width: 30px;
+  }
+
+  .calendar td:last-child {
+    width: auto;
+  }
+
+  table .category {
+    left: 5px;
+  }
+}
+
+@media only screen and (max-width: 725px) {
+
+  header {
+    margin-bottom: 40px;
+  }
+
+  nav#sub a {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 40px;
+  }
+
+  main {
+    flex-direction: column-reverse;
+    margin-bottom: 0;
+  }
+
+    main section {
+      padding: 40px;
+    }
+
+    main > aside {
+      flex: 1;
+      padding: 40px;
+    }
+
+      main > aside:empty {
+        display: none;
+      }
+
+      main > aside img.main {
+        margin: 0 -40px;
+        max-width: calc(100% + 80px);
+      }
+
+    main.homepage {
+      flex-direction: column;
+    }
+
+  #left, #right {
+    width: 100%;
+  }
+
+  .articles {
+    gap: 40px;
+  }
 
     .articles article {
       width: calc(50% - 25px);
     }
+}
+
+@media only screen and (max-width: 650px) {
+
+  #logo {
+    width: 65%;
   }
 
-  @media only screen and (max-width: 1000px) {
-
-    .row {
-      flex-direction: column;
-      gap: 0;
-    }
-
-      .row > *, .row.checkbox > * {
-        margin: 10px 0 0 0;
-      }
-
-    fieldset.double {
-      width: 100%;
-    }
+  #main {
+    width: 35%;
   }
 
-  @media only screen and (max-width: 900px) {
+  #logo span {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  nav#main {
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    padding: 15px;
+  }
+
+    nav#main a {
+      font-size: 18px;
+      font-weight: 600;
+      padding: 0 10px 1px 10px;
+      line-height: 1.5;
+    }
+
+  main section {
+    padding: 30px;
+  }
+
+  main aside {
+    padding: 30px;
+  }
+
+  .articles {
+    gap: 30px;
+  }
 
     .articles article {
       width: 100%;
     }
-
-    .calendar td:nth-child(1), .calendar td:nth-child(2) {
-      width: 30px;
-    }
-
-    .calendar td:last-child {
-      width: auto;
-    }
-
-    table .category {
-      left: 5px;
-    }
-  }
-
-  @media only screen and (max-width: 725px) {
-
-    header {
-      margin-bottom: 40px;
-    }
-
-    nav#sub a {
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 40px;
-    }
-
-    main {
-      flex-direction: column-reverse;
-      margin-bottom: 0;
-    }
-
-      main section {
-        padding: 40px;
-      }
-
-      main > aside {
-        flex: 1;
-        padding: 40px;
-      }
-
-        main > aside:empty {
-          display: none;
-        }
-
-        main > aside img.main {
-          margin: 0 -40px;
-          max-width: calc(100% + 80px);
-        }
-
-      main.homepage {
-        flex-direction: column;
-      }
-
-    #left, #right {
-      width: 100%;
-    }
-
-    .articles {
-      gap: 40px;
-    }
-
-      .articles article {
-        width: calc(50% - 25px);
-      }
-  }
-
-  @media only screen and (max-width: 650px) {
-
-    #logo {
-      width: 65%;
-    }
-
-    #main {
-      width: 35%;
-    }
-
-    #logo span {
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-    nav#main {
-      flex-direction: column;
-      align-items: end;
-      justify-content: center;
-      padding: 15px;
-    }
-
-      nav#main a {
-        font-size: 18px;
-        font-weight: 600;
-        padding: 0 10px 1px 10px;
-        line-height: 1.5;
-      }
-
-    main section {
-      padding: 30px;
-    }
-
-    main aside {
-      padding: 30px;
-    }
-
-    .articles {
-      gap: 30px;
-    }
-
-      .articles article {
-        width: 100%;
-      }
-  }
+}

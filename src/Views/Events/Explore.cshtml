@@ -4,6 +4,7 @@
 @using GruenesBrett.Properties
 @using GruenesBrett.ViewModels.Events
 
+@inject IEventService EventService
 @inject ITextService TextService
 
 @model ExploreViewModel
@@ -12,6 +13,7 @@
   var noResults = TextService.GetText(Constants.Text.Events.NoResults);
   var adjustFilters = TextService.GetText(Constants.Text.Events.AdjustFilters);
   var moreInformation = TextService.GetText(Constants.Text.Events.MoreInformation);
+  var edit = TextService.GetText(Constants.Text.Event.Edit);
 
   var title = SystemTexts.Explore;
   ViewData["Title"] = title;
@@ -33,6 +35,7 @@
       @foreach (var singleEvent in Model.Events)
       {
         var formattedTimeSpan = TextService.GetFormattedDateTimeSpan(singleEvent);
+        var canEditEvent = await EventService.CanEditEventAsync(singleEvent, User);
 
         <article>
           <div class="category" style="background-color: @singleEvent.PrimaryCategory.BackgroundColor;"></div>
@@ -49,7 +52,15 @@
           <h2>
             <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Index)" asp-route-eventid="@singleEvent.ExternalId">@singleEvent.EventName</a>
           </h2>
-          <p>@Html.Raw(formattedTimeSpan)<br />@singleEvent.OrganizerName</p>
+          <p>
+            @Html.Raw(formattedTimeSpan)<br />
+            @singleEvent.OrganizerName
+            @if (canEditEvent)
+            {
+              <br />
+              <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Edit)" asp-route-eventid="@singleEvent.InternalId">@edit</a>
+            }
+          </p>
           <p>@singleEvent.EventDescription.Truncate(350)</p>
           <p>&#x2B62; <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Index)" asp-route-eventid="@singleEvent.ExternalId">@moreInformation</a></p>
         </article>
