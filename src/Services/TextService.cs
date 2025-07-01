@@ -73,7 +73,7 @@ public class TextService : ITextService
     var startDate = $"{singleEvent.StartDate:ddd} {singleEvent.StartDate:dd.MM.yyyy}";
     result.Append(startDate);
 
-    if (singleEvent.EndDate is not null)
+    if (singleEvent.EndDate is not null && singleEvent.StartDate != singleEvent.EndDate)
     {
       var endDate = $"{singleEvent.EndDate:ddd} {singleEvent.EndDate:dd.MM.yyyy}";
       result.Append($" {SystemTexts.Until} {endDate}");
@@ -83,7 +83,9 @@ public class TextService : ITextService
     if (formattedTimeSpan.HasValue())
     {
       result.Append(", ");
+      result.Append("<time>");
       result.Append(formattedTimeSpan);
+      result.Append("</time>");
     }
 
     return result.ToString();
@@ -100,7 +102,7 @@ public class TextService : ITextService
       result.Append(startTime);
     }
 
-    if (singleEvent.EndTime is not null)
+    if (singleEvent.EndTime is not null && singleEvent.StartTime != singleEvent.EndTime)
     {
       var endTime = $"{singleEvent.EndTime:HH:mm}";
       result.Append($" \u2013 {endTime}");

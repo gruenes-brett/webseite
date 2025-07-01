@@ -49,7 +49,7 @@
           <h2>
             <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Index)" asp-route-eventid="@singleEvent.ExternalId">@singleEvent.EventName</a>
           </h2>
-          <p>@formattedTimeSpan<br />@singleEvent.OrganizerName</p>
+          <p>@Html.Raw(formattedTimeSpan)<br />@singleEvent.OrganizerName</p>
           <p>@singleEvent.EventDescription.Truncate(350)</p>
           <p>&#x2B62; <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Index)" asp-route-eventid="@singleEvent.ExternalId">@moreInformation</a></p>
         </article>

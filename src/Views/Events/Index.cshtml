@@ -65,7 +65,7 @@
                 @editEvent.EventName
               </a>
             </h2>
-            <p>@formattedTimeSpan</p>
+            <p>@Html.Raw(formattedTimeSpan)</p>
           </td>
           <td>
             @if (editEvent.CreatedBy is not null)

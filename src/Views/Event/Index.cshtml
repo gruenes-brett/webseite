@@ -65,7 +65,7 @@
     <img src="/img/placeholder.svg" alt="@title" class="main" asp-append-version="true" />
   }
   <h3>@information</h3>
-  <p>@formattedTimeSpan</p>
+  <p>@Html.Raw(formattedTimeSpan)</p>
   <p>
     @Model.EventLocation.Name
     @if (Model.EventLocation.Address.HasValue())

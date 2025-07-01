@@ -552,6 +552,10 @@ main > aside input, main > aside select {
   border-color: var(--mediumgray);
 }
 
+time {
+  text-wrap: nowrap;
+}
+
 #map {
   width: 100%;
   height: 400px;
