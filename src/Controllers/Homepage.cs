@@ -1,3 +1,4 @@
+using GruenesBrett.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GruenesBrett.Controllers;
@@ -5,16 +6,22 @@ namespace GruenesBrett.Controllers;
 /// <summary>
 /// Handles the homepage
 /// </summary>
+/// <param name="filterService"></param>
 [Route("")]
-public class Homepage() : Controller
+public class Homepage(IFilterService filterService) : Controller
 {
   /// <summary>
   /// Shows the homepage
   /// </summary>
+  /// <param name="noRedirect"></param>
   /// <returns></returns>
   [Route("")]
-  public IActionResult Index()
+  public IActionResult Index(bool noRedirect = false)
   {
-    return View();
+    var postCode = filterService.GetCurrentPostCode(HttpContext.Request);
+    if (postCode is null || noRedirect)
+      return View();
+
+    return RedirectToAction(nameof(Events.Explore), nameof(Events));
   }
 }

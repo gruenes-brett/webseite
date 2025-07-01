@@ -26,7 +26,7 @@
 
   <fieldset>
     <label>@location</label>
-    <span>@Model.PostCode?.CityName (<a asp-controller="@nameof(Homepage)" asp-action="@nameof(Homepage.Index)">@changeLocation</a>)</span>
+    <span>@Model.PostCode?.CityName (<a asp-controller="@nameof(Homepage)" asp-action="@nameof(Homepage.Index)" asp-route-noredirect="true">@changeLocation</a>)</span>
   </fieldset>
 
   <fieldset>
