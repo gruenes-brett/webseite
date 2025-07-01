@@ -43,7 +43,7 @@
       {
         <tr>
           <th>@account.Name</th>
-          <td><a href="mailto:@account.Email">@account.Email</a></td>
+          <td><a href="mailto:@account.Email">@Html.Raw(account.Email.AddLineBreakOpportunityToEmail())</a></td>
           @if (account.Role is null)
           {
             <td>

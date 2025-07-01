@@ -857,7 +857,7 @@ tr {
   }
 
 th, td {
-  padding: 10px 0;
+  padding: 10px 5px;
   text-align: left;
   vertical-align: top;
   position: relative;
@@ -868,7 +868,7 @@ td.single, th.single {
 }
 
 td.double, th.double {
-  width: 250px;
+  width: 300px;
 }
 
 table h2 {

@@ -99,4 +99,19 @@ public static partial class StringExtensions
         yield return guid;
     }
   }
+
+  /// <summary>
+  /// Returns the given string with a line break opportunity
+  /// added right before the at sign
+  /// </summary>
+  /// <param name="s"></param>
+  /// <returns></returns>
+  public static string? AddLineBreakOpportunityToEmail(this string? s)
+  {
+    if (s.IsNullOrEmpty())
+      return s;
+
+    var atIndex = s.IndexOf('@');
+    return $"{s[0..atIndex]}<wbr />{s[atIndex..]}";
+  }
 }
