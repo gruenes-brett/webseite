@@ -11,6 +11,7 @@
   var termsOfService = TextService.GetText(Constants.Text.Content.TermsOfService);
   var dataPrivacyPolicy = TextService.GetText(Constants.Text.Content.DataPrivacyPolicy);
   var reportIssue = TextService.GetText(Constants.Text.Content.ReportIssue);
+  var changelog = TextService.GetText(Constants.Text.Content.Changelog);
 }
 
 <h2>@links</h2>
@@ -18,5 +19,6 @@
 <ul>
   <li><a asp-controller="@nameof(Content)" asp-action="@nameof(Content.Imprint)">@imprint / @termsOfService</a></li>
   <li><a asp-controller="@nameof(Content)" asp-action="@nameof(Content.DataPrivacyPolicy)">@dataPrivacyPolicy</a></li>
-  <li><a asp-controller ="@nameof(Content)" asp-action="@nameof(Content.ReportIssue)">@reportIssue</a></li>
+  <li><a asp-controller="@nameof(Content)" asp-action="@nameof(Content.ReportIssue)">@reportIssue</a></li>
+  <li><a asp-controller="@nameof(Content)" asp-action="@nameof(Content.Changelog)">@changelog</a></li>
 </ul>

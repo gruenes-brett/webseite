@@ -1,0 +1,19 @@
+﻿@using GruenesBrett.Interfaces
+
+@inject ITextService TextService
+
+@{
+  var text = TextService.GetText(Constants.Text.Content.ChangelogText);
+
+  var title = TextService.GetText(Constants.Text.Content.Changelog);
+  ViewData["Title"] = title;
+}
+
+<aside>
+  <partial name="_SidebarLinks" />
+</aside>
+<section>
+  <h1>@title</h1>
+
+  @Html.Raw(text)
+</section>

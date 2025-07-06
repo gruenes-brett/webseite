@@ -874,6 +874,24 @@ namespace GruenesBrett.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Neuerungen.
+        /// </summary>
+        public static string Content_Changelog {
+            get {
+                return ResourceManager.GetString("Content.Changelog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Content_ChangelogText {
+            get {
+                return ResourceManager.GetString("Content.ChangelogText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Verwendung von Cookies.
         /// </summary>
         public static string Content_CookieDeclaration {

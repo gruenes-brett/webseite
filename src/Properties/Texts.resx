@@ -884,4 +884,10 @@
   <data name="Event.WasRejected" xml:space="preserve">
     <value>Die Veranstaltung wurde abgelehnt und ist damit nicht öffentlich sichtbar.</value>
   </data>
+  <data name="Content.Changelog" xml:space="preserve">
+    <value>Neuerungen</value>
+  </data>
+  <data name="Content.ChangelogText" xml:space="preserve">
+    <value>&lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.&lt;/p&gt;</value>
+  </data>
 </root>

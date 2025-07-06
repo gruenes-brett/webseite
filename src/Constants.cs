@@ -203,6 +203,7 @@ internal static class Constants
       Accounts.SetPasswordConfirmationText,
       Accounts.SetPasswordEmailBody,
       Content.AboutUsText,
+      Content.ChangelogText,
       Content.CookieDeclarationText,
       Content.DataPrivacyPolicyText,
       Content.ImprintText,
@@ -342,6 +343,8 @@ internal static class Constants
     {
       internal const string AboutUs = "Content.AboutUs";
       internal const string AboutUsText = "Content.AboutUsText";
+      internal const string Changelog = "Content.Changelog";
+      internal const string ChangelogText = "Content.ChangelogText";
       internal const string CookieDeclaration = "Content.CookieDeclaration";
       internal const string CookieDeclarationText = "Content.CookieDeclarationText";
       internal const string DataPrivacyPolicy = "Content.DataPrivacyPolicy";

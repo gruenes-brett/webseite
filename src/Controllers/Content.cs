@@ -47,4 +47,14 @@ public class Content() : Controller
   {
     return View();
   }
+
+  /// <summary>
+  /// Shows the changelog page
+  /// </summary>
+  /// <returns></returns>
+  [Route("neuerungen")]
+  public IActionResult Changelog()
+  {
+    return View();
+  }
 }
