@@ -201,7 +201,7 @@
     <span asp-validation-for="ConfirmImageRights" class="warning"></span>
 
     <fieldset class="double">
-      <input asp-for="ConfirmPrivacyPolicy" />
+      <input asp-for="ConfirmPrivacyPolicy" required="" />
       <label asp-for="ConfirmPrivacyPolicy">@Html.Raw(confirmPrivacyPolicy)</label>
     </fieldset>
     <span asp-validation-for="ConfirmPrivacyPolicy" class="warning"></span>

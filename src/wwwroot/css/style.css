@@ -370,6 +370,14 @@ label {
   font-weight: 600;
 }
 
+  label:has(+ input:required):after,
+  label:has(+ textarea:required):after,
+  label:has(+ select:required):after,
+  input:required + label:after {
+    content: ' *';
+    color: var(--green);
+  }
+
 input, button, select, textarea, .button, #editor {
   font-family: var(--fira);
   font-size: 14px;
@@ -972,9 +980,9 @@ td:has(.category) {
   gap: 10px;
 }
 
-.actions a {
-  margin: 0;
-}
+  .actions a {
+    margin: 0;
+  }
 
 .share {
   list-style: none;
