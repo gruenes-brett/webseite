@@ -1,16 +1,33 @@
-﻿@using GruenesBrett.Properties
+﻿@using GruenesBrett.Extensions
+@using GruenesBrett.Properties
 
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>@ViewData["Title"] - @SystemTexts.SiteName</title>
+  <title>@ViewData[Constants.ViewData.Title] - @SystemTexts.SiteName</title>
   <script type="importmap"></script>
   <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
   <link rel="icon" href="~/favicon.png" asp-append-version="true" />
   <link rel="shortcut icon" href="~/favicon.png" asp-append-version="true" />
-  @await RenderSectionAsync("Styles", required: false)
+  @await RenderSectionAsync(Constants.ViewData.Styles, required: false)
+  @if (ViewData[Constants.ViewData.Description]?.ToString().HasValue() ?? false)
+  {
+    <meta name="description" content="@ViewData[Constants.ViewData.Description]" />
+  }
+  @if (ViewData[Constants.ViewData.Title]?.ToString().HasValue() ?? false)
+  {
+    <meta property="og:title" content="@ViewData[Constants.ViewData.Title] - @SystemTexts.SiteName" />
+  }
+  @if (ViewData[Constants.ViewData.Permalink]?.ToString().HasValue() ?? false)
+  {
+    <meta property="og:url" content="@ViewData[Constants.ViewData.Permalink]" />
+  }
+  @if (ViewData[Constants.ViewData.Image]?.ToString().HasValue() ?? false)
+  {
+    <meta property="og:image" content="@ViewData[Constants.ViewData.Image]" />
+  }
 </head>
 <body>
   <div id="wrapper">
@@ -26,6 +43,6 @@
   </div>
 
   <script src="~/js/scripts.js" asp-append-version="true"></script>
-  @await RenderSectionAsync("Scripts", required: false)
+  @await RenderSectionAsync(Constants.ViewData.Scripts, required: false)
 </body>
 </html>

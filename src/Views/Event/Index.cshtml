@@ -48,8 +48,16 @@
   var edit = TextService.GetText(Constants.Text.Event.Edit);
   var delete = TextService.GetText(Constants.Text.Event.Delete);
 
+  var relativeImagePath = Model.EventImage?.FileName?.HasValue() ?? false
+    ? $"/{Model.EventImage?.FileName}"
+    : "/img/placeholder.svg";
+  var absoluteImagePath = UrlService.GetAbsoluteUrl(relativeImagePath);
+
   var title = Model.EventName;
-  ViewData["Title"] = title;
+  ViewData[Constants.ViewData.Title] = title;
+  ViewData[Constants.ViewData.Description] = Model.EventDescription;
+  ViewData[Constants.ViewData.Permalink] = permalink;
+  ViewData[Constants.ViewData.Image] = absoluteImagePath;
 }
 
 @section Styles {
@@ -72,14 +80,7 @@ else if (rejected)
   <div class="error">@wasRejected</div>
 }
 <aside>
-  @if (Model.EventImage?.FileName?.HasValue() ?? false)
-  {
-    <img src="/@Model.EventImage?.FileName" alt="@title" class="main" asp-append-version="true" />
-  }
-  else
-  {
-    <img src="/img/placeholder.svg" alt="@title" class="main" asp-append-version="true" />
-  }
+  <img src="@relativeImagePath" alt="@title" class="main" asp-append-version="true" />
   <h3>@information</h3>
   <p>@Html.Raw(formattedTimeSpan)</p>
   <p>

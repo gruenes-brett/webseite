@@ -32,8 +32,20 @@ public class UrlService(IHttpContextAccessor accessor, LinkGenerator generator) 
     if (httpContext?.Request is null)
       return string.Empty;
 
-    var host = httpContext.Request.Host;
     var protocol = httpContext.Request.Scheme;
+    var host = httpContext.Request.Host;
     return generator.GetUriByAction(httpContext, action, controller, values, protocol, host) ?? string.Empty;
+  }
+
+  /// <inheritdoc />
+  public string GetAbsoluteUrl(string relativeUrl)
+  {
+    var httpContext = accessor.HttpContext;
+    if (httpContext?.Request is null)
+      return string.Empty;
+
+    var protocol = httpContext.Request.Scheme;
+    var host = httpContext.Request.Host;
+    return $"{protocol}://{host}{relativeUrl}";
   }
 }

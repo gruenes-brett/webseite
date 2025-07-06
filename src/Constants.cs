@@ -22,6 +22,20 @@ internal static class Constants
   }
 
   /// <summary>
+  /// ViewData related constants
+  /// </summary>
+  internal static class ViewData
+  {
+    internal const string Title = nameof(Title);
+    internal const string Description = nameof(Description);
+    internal const string Permalink = nameof(Permalink);
+    internal const string Image = nameof(Image);
+
+    internal const string Styles = nameof(Styles);
+    internal const string Scripts = nameof(Scripts);
+  }
+
+  /// <summary>
   /// Cookie related constants
   /// </summary>
   internal static class Cookie

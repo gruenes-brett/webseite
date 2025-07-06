@@ -29,4 +29,11 @@ public interface IUrlService
   /// <param name="values"></param>
   /// <returns></returns>
   string GetAbsoluteUrl(string controller, string action, object? values = null);
+
+  /// <summary>
+  /// Returns the absolute URL for the given relative URL
+  /// </summary>
+  /// <param name="relativeUrl"></param>
+  /// <returns></returns>
+  string GetAbsoluteUrl(string relativeUrl);
 }

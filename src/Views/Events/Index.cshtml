@@ -28,7 +28,7 @@
   var role = user is not null ? await UserService.GetRoleAsync(user) : string.Empty;
 
   var title = TextService.GetText(Constants.Text.Events.Edit);
-  ViewData["Title"] = title;
+  ViewData[Constants.ViewData.Title] = title;
 }
 
 <aside>

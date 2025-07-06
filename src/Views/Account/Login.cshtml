@@ -23,7 +23,7 @@
   var selfRegistrationEnabled = await SettingsService.GetBoolSettingAsync(Constants.Settings.SelfRegistration);
 
   var title = TextService.GetText(Constants.Text.Account.Login);
-  ViewData["Title"] = title;
+  ViewData[Constants.ViewData.Title] = title;
 }
 
 <aside>

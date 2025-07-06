@@ -48,7 +48,7 @@
   var confirmPrivacyPolicy = TextService.GetText(Constants.Text.Event.ConfirmPrivacyPolicy);
 
   var title = SystemTexts.CreateEvent;
-  ViewData["Title"] = title;
+  ViewData[Constants.ViewData.Title] = title;
 
   var isSignedIn = SignInManager.IsSignedIn(User);
 }
