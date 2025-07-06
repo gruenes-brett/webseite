@@ -84,8 +84,9 @@ internal static class Constants
     internal const string Approved = nameof(Approved);
     internal const string WaitingForApproval = nameof(WaitingForApproval);
     internal const string Rejected = nameof(Rejected);
+    internal const string Past = nameof(Past);
 
-    internal static readonly List<string> All = [AllStatuses, Approved, WaitingForApproval, Rejected];
+    internal static readonly List<string> All = [AllStatuses, Approved, WaitingForApproval, Rejected, Past];
 
     internal static string GetDisplayName(string status)
     {
@@ -95,6 +96,7 @@ internal static class Constants
         Approved => SystemTexts.Approved,
         WaitingForApproval => SystemTexts.WaitingForApproval,
         Rejected => SystemTexts.Rejected,
+        Past => SystemTexts.Past,
         _ => string.Empty,
       };
     }

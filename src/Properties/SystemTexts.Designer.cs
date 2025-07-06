@@ -88,7 +88,7 @@ namespace GruenesBrett.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Alle.
+        ///   Looks up a localized string similar to Alle (außer in der Vergangenheit).
         /// </summary>
         public static string AllStatuses {
             get {
@@ -723,6 +723,15 @@ namespace GruenesBrett.Properties {
         public static string PasswordTooShortOrTooLong {
             get {
                 return ResourceManager.GetString("PasswordTooShortOrTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In der Vergangenheit.
+        /// </summary>
+        public static string Past {
+            get {
+                return ResourceManager.GetString("Past", resourceCulture);
             }
         }
         

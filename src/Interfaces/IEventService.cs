@@ -13,6 +13,7 @@ public interface IEventService
   /// Returns the approved event for the given external ID
   /// </summary>
   /// <param name="externalId"></param>
+  /// <param name="principal"></param>
   /// <returns></returns>
   Task<SingleEvent?> GetApprovedEventAsync(string externalId, ClaimsPrincipal? principal = null);
 
@@ -20,6 +21,7 @@ public interface IEventService
   /// Returns the approved event for the given internal ID
   /// </summary>
   /// <param name="internalId"></param>
+  /// <param name="principal"></param>
   /// <returns></returns>
   Task<SingleEvent?> GetApprovedEventAsync(Guid internalId, ClaimsPrincipal? principal = null);
 
@@ -100,6 +102,9 @@ public interface IEventService
   /// (matching the given categories, coordinates and search distance)
   /// </summary>
   /// <param name="categories"></param>
+  /// <param name="coordinates"></param>
+  /// <param name="searchDistanceInMeters"></param>
+  /// <param name="principal"></param>
   /// <returns></returns>
   Task<List<SingleEvent>> GetApprovedEventsAsync(HashSet<Category> categories, Point? coordinates = null, double? searchDistanceInMeters = null, ClaimsPrincipal? principal = null);
 
@@ -108,6 +113,7 @@ public interface IEventService
   /// (matching the given categories and using the access rights of the given principal)
   /// </summary>
   /// <param name="categories"></param>
+  /// <param name="principal"></param>
   /// <returns></returns>
   Task<List<SingleEvent>> GetDraftEventsAsync(HashSet<Category> categories, ClaimsPrincipal principal);
 
@@ -116,8 +122,18 @@ public interface IEventService
   /// (matching the given categories and using the access rights of the given principal)
   /// </summary>
   /// <param name="categories"></param>
+  /// <param name="principal"></param>
   /// <returns></returns>
   Task<List<SingleEvent>> GetRejectedEventsAsync(HashSet<Category> categories, ClaimsPrincipal principal);
+
+  /// <summary>
+  /// Returns the past events
+  /// (matching the given categories and using the access rights of the given principal)
+  /// </summary>
+  /// <param name="categories"></param>
+  /// <param name="principal"></param>
+  /// <returns></returns>
+  Task<List<SingleEvent>> GetPastEventsAsync(HashSet<Category> categories, ClaimsPrincipal principal);
 
   /// <summary>
   /// Returns whether the given user can edit the given event

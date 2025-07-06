@@ -186,6 +186,12 @@ public class Events(IAuditService auditService, ICategoryService categoryService
       events.AddRange(rejectedEvents);
     }
 
+    if (status == Constants.Status.Past)
+    {
+      var pastEvents = await eventService.GetPastEventsAsync(categories, User);
+      events.AddRange(pastEvents);
+    }
+
     return [.. events.OrderByDescending(e => e.Created)];
   }
 }

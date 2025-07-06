@@ -492,7 +492,7 @@
     <value>Status</value>
   </data>
   <data name="AllStatuses" xml:space="preserve">
-    <value>Alle</value>
+    <value>Alle (außer in der Vergangenheit)</value>
   </data>
   <data name="Approved" xml:space="preserve">
     <value>Freigegeben</value>
@@ -529,5 +529,8 @@
   </data>
   <data name="StatusCookie" xml:space="preserve">
     <value>zur Filterung der angezeigten Veranstaltungen nach ihrem Freigabe-Status</value>
+  </data>
+  <data name="Past" xml:space="preserve">
+    <value>In der Vergangenheit</value>
   </data>
 </root>

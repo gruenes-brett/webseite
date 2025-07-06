@@ -138,6 +138,17 @@ public class EventService(ApplicationDbContext context, IUserService userService
   }
 
   /// <inheritdoc />
+  public async Task<List<SingleEvent>> GetPastEventsAsync(HashSet<Category> categories, ClaimsPrincipal principal)
+  {
+    var pastEvents = await GetPastEventsAsync(principal);
+    if (pastEvents is null)
+      return [];
+
+    pastEvents = ApplyCategoriesFilter(pastEvents, categories);
+    return await pastEvents.ToListAsync();
+  }
+
+  /// <inheritdoc />
   public async Task<bool> CanEditEventAsync(SingleEvent singleEvent, ClaimsPrincipal principal)
   {
     if (principal is null)
@@ -224,6 +235,21 @@ public class EventService(ApplicationDbContext context, IUserService userService
   }
 
   /// <summary>
+  /// Returns a queryable for events in the past
+  /// (with all the necessary includes and filters already applied)
+  /// </summary>
+  /// <param name="principal"></param>
+  /// <returns></returns>
+  private async Task<IQueryable<SingleEvent>?> GetPastEventsAsync(ClaimsPrincipal principal)
+  {
+    var pastEvents = context.SingleEvents.AsQueryable();
+    pastEvents = await ApplyUserFilter(pastEvents, principal);
+    pastEvents = ApplyPastDateFilter(pastEvents);
+    pastEvents = ApplyIncludes(pastEvents);
+    return pastEvents;
+  }
+
+  /// <summary>
   /// Applies the filter for the given principal to the given source
   /// </summary>
   /// <param name="source"></param>
@@ -289,7 +315,7 @@ public class EventService(ApplicationDbContext context, IUserService userService
   }
 
   /// <summary>
-  /// Applies the current date filter to the given source
+  /// Applies the current date filter to the given source to only match current and future events
   /// </summary>
   /// <param name="source"></param>
   /// <returns></returns>
@@ -297,6 +323,17 @@ public class EventService(ApplicationDbContext context, IUserService userService
   {
     var today = DateOnly.FromDateTime(DateTime.Now);
     return source.Where(e => (e.EndDate != null && e.EndDate >= today) || (e.EndDate == null && e.StartDate >= today));
+  }
+
+  /// <summary>
+  /// Applies the current date filter to the given source to only match past events
+  /// </summary>
+  /// <param name="source"></param>
+  /// <returns></returns>
+  private static IQueryable<SingleEvent> ApplyPastDateFilter(IQueryable<SingleEvent> source)
+  {
+    var today = DateOnly.FromDateTime(DateTime.Now);
+    return source.Where(e => (e.EndDate != null && e.EndDate < today) || (e.EndDate == null && e.StartDate < today));
   }
 
   /// <summary>
