@@ -8,16 +8,16 @@ public class CreateAccountViewModel
 {
   [Required(ErrorMessageResourceName = "FieldRequired", ErrorMessageResourceType = typeof(SystemTexts))]
   [Display(Name = "Name", ResourceType = typeof(SystemTexts))]
-  public required string Name { get; set; }
+  public required string Name { get; init; }
 
   [Required(ErrorMessageResourceName = "FieldRequired", ErrorMessageResourceType = typeof(SystemTexts))]
   [EmailAddress(ErrorMessageResourceName = "InvalidEmail", ErrorMessageResourceType = typeof(SystemTexts))]
   [Display(Name = "Email", ResourceType = typeof(SystemTexts))]
-  public required string Email { get; set; }
+  public required string Email { get; init; }
 
   [Required(ErrorMessageResourceName = "FieldRequired", ErrorMessageResourceType = typeof(SystemTexts))]
   [Display(Name = "Role", ResourceType = typeof(SystemTexts))]
-  public required string Role { get; set; }
+  public required string Role { get; init; }
 
   public List<SelectListItem> Roles { get; } =
     [.. Constants.Roles.All.Select(r => new SelectListItem(Constants.Roles.GetDisplayName(r), r))];

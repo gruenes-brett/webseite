@@ -5,19 +5,19 @@ namespace GruenesBrett.Models;
 public class SingleEvent
 {
   [Key]
-  public required Guid InternalId { get; set; }
+  public required Guid InternalId { get; init; }
 
-  public required string ExternalId { get; set; }
+  public required string ExternalId { get; init; }
 
-  public DateTime Created { get; set; }
+  public DateTime Created { get; init; }
 
   public DateTime Updated { get; set; }
 
-  public ApplicationUser? CreatedBy { get; set; }
+  public ApplicationUser? CreatedBy { get; init; }
 
-  public string? CreatedByName { get; set; }
+  public string? CreatedByName { get; init; }
 
-  public string? CreatedByEmail { get; set; }
+  public string? CreatedByEmail { get; init; }
 
   public required string EventName { get; set; }
 
@@ -45,7 +45,7 @@ public class SingleEvent
 
   public Image? EventImage { get; set; }
 
-  public bool IsReoccurring { get; set; }
+  public bool IsReoccurring { get; init; }
 
   public DateOnly RelevantDate => EndDate ?? StartDate;
 

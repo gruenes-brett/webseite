@@ -2,13 +2,13 @@
 
 public class SetFilterViewModel
 {
-  public string? PostCode { get; set; }
+  public string? PostCode { get; init; }
 
-  public int? SearchDistance { get; set; }
+  public int? SearchDistance { get; init; }
 
-  public IEnumerable<Guid>? SelectedCategories { get; set; }
+  public IEnumerable<Guid>? SelectedCategories { get; init; }
 
-  public string? EventStatus { get; set; }
+  public string? EventStatus { get; init; }
 
-  public string? Redirect { get; set; }
+  public string? Redirect { get; init; }
 }

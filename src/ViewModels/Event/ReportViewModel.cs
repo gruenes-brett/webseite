@@ -6,11 +6,11 @@ namespace GruenesBrett.ViewModels.Event;
 
 public class ReportViewModel
 {
-  public required string EventId { get; set; }
+  public required string EventId { get; init; }
 
   [Required(ErrorMessageResourceName = "FieldRequired", ErrorMessageResourceType = typeof(SystemTexts))]
   [Display(Name = "Reason", ResourceType = typeof(SystemTexts))]
-  public required string Reason { get; set; }
+  public required string Reason { get; init; }
 
-  public required IEnumerable<SelectListItem> Reasons { get; set; }
+  public required IEnumerable<SelectListItem> Reasons { get; init; }
 }

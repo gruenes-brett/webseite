@@ -2,7 +2,7 @@
 
 public class DeleteCategoryViewModel
 {
-  public required Guid Id { get; set; }
+  public required Guid Id { get; init; }
 
-  public string? Name { get; set; }
+  public string? Name { get; init; }
 }

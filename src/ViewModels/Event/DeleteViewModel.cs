@@ -2,5 +2,5 @@
 
 public class DeleteViewModel
 {
-  public required Guid EventId { get; set; }
+  public required Guid EventId { get; init; }
 }

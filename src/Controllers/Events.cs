@@ -87,8 +87,18 @@ public class Events(IAuditService auditService, ICategoryService categoryService
     if (user is null)
       return RedirectToAction(nameof(Explore));
 
-    var viewModel = GetEditViewModel();
-    viewModel.Events = await GetRelevantEvents(viewModel.EventStatus, viewModel.SelectedCategories);
+    var allCategories = categoryService.GetAllCategoriesSorted();
+    var selectedCategories = filterService.GetCurrentSelectedCategories(HttpContext.Request);
+    var eventStatus = filterService.GetCurrentEventStatus(HttpContext.Request);
+    var events = await GetRelevantEvents(eventStatus, selectedCategories);
+
+    var viewModel = new EditViewModel
+    {
+      Events = events ?? [],
+      Categories = allCategories ?? [],
+      SelectedCategories = selectedCategories ?? [],
+      EventStatus = eventStatus
+    };
     return View(viewModel);
   }
 
@@ -102,25 +112,6 @@ public class Events(IAuditService auditService, ICategoryService categoryService
   {
     var auditEntries = await auditService.GetNewestActivities(Constants.Audit.Event);
     return View(auditEntries);
-  }
-
-  /// <summary>
-  /// Reads the currently selected filters for editing events from the cookies and returns them
-  /// </summary>
-  /// <returns></returns>
-  private EditViewModel GetEditViewModel()
-  {
-    var allCategories = categoryService.GetAllCategoriesSorted();
-    var selectedCategories = filterService.GetCurrentSelectedCategories(HttpContext.Request);
-    var eventStatus = filterService.GetCurrentEventStatus(HttpContext.Request);
-
-    return new EditViewModel
-    {
-      Events = [],
-      Categories = allCategories ?? [],
-      SelectedCategories = selectedCategories ?? [],
-      EventStatus = eventStatus
-    };
   }
 
   /// <summary>

@@ -2,5 +2,5 @@
 
 public class EditAccountsViewModel
 {
-  public required IEnumerable<AccountViewModel> Accounts { get; set; }
+  public required IEnumerable<AccountViewModel> Accounts { get; init; }
 }

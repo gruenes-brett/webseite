@@ -5,7 +5,7 @@ namespace GruenesBrett.ViewModels.Events;
 
 public class CalendarViewModel
 {
-  public required OrderedDictionary<DateOnly, List<SingleEvent>> DateEvents { get; set; }
+  public required OrderedDictionary<DateOnly, List<SingleEvent>> DateEvents { get; init; }
 
-  public required GetFilterViewModel FilterViewModel { get; set; }
+  public required GetFilterViewModel FilterViewModel { get; init; }
 }

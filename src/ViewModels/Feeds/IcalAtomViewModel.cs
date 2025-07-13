@@ -2,9 +2,9 @@
 
 public class IcalAtomViewModel
 {
-  public required string PostCode { get; set; }
+  public required string PostCode { get; init; }
 
-  public required int SearchDistance { get; set; }
+  public required int SearchDistance { get; init; }
 
-  public required IEnumerable<Guid> SelectedCategories { get; set; }
+  public required IEnumerable<Guid> SelectedCategories { get; init; }
 }

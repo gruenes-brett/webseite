@@ -6,7 +6,7 @@ namespace GruenesBrett.Models;
 public class Category
 {
   [Key]
-  public required Guid Id { get; set; }
+  public required Guid Id { get; init; }
 
   public required string Name { get; set; }
 

@@ -7,5 +7,5 @@ public class EditNameViewModel
 {
   [Required(ErrorMessageResourceName = "FieldRequired", ErrorMessageResourceType = typeof(SystemTexts))]
   [Display(Name = "Name", ResourceType = typeof(SystemTexts))]
-  public required string Name { get; set; }
+  public required string Name { get; init; }
 }

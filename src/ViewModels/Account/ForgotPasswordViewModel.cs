@@ -8,5 +8,5 @@ public class ForgotPasswordViewModel
   [Required(ErrorMessageResourceName = "FieldRequired", ErrorMessageResourceType = typeof(SystemTexts))]
   [EmailAddress(ErrorMessageResourceName = "InvalidEmail", ErrorMessageResourceType = typeof(SystemTexts))]
   [Display(Name = "Email", ResourceType = typeof(SystemTexts))]
-  public required string Email { get; set; }
+  public required string Email { get; init; }
 }

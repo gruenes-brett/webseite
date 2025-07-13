@@ -6,11 +6,11 @@ namespace GruenesBrett.ViewModels.Settings;
 public class EditSettingsViewModel
 {
   [Display(Name = "GlobalOptOut", ResourceType = typeof(SystemTexts))]
-  public string? GlobalOptOut { get; set; }
+  public string? GlobalOptOut { get; init; }
 
   [Display(Name = "SelfRegistration", ResourceType = typeof(SystemTexts))]
-  public bool SelfRegistration { get; set; }
+  public bool SelfRegistration { get; init; }
 
   [Display(Name = "MaximumEventLength", ResourceType = typeof(SystemTexts))]
-  public int MaximumEventLength { get; set; }
+  public int MaximumEventLength { get; init; }
 }

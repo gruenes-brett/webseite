@@ -4,15 +4,15 @@ namespace GruenesBrett.ViewModels.Shared;
 
 public class GetFilterViewModel
 {
-  public PostCode? PostCode { get; set; }
+  public PostCode? PostCode { get; init; }
 
-  public int SearchDistance { get; set; }
+  public int SearchDistance { get; init; }
 
-  public double SearchDistanceInMeters { get; set; }
+  public double SearchDistanceInMeters { get; init; }
 
-  public required IEnumerable<Category> Categories { get; set; }
+  public required IEnumerable<Category> Categories { get; init; }
 
-  public required HashSet<Category> SelectedCategories { get; set; }
+  public required HashSet<Category> SelectedCategories { get; init; }
 
-  public string? Redirect { get; set; }
+  public string? Redirect { get; init; }
 }

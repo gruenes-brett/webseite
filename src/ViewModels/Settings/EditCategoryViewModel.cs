@@ -5,17 +5,17 @@ namespace GruenesBrett.ViewModels.Settings;
 
 public class EditCategoryViewModel
 {
-  public required Guid Id { get; set; }
+  public required Guid Id { get; init; }
 
   [Required(ErrorMessageResourceName = "FieldRequired", ErrorMessageResourceType = typeof(SystemTexts))]
   [Display(Name = "Name", ResourceType = typeof(SystemTexts))]
-  public required string Name { get; set; }
+  public required string Name { get; init; }
 
   [Required(ErrorMessageResourceName = "FieldRequired", ErrorMessageResourceType = typeof(SystemTexts))]
   [Display(Name = "ForegroundColor", ResourceType = typeof(SystemTexts))]
-  public required string ForegroundColor { get; set; }
+  public required string ForegroundColor { get; init; }
 
   [Required(ErrorMessageResourceName = "FieldRequired", ErrorMessageResourceType = typeof(SystemTexts))]
   [Display(Name = "BackgroundColor", ResourceType = typeof(SystemTexts))]
-  public required string BackgroundColor { get; set; }
+  public required string BackgroundColor { get; init; }
 }

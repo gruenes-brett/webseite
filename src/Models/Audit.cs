@@ -5,11 +5,11 @@ namespace GruenesBrett.Models;
 public class Audit
 {
   [Key]
-  public required Guid Id { get; set; }
+  public required Guid Id { get; init; }
 
-  public required string Message { get; set; }
+  public required string Message { get; init; }
 
-  public required DateTime Timestamp { get; set; }
+  public required DateTime Timestamp { get; init; }
 
-  public required string Section { get; set; }
+  public required string Section { get; init; }
 }

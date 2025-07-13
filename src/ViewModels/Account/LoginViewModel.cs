@@ -8,17 +8,17 @@ public class LoginViewModel
   [Required(ErrorMessageResourceName = "FieldRequired", ErrorMessageResourceType = typeof(SystemTexts))]
   [EmailAddress(ErrorMessageResourceName = "InvalidEmail", ErrorMessageResourceType = typeof(SystemTexts))]
   [Display(Name = "Email", ResourceType = typeof(SystemTexts))]
-  public required string Email { get; set; }
+  public required string Email { get; init; }
 
   [Required(ErrorMessageResourceName = "FieldRequired", ErrorMessageResourceType = typeof(SystemTexts))]
   [DataType(DataType.Password)]
   [Display(Name = "Password", ResourceType = typeof(SystemTexts))]
-  public required string Password { get; set; }
+  public required string Password { get; init; }
 
   [Display(Name = "RememberMe", ResourceType = typeof(SystemTexts))]
-  public bool RememberMe { get; set; }
+  public bool RememberMe { get; init; }
 
-  public string? ReturnUrl { get; set; }
+  public string? ReturnUrl { get; init; }
 
-  public bool ConfirmEmailTrigger { get; set; }
+  public bool ConfirmEmailTrigger { get; init; }
 }

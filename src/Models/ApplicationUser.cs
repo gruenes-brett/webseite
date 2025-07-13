@@ -10,7 +10,7 @@ public class ApplicationUser : IdentityUser
 
   public bool Banned { get; set; }
 
-  public required DateTime Created { get; set; }
+  public required DateTime Created { get; init; }
 
   public required DateTime PasswordChanged { get; set; }
 

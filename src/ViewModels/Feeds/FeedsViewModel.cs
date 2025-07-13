@@ -4,11 +4,11 @@ namespace GruenesBrett.ViewModels.Feeds;
 
 public class FeedsViewModel
 {
-  public required string ApiUrl { get; set; }
+  public required string ApiUrl { get; init; }
 
-  public required string AtomUrl { get; set; }
+  public required string AtomUrl { get; init; }
 
-  public required string IcalUrl { get; set; }
+  public required string IcalUrl { get; init; }
 
-  public required GetFilterViewModel FilterViewModel { get; set; }
+  public required GetFilterViewModel FilterViewModel { get; init; }
 }

@@ -2,5 +2,5 @@
 
 public class EditTextsViewModel
 {
-  public required IEnumerable<KeyValuePair<string, string>> Texts { get; set; }
+  public required IEnumerable<KeyValuePair<string, string>> Texts { get; init; }
 }

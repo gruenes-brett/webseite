@@ -9,13 +9,13 @@ namespace GruenesBrett.Models;
 public class Location
 {
   [Key]
-  public required Guid Id { get; set; }
+  public required Guid Id { get; init; }
 
-  public required string Name { get; set; }
+  public required string Name { get; init; }
 
-  public string? Address { get; set; }
+  public string? Address { get; init; }
 
   [JsonConverter(typeof(PointJsonConverter))]
   [Column(TypeName = "geography")]
-  public required Point Coordinates { get; set; }
+  public required Point Coordinates { get; init; }
 }

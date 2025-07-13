@@ -5,7 +5,7 @@ namespace GruenesBrett.ViewModels.Events;
 
 public class ExploreViewModel
 {
-  public required List<SingleEvent> Events { get; set; }
+  public required List<SingleEvent> Events { get; init; }
 
-  public required GetFilterViewModel FilterViewModel { get; set; }
+  public required GetFilterViewModel FilterViewModel { get; init; }
 }

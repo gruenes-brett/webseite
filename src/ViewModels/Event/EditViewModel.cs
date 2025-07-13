@@ -6,7 +6,7 @@ namespace GruenesBrett.ViewModels.Event;
 public class EditViewModel : CreateOrEditViewModel
 {
   [Required(ErrorMessageResourceName = "FieldRequired", ErrorMessageResourceType = typeof(SystemTexts))]
-  public required Guid EventId { get; set; }
+  public required Guid EventId { get; init; }
 
-  public string? PreviousImage { get; set; }
+  public string? PreviousImage { get; init; }
 }
