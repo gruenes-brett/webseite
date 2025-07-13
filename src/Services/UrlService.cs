@@ -8,9 +8,9 @@ namespace GruenesBrett.Services;
 public class UrlService(IHttpContextAccessor accessor, LinkGenerator generator) : IUrlService
 {
   /// <inheritdoc />
-  public string? GetPermalink(SingleEvent singleEvent)
+  public string GetPermalink(SingleEvent singleEvent)
   {
-    if (accessor?.HttpContext is null)
+    if (accessor.HttpContext is null)
       return string.Empty;
 
     var eventId = singleEvent.ExternalId;
@@ -19,7 +19,7 @@ public class UrlService(IHttpContextAccessor accessor, LinkGenerator generator) 
   }
 
   /// <inheritdoc />
-  public string? GetEncodedPermalink(SingleEvent singleEvent)
+  public string GetEncodedPermalink(SingleEvent singleEvent)
   {
     var permalink = GetPermalink(singleEvent);
     return HttpUtility.UrlEncode(permalink);

@@ -45,6 +45,7 @@ public interface ISettingsService
   /// Sets the given value for the setting for the given key
   /// </summary>
   /// <param name="key"></param>
+  /// <param name="value"></param>
   /// <returns></returns>
   Task SetBoolSettingAsync(string key, bool value);
 
@@ -52,6 +53,7 @@ public interface ISettingsService
   /// Sets the given value for the setting for the given key
   /// </summary>
   /// <param name="key"></param>
+  /// <param name="value"></param>
   /// <returns></returns>
   Task SetIntSettingAsync(string key, int value);
 }

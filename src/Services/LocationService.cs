@@ -3,7 +3,7 @@ using NetTopologySuite.Geometries;
 
 namespace GruenesBrett.Services;
 
-public class LocationService() : ILocationService
+public class LocationService : ILocationService
 {
   /// <inheritdoc />
   public bool IsValidCoordinates(Point coordinates)

@@ -4,7 +4,7 @@ using GruenesBrett.Models;
 
 namespace GruenesBrett.Services;
 
-public partial class PostCodeService : IPostCodeService
+public class PostCodeService : IPostCodeService
 {
   private readonly IServiceScopeFactory _scopeFactory;
   private readonly ConcurrentDictionary<string, PostCode> _cache = new();

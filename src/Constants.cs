@@ -193,7 +193,6 @@ internal static class Constants
   {
     internal const string Jpeg = "image/jpeg";
     internal const string Png = "image/png";
-    internal const string DefaultContentType = Jpeg;
     internal const int MaxSize = 10 * 1024 * 1024; // 10 MB
     internal const int MaxWidth = 960;
   }
@@ -333,7 +332,6 @@ internal static class Constants
       internal const string Delete = "Accounts.Delete";
       internal const string DeleteAction = "Accounts.DeleteAction";
       internal const string DeleteYourself = "Accounts.DeleteYourself";
-      internal const string Edit = "Accounts.Edit";
       internal const string EditAccounts = "Accounts.EditAccounts";
       internal const string EditResponsibility = "Accounts.EditResponsibility";
       internal const string EditRole = "Accounts.EditRole";
@@ -446,7 +444,6 @@ internal static class Constants
       internal const string OrganizerNameExplanation = "Event.OrganizerNameExplanation";
       internal const string OrganizerNamePlaceholder = "Event.OrganizerNamePlaceholder";
       internal const string Reject = "Event.Reject";
-      internal const string Rejected = "Event.Rejected";
       internal const string RejectedEmailBody = "Event.RejectedEmailBody";
       internal const string RejectedEmailSubject = "Event.RejectedEmailSubject";
       internal const string Report = "Event.Report";
@@ -498,7 +495,6 @@ internal static class Constants
       internal const string Rejected = "Events.Rejected";
       internal const string SearchDistance = "Events.SearchDistance";
       internal const string ShowAuditLog = "Events.ShowAuditLog";
-      internal const string Status = "Events.Status";
       internal const string Supraregional = "Events.Supraregional";
       internal const string Timestamp = "Events.Timestamp";
       internal const string WaitingForApproval = "Events.WaitingForApproval";

@@ -49,13 +49,13 @@ public class SettingsService(ApplicationDbContext context) : ISettingsService
     {
       var newSetting = new Setting { Key = key, Value = value };
       context.Add(newSetting);
-      await context.SaveChangesAsync();
     }
     else
     {
       setting.Value = value;
-      await context.SaveChangesAsync();
     }
+
+    await context.SaveChangesAsync();
   }
 
   /// <inheritdoc />

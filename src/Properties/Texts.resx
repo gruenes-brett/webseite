@@ -678,9 +678,6 @@
   <data name="Events.CreatedBy" xml:space="preserve">
     <value>Erstellt von</value>
   </data>
-  <data name="Events.Status" xml:space="preserve">
-    <value>Status</value>
-  </data>
   <data name="Events.Name" xml:space="preserve">
     <value>Name der Veranstaltung</value>
   </data>
@@ -868,9 +865,6 @@
   </data>
   <data name="Event.Reject" xml:space="preserve">
     <value>Veranstaltung ablehnen</value>
-  </data>
-  <data name="Event.Rejected" xml:space="preserve">
-    <value>Abgelehnt</value>
   </data>
   <data name="Event.RejectedEmailSubject" xml:space="preserve">
     <value>Deine Veranstaltung wurde abgelehnt</value>

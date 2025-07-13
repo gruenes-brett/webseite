@@ -7,8 +7,8 @@
 @model IEnumerable<Audit>
 
 @{
-  var timestamp = TextService.GetText(Constants.Text.Accounts.Timestamp);
-  var message = TextService.GetText(Constants.Text.Accounts.Message);
+  var timestamp = TextService.GetText(Constants.Text.Events.Timestamp);
+  var message = TextService.GetText(Constants.Text.Events.Message);
 
   var title = TextService.GetText(Constants.Text.Events.ShowAuditLog);
   ViewData[Constants.ViewData.Title] = title;

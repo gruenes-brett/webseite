@@ -6,7 +6,7 @@ namespace GruenesBrett.Initialization;
 /// <summary>
 /// Handles translation of identity related errors
 /// </summary>
-public class LocalizedIdentityErrorDescriber() : IdentityErrorDescriber
+public class LocalizedIdentityErrorDescriber : IdentityErrorDescriber
 {
   /// <inheritdoc />
   public override IdentityError DefaultError()

@@ -10,9 +10,11 @@ namespace GruenesBrett.Initialization;
 public class LogOutBannedUsersMiddleware(RequestDelegate next)
 {
   /// <summary>
-  /// Checks the currently logged in user and logs them out when they are banned
+  /// Checks the currently logged-in user and logs them out when they are banned
   /// </summary>
   /// <param name="context"></param>
+  /// <param name="userManager"></param>
+  /// <param name="signInManager"></param>
   /// <returns></returns>
   public async Task InvokeAsync(HttpContext context, UserManager<ApplicationUser> userManager,
     SignInManager<ApplicationUser> signInManager)

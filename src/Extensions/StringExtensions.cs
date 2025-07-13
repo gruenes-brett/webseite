@@ -16,16 +16,15 @@ public static partial class StringExtensions
   /// <param name="length"></param>
   /// <param name="character"></param>
   /// <returns></returns>
-  internal static string? Truncate(this string s, int length, char character = '\u2026')
+  internal static string? Truncate(this string? s, int length, char character = '\u2026')
   {
     if (s is null || s.Length <= length)
       return s;
 
     var lastWhitespace = s.LastIndexOf(' ', length);
-    if (lastWhitespace > 0)
-      return $"{s[..lastWhitespace]}{character}";
-
-    return $"{s[..length]}{character}";
+    return lastWhitespace > 0
+      ? $"{s[..lastWhitespace]}{character}"
+      : $"{s[..length]}{character}";
   }
 
   /// <summary>
@@ -86,6 +85,7 @@ public static partial class StringExtensions
   /// Returns the GUIDs from the given comma-separated list
   /// </summary>
   /// <param name="s"></param>
+  /// <param name="separator"></param>
   /// <returns></returns>
   public static IEnumerable<Guid> GetGuids(this string? s, char separator = ',')
   {
@@ -95,7 +95,7 @@ public static partial class StringExtensions
     var splitValues = s.Split(separator, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
     foreach (var splitValue in splitValues)
     {
-      if (Guid.TryParse(splitValue, out Guid guid))
+      if (Guid.TryParse(splitValue, out var guid))
         yield return guid;
     }
   }
@@ -112,6 +112,6 @@ public static partial class StringExtensions
       return s;
 
     var atIndex = s.IndexOf('@');
-    return $"{s[0..atIndex]}<wbr />{s[atIndex..]}";
+    return $"{s[..atIndex]}<wbr />{s[atIndex..]}";
   }
 }

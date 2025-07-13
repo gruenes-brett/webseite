@@ -62,9 +62,6 @@ public class MailKitEmailSender(IOptions<MailKitEmailSenderOptions> options, ILo
         return string.Empty;
 
       using var reader = new StreamReader(stream);
-      if (reader is null)
-        return string.Empty;
-
       return await reader.ReadToEndAsync();
     }
     catch (Exception e)

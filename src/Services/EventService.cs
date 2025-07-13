@@ -296,7 +296,7 @@ public class EventService(ApplicationDbContext context, IUserService userService
     if (categories is null || categories.Count == 0)
       return source;
 
-    return source.Where(e => categories.Contains(e.PrimaryCategory) || e.AdditionalCategories.Any(c => categories.Contains(c)));
+    return source.Where(e => categories.Contains(e.PrimaryCategory) || e.AdditionalCategories.Any(categories.Contains));
   }
 
   /// <summary>

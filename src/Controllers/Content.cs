@@ -6,7 +6,7 @@ namespace GruenesBrett.Controllers;
 /// Handles content pages
 /// </summary>
 [Route("inhalte")]
-public class Content() : Controller
+public class Content : Controller
 {
   /// <summary>
   /// Shows the about us page

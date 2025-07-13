@@ -12,7 +12,7 @@ public static class DateTimeExtensions
   /// <returns></returns>
   internal static bool IsWeekend(this DateOnly dateOnly)
   {
-    return dateOnly.DayOfWeek == DayOfWeek.Saturday || dateOnly.DayOfWeek == DayOfWeek.Sunday;
+    return dateOnly.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday;
   }
 
   /// <summary>

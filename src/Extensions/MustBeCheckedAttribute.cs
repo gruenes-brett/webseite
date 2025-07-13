@@ -5,7 +5,7 @@ namespace GruenesBrett.Extensions;
 /// <summary>
 /// An attribute to indicate that the checkbox must be checked
 /// </summary>
-[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+[AttributeUsage(AttributeTargets.Property)]
 public class MustBeCheckedAttribute : ValidationAttribute
 {
   /// <summary>
@@ -13,5 +13,5 @@ public class MustBeCheckedAttribute : ValidationAttribute
   /// </summary>
   /// <param name="value"></param>
   /// <returns></returns>
-  public override bool IsValid(object? value) => value is bool result && result;
+  public override bool IsValid(object? value) => value is true;
 }

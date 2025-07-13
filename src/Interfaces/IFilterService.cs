@@ -47,6 +47,7 @@ public interface IFilterService
   /// <summary>
   /// Reads the currently selected filters from the cookies and returns them
   /// </summary>
+  /// <param name="request"></param>
   /// <param name="redirect"></param>
   /// <returns></returns>
   GetFilterViewModel GetFilterViewModel(HttpRequest request, string redirect);

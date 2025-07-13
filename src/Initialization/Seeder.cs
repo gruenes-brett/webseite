@@ -77,11 +77,11 @@ public static class Seeder
 
       var splitCoordinates = coordinateValue.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
-      var hasLatitude = double.TryParse(splitCoordinates[0], NumberStyles.Any, CultureInfo.InvariantCulture, out var latitude);
-      var hasLongitude = double.TryParse(splitCoordinates[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var longitude);
+      double.TryParse(splitCoordinates[0], NumberStyles.Any, CultureInfo.InvariantCulture, out var latitude);
+      double.TryParse(splitCoordinates[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var longitude);
       var coordinates = new Point(longitude, latitude) { SRID = Constants.Locations.Srid };
 
-      return new PostCode()
+      return new PostCode
       {
         Id = id,
         CityName = cityName,
