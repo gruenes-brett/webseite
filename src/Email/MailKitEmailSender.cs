@@ -39,11 +39,11 @@ public class MailKitEmailSender(IOptions<MailKitEmailSenderOptions> options, ILo
     mimeMessage.Body = body;
 
     using var smtp = new SmtpClient();
-    smtp.Connect(Options.Address, Options.Port, Options.SecureSocketOptions);
+    await smtp.ConnectAsync(Options.Address, Options.Port, Options.SecureSocketOptions);
     if (Options.Username.HasValue() && Options.Password.HasValue())
-      smtp.Authenticate(Options.Username, Options.Password);
-    smtp.Send(mimeMessage);
-    smtp.Disconnect(true);
+      await smtp.AuthenticateAsync(Options.Username, Options.Password);
+    await smtp.SendAsync(mimeMessage);
+    await smtp.DisconnectAsync(true);
   }
 
   /// <summary>
