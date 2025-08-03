@@ -90,14 +90,33 @@ public class EventService(ApplicationDbContext context, IUserService userService
   }
 
   /// <inheritdoc />
-  public async Task<SingleEvent?> GetApprovedOrDraftOrRejectedEventAsync(Guid internalId, ClaimsPrincipal principal)
+  public async Task<SingleEvent?> GetEventAsync(string externalId, ClaimsPrincipal principal)
   {
-    var approvedEvent = await GetApprovedEventAsync(internalId, principal);
-    if (approvedEvent is not null)
-      return approvedEvent;
+    var allEvents = await GetAllEventsAsync(principal);
+    if (allEvents is null)
+      return null;
 
-    var draftEvent = await GetDraftEventAsync(internalId, principal);
-    return draftEvent ?? await GetRejectedEventAsync(internalId, principal);
+    return await allEvents.FirstOrDefaultAsync(e => e.ExternalId == externalId);
+  }
+
+  /// <inheritdoc />
+  public async Task<SingleEvent?> GetEventAsync(Guid internalId, ClaimsPrincipal principal)
+  {
+    var allEvents = await GetAllEventsAsync(principal);
+    if (allEvents is null)
+      return null;
+
+    return await allEvents.FirstOrDefaultAsync(e => e.InternalId == internalId);
+  }
+
+  /// <inheritdoc />
+  public async Task<SingleEvent?> GetPastEventAsync(string externalId, ClaimsPrincipal principal)
+  {
+    var pastEvents = await GetPastEventsAsync(principal);
+    if (pastEvents is null)
+      return null;
+
+    return await pastEvents.FirstOrDefaultAsync(e => e.ExternalId == externalId);
   }
 
   /// <inheritdoc />
@@ -186,6 +205,13 @@ public class EventService(ApplicationDbContext context, IUserService userService
     return singleEvent is not null;
   }
 
+  /// <inheritdoc />
+  public bool EventWasInThePast(SingleEvent singleEvent)
+  {
+    var today = DateOnly.FromDateTime(DateTime.Now);
+    return (singleEvent.EndDate is not null && singleEvent.EndDate < today) || (singleEvent.EndDate is null && singleEvent.StartDate < today);
+  }
+
   /// <summary>
   /// Returns a queryable for events in the approved workflow status
   /// (with all the necessary includes and filters already applied)
@@ -247,6 +273,20 @@ public class EventService(ApplicationDbContext context, IUserService userService
     pastEvents = ApplyPastDateFilter(pastEvents);
     pastEvents = ApplyIncludes(pastEvents);
     return pastEvents;
+  }
+
+  /// <summary>
+  /// Returns a queryable for all events
+  /// (with all the necessary includes and filters already applied)
+  /// </summary>
+  /// <param name="principal"></param>
+  /// <returns></returns>
+  private async Task<IQueryable<SingleEvent>?> GetAllEventsAsync(ClaimsPrincipal principal)
+  {
+    var allEvents = context.SingleEvents.AsQueryable();
+    allEvents = await ApplyUserFilter(allEvents, principal);
+    allEvents = ApplyIncludes(allEvents);
+    return allEvents;
   }
 
   /// <summary>

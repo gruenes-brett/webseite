@@ -48,6 +48,9 @@
   var edit = TextService.GetText(Constants.Text.Event.Edit);
   var delete = TextService.GetText(Constants.Text.Event.Delete);
 
+  var inThePast = EventService.EventWasInThePast(Model);
+  var wasInThePast = TextService.GetText(Constants.Text.Event.InThePast);
+
   var relativeImagePath = Model.EventImage?.FileName?.HasValue() ?? false
     ? $"/{Model.EventImage?.FileName}"
     : "/img/placeholder.svg";
@@ -71,7 +74,11 @@
   <script src="~/js/leaflet/scripts.js" asp-append-version="true"></script>
 }
 
-@if (waitingForApproval)
+@if (inThePast)
+{
+  <div class="warning">@wasInThePast</div>
+}
+else if (waitingForApproval)
 {
   <div class="warning">@notApprovedYet</div>
 }
@@ -95,7 +102,7 @@ else if (rejected)
   <div class="row">
     <div id="map" data-longitude="@longitude" data-latitude="@latitude" data-zoom="13"></div>
   </div>
-  @if (approved)
+  @if (approved && !inThePast)
   {
     <h3>@shareEvent</h3>
     <ul class="share">
@@ -121,19 +128,25 @@ else if (rejected)
   @if (canEditEvent)
   {
     <div class="actions">
-      <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Edit)" asp-route-eventid="@Model.InternalId" class="button primary">@edit</a>
+      @if (!inThePast)
+      {
+        <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Edit)" asp-route-eventid="@Model.InternalId" class="button primary">@edit</a>
+      }
       <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Delete)" asp-route-eventid="@Model.InternalId" class="button error">@delete</a>
     </div>
-    <div class="actions">
-      @if (waitingForApproval || rejected)
-      {
-        <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Approve)" asp-route-eventid="@Model.InternalId" class="button primary">@approve</a>
-      }
-      @if (waitingForApproval || approved)
-      {
-        <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Reject)" asp-route-eventid="@Model.InternalId" class="button error">@reject</a>
-      }
-    </div>
+    @if (!inThePast)
+    {
+      <div class="actions">
+        @if (waitingForApproval || rejected)
+        {
+          <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Approve)" asp-route-eventid="@Model.InternalId" class="button primary">@approve</a>
+        }
+        @if (waitingForApproval || approved)
+        {
+          <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Reject)" asp-route-eventid="@Model.InternalId" class="button error">@reject</a>
+        }
+      </div>
+    }
   }
 </section>
 <script type="application/ld+json">

@@ -89,13 +89,31 @@ public interface IEventService
   Task<SingleEvent?> GetDraftOrRejectedEventAsync(Guid internalId, ClaimsPrincipal principal);
 
   /// <summary>
-  /// Returns the approved, draft or rejected event for the given internal ID
+  /// Returns the event for the given external ID
+  /// (using the access rights of the given principal)
+  /// </summary>
+  /// <param name="externalId"></param>
+  /// <param name="principal"></param>
+  /// <returns></returns>
+  Task<SingleEvent?> GetEventAsync(string externalId, ClaimsPrincipal principal);
+
+  /// <summary>
+  /// Returns the event for the given internal ID
   /// (using the access rights of the given principal)
   /// </summary>
   /// <param name="internalId"></param>
   /// <param name="principal"></param>
   /// <returns></returns>
-  Task<SingleEvent?> GetApprovedOrDraftOrRejectedEventAsync(Guid internalId, ClaimsPrincipal principal);
+  Task<SingleEvent?> GetEventAsync(Guid internalId, ClaimsPrincipal principal);
+
+  /// <summary>
+  /// Returns the past event for the given external ID
+  /// (using the access rights of the given principal)
+  /// </summary>
+  /// <param name="externalId"></param>
+  /// <param name="principal"></param>
+  /// <returns></returns>
+  Task<SingleEvent?> GetPastEventAsync(string externalId, ClaimsPrincipal principal);
 
   /// <summary>
   /// Returns the approved events
@@ -149,4 +167,11 @@ public interface IEventService
   /// <param name="externalId"></param>
   /// <returns></returns>
   Task<bool> EventExists(string externalId);
+
+  /// <summary>
+  /// Returns whether the given event was in the past
+  /// </summary>
+  /// <param name="singleEvent"></param>
+  /// <returns></returns>
+  bool EventWasInThePast(SingleEvent singleEvent);
 }

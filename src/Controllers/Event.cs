@@ -49,9 +49,9 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
     if (approvedEvent is not null)
       return View(approvedEvent);
 
-    var draftOrRejectedEvent = await eventService.GetDraftOrRejectedEventAsync(eventId, User);
-    if (draftOrRejectedEvent is not null)
-      return View(draftOrRejectedEvent);
+    var internalEvent = await eventService.GetEventAsync(eventId, User);
+    if (internalEvent is not null)
+      return View(internalEvent);
 
     var eventExists = await eventService.EventExists(eventId);
     if (eventExists)
@@ -261,8 +261,12 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
   [Route("bearbeiten")]
   public async Task<IActionResult> Edit(Guid eventId)
   {
-    var eventToEdit = await eventService.GetApprovedOrDraftOrRejectedEventAsync(eventId, User);
+    var eventToEdit = await eventService.GetEventAsync(eventId, User);
     if (eventToEdit is null)
+      return RedirectToAction(nameof(Error.Index), nameof(Error), new { statusCode = 404 });
+
+    var wasInThePast = eventService.EventWasInThePast(eventToEdit);
+    if (wasInThePast)
       return RedirectToAction(nameof(Error.Index), nameof(Error), new { statusCode = 404 });
 
     var categories = categoryService.GetAllCategoriesSorted();
@@ -303,8 +307,12 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
   [Route("bearbeiten")]
   public async Task<IActionResult> Edit(EditViewModel viewModel)
   {
-    var eventToEdit = await eventService.GetApprovedOrDraftOrRejectedEventAsync(viewModel.EventId, User);
+    var eventToEdit = await eventService.GetEventAsync(viewModel.EventId, User);
     if (eventToEdit is null)
+      return RedirectToAction(nameof(Error.Index), nameof(Error), new { statusCode = 404 });
+
+    var wasInThePast = eventService.EventWasInThePast(eventToEdit);
+    if (wasInThePast)
       return RedirectToAction(nameof(Error.Index), nameof(Error), new { statusCode = 404 });
 
     // add the categories again in case of an error
@@ -343,7 +351,7 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
   [Route("loeschen")]
   public async Task<IActionResult> Delete(Guid eventId)
   {
-    var eventToDelete = await eventService.GetApprovedOrDraftOrRejectedEventAsync(eventId, User);
+    var eventToDelete = await eventService.GetEventAsync(eventId, User);
     if (eventToDelete is not null)
       return View(eventToDelete);
 
@@ -361,7 +369,7 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
   [Route("loeschen")]
   public async Task<IActionResult> Delete(DeleteViewModel viewModel)
   {
-    var eventToDelete = await eventService.GetApprovedOrDraftOrRejectedEventAsync(viewModel.EventId, User);
+    var eventToDelete = await eventService.GetEventAsync(viewModel.EventId, User);
     if (eventToDelete is null)
       return RedirectToAction(nameof(Events.Index), nameof(Events));
 

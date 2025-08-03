@@ -1538,5 +1538,11 @@ namespace GruenesBrett.Properties {
                 return ResourceManager.GetString("Event.InvalidEndTime", resourceCulture);
             }
         }
+        
+        public static string Event_InThePast {
+            get {
+                return ResourceManager.GetString("Event.InThePast", resourceCulture);
+            }
+        }
     }
 }

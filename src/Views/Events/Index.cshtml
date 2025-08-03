@@ -4,6 +4,7 @@
 
 @model EditViewModel
 
+@inject IEventService EventService
 @inject ITextService TextService
 @inject IUserService UserService
 
@@ -57,6 +58,7 @@
       @foreach (var editEvent in Model.Events)
       {
         var formattedTimeSpan = TextService.GetFormattedDateTimeSpan(editEvent);
+        var wasInThePast = EventService.EventWasInThePast(editEvent);
 
         <tr>
           <td>
@@ -100,10 +102,13 @@
             }
           </td>
           <td>
-            <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Edit)" asp-route-eventid="@editEvent.InternalId" class="text-info">
-              @edit
-            </a>
-            <span>/</span>
+            @if (!wasInThePast)
+            {
+              <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Edit)" asp-route-eventid="@editEvent.InternalId" class="text-info">
+                @edit
+              </a>
+              <span>/</span>
+            }
             <a asp-controller="@nameof(Event)" asp-action="@nameof(Event.Delete)" asp-route-eventid="@editEvent.InternalId" class="text-error">
               @delete
             </a>

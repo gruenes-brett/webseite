@@ -890,4 +890,7 @@
   <data name="Event.InvalidStartTime" xml:space="preserve">
     <value>Die Startzeit darf nicht leer sein, wenn eine Endzeit festgelegt wurde.</value>
   </data>
+  <data name="Event.InThePast" xml:space="preserve">
+    <value>Die Veranstaltung liegt in der Vergangenheit und ist damit nicht öffentlich sichtbar.</value>
+  </data>
 </root>

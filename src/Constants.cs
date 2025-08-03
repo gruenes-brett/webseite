@@ -423,6 +423,7 @@ internal static class Constants
       internal const string EventNameExplanation = "Event.EventNameExplanation";
       internal const string EventNamePlaceholder = "Event.EventNamePlaceholder";
       internal const string Information = "Event.Information";
+      internal const string InThePast = "Event.InThePast";
       internal const string InvalidDate = "Event.InvalidDate";
       internal const string InvalidDates = "Event.InvalidDates";
       internal const string InvalidEndTime = "Event.InvalidEndTime";
