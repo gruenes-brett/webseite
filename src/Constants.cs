@@ -425,10 +425,12 @@ internal static class Constants
       internal const string Information = "Event.Information";
       internal const string InvalidDate = "Event.InvalidDate";
       internal const string InvalidDates = "Event.InvalidDates";
+      internal const string InvalidEndTime = "Event.InvalidEndTime";
       internal const string InvalidEventLength = "Event.InvalidEventLength";
       internal const string InvalidImage = "Event.InvalidImage";
       internal const string InvalidImageRights = "Event.InvalidImageRights";
       internal const string InvalidLink = "Event.InvalidLink";
+      internal const string InvalidStartTime = "Event.InvalidStartTime";
       internal const string JoinEveryDayExplanation = "Event.JoinEveryDayExplanation";
       internal const string LocationAddressExplanation = "Event.LocationAddressExplanation";
       internal const string LocationAddressPlaceholder = "Event.LocationAddressPlaceholder";

@@ -512,6 +512,26 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
       isValid = false;
     }
 
+    // check the start time
+    var startTimeIsMissing = viewModel.EndTime is not null && viewModel.StartTime is null;
+    if (startTimeIsMissing)
+    {
+      var invalidStartTimeError = textService.GetText(Constants.Text.Event.InvalidStartTime);
+      ModelState.AddModelError(nameof(viewModel.StartTime), invalidStartTimeError);
+      isValid = false;
+    }
+
+    // check the end time
+    var isSingleDay = viewModel.EndDate is null || viewModel.EndDate == viewModel.StartDate;
+    var hasBothTimes = viewModel.StartTime is not null && viewModel.EndTime is not null;
+    var endTimeBeforeStartTime = viewModel.EndTime < viewModel.StartTime;
+    if (isSingleDay && hasBothTimes && endTimeBeforeStartTime)
+    {
+      var invalidEndTimeError = textService.GetText(Constants.Text.Event.InvalidEndTime);
+      ModelState.AddModelError(nameof(viewModel.EndTime), invalidEndTimeError);
+      isValid = false;
+    }
+
     // check the provided image
     var imageIsAllowedToUpload = IsAllowedToUpload(viewModel.EventImage);
     if (!imageIsAllowedToUpload)

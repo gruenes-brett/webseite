@@ -1526,5 +1526,17 @@ namespace GruenesBrett.Properties {
                 return ResourceManager.GetString("Content.ChangelogText", resourceCulture);
             }
         }
+        
+        public static string Event_InvalidStartTime {
+            get {
+                return ResourceManager.GetString("Event.InvalidStartTime", resourceCulture);
+            }
+        }
+        
+        public static string Event_InvalidEndTime {
+            get {
+                return ResourceManager.GetString("Event.InvalidEndTime", resourceCulture);
+            }
+        }
     }
 }
