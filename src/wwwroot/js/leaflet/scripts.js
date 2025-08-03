@@ -49,9 +49,11 @@ if (mapElement) {
     }
 
     // make circle radius editable
-    radiusInput.addEventListener('change', (event) => {
-      circle.setRadius(event.target.value * 1000);
-    });
+    if (radiusInput) {
+      radiusInput.addEventListener('change', (event) => {
+        circle.setRadius(event.target.value * 1000);
+      });
+    }
   }
   else {
     // initialize the marker with the icon
