@@ -84,5 +84,17 @@ if (mapElement) {
     if (longitudeInput && latitudeInput) {
       map.on('click', onMapClick);
     }
+
+    // make marker react to changes
+    if (longitudeInput && latitudeInput) {
+      longitudeInput.addEventListener('input', (event) => {
+        map.panTo([latitudeInput.value, longitudeInput.value]);
+        marker.setLatLng([latitudeInput.value, longitudeInput.value]);
+      });
+      latitudeInput.addEventListener('input', (event) => {
+        map.panTo([latitudeInput.value, longitudeInput.value]);
+        marker.setLatLng([latitudeInput.value, longitudeInput.value]);
+      });
+    }
   }
 }

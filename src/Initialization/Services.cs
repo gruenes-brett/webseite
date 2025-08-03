@@ -1,13 +1,19 @@
-﻿using GruenesBrett.Email;
+﻿using System.Threading.RateLimiting;
+using GruenesBrett.Email;
 using GruenesBrett.Interfaces;
 using GruenesBrett.Models;
 using GruenesBrett.Services;
 using Linkernizer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NetTopologySuite.Geometries;
+using Nominatim.API.Address;
+using Nominatim.API.Geocoders;
+using Nominatim.API.Interfaces;
+using Nominatim.API.Web;
 using Serilog;
 using Sqids;
 
@@ -98,6 +104,7 @@ internal static class Services
           schema.Format = "";
           schema.Type = "";
         }
+
         return Task.CompletedTask;
       });
     });
@@ -125,6 +132,19 @@ internal static class Services
       options.SenderName = builder.Configuration["Email:SenderName"] ?? string.Empty;
     });
 
+    // add rate limiter that allows one request per second
+    builder.Services.AddRateLimiter(options => options
+      .AddFixedWindowLimiter(policyName: Constants.System.OneSecondRateLimit, limiterOptions =>
+      {
+        limiterOptions.PermitLimit = 1;
+        limiterOptions.Window = TimeSpan.FromSeconds(1);
+        limiterOptions.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        limiterOptions.QueueLimit = 5;
+      })
+    );
+
+    builder.Services.AddHttpClient();
+
     // register singleton services for use with dependency injection
     builder.Services.AddSingleton<ICategoryService, CategoryService>();
     builder.Services.AddSingleton<ILinkernizer>(new Linkernizer.Linkernizer(options =>
@@ -136,6 +156,12 @@ internal static class Services
     {
       Alphabet = Constants.System.ExternalIdAlphabet
     }));
+
+    // register scoped services for use with dependency injection
+    builder.Services.AddScoped<INominatimWebInterface, NominatimWebInterface>();
+    builder.Services.AddScoped<IAddressSearcher, AddressSearcher>();
+    builder.Services.AddScoped<IForwardGeocoder, ForwardGeocoder>();
+    builder.Services.AddScoped<IReverseGeocoder, ReverseGeocoder>();
 
     // register transient services for use with dependency injection
     builder.Services.AddTransient<IAuditService, AuditService>();

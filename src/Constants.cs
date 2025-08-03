@@ -19,6 +19,8 @@ internal static class Constants
     internal const string ApiReference = "/api-reference";
 
     internal const string ExternalIdAlphabet = "abcdefghjkmnopqrstuvwxyz23456789";
+
+    internal const string OneSecondRateLimit = "one-second-rate-limit";
   }
 
   /// <summary>

@@ -43,6 +43,7 @@
 @section Styles {
   <link rel="stylesheet" href="~/css/leaflet/leaflet.css" asp-append-version="true" />
   <link rel="stylesheet" href="~/css/leaflet/leaflet.fullscreen.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/css/autocomplete/autoComplete.css" asp-append-version="true" />
 }
 
 @section Scripts {
@@ -51,6 +52,8 @@
   <script src="~/js/leaflet/leaflet.js" asp-append-version="true"></script>
   <script src="~/js/leaflet/Leaflet.fullscreen.min.js" asp-append-version="true"></script>
   <script src="~/js/leaflet/scripts.js" asp-append-version="true"></script>
+  <script src="~/js/autocomplete/autoComplete.min.js" asp-append-version="true"></script>
+  <script src="~/js/autocomplete/scripts.js" asp-append-version="true"></script>
 }
 
 <aside>
@@ -139,7 +142,7 @@
     <div class="row">
       <fieldset class="double">
         <label asp-for="LocationAddress">@Html.DisplayNameFor(m => m.LocationAddress)</label>
-        <input asp-for="LocationAddress" placeholder="@locationAddressPlaceholder" />
+        <input asp-for="LocationAddress" autocomplete="off" placeholder="@locationAddressPlaceholder" />
         <span asp-validation-for="LocationAddress" class="warning"></span>
       </fieldset>
       <p>@locationAddressExplanation</p>

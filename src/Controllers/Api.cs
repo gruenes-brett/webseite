@@ -1,8 +1,13 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
+using GruenesBrett.Extensions;
 using GruenesBrett.Interfaces;
 using GruenesBrett.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
+using Nominatim.API.Interfaces;
+using Nominatim.API.Models;
 
 namespace GruenesBrett.Controllers;
 
@@ -10,12 +15,14 @@ namespace GruenesBrett.Controllers;
 /// Handles the public REST API endpoints
 /// </summary>
 /// <param name="eventService"></param>
+/// <param name="forwardGeocoder"></param>
 /// <param name="locationService"></param>
 /// <param name="postCodeService"></param>
 [ApiController]
 [Tags("API")]
 [Route("api/[action]")]
-public class Api(IEventService eventService, ILocationService locationService, IPostCodeService postCodeService) : Controller
+public class Api(IEventService eventService, IForwardGeocoder forwardGeocoder , ILocationService locationService,
+  IPostCodeService postCodeService) : Controller
 {
   /// <summary>
   /// Returns the event for the given ID
@@ -98,5 +105,78 @@ public class Api(IEventService eventService, ILocationService locationService, I
   {
     var matchingPostCodeNames = postCodeService.GetMatchingPostCodeNames(query);
     return Json(matchingPostCodeNames);
+  }
+
+  /// <summary>
+  /// Returns the list of addresses matching the given query
+  /// </summary>
+  /// <param name="query"></param>
+  /// <returns></returns>
+  [EndpointSummary("Addresses")]
+  [EndpointDescription("Returns the list of addresses matching the given query.")]
+  [ProducesResponseType(typeof(IEnumerable<ApiAddress>), StatusCodes.Status200OK)]
+  [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+  [HttpGet]
+  [EnableRateLimiting(Constants.System.OneSecondRateLimit)]
+  public async Task<IActionResult> Addresses(
+    [Required]
+    [Description("Can be part of an address (for example \"Alaunstr\") or a city name (for example \"Dresden\").")]
+    string query)
+  {
+    if (query.IsNullOrEmpty())
+    {
+      var problemDetails = new ValidationProblemDetails();
+      problemDetails.Errors.Add("query", ["The value for the parameter was invalid."]);
+      return BadRequest(problemDetails);
+    }
+    
+    var request = new ForwardGeocodeRequest
+    {
+      queryString = query,
+      CountryCodeSearch = "de",
+      BreakdownAddressElements = true
+    };
+
+    var response = await forwardGeocoder.Geocode(request);
+    if (response is null)
+      return Json(Enumerable.Empty<ApiAddress>());
+
+    var results = response.Select(MapResponseToAddress);
+    var uniqueResults = results.DistinctBy(a => a.Name);
+    return Json(uniqueResults);
+  }
+
+  /// <summary>
+  /// Returns the mapped address for a given geocode response
+  /// </summary>
+  /// <param name="response"></param>
+  /// <returns></returns>
+  private static ApiAddress MapResponseToAddress(GeocodeResponse response)
+  {
+    var latitude = response.Latitude;
+    var longitude = response.Longitude;
+    
+    var name = new StringBuilder();
+    if (response.Address.Road.HasValue())
+      name.Append(response.Address.Road);
+    if (response.Address.Road.HasValue() && response.Address.HouseNumber.HasValue())
+      name.Append(' ');
+    if (response.Address.HouseNumber.HasValue())
+      name.Append(response.Address.HouseNumber);
+    if (response.Address.Road.HasValue())
+      name.Append(", ");
+    if (response.Address.PostCode.HasValue())
+      name.Append(response.Address.PostCode);
+    if (response.Address.PostCode.HasValue() &&
+        (response.Address.City.HasValue() || response.Address.Town.HasValue() || response.Address.Village.HasValue()))
+      name.Append(' ');
+    if (response.Address.City.HasValue())
+      name.Append(response.Address.City);
+    else if (response.Address.Town.HasValue())
+      name.Append(response.Address.Town);
+    else if (response.Address.Village.HasValue())
+      name.Append(response.Address.Village);
+
+    return new ApiAddress(name.ToString(), latitude, longitude);
   }
 }
