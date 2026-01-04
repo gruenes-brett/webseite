@@ -121,7 +121,7 @@ public class TextService : ITextService
       ? new DateTime(singleEvent.StartDate, singleEvent.StartTime.Value)
       : new DateTime(singleEvent.StartDate, TimeOnly.MinValue);
 
-    return start.ToString("yyyyMMddTHHmmssZ");
+    return start.ToString("yyyyMMddTHHmmss");
   }
 
   /// <inheritdoc />
@@ -135,7 +135,7 @@ public class TextService : ITextService
         ? new DateTime(singleEvent.StartDate, singleEvent.EndTime.Value)
         : DateTime.MinValue;
 
-    var formattedEndDateAndTime = end == DateTime.MinValue ? string.Empty : end.ToString("yyyyMMddTHHmmssZ");
+    var formattedEndDateAndTime = end == DateTime.MinValue ? string.Empty : end.ToString("yyyyMMddTHHmmss");
     return formattedEndDateAndTime;
   }
 

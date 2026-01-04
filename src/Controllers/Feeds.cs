@@ -256,6 +256,8 @@ public class Feeds(ICategoryService categoryService, IEventService eventService,
   /// <param name="stringBuilder"></param>
   private void AppendEvent(SingleEvent singleEvent, StringBuilder stringBuilder)
   {
+    const string timezone = "TZID=Europe/Berlin";
+
     var start = textService.GetFormattedStartDateAndTime(singleEvent);
     var end = textService.GetFormattedEndDateAndTime(singleEvent);
     var escapedDescription = singleEvent.EventDescription.Replace('\n', ' ').Replace('\r', ' ');
@@ -271,10 +273,10 @@ public class Feeds(ICategoryService categoryService, IEventService eventService,
     stringBuilder.AppendLine("BEGIN:VEVENT");
     stringBuilder.AppendLine($"UID:{singleEvent.ExternalId}@gruenesbrett");
     stringBuilder.AppendLine($"DTSTAMP:{singleEvent.Updated:yyyyMMddTHHmmssZ}");
-    stringBuilder.AppendLine($"DTSTART:{start}");
+    stringBuilder.AppendLine($"DTSTART;{timezone}:{start}");
 
     if (end.HasValue())
-      stringBuilder.AppendLine($"DTEND:{end}");
+      stringBuilder.AppendLine($"DTEND;{timezone}:{end}");
 
     stringBuilder.AppendLine($"SUMMARY:{singleEvent.EventName}");
     stringBuilder.AppendLine($"DESCRIPTION:{escapedDescription}");
