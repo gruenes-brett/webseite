@@ -32,9 +32,6 @@ internal static class Constants
     internal const string Description = nameof(Description);
     internal const string Permalink = nameof(Permalink);
     internal const string Image = nameof(Image);
-
-    internal const string Styles = nameof(Styles);
-    internal const string Scripts = nameof(Scripts);
   }
 
   /// <summary>

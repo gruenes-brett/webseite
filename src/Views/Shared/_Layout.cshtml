@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
   <link rel="icon" href="~/favicon.png" asp-append-version="true" />
   <link rel="shortcut icon" href="~/favicon.png" asp-append-version="true" />
-  @await RenderSectionAsync(Constants.ViewData.Styles, required: false)
+  @await RenderSectionAsync("Styles", required: false)
   @if (ViewData[Constants.ViewData.Description]?.ToString().HasValue() ?? false)
   {
     <meta name="description" content="@ViewData[Constants.ViewData.Description]" />
@@ -43,6 +43,6 @@
   </div>
 
   <script src="~/js/scripts.js" asp-append-version="true"></script>
-  @await RenderSectionAsync(Constants.ViewData.Scripts, required: false)
+  @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
