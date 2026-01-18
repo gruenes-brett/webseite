@@ -59,4 +59,10 @@ public class UserService(ApplicationDbContext context, UserManager<ApplicationUs
   {
     return await context.Users.CountAsync() == 1;
   }
+
+  /// <inheritdoc />
+  public async Task<bool> HasNoUsers()
+  {
+    return await context.Users.CountAsync() == 0;
+  }
 }

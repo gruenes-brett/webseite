@@ -41,7 +41,8 @@ public class Account(IAuditService auditService, IEmailService emailService, ILo
       return RedirectToAction(nameof(Index));
 
     var selfRegistrationEnabled = await settingsService.GetBoolSettingAsync(Constants.Settings.SelfRegistration);
-    if (!selfRegistrationEnabled)
+    var hasNoUsers = await userService.HasNoUsers();
+    if (!selfRegistrationEnabled && !hasNoUsers)
       return RedirectToAction(nameof(Login));
 
     return View();
@@ -58,7 +59,8 @@ public class Account(IAuditService auditService, IEmailService emailService, ILo
   public async Task<IActionResult> Register(RegistrationViewModel viewModel)
   {
     var selfRegistrationEnabled = await settingsService.GetBoolSettingAsync(Constants.Settings.SelfRegistration);
-    if (!selfRegistrationEnabled)
+    var hasNoUsers = await userService.HasNoUsers();
+    if (!selfRegistrationEnabled && !hasNoUsers)
       return RedirectToAction(nameof(Login));
 
     if (!ModelState.IsValid)

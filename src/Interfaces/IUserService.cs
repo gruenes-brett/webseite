@@ -41,4 +41,10 @@ public interface IUserService
   /// </summary>
   /// <returns></returns>
   Task<bool> IsFirstUser();
+
+  /// <summary>
+  /// Returns whether there are currently no users at all or not
+  /// </summary>
+  /// <returns></returns>
+  Task<bool> HasNoUsers();
 }

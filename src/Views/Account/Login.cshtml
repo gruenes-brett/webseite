@@ -4,6 +4,7 @@
 
 @inject ISettingsService SettingsService
 @inject ITextService TextService
+@inject IUserService UserService
 
 @model LoginViewModel
 
@@ -21,13 +22,14 @@
   var passwordPlaceholder = TextService.GetText(Constants.Text.Account.PasswortPlaceholder);
 
   var selfRegistrationEnabled = await SettingsService.GetBoolSettingAsync(Constants.Settings.SelfRegistration);
+  var hasNoUsers = await UserService.HasNoUsers();
 
   var title = TextService.GetText(Constants.Text.Account.Login);
   ViewData[Constants.ViewData.Title] = title;
 }
 
 <aside>
-  @if (selfRegistrationEnabled)
+  @if (selfRegistrationEnabled || hasNoUsers)
   {
     <h2>@noAccountYetHeading</h2>
     @Html.Raw(noAccountYetText)
