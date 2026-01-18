@@ -41,6 +41,12 @@
     <tbody>
       @foreach (var account in Model.Accounts)
       {
+        if (User is null)
+          continue;
+
+        var isOwnAccount = User.Identity is not null && account.Email == User.Identity.Name;
+        var isHigherAccount = User.IsInRole(Constants.Roles.ChiefEditor)
+                              && account.Role is Constants.Roles.ChiefEditor or Constants.Roles.Administrator;
         <tr>
           <th>@account.Name</th>
           <td><a href="mailto:@account.Email">@Html.Raw(account.Email.AddLineBreakOpportunityToEmail())</a></td>
@@ -55,7 +61,7 @@
           else
           {
             <td>
-              @if (User?.Identity is not null && account.Email == User.Identity.Name)
+              @if (isOwnAccount || isHigherAccount)
               {
                 <span class="text-info">@Constants.Roles.GetDisplayName(account.Role)</span>
               }
@@ -76,7 +82,7 @@
             <td>@SystemTexts.NeverLoggedIn</td>
           }
           <td>
-            @if (User?.Identity is not null && account.Email != User.Identity.Name)
+            @if (!isOwnAccount && !isHigherAccount)
             {
               if (account.Banned)
               {
@@ -96,11 +102,14 @@
               </a>
             }
 
-            @if (account.Role.HasValue() && account.Role != Constants.Roles.Normal && User?.Identity is not null && account.Email != User.Identity.Name)
+            @{
+              var showResponsibilityLink = account.Role.HasValue() && account.Role != Constants.Roles.Normal;
+            }
+            @if (showResponsibilityLink && !isOwnAccount && !isHigherAccount)
             {
               <span>/</span>
             }
-            @if (account.Role.HasValue() && account.Role != Constants.Roles.Normal)
+            @if (showResponsibilityLink && !isHigherAccount)
             {
               <a asp-controller="@nameof(Accounts)" asp-action="@nameof(Accounts.EditResponsibility)" asp-route-email="@account.Email" class="text-info">
                 Zuständigkeit

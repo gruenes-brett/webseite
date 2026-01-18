@@ -71,16 +71,18 @@ internal static class Constants
   internal static class Roles
   {
     internal const string Administrator = nameof(Administrator);
+    internal const string ChiefEditor = nameof(ChiefEditor);
     internal const string Editor = nameof(Editor);
     internal const string Normal = nameof(Normal);
 
-    internal static readonly List<string> All = [Normal, Editor, Administrator];
+    internal static readonly List<string> All = [Normal, Editor, ChiefEditor, Administrator];
 
     internal static string GetDisplayName(string role)
     {
       return role switch
       {
         Administrator => SystemTexts.Administrator,
+        ChiefEditor => SystemTexts.ChiefEditor,
         Editor => SystemTexts.Editor,
         Normal => SystemTexts.Normal,
         _ => string.Empty,
@@ -322,8 +324,10 @@ internal static class Constants
       internal const string ApprovalEmailBody = "Accounts.ApprovalEmailBody";
       internal const string ApprovalEmailSubject = "Accounts.ApprovalEmailSubject";
       internal const string Approve = "Accounts.Approve";
+      internal const string AssigningRoleNotAllowed = "Accounts.AssigningRoleNotAllowed";
       internal const string Ban = "Accounts.Ban";
       internal const string BanAction = "Accounts.BanAction";
+      internal const string BanOrUnbanNotAllowed = "Accounts.BanOrUnbanNotAllowed";
       internal const string BanOrUnbanYourself = "Accounts.BanOrUnbanYourself";
       internal const string Create = "Accounts.Create";
       internal const string Created = "Accounts.Created";
@@ -331,9 +335,11 @@ internal static class Constants
       internal const string Delete = "Accounts.Delete";
       internal const string DeleteAction = "Accounts.DeleteAction";
       internal const string DeleteYourself = "Accounts.DeleteYourself";
+      internal const string DeleteNotAllowed = "Accounts.DeleteNotAllowed";
       internal const string EditAccounts = "Accounts.EditAccounts";
       internal const string EditResponsibility = "Accounts.EditResponsibility";
       internal const string EditRole = "Accounts.EditRole";
+      internal const string EditRoleNotAllowed = "Accounts.EditRoleNotAllowed";
       internal const string EditRoleOfYourself = "Accounts.EditRoleOfYourself";
       internal const string LastLogin = "Accounts.LastLogin";
       internal const string Links = "Accounts.Links";

@@ -79,11 +79,15 @@
   @if (isSignedIn)
   {
     var isAdministrator = User.IsInRole(Constants.Roles.Administrator);
+    var isChiefEditor = User.IsInRole(Constants.Roles.ChiefEditor);
 
     <a asp-controller="@nameof(Events)" asp-action="@nameof(Events.Index)" class="@(isEditEvents ? active : string.Empty)">@editEvents</a>
-    @if (isAdministrator)
+    @if (isAdministrator || isChiefEditor)
     {
       <a asp-controller="@nameof(Accounts)" asp-action="@nameof(Accounts.Index)" class="@(isEditAccounts ? active : string.Empty)">@editAccounts</a>
+    }
+    @if (isAdministrator)
+    {
       <a asp-controller="@nameof(Settings)" asp-action="@nameof(Settings.EditSettings)" class="@(isSettings ? active : string.Empty)">@settings</a>
     }
     <a asp-controller="@nameof(Account)" asp-action="@nameof(Account.Index)" class="@(isMyAccount ? active : string.Empty)">@myAccount</a>

@@ -1527,21 +1527,45 @@ namespace GruenesBrett.Properties {
             }
         }
         
-        public static string Event_InvalidStartTime {
-            get {
-                return ResourceManager.GetString("Event.InvalidStartTime", resourceCulture);
-            }
-        }
-        
         public static string Event_InvalidEndTime {
             get {
                 return ResourceManager.GetString("Event.InvalidEndTime", resourceCulture);
             }
         }
         
+        public static string Event_InvalidStartTime {
+            get {
+                return ResourceManager.GetString("Event.InvalidStartTime", resourceCulture);
+            }
+        }
+        
         public static string Event_InThePast {
             get {
                 return ResourceManager.GetString("Event.InThePast", resourceCulture);
+            }
+        }
+        
+        public static string Accounts_AssigningRoleNotAllowed {
+            get {
+                return ResourceManager.GetString("Accounts.AssigningRoleNotAllowed", resourceCulture);
+            }
+        }
+        
+        public static string Accounts_BanOrUnbanNotAllowed {
+            get {
+                return ResourceManager.GetString("Accounts.BanOrUnbanNotAllowed", resourceCulture);
+            }
+        }
+        
+        public static string Accounts_DeleteNotAllowed {
+            get {
+                return ResourceManager.GetString("Accounts.DeleteNotAllowed", resourceCulture);
+            }
+        }
+        
+        public static string Accounts_EditRoleNotAllowed {
+            get {
+                return ResourceManager.GetString("Accounts.EditRoleNotAllowed", resourceCulture);
             }
         }
     }

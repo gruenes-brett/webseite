@@ -6,14 +6,12 @@
 
 @inject IEventService EventService
 @inject ITextService TextService
-@inject IUserService UserService
 
 @{
   var name = TextService.GetText(Constants.Text.Events.Name);
   var createdBy = TextService.GetText(Constants.Text.Events.CreatedBy);
   var created = TextService.GetText(Constants.Text.Events.Created);
   var actions = TextService.GetText(Constants.Text.Events.Actions);
-  var approve = TextService.GetText(Constants.Text.Events.Approve);
   var edit = TextService.GetText(Constants.Text.Events.EditAction);
   var delete = TextService.GetText(Constants.Text.Events.Delete);
   var approved = TextService.GetText(Constants.Text.Events.Approved);
@@ -24,9 +22,6 @@
 
   var loggedIn = TextService.GetText(Constants.Text.Events.LoggedIn);
   var notLoggedIn = TextService.GetText(Constants.Text.Events.NotLoggedIn);
-
-  var user = await UserService.GetUserAsync(User);
-  var role = user is not null ? await UserService.GetRoleAsync(user) : string.Empty;
 
   var title = TextService.GetText(Constants.Text.Events.Edit);
   ViewData[Constants.ViewData.Title] = title;

@@ -192,7 +192,8 @@ public class EventService(ApplicationDbContext context, IUserService userService
       return true;
 
     var isEditor = principal.IsInRole(Constants.Roles.Editor);
-    if (isEditor)
+    var isChiefEditor = principal.IsInRole(Constants.Roles.ChiefEditor);
+    if (isEditor || isChiefEditor)
     {
       var radius = user.Radius * 1000;
       if (singleEvent.EventLocation.Coordinates.IsWithinDistance(user.Coordinates, radius))
@@ -339,7 +340,8 @@ public class EventService(ApplicationDbContext context, IUserService userService
       return source;
 
     var isEditor = principal.IsInRole(Constants.Roles.Editor);
-    if (isEditor)
+    var isChiefEditor = principal.IsInRole(Constants.Roles.ChiefEditor);
+    if (isEditor || isChiefEditor)
     {
       var radius = user.Radius * 1000;
       return source.Where(e => e.EventLocation.Coordinates.IsWithinDistance(user.Coordinates, radius) || (e.CreatedBy != null && e.CreatedBy.Equals(user)));

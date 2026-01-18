@@ -8,6 +8,7 @@ using GruenesBrett.ViewModels.Accounts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
@@ -23,10 +24,17 @@ namespace GruenesBrett.Controllers;
 /// <param name="textService"></param>
 /// <param name="urlService"></param>
 /// <param name="userManager"></param>
-[Authorize(Roles = Constants.Roles.Administrator)]
+/// <param name="userManager"></param>
+[Authorize(Roles = Constants.Roles.Administrator + "," + Constants.Roles.ChiefEditor)]
 [Route("accounts")]
-public class Accounts(IAuditService auditService, IEmailService emailService, ILogger<Account> logger,
-  ITextService textService, IUrlService urlService, UserManager<ApplicationUser> userManager) : Controller
+public class Accounts(
+  IAuditService auditService,
+  IEmailService emailService,
+  ILogger<Account> logger,
+  ITextService textService,
+  IUrlService urlService,
+  UserManager<ApplicationUser> userManager,
+  IUserService userService) : Controller
 {
   /// <summary>
   /// Shows the form for creating a new account
@@ -39,7 +47,8 @@ public class Accounts(IAuditService auditService, IEmailService emailService, IL
     {
       Name = string.Empty,
       Email = string.Empty,
-      Role = Constants.Roles.Normal
+      Role = Constants.Roles.Normal,
+      Roles = GetPossibleRoles().Select(GetSelectListItemForRole).ToList()
     };
     return View(viewModel);
   }
@@ -54,8 +63,21 @@ public class Accounts(IAuditService auditService, IEmailService emailService, IL
   [Route("anlegen")]
   public async Task<IActionResult> Create(CreateAccountViewModel viewModel)
   {
+    // add the roles again in case of an error
+    var possibleRoles = GetPossibleRoles();
+    var roles = possibleRoles.Select(GetSelectListItemForRole).ToList();
+    viewModel.Roles = roles;
+    ModelState.Remove("Roles");
+
     if (!ModelState.IsValid)
       return View(viewModel);
+
+    if (!possibleRoles.Contains(viewModel.Role))
+    {
+      var registrationError = textService.GetText(Constants.Text.Accounts.AssigningRoleNotAllowed);
+      ModelState.AddModelError("Role", registrationError);
+      return View(viewModel);
+    }
 
     const double longitude = Constants.Locations.DefaultLongitude;
     const double latitude = Constants.Locations.DefaultLatitude;
@@ -87,7 +109,8 @@ public class Accounts(IAuditService auditService, IEmailService emailService, IL
     var email = user.Email;
     var admin = User?.Identity?.Name;
     var role = viewModel.Role;
-    await auditService.LogAccountActivityAsync("User {email} was created by user {admin} and assigned role {role}", email, admin, role);
+    await auditService.LogAccountActivityAsync("User {email} was created by user {admin} and assigned role {role}",
+      email, admin, role);
 
     var confirmationLink = await GetConfirmationLinkAsync(user);
     if (confirmationLink.IsNullOrEmpty())
@@ -208,13 +231,15 @@ public class Accounts(IAuditService auditService, IEmailService emailService, IL
       foreach (var error in addPasswordResult.Errors)
         ModelState.AddModelError(string.Empty, error.Description);
 
-      await auditService.LogAccountActivityAsync("User {email} confirmed their email address, but did not set a password", user.Email);
+      await auditService.LogAccountActivityAsync(
+        "User {email} confirmed their email address, but did not set a password", user.Email);
       return View(viewModel);
     }
 
     user.PasswordChanged = DateTime.UtcNow;
     await userManager.UpdateAsync(user);
-    await auditService.LogAccountActivityAsync("User {email} confirmed their email address and set a password", user.Email);
+    await auditService.LogAccountActivityAsync("User {email} confirmed their email address and set a password",
+      user.Email);
     return RedirectToAction(nameof(SetPasswordConfirmation));
   }
 
@@ -237,11 +262,9 @@ public class Accounts(IAuditService auditService, IEmailService emailService, IL
   public async Task<IActionResult> Index()
   {
     var users = await userManager.Users.OrderBy(u => u.DisplayName).ToListAsync() ?? [];
-    var accounts = users.Select(async user => await MapUserToAccount(user)).Select(t => t.Result).OfType<AccountViewModel>() ?? [];
-    var viewModel = new EditAccountsViewModel
-    {
-      Accounts = accounts
-    };
+    var accounts = users.Select(async user => await MapUserToAccount(user)).Select(t => t.Result)
+      .OfType<AccountViewModel>() ?? [];
+    var viewModel = new EditAccountsViewModel { Accounts = accounts };
     return View(viewModel);
   }
 
@@ -346,6 +369,14 @@ public class Accounts(IAuditService auditService, IEmailService emailService, IL
       return View(viewModel);
     }
 
+    var isAllowedToEdit = await IsAllowedToEdit(user);
+    if (!isAllowedToEdit)
+    {
+      var banError = textService.GetText(Constants.Text.Accounts.BanOrUnbanNotAllowed);
+      ModelState.AddModelError(string.Empty, banError);
+      return View(viewModel);
+    }
+
     user.Banned = true;
 
     var result = await userManager.UpdateAsync(user);
@@ -404,6 +435,14 @@ public class Accounts(IAuditService auditService, IEmailService emailService, IL
       return View(viewModel);
     }
 
+    var isAllowedToEdit = await IsAllowedToEdit(user);
+    if (!isAllowedToEdit)
+    {
+      var unbanError = textService.GetText(Constants.Text.Accounts.BanOrUnbanNotAllowed);
+      ModelState.AddModelError(string.Empty, unbanError);
+      return View(viewModel);
+    }
+
     user.Banned = false;
 
     var result = await userManager.UpdateAsync(user);
@@ -458,6 +497,14 @@ public class Accounts(IAuditService auditService, IEmailService emailService, IL
       return View(viewModel);
     }
 
+    var isAllowedToEdit = await IsAllowedToEdit(user);
+    if (!isAllowedToEdit)
+    {
+      var deleteError = textService.GetText(Constants.Text.Accounts.DeleteNotAllowed);
+      ModelState.AddModelError(string.Empty, deleteError);
+      return View(viewModel);
+    }
+
     var result = await userManager.DeleteAsync(user);
     if (result.Succeeded)
     {
@@ -487,13 +534,15 @@ public class Accounts(IAuditService auditService, IEmailService emailService, IL
       return RedirectToAction(nameof(Index));
 
     var roles = await userManager.GetRolesAsync(user);
+    var possibleRoles = GetPossibleRoles().Select(GetSelectListItemForRole).ToList();
     var firstRole = roles.FirstOrDefault();
     var viewModel = new EditRoleViewModel
     {
       Name = user.DisplayName ?? string.Empty,
       Email = user.Email ?? string.Empty,
       Created = DateOnly.FromDateTime(user.Created),
-      Role = firstRole ?? string.Empty
+      Role = firstRole ?? string.Empty,
+      Roles = possibleRoles
     };
     return View(viewModel);
   }
@@ -512,9 +561,30 @@ public class Accounts(IAuditService auditService, IEmailService emailService, IL
     if (user is null)
       return RedirectToAction(nameof(Index));
 
+    // add the roles again in case of an error
+    var possibleRoles = GetPossibleRoles();
+    var roles = possibleRoles.Select(GetSelectListItemForRole).ToList();
+    viewModel.Roles = roles;
+    ModelState.Remove("Roles");
+
     if (user.Email == User?.Identity?.Name)
     {
       var editRoleError = textService.GetText(Constants.Text.Accounts.EditRoleOfYourself);
+      ModelState.AddModelError(string.Empty, editRoleError);
+      return View(viewModel);
+    }
+
+    var isAllowedToEdit = await IsAllowedToEdit(user);
+    if (!isAllowedToEdit)
+    {
+      var editRoleError = textService.GetText(Constants.Text.Accounts.EditRoleNotAllowed);
+      ModelState.AddModelError(string.Empty, editRoleError);
+      return View(viewModel);
+    }
+
+    if (!possibleRoles.Contains(viewModel.Role))
+    {
+      var editRoleError = textService.GetText(Constants.Text.Accounts.AssigningRoleNotAllowed);
       ModelState.AddModelError(string.Empty, editRoleError);
       return View(viewModel);
     }
@@ -622,7 +692,8 @@ public class Accounts(IAuditService auditService, IEmailService emailService, IL
       var email = user.Email;
       var admin = User?.Identity?.Name;
 
-      await auditService.LogAccountActivityAsync("User {email} got different responsibility area from user {admin}", email, admin);
+      await auditService.LogAccountActivityAsync("User {email} got different responsibility area from user {admin}",
+        email, admin);
       return RedirectToAction(nameof(Index));
     }
 
@@ -757,5 +828,39 @@ public class Accounts(IAuditService auditService, IEmailService emailService, IL
       logger.LogError(e, "Failed to generate confirmation link for user {email}", user.Email);
       return string.Empty;
     }
+  }
+
+  /// <summary>
+  /// Returns the possible roles the current user can assign to other users
+  /// </summary>
+  /// <returns></returns>
+  private List<string> GetPossibleRoles()
+  {
+    return User.IsInRole(Constants.Roles.Administrator)
+      ? Constants.Roles.All
+      : [Constants.Roles.Normal, Constants.Roles.Editor];
+  }
+
+  /// <summary>
+  /// Returns the select list item for a given role
+  /// </summary>
+  /// <param name="role"></param>
+  /// <returns></returns>
+  private static SelectListItem GetSelectListItemForRole(string role)
+    => new(Constants.Roles.GetDisplayName(role), role);
+
+  /// <summary>
+  /// Returns whether the current user is allowed to edit the given user or not
+  /// </summary>
+  /// <param name="user"></param>
+  /// <returns></returns>
+  private async Task<bool> IsAllowedToEdit(ApplicationUser user)
+  {
+    var currentUserIsAdmin = User.IsInRole(Constants.Roles.Administrator);
+    if (currentUserIsAdmin)
+      return true;
+
+    var role = await userService.GetRoleAsync(user);
+    return role != Constants.Roles.Administrator && role != Constants.Roles.ChiefEditor;
   }
 }
