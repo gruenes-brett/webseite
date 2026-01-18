@@ -49,16 +49,13 @@ public class Event(IAuditService auditService, ICategoryService categoryService,
     if (approvedEvent is not null)
       return View(approvedEvent);
 
+    var pastEvent = await eventService.GetPastApprovedEventAsync(eventId);
+    if (pastEvent is not null)
+      return View(pastEvent);
+
     var internalEvent = await eventService.GetEventAsync(eventId, User);
     if (internalEvent is not null)
       return View(internalEvent);
-
-    var eventExists = await eventService.EventExists(eventId);
-    if (eventExists)
-    {
-      var returnUrl = Url.Action(nameof(Index), nameof(Event), new { eventId });
-      return RedirectToAction(nameof(Account.Login), nameof(Account), new { returnUrl });
-    }
 
     return RedirectToAction(nameof(Error.Index), nameof(Error), new { statusCode = 404 });
   }

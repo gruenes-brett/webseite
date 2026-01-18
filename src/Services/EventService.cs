@@ -29,6 +29,16 @@ public class EventService(ApplicationDbContext context, IUserService userService
   }
 
   /// <inheritdoc />
+  public async Task<SingleEvent?> GetPastApprovedEventAsync(string externalId, ClaimsPrincipal? principal = null)
+  {
+    var pastApprovedEvents = await GetPastApprovedEventsAsync(principal);
+    if (pastApprovedEvents is null)
+      return null;
+
+    return await pastApprovedEvents.FirstOrDefaultAsync(e => e.ExternalId == externalId);
+  }
+
+  /// <inheritdoc />
   public async Task<SingleEvent?> GetDraftEventAsync(string externalId, ClaimsPrincipal principal)
   {
     var draftEvents = await GetDraftEventsAsync(principal);
@@ -226,6 +236,23 @@ public class EventService(ApplicationDbContext context, IUserService userService
     approvedEvents = ApplyDateFilter(approvedEvents);
     approvedEvents = ApplyIncludes(approvedEvents);
     return approvedEvents;
+  }
+
+  /// <summary>
+  /// Returns a queryable for events in the past and in the approved workflow status
+  /// (with all the necessary includes and filters already applied)
+  /// </summary>
+  /// <param name="principal"></param>
+  /// <returns></returns>
+  private async Task<IQueryable<SingleEvent>?> GetPastApprovedEventsAsync(ClaimsPrincipal? principal)
+  {
+    var pastApprovedEvents = context.SingleEvents.AsQueryable();
+    if (principal is not null)
+      pastApprovedEvents = await ApplyUserFilter(pastApprovedEvents, principal);
+    pastApprovedEvents = ApplyWorkflowFilter(pastApprovedEvents, WorkflowStatus.Approved);
+    pastApprovedEvents = ApplyPastDateFilter(pastApprovedEvents);
+    pastApprovedEvents = ApplyIncludes(pastApprovedEvents);
+    return pastApprovedEvents;
   }
 
   /// <summary>

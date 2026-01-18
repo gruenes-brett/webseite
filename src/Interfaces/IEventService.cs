@@ -26,6 +26,14 @@ public interface IEventService
   Task<SingleEvent?> GetApprovedEventAsync(Guid internalId, ClaimsPrincipal? principal = null);
 
   /// <summary>
+  /// Returns the past approved event for the given external ID
+  /// </summary>
+  /// <param name="externalId"></param>
+  /// <param name="principal"></param>
+  /// <returns></returns>
+  Task<SingleEvent?> GetPastApprovedEventAsync(string externalId, ClaimsPrincipal? principal = null);
+
+  /// <summary>
   /// Returns the draft event for the given external ID
   /// (using the access rights of the given principal)
   /// </summary>
